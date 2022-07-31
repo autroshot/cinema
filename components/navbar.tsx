@@ -12,10 +12,16 @@ export default function Navbar() {
             <Image src={logo} alt="시네마 로고" width={40} height={40} />
             <span className={styles.logoText}>CINEMA</span>
           </BootstrapNavBar.Brand>
-          <span className="justify-content-end">
-            <span>회원 가입</span>
-            <span>로그인</span>
-          </span>
+          <div className="flex-column me-auto">
+            <ul className="navbar-nav flex-row">
+              <li className="nav-item">회원가입</li>
+              <li className="nav-item">로그인</li>
+            </ul>
+            <ul className="navbar-nav flex-row">
+              <li className="nav-item">회원가입</li>
+              <li className="nav-item">로그인</li>
+            </ul>
+          </div>
         </Container>
       </BootstrapNavBar>
     </Container>

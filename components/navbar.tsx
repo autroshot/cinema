@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '../public/logoWithText.png';
+import logo from '../public/logo-with-text.png';
 import {
   Container,
   Nav,

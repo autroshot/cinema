@@ -52,6 +52,9 @@ export default function Navbar() {
                 <NavDropdown.Item href="#action/3.2">컬러리움</NavDropdown.Item>
               </NavDropdown>
             </Nav>
+            <Nav>
+              <Nav.Link href="#home">로그인</Nav.Link>
+            </Nav>
           </BootstrapNavBar.Collapse>
         </Container>
       </BootstrapNavBar>

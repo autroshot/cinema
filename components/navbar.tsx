@@ -53,7 +53,7 @@ export default function Navbar() {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#home">로그인</Nav.Link>
+              <Nav.Link href="#login">로그인</Nav.Link>
             </Nav>
           </BootstrapNavBar.Collapse>
         </Container>

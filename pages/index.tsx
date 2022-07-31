@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Carousel, Container } from 'react-bootstrap';
 import styles from '../styles/Home.module.css';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import trailer1 from '../public/dummy/carousel-trailer-1.jpg';
 import trailer2 from '../public/dummy/carousel-trailer-2.jpg';
 import trailer3 from '../public/dummy/carousel-trailer-3.jpg';
@@ -19,22 +19,22 @@ export default function Home() {
           <Carousel.Item>
             <Image
               src={trailer1}
-              className="d-block w-100"
               alt="리미트 트레일러"
+              className="d-block mx-auto"
             />
           </Carousel.Item>
           <Carousel.Item>
             <Image
               src={trailer2}
-              className="d-block w-100"
               alt="불릿트레인 트레일러"
+              className="d-block mx-auto"
             />
           </Carousel.Item>
           <Carousel.Item>
             <Image
               src={trailer3}
-              className="d-block w-100"
               alt="한산 트레일러"
+              className="d-block mx-auto"
             />
           </Carousel.Item>
         </Carousel>

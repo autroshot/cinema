@@ -1,12 +1,15 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Layout from '../components/layout';
+import { SSRProvider } from 'react-bootstrap';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <SSRProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </SSRProvider>
   );
 }
 

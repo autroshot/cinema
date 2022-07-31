@@ -13,7 +13,7 @@ export default function Navbar() {
     <Container>
       <BootstrapNavBar expand="md" bg="light" className="p-0">
         <Container className="p-0">
-          <BootstrapNavBar.Brand className="mx-3">
+          <BootstrapNavBar.Brand className="mx-3 d-flex align-items-center">
             <Image src={logo} alt="시네마 로고" width={40} height={40} />
             <span className={styles.logoText}>CINEMA</span>
           </BootstrapNavBar.Brand>

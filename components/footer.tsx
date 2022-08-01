@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <Container>
       <footer>
-        <div>
+        <div className="mt-5">
           <Image src={logo} alt="시네마 로고" />
         </div>
         <div>

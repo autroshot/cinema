@@ -13,7 +13,7 @@ import YoutubeModal from './youtubeModal';
 export default function Carousel() {
   const [youtubeId, setYoutubeId] = useState<null | string>(null);
 
-  const SLIDE_PARAMS = [
+  const DUMMY_SLIDE_PARAMS = [
     { title: '리미트', src: image1, youtubeId: 'H150mI_LPV4' },
     { title: '불릿트레인', src: image2, youtubeId: '_ics0ClH5TQ' },
     { title: '한산', src: image3, youtubeId: 'GduEtmvwcI0' },
@@ -28,7 +28,7 @@ export default function Carousel() {
         navigation
         loop
       >
-        {SLIDE_PARAMS.map((slideParam) => {
+        {DUMMY_SLIDE_PARAMS.map((slideParam) => {
           return (
             <SwiperSlide key={slideParam.title} className={styles.trailerSlide}>
               <SlideContent

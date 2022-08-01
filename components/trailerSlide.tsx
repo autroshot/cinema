@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { SwiperSlide } from 'swiper/react';
 import styles from '../styles/TrailerSlide.module.css';
+import playBtn from '../public/play-btn.png';
 
 export default function TrailerSlide() {
   return (

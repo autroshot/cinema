@@ -6,11 +6,11 @@ import 'swiper/css/navigation';
 import image1 from '../../public/dummy/carousel-trailer-리미트.jpg';
 import image2 from '../../public/dummy/carousel-trailer-불릿트레인.jpg';
 import image3 from '../../public/dummy/carousel-trailer-한산.jpg';
-import styles from './trailerCarousel.module.css';
+import styles from './carousel.module.css';
 import { useState } from 'react';
 import TrailerSlideContent from './trailerSlideContent';
 
-export default function TrailerCarousel() {
+export default function Carousel() {
   const [showModal, setShowModal] = useState(false);
 
   const SLIDE_PARAMS = [

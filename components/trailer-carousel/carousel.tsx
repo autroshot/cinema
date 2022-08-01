@@ -12,9 +12,8 @@ import SlideContent from './slideContent';
 import YoutubeModal from './youtubeModal';
 
 export default function Carousel() {
-  const [showModal, setShowModal] = useState(false);
   const [youtubeId, setYoutubeId] = useState<null | string>(null);
-  console.log(youtubeId);
+
   const SLIDE_PARAMS = [
     { title: '리미트', src: image1, youtubeId: 'H150mI_LPV4' },
     { title: '불릿트레인', src: image2, youtubeId: '_ics0ClH5TQ' },
@@ -52,21 +51,15 @@ export default function Carousel() {
           />
         </SwiperSlide>
       </Swiper>
-      <YoutubeModal
-        showModal={showModal}
-        onHide={handleHide}
-        youtubeId={'H150mI_LPV4'}
-      />
+      <YoutubeModal onHide={handleHide} youtubeId={youtubeId} />
     </>
   );
 
   function handleClick(newYoutubeId: string) {
-    setShowModal(true);
     setYoutubeId(newYoutubeId);
   }
 
   function handleHide() {
-    setShowModal(false);
     setYoutubeId(null);
   }
 }

@@ -4,7 +4,7 @@ export default function YoutubeModal(props: Props) {
   return (
     <Modal
       size="lg"
-      show={props.showModal}
+      show={props.youtubeId ? true : false}
       onHide={props.onHide}
       aria-labelledby="trailer"
       animation={false}
@@ -29,7 +29,6 @@ export default function YoutubeModal(props: Props) {
 }
 
 interface Props {
-  showModal: boolean;
   onHide: () => void;
-  youtubeId: string;
+  youtubeId: null | string;
 }

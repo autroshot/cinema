@@ -58,6 +58,7 @@ export default function TrailerCarousel() {
         onHide={handleHide}
         aria-labelledby="example-modal-sizes-title-lg"
         animation={false}
+        centered
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">

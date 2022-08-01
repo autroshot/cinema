@@ -67,5 +67,6 @@ export default function Carousel() {
 
   function handleHide() {
     setShowModal(false);
+    setYoutubeId(null);
   }
 }

@@ -13,6 +13,7 @@ import YoutubeModal from './youtubeModal';
 
 export default function Carousel() {
   const [showModal, setShowModal] = useState(false);
+  const [youtubeId, setYoutubeId] = useState<null | string>(null);
 
   const SLIDE_PARAMS = [
     { title: '리미트', src: image1, youtubeId: 'H150mI_LPV4' },

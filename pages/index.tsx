@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from '../styles/Home.module.css';
-import TrailerCarousel from '../components/trailerCarousel';
+import TrailerCarousel from '../components/trailer-carousel/trailerCarousel';
 
 export default function Home() {
   return (

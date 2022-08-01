@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from 'next/image';
-import styles from '../styles/TrailerSlide.module.css';
-import playBtn from '../public/play-btn.png';
+import styles from '../../styles/TrailerSlide.module.css';
+import playBtn from '../../public/play-btn.png';
 
 export default function TrailerSlideContent(props: Props) {
   return (

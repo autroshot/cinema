@@ -3,12 +3,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Image from 'next/image';
-import image1 from '../public/dummy/carousel-trailer-리미트.jpg';
-import image2 from '../public/dummy/carousel-trailer-불릿트레인.jpg';
-import image3 from '../public/dummy/carousel-trailer-한산.jpg';
-import playBtn from '../public/play-btn.png';
-import styles from '../styles/TrailerCarousel.module.css';
+import image1 from '../../public/dummy/carousel-trailer-리미트.jpg';
+import image2 from '../../public/dummy/carousel-trailer-불릿트레인.jpg';
+import image3 from '../../public/dummy/carousel-trailer-한산.jpg';
+import styles from '../../styles/TrailerCarousel.module.css';
 import { useState } from 'react';
 import TrailerSlideContent from './trailerSlideContent';
 

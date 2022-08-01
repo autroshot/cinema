@@ -3,19 +3,27 @@ import { SwiperSlide } from 'swiper/react';
 import styles from '../styles/TrailerSlide.module.css';
 import playBtn from '../public/play-btn.png';
 
-export default function TrailerSlide() {
+export default function TrailerSlide(props: Props) {
   return (
     <SwiperSlide className={styles.trailerSlide}>
       <button
         type="button"
         className={styles.trailerButton}
-        onClick={handleClick}
+        onClick={props.onClick}
       >
-        <Image src={trailer1} alt="리미트 트레일러" />
+        <Image
+          src={`carousel-trailer-${props.title}.jpg`}
+          alt={`${props.title} 트레일러`}
+        />
         <div className="position-absolute top-50 start-50 translate-middle">
           <Image src={playBtn} alt="플레이 버튼" />
         </div>
       </button>
     </SwiperSlide>
   );
+}
+
+interface Props {
+  title: string;
+  onClick: () => void;
 }

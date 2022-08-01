@@ -15,6 +15,12 @@ import TrailerSlideContent from './trailerSlideContent';
 export default function TrailerCarousel() {
   const [showModal, setShowModal] = useState(false);
 
+  const SLIDE_PARAMS = [
+    { title: '리미트', src: image1, youtubeId: 'H150mI_LPV4' },
+    { title: '불릿트레인', src: image2, youtubeId: '_ics0ClH5TQ' },
+    { title: '한산', src: image3, youtubeId: 'GduEtmvwcI0' },
+  ];
+
   return (
     <>
       <Swiper

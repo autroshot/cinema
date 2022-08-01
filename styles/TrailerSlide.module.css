@@ -1,0 +1,11 @@
+.trailerSlide {
+  background: black;
+  display: flex;
+  justify-content: center;
+}
+
+.trailerButton {
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+}

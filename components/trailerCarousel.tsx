@@ -19,13 +19,19 @@ export default function TrailerCarousel() {
       loop
     >
       <SwiperSlide className={styles.trailerSlide}>
-        <Image src={trailer1} alt="리미트 트레일러" />
+        <button type="button" className={styles.trailerButton}>
+          <Image src={trailer1} alt="리미트 트레일러" />
+        </button>
       </SwiperSlide>
       <SwiperSlide className={styles.trailerSlide}>
-        <Image src={trailer2} alt="불릿트레인 트레일러" />
+        <button type="button" className={styles.trailerButton}>
+          <Image src={trailer2} alt="불릿트레인 트레일러" />
+        </button>
       </SwiperSlide>
       <SwiperSlide className={styles.trailerSlide}>
-        <Image src={trailer3} alt="한산 트레일러" />
+        <button type="button" className={styles.trailerButton}>
+          <Image src={trailer3} alt="한산 트레일러" />
+        </button>
       </SwiperSlide>
     </Swiper>
   );

@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import image1 from '../../public/dummy/carousel-trailer-리미트.jpg';
 import image2 from '../../public/dummy/carousel-trailer-불릿트레인.jpg';
 import image3 from '../../public/dummy/carousel-trailer-한산.jpg';
-import styles from '../../styles/trailerCarousel.module.css';
+import styles from './trailerCarousel.module.css';
 import { useState } from 'react';
 import TrailerSlideContent from './trailerSlideContent';
 

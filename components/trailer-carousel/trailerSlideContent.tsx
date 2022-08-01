@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from 'next/image';
-import styles from '../../styles/trailerSlide.module.css';
+import styles from './trailerSlide.module.css';
 import playBtn from '../../public/play-btn.png';
 
 export default function TrailerSlideContent(props: Props) {

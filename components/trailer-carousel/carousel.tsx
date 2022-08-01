@@ -8,7 +8,7 @@ import image2 from '../../public/dummy/carousel-trailer-불릿트레인.jpg';
 import image3 from '../../public/dummy/carousel-trailer-한산.jpg';
 import styles from './carousel.module.css';
 import { useState } from 'react';
-import TrailerSlideContent from './trailerSlideContent';
+import SlideContent from './slideContent';
 
 export default function Carousel() {
   const [showModal, setShowModal] = useState(false);
@@ -29,25 +29,13 @@ export default function Carousel() {
         loop
       >
         <SwiperSlide className={styles.trailerSlide}>
-          <TrailerSlideContent
-            title="리미트"
-            src={image1}
-            onClick={handleClick}
-          />
+          <SlideContent title="리미트" src={image1} onClick={handleClick} />
         </SwiperSlide>
         <SwiperSlide className={styles.trailerSlide}>
-          <TrailerSlideContent
-            title="불릿트레인"
-            src={image2}
-            onClick={handleClick}
-          />
+          <SlideContent title="불릿트레인" src={image2} onClick={handleClick} />
         </SwiperSlide>
         <SwiperSlide className={styles.trailerSlide}>
-          <TrailerSlideContent
-            title="한산"
-            src={image3}
-            onClick={handleClick}
-          />
+          <SlideContent title="한산" src={image3} onClick={handleClick} />
         </SwiperSlide>
       </Swiper>
       <Modal

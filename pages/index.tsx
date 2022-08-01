@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Container } from 'react-bootstrap';
+import { Container, Modal } from 'react-bootstrap';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
@@ -36,6 +36,19 @@ export default function Home() {
             <Image src={trailer3} alt="한산 트레일러" />
           </SwiperSlide>
         </Swiper>
+        {/* <Modal
+          size="lg"
+          show={lgShow}
+          onHide={() => setLgShow(false)}
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">
+              Large Modal
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>...</Modal.Body>
+        </Modal> */}
       </Container>
     </div>
   );

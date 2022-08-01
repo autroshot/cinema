@@ -9,6 +9,7 @@ import image3 from '../../public/dummy/carousel-trailer-hansan.jpg';
 import styles from './carousel.module.css';
 import { useState } from 'react';
 import SlideContent from './slideContent';
+import YoutubeModal from './youtubeModal';
 
 export default function Carousel() {
   const [showModal, setShowModal] = useState(false);
@@ -38,29 +39,11 @@ export default function Carousel() {
           <SlideContent title="한산" src={image3} onClick={handleClick} />
         </SwiperSlide>
       </Swiper>
-      <Modal
-        size="lg"
-        show={showModal}
+      <YoutubeModal
+        showModal={showModal}
         onHide={handleHide}
-        aria-labelledby="trailer"
-        animation={false}
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="trailer">트레일러</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="p-0 d-flex">
-          <iframe
-            width="800"
-            height="450"
-            src="https://www.youtube-nocookie.com/embed/H150mI_LPV4?autoplay=1"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-        </Modal.Body>
-      </Modal>
+        youtubeId={'H150mI_LPV4'}
+      />
     </>
   );
 

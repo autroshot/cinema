@@ -4,9 +4,9 @@ import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
-import trailer1 from '../public/dummy/carousel-trailer-리미트.jpg';
-import trailer2 from '../public/dummy/carousel-trailer-불릿트레인.jpg';
-import trailer3 from '../public/dummy/carousel-trailer-한산.jpg';
+import image1 from '../public/dummy/carousel-trailer-리미트.jpg';
+import image2 from '../public/dummy/carousel-trailer-불릿트레인.jpg';
+import image3 from '../public/dummy/carousel-trailer-한산.jpg';
 import playBtn from '../public/play-btn.png';
 import styles from '../styles/TrailerCarousel.module.css';
 import { useState } from 'react';
@@ -29,7 +29,7 @@ export default function TrailerCarousel() {
             className={styles.trailerButton}
             onClick={handleClick}
           >
-            <Image src={trailer1} alt="리미트 트레일러" />
+            <Image src={image1} alt="리미트 트레일러" />
             <div className="position-absolute top-50 start-50 translate-middle">
               <Image src={playBtn} alt="플레이 버튼" />
             </div>
@@ -37,7 +37,7 @@ export default function TrailerCarousel() {
         </SwiperSlide>
         <SwiperSlide className={styles.trailerSlide}>
           <button type="button" className={styles.trailerButton}>
-            <Image src={trailer2} alt="불릿트레인 트레일러" />
+            <Image src={image2} alt="불릿트레인 트레일러" />
             <div className="position-absolute top-50 start-50 translate-middle">
               <Image src={playBtn} alt="플레이 버튼" />
             </div>
@@ -45,7 +45,7 @@ export default function TrailerCarousel() {
         </SwiperSlide>
         <SwiperSlide className={styles.trailerSlide}>
           <button type="button" className={styles.trailerButton}>
-            <Image src={trailer3} alt="한산 트레일러" />
+            <Image src={image3} alt="한산 트레일러" />
             <div className="position-absolute top-50 start-50 translate-middle">
               <Image src={playBtn} alt="플레이 버튼" />
             </div>

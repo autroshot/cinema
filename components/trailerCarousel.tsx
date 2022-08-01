@@ -9,8 +9,11 @@ import trailer2 from '../public/dummy/carousel-trailer-2.jpg';
 import trailer3 from '../public/dummy/carousel-trailer-3.jpg';
 import playBtn from '../public/play-btn.png';
 import styles from '../styles/TrailerCarousel.module.css';
+import { useState } from 'react';
 
 export default function TrailerCarousel() {
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <Swiper
       modules={[Navigation]}
@@ -20,7 +23,11 @@ export default function TrailerCarousel() {
       loop
     >
       <SwiperSlide className={styles.trailerSlide}>
-        <button type="button" className={styles.trailerButton}>
+        <button
+          type="button"
+          className={styles.trailerButton}
+          onClick={() => console.log('clicked')}
+        >
           <Image src={trailer1} alt="리미트 트레일러" />
           <div className="position-absolute top-50 start-50 translate-middle">
             <Image src={playBtn} alt="플레이 버튼" />

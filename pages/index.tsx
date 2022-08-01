@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from '../styles/Home.module.css';
-import Carousel from '../components/trailer-carousel/carousel';
+import TrailerCarousel from '../components/trailer-carousel/carousel';
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container fluid className="p-0">
-        <Carousel />
+        <TrailerCarousel />
       </Container>
     </div>
   );

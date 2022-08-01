@@ -57,6 +57,7 @@ export default function TrailerCarousel() {
         show={showModal}
         onHide={handleHide}
         aria-labelledby="example-modal-sizes-title-lg"
+        animation={false}
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">

@@ -1,3 +1,5 @@
-.blackContainer {
-  background-color: black;
+.trailerSlide {
+  background: black;
+  display: flex;
+  justify-content: center;
 }

@@ -26,13 +26,13 @@ export default function Home() {
           navigation
           loop
         >
-          <SwiperSlide>
+          <SwiperSlide className={styles.trailerSlide}>
             <Image src={trailer1} alt="리미트 트레일러" />
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide className={styles.trailerSlide}>
             <Image src={trailer2} alt="불릿트레인 트레일러" />
           </SwiperSlide>
-          <SwiperSlide>
+          <SwiperSlide className={styles.trailerSlide}>
             <Image src={trailer3} alt="한산 트레일러" />
           </SwiperSlide>
         </Swiper>

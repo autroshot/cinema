@@ -10,6 +10,7 @@ import image3 from '../public/dummy/carousel-trailer-한산.jpg';
 import playBtn from '../public/play-btn.png';
 import styles from '../styles/TrailerCarousel.module.css';
 import { useState } from 'react';
+import TrailerSlideContent from './trailerSlideContent';
 
 export default function TrailerCarousel() {
   const [showModal, setShowModal] = useState(false);
@@ -23,6 +24,13 @@ export default function TrailerCarousel() {
         navigation
         loop
       >
+        <SwiperSlide className={styles.trailerSlide}>
+          <TrailerSlideContent
+            title="리미트"
+            src={image1}
+            onClick={handleClick}
+          />
+        </SwiperSlide>
         <SwiperSlide className={styles.trailerSlide}>
           <button
             type="button"

@@ -29,27 +29,17 @@ export default function Carousel() {
         navigation
         loop
       >
-        <SwiperSlide className={styles.trailerSlide}>
-          <SlideContent
-            title="리미트"
-            src={image1}
-            onClick={() => handleClick('H150mI_LPV4')}
-          />
-        </SwiperSlide>
-        <SwiperSlide className={styles.trailerSlide}>
-          <SlideContent
-            title="불릿트레인"
-            src={image2}
-            onClick={() => handleClick('_ics0ClH5TQ')}
-          />
-        </SwiperSlide>
-        <SwiperSlide className={styles.trailerSlide}>
-          <SlideContent
-            title="한산"
-            src={image3}
-            onClick={() => handleClick('GduEtmvwcI0')}
-          />
-        </SwiperSlide>
+        {SLIDE_PARAMS.map((slideParam) => {
+          return (
+            <SwiperSlide key={slideParam.title} className={styles.trailerSlide}>
+              <SlideContent
+                title={slideParam.title}
+                src={slideParam.src}
+                onClick={() => handleClick(slideParam.youtubeId)}
+              />
+            </SwiperSlide>
+          );
+        })}
       </Swiper>
       <YoutubeModal onHide={handleHide} youtubeId={youtubeId} />
     </>

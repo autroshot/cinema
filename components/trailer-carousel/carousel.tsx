@@ -1,7 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
+import { Autoplay, Navigation, Pagination } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
+import 'swiper/css/pagination';
 import image1 from '../../public/dummy/carousel-trailer-limit.jpg';
 import image2 from '../../public/dummy/carousel-trailer-bullet-train.jpg';
 import image3 from '../../public/dummy/carousel-trailer-hansan.jpg';
@@ -22,11 +24,13 @@ export default function Carousel() {
   return (
     <>
       <Swiper
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay, Pagination]}
         spaceBetween={0}
         slidesPerView={1}
         navigation
         loop
+        autoplay
+        pagination
       >
         {DUMMY_SLIDE_PARAMS.map((slideParam) => {
           return (

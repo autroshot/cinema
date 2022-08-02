@@ -64,6 +64,11 @@
   background-color: #ed4c6b;
 }
 
+.ratingRestricted {
+  composes: ratingText;
+  background-color: white;
+}
+
 .movieButtonsContainer {
   position: absolute;
   top: 0;

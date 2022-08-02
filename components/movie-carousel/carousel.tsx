@@ -10,6 +10,17 @@ import styles from './carousel.module.css';
 import SlideContent from './slideContent';
 
 export default function Carousel() {
+  const DUMMY_SLIDE_PARAMS = new Array(10);
+  DUMMY_SLIDE_PARAMS.fill({
+    image: movie1,
+    rating: '12세이상관람가',
+    ranking: 1,
+    title: '한산: 용의 출현',
+    salesShare: 44.4,
+    reviewScore: 9.4,
+    liked: true,
+  });
+
   return (
     <Swiper
       modules={[Navigation]}
@@ -18,123 +29,21 @@ export default function Carousel() {
       breakpoints={{ 576: { slidesPerView: 5 } }}
       navigation
     >
-      <SwiperSlide>
-        <SlideContent />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card className={styles.card}>
-          <div className={styles.imageBox}>
-            <Image src={movie2} alt={'비상선언'} />
-            <span className="position-absolute bottom-n1 start-5">
-              <em className={styles.ranking}>2</em>
-            </span>
-            <span className="position-absolute top-4 end-5">
-              <span className={styles.ratingAll}>전체</span>
-            </span>
-            <div className={styles.movieButtonsContainer}>
-              <div className="position-absolute top-50 start-50 translate-middle d-grid gap-2 col-6 mx-auto">
-                <Button variant="outline-light">예매하기</Button>
-                <Button variant="outline-light">상세정보</Button>
-              </div>
-            </div>
-          </div>
-          <Card.Body className={styles.body}>
-            <Card.Title className={styles.title}>비상선언</Card.Title>
-            <Card.Text className={styles.text}>
-              예매율 24.1% |{' '}
-              <span className="material-icons md-18 md-grade">grade</span> 8.0 |{' '}
-              <span className="material-icons md-18 md-heart">favorite</span>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card className={styles.card}>
-          <div className={styles.imageBox}>
-            <Image src={movie1} alt={'한산'} />
-            <span className="position-absolute bottom-n1 start-5">
-              <em className={styles.ranking}>3</em>
-            </span>
-            <span className="position-absolute top-4 end-5">
-              <span className={styles.rating15}>15</span>
-            </span>
-          </div>
-          <Card.Body className={styles.body}>
-            <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
-            <Card.Text className={styles.text}>
-              예매율 44.4% |{' '}
-              <span className="material-icons md-18 md-grade">grade</span> 9.4 |{' '}
-              <span className="material-icons md-18 md-heart">favorite</span>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card className={styles.card}>
-          <div className={styles.imageBox}>
-            <Image src={movie1} alt={'한산'} />
-            <span className="position-absolute bottom-n1 start-5">
-              <em className={styles.ranking}>4</em>
-            </span>
-            <span className="position-absolute top-4 end-5">
-              <span className={styles.ratingX}>청불</span>
-            </span>
-          </div>
-          <Card.Body className={styles.body}>
-            <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
-            <Card.Text className={styles.text}>
-              예매율 44.4% |{' '}
-              <span className="material-icons md-18 md-grade">grade</span> 9.4 |{' '}
-              <span className="material-icons md-18 md-heart">favorite</span>
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
+      {DUMMY_SLIDE_PARAMS.map((slideParam) => {
+        return (
+          <SwiperSlide key={slideParam.title}>
+            <SlideContent
+              image={slideParam.image}
+              rating={slideParam.rating}
+              ranking={slideParam.ranking}
+              title={slideParam.title}
+              salesShare={slideParam.salesShare}
+              reviewScore={slideParam.reviewScore}
+              liked={slideParam.liked}
+            />
+          </SwiperSlide>
+        );
+      })}
     </Swiper>
   );
 }

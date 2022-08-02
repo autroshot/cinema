@@ -24,7 +24,8 @@ a {
   vertical-align: text-bottom;
 }
 
-.material-icons.md-heart {
+.material-icons.md-favorite,
+.material-icons.md-favorite-border {
   color: #d32f2f;
 }
 

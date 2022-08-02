@@ -19,7 +19,7 @@ export default function Carousel() {
         <Card className={styles.card}>
           <div className={styles.imageBox}>
             <Image src={movie1} alt={'한산'} />
-            <span className="position-absolute bottom-0 start-0">
+            <span className="position-absolute bottom-0 start-5">
               <em className={styles.ranking}>1</em>
             </span>
           </div>

@@ -1,7 +1,6 @@
 import Image, { StaticImageData } from 'next/image';
 import { Button, Card } from 'react-bootstrap';
 import styles from './slideContent.module.css';
-import movie1 from '../../public/images/dummy/movies/01.jpg';
 
 export default function SlideContent(props: Props) {
   return (

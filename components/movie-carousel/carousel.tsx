@@ -2,8 +2,6 @@ import { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { Button, Card } from 'react-bootstrap';
-import Image from 'next/image';
 import movie1 from '../../public/images/dummy/movies/01.jpg';
 import movie2 from '../../public/images/dummy/movies/02.jpg';
 import movie3 from '../../public/images/dummy/movies/03.jpg';
@@ -14,7 +12,6 @@ import movie7 from '../../public/images/dummy/movies/07.jpg';
 import movie8 from '../../public/images/dummy/movies/08.jpg';
 import movie9 from '../../public/images/dummy/movies/09.jpg';
 import movie10 from '../../public/images/dummy/movies/10.jpg';
-import styles from './carousel.module.css';
 import SlideContent from './slideContent';
 
 export default function Carousel() {

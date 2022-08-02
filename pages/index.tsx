@@ -18,7 +18,7 @@ export default function Home() {
         <TrailerCarousel />
       </Container>
       <Container fluid className={styles.darkBackGround}>
-        <Container className="p-0">
+        <Container className="px-0 py-3">
           <MovieCarousel />
         </Container>
       </Container>

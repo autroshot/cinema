@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from './home.module.css';
 import TrailerCarousel from '../components/trailer-carousel/carousel';
-import MovieCarousel from '../components/ticket-sales-order-movie-carousel/carousel';
+import MovieCarousel from '../components/movie-carousel/carousel';
 
 export default function Home() {
   return (

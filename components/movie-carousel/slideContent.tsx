@@ -7,7 +7,7 @@ export default function SlideContent(props: Props) {
   return (
     <Card className={styles.card}>
       <div className={styles.imageBox}>
-        <Image src={movie1} alt={props.title} />
+        <Image src={props.image} alt={props.title} />
         {!parseCSSClass(props.rating) ? null : (
           <span className="position-absolute top-4 end-5">
             <span className={styles[parseCSSClass(props.rating) as string]}>

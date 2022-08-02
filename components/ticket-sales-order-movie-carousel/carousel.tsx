@@ -54,6 +54,12 @@ export default function Carousel() {
             <span className="position-absolute top-4 end-5">
               <span className={styles.ratingAll}>전체</span>
             </span>
+            <div className={styles.movieButtonsContainer}>
+              <div className="position-absolute top-50 start-50 translate-middle d-grid gap-2 col-6 mx-auto">
+                <Button variant="outline-light">예매하기</Button>
+                <Button variant="outline-light">상세정보</Button>
+              </div>
+            </div>
           </div>
           <Card.Body className={styles.body}>
             <Card.Title className={styles.title}>비상선언</Card.Title>

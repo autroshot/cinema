@@ -26,3 +26,41 @@
   font-size: 2rem;
   font-weight: bold;
 }
+
+.rating {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 1.8rem;
+  height: 1.8rem;
+  line-height: 1.8rem;
+  /* background-color: #4dd6ff; */
+  border-radius: 100%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.rating12 {
+  composes: rating;
+  background-color: #4dd6ff;
+}
+
+.rating15 {
+  composes: rating;
+  background-color: #ffc134;
+}
+
+.ratingText {
+  composes: rating;
+  font-size: 0.8rem;
+}
+
+.ratingAll {
+  composes: ratingText;
+  background-color: #5bc77e;
+}
+
+.ratingX {
+  composes: ratingText;
+  background-color: #ed4c6b;
+}

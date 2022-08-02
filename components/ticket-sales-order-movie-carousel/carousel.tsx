@@ -22,6 +22,9 @@ export default function Carousel() {
             <span className="position-absolute bottom-n1 start-5">
               <em className={styles.ranking}>1</em>
             </span>
+            <span className="position-absolute top-4 end-5">
+              <span className={styles.rating12}>12</span>
+            </span>
           </div>
           <Card.Body className={styles.body}>
             <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
@@ -39,6 +42,9 @@ export default function Carousel() {
             <Image src={movie1} alt={'한산'} />
             <span className="position-absolute bottom-n1 start-5">
               <em className={styles.ranking}>2</em>
+            </span>
+            <span className="position-absolute top-4 end-5">
+              <span className={styles.ratingAll}>전체</span>
             </span>
           </div>
           <Card.Body className={styles.body}>
@@ -58,6 +64,9 @@ export default function Carousel() {
             <span className="position-absolute bottom-n1 start-5">
               <em className={styles.ranking}>3</em>
             </span>
+            <span className="position-absolute top-4 end-5">
+              <span className={styles.rating15}>15</span>
+            </span>
           </div>
           <Card.Body className={styles.body}>
             <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
@@ -70,20 +79,23 @@ export default function Carousel() {
         </Card>
       </SwiperSlide>
       <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
-          </Card.Body>
-        </Card>
-      </SwiperSlide>
-      <SwiperSlide>
-        <Card>
-          <Image src={movie1} alt={'한산'} />
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
+        <Card className={styles.card}>
+          <div className={styles.imageBox}>
+            <Image src={movie1} alt={'한산'} />
+            <span className="position-absolute bottom-n1 start-5">
+              <em className={styles.ranking}>4</em>
+            </span>
+            <span className="position-absolute top-4 end-5">
+              <span className={styles.ratingX}>청불</span>
+            </span>
+          </div>
+          <Card.Body className={styles.body}>
+            <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
+            <Card.Text className={styles.text}>
+              예매율 44.4% |{' '}
+              <span className="material-icons md-18 md-grade">grade</span> 9.4 |{' '}
+              <span className="material-icons md-18 md-heart">favorite</span>
+            </Card.Text>
           </Card.Body>
         </Card>
       </SwiperSlide>

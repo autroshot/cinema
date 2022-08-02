@@ -32,12 +32,13 @@ export default function Carousel() {
         autoplay
         pagination
       >
-        {DUMMY_SLIDE_PARAMS.map((slideParam) => {
+        {DUMMY_SLIDE_PARAMS.map((slideParam, index) => {
           return (
             <SwiperSlide key={slideParam.title} className={styles.trailerSlide}>
               <SlideContent
                 title={slideParam.title}
                 src={slideParam.src}
+                priority={index === 0 ? true : false}
                 onClick={() => handleClick(slideParam.youtubeId)}
               />
             </SwiperSlide>

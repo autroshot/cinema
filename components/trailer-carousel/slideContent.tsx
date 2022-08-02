@@ -9,7 +9,11 @@ export default function SlideContent(props: Props) {
       className={styles.trailerButton}
       onClick={props.onClick}
     >
-      <Image src={props.src} alt={`${props.title} 트레일러`} />
+      <Image
+        src={props.src}
+        alt={`${props.title} 트레일러`}
+        priority={props.priority}
+      />
       <div className="position-absolute top-50 start-50 translate-middle">
         <Image src={playBtn} alt="플레이 버튼" />
       </div>
@@ -20,5 +24,6 @@ export default function SlideContent(props: Props) {
 interface Props {
   title: string;
   src: StaticImageData;
+  priority: boolean;
   onClick: () => void;
 }

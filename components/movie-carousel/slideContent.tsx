@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { Button, Card } from 'react-bootstrap';
 import styles from './slideContent.module.css';
 import movie1 from '../../public/images/dummy/movies/01.jpg';
@@ -31,4 +31,14 @@ export default function SlideContent() {
       </Card.Body>
     </Card>
   );
+}
+
+interface Props {
+  image: StaticImageData;
+  rating: string;
+  ranking: number;
+  title: string;
+  salesShare: number;
+  revierScore: number;
+  liked: boolean;
 }

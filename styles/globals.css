@@ -18,3 +18,16 @@ a {
 .swiper-pagination-bullet-active {
   background-color: #d32f2f !important;
 }
+
+.material-icons.md-18 {
+  font-size: 18px;
+  vertical-align: text-bottom;
+}
+
+.material-icons.md-heart {
+  color: #d32f2f;
+}
+
+.material-icons.md-grade {
+  color: #ffa406;
+}

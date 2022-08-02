@@ -23,7 +23,9 @@ export default function Carousel() {
           <Card.Body className={styles.body}>
             <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
             <Card.Text className={styles.text}>
-              예매율 44.4% | 별 9.4 | 하트
+              예매율 44.4% |{' '}
+              <span className="material-icons md-18 md-grade">grade</span> 9.4 |{' '}
+              <span className="material-icons md-18 md-heart">favorite</span>
             </Card.Text>
           </Card.Body>
         </Card>

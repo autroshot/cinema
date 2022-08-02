@@ -13,7 +13,8 @@ export default function Carousel() {
     <Swiper
       modules={[Navigation]}
       spaceBetween={15}
-      slidesPerView={5}
+      slidesPerView={2}
+      breakpoints={{ 576: { slidesPerView: 5 } }}
       navigation
     >
       <SwiperSlide>

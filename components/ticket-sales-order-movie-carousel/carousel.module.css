@@ -8,3 +8,15 @@
   border-radius: 5%;
   overflow: hidden;
 }
+
+.body {
+  text-align: center;
+}
+
+.title {
+  font-size: 1rem;
+}
+
+.text {
+  font-size: 0.8rem;
+}

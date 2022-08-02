@@ -20,9 +20,11 @@ export default function Carousel() {
           <div className={styles.imageBox}>
             <Image src={movie1} alt={'한산'} />
           </div>
-          <Card.Body>
-            <Card.Title>한산: 용의 출현</Card.Title>
-            <Card.Text>예매율 44.4% | 별 9.4 | 하트</Card.Text>
+          <Card.Body className={styles.body}>
+            <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
+            <Card.Text className={styles.text}>
+              예매율 44.4% | 별 9.4 | 하트
+            </Card.Text>
           </Card.Body>
         </Card>
       </SwiperSlide>

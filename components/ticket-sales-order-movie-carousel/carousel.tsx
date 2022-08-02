@@ -5,6 +5,7 @@ import 'swiper/css/navigation';
 import { Card } from 'react-bootstrap';
 import Image from 'next/image';
 import movie1 from '../../public/images/dummy/movies/01.jpg';
+import movie2 from '../../public/images/dummy/movies/02.jpg';
 import styles from './carousel.module.css';
 
 export default function Carousel() {
@@ -39,7 +40,7 @@ export default function Carousel() {
       <SwiperSlide>
         <Card className={styles.card}>
           <div className={styles.imageBox}>
-            <Image src={movie1} alt={'한산'} />
+            <Image src={movie2} alt={'비상선언'} />
             <span className="position-absolute bottom-n1 start-5">
               <em className={styles.ranking}>2</em>
             </span>
@@ -48,10 +49,10 @@ export default function Carousel() {
             </span>
           </div>
           <Card.Body className={styles.body}>
-            <Card.Title className={styles.title}>한산: 용의 출현</Card.Title>
+            <Card.Title className={styles.title}>비상선언</Card.Title>
             <Card.Text className={styles.text}>
-              예매율 44.4% |{' '}
-              <span className="material-icons md-18 md-grade">grade</span> 9.4 |{' '}
+              예매율 24.1% |{' '}
+              <span className="material-icons md-18 md-grade">grade</span> 8.0 |{' '}
               <span className="material-icons md-18 md-heart">favorite</span>
             </Card.Text>
           </Card.Body>

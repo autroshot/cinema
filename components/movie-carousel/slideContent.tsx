@@ -34,13 +34,17 @@ export default function SlideContent(props: Props) {
         </Card.Title>
         <Card.Text className={styles.text}>
           예매율 {props.salesShare.toFixed(1)}% |{' '}
-          <span className="material-icons md-18 md-grade">grade</span>{' '}
+          <span className="material-symbols-outlined">
+            <span className={styles.grade}>grade</span>
+          </span>{' '}
           {props.reviewScore.toFixed(1)} |{' '}
           {props.liked ? (
-            <span className="material-icons md-18 md-favorite">favorite</span>
+            <span className="material-symbols-outlined">
+              <span className={styles.favorite}>favorite</span>
+            </span>
           ) : (
-            <span className="material-icons-outlined md-18 md-favorite-border">
-              favorite_border
+            <span className="material-symbols-outlined">
+              <span className={styles.favoriteBorder}>favorite</span>
             </span>
           )}
         </Card.Text>

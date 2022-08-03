@@ -19,21 +19,6 @@ a {
   background-color: #d32f2f !important;
 }
 
-.material-icons.md-18 {
-  font-size: 18px;
+.material-symbols-outlined {
   vertical-align: text-bottom;
-}
-
-.material-icons-outlined.md-18 {
-  font-size: 18px;
-  vertical-align: text-bottom;
-}
-
-.material-icons.md-favorite,
-.material-icons-outlined.md-favorite-border {
-  color: #d32f2f;
-}
-
-.material-icons.md-grade {
-  color: #ffa406;
 }

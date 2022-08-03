@@ -83,7 +83,7 @@ export default function Carousel() {
     {
       image: movie9,
       rating: '청소년관람불가',
-      title: '헤어질 결심',
+      title: '가나다라마바사아자차카타파하',
       salesShare: 0.5,
       reviewScore: 10,
       liked: true,

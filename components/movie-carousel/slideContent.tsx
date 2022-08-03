@@ -3,6 +3,8 @@ import { Button, Card } from 'react-bootstrap';
 import styles from './slideContent.module.css';
 
 export default function SlideContent(props: Props) {
+  const MAX_TITLE_LENGTH = 11;
+
   return (
     <Card className={styles.card}>
       <div className={styles.imageBox}>
@@ -25,7 +27,11 @@ export default function SlideContent(props: Props) {
         </div>
       </div>
       <Card.Body className={styles.body}>
-        <Card.Title className={styles.title}>{props.title}</Card.Title>
+        <Card.Title className={styles.title}>
+          {props.title.length <= MAX_TITLE_LENGTH
+            ? props.title
+            : props.title.slice(0, MAX_TITLE_LENGTH) + '...'}
+        </Card.Title>
         <Card.Text className={styles.text}>
           예매율 {props.salesShare.toFixed(1)}% |{' '}
           <span className="material-icons md-18 md-grade">grade</span>{' '}

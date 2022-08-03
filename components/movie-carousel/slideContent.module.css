@@ -66,6 +66,7 @@
 
 .ratingRestricted {
   composes: ratingText;
+  color: black;
   background-color: white;
 }
 

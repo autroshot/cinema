@@ -11,8 +11,8 @@ import Link from 'next/link';
 export default function Navbar() {
   return (
     <Container>
-      <BootstrapNavBar expand="md" bg="light" className="p-0">
-        <Container className="p-0">
+      <BootstrapNavBar expand="md" bg="white" className="py-0">
+        <Container className="px-0">
           <BootstrapNavBar.Brand className="d-flex align-items-center">
             <Link href="/">
               <a>

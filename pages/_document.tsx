@@ -9,7 +9,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,FILL@20,0..1&display=optional"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,FILL@20,0..1&display=swap"
           rel="stylesheet"
         />
       </Head>

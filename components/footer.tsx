@@ -4,9 +4,9 @@ import { Container } from 'react-bootstrap';
 
 export default function Footer() {
   return (
-    <Container className="py-5">
+    <Container className="px-0 py-5">
       <footer>
-        <div>
+        <div className="mb-3">
           <Image src={logo} alt="시네마 로고" />
         </div>
         <div>

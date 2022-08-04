@@ -4,6 +4,7 @@ import styles from './specialScreenLinks.module.css';
 import superPlexG from '../public/super-plex-g.png';
 import colorium from '../public/colorium.png';
 import super4D from '../public/super-4d.png';
+import Link from 'next/link';
 
 export default function SpecialScreenLinks() {
   return (
@@ -13,7 +14,7 @@ export default function SpecialScreenLinks() {
           <h5 className="me-auto">
             <b>스페셜관</b>
           </h5>
-          <a href="">더보기 {'>'}</a>
+          <Link href="/special-screen/">더보기 &gt;</Link>
         </Col>
       </Row>
       <Row>

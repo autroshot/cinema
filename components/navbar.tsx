@@ -6,6 +6,7 @@ import {
   Navbar as BootstrapNavBar,
   NavDropdown,
 } from 'react-bootstrap';
+import Link from 'next/link';
 
 export default function Navbar() {
   return (
@@ -13,7 +14,11 @@ export default function Navbar() {
       <BootstrapNavBar expand="md" bg="light" className="p-0">
         <Container className="p-0">
           <BootstrapNavBar.Brand className="d-flex align-items-center">
-            <Image src={logo} alt="시네마 로고" />
+            <Link href="/">
+              <a>
+                <Image src={logo} alt="시네마 로고" />
+              </a>
+            </Link>
           </BootstrapNavBar.Brand>
           <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
           <BootstrapNavBar.Collapse id="basic-navbar-nav">
@@ -41,7 +46,9 @@ export default function Navbar() {
                 <NavDropdown.Item href="#action/3.2">노원</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="스페셜관" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">홈</NavDropdown.Item>
+                <Link href="/special-screen/" passHref>
+                  <NavDropdown.Item>홈</NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.2">샤롯데</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">

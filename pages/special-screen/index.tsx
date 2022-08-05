@@ -20,7 +20,7 @@ export default function Index() {
         <h5 className="ms-3 mt-3">영화의 순간을 더욱 특별하게</h5>
         <div className="mt-5 d-flex justify-content-around flex-wrap">
           <Card className="mb-4 mb-lg-0 border-0">
-            <Image src={superPlexG} alt="수퍼플렉스G" />
+            <Image src={superPlexG} alt="수퍼플렉스G" priority />
             <Card.Body>
               <Card.Title>수퍼플렉스G</Card.Title>
               <Card.Text>기네스북이 인정한 세계 최대 스케일</Card.Text>

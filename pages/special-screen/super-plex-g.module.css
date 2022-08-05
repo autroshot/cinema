@@ -3,3 +3,8 @@
   max-width: 1920px;
   height: auto;
 }
+
+.theaters {
+  text-align: center;
+  border-collapse: collapse;
+}

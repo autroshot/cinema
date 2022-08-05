@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import styles from './specialScreenLinks.module.css';
 import superPlexG from '../public/super-plex-g.png';
 import colorium from '../public/colorium.png';
-import super4D from '../public/super-4d.png';
+import cineCouple from '../public/cine-couple.png';
 import Link from 'next/link';
 
 export default function SpecialScreenLinks() {
@@ -33,7 +33,12 @@ export default function SpecialScreenLinks() {
           </Link>
           <Link href="/special-screen/cine-couple">
             <a className="ms-lg-5">
-              <Image src={super4D} alt="씨네 커플" />
+              <Image
+                src={cineCouple}
+                alt="씨네 커플"
+                width={95.7}
+                height={30}
+              />
             </a>
           </Link>
         </Col>

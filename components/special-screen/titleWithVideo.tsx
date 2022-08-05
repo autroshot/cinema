@@ -1,8 +1,8 @@
 import Image, { StaticImageData } from 'next/image';
 import { Container } from 'react-bootstrap';
-import styles from './titleVideo.module.css';
+import styles from './titleWithVideo.module.css';
 
-export default function TitleVideo(props: Props) {
+export default function TitleWithVideo(props: Props) {
   return (
     <>
       <div className="d-flex justify-content-center">

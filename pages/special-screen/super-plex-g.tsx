@@ -1,3 +1,17 @@
+import { Container } from 'react-bootstrap';
+
 export default function SuperPlexG() {
-  return '수퍼플렉스G 페이지';
+  return (
+    <>
+      <Container fluid>
+        <video
+          src="../../videos/video-super-plex-g.mp4"
+          autoPlay
+          loop
+          playsInline
+        />
+      </Container>
+      <Container></Container>
+    </>
+  );
 }

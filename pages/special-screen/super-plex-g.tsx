@@ -6,31 +6,18 @@ import image2 from '../../public/images/special-screen/super-plex-g-detail-2.jpg
 import image3 from '../../public/images/special-screen/super-plex-g-detail-3.jpg';
 import Link from 'next/link';
 import styles from './super-plex-g.module.css';
+import TitleWithVideo from '../../components/special-screen/titleWithVideo';
 
 export default function SuperPlexG() {
   return (
     <>
       <Container fluid className="position-relative p-0 bg-black">
-        <div className="d-flex justify-content-center">
-          <video
-            className={styles.video}
-            src="/videos/video-super-plex-g.mp4"
-            muted
-            autoPlay
-            loop
-            playsInline
-          />
-        </div>
-        <div className="position-absolute top-50 start-50 translate-middle w-100 h-100">
-          <Container className="h-100 d-flex flex-column">
-            <div className="mt-auto mb-3">
-              <Image src={logo} alt="수퍼플렉스G" />
-              <h5 className="text-white mt-3 ms-5">
-                기네스북이 인정한 세계 최대 스케일
-              </h5>
-            </div>
-          </Container>
-        </div>
+        <TitleWithVideo
+          src="/videos/video-super-plex-g.mp4"
+          logo={logo}
+          alt="수퍼플렉스G"
+          text="기네스북이 인정한 세계 최대 스케일"
+        />
       </Container>
       <Container className="my-5">
         <Row className="mb-2">

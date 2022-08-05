@@ -6,6 +6,7 @@ export default function SuperPlexG() {
       <Container fluid>
         <video
           src="../../videos/video-super-plex-g.mp4"
+          muted
           autoPlay
           loop
           playsInline

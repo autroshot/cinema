@@ -1,19 +1,30 @@
 import { Col, Container, Row } from 'react-bootstrap';
+import TitleWithVideo from '../../components/special-screen/titleWithVideo';
+import TheaterLinks from '../../components/special-screen/theaterLinks';
 import Image from 'next/image';
 import logo from '../../public/logos/special-screen/super-plex-g-white.png';
 import image1 from '../../public/images/special-screen/super-plex-g-detail-1.jpg';
 import image2 from '../../public/images/special-screen/super-plex-g-detail-2.jpg';
 import image3 from '../../public/images/special-screen/super-plex-g-detail-3.jpg';
-import Link from 'next/link';
 import styles from './super-plex-g.module.css';
-import TitleWithVideo from '../../components/special-screen/titleWithVideo';
 
 export default function SuperPlexG() {
+  const THEATER_LINKS_DUMMY = [
+    { name: '월드타워', href: '#' },
+    { name: '건대입구', href: '#' },
+    { name: '수원', href: '#' },
+    { name: '노원', href: '#' },
+    { name: '월드타워', href: '#' },
+    { name: '건대입구', href: '#' },
+    { name: '수원', href: '#' },
+    { name: '노원', href: '#' },
+  ];
+
   return (
     <>
       <Container fluid className="position-relative p-0 bg-black">
         <TitleWithVideo
-          src="/videos/video-super-plex-g.mp4"
+          src="/videos/super-plex-g.mp4"
           logo={logo}
           alt="수퍼플렉스G"
           text="기네스북이 인정한 세계 최대 스케일"
@@ -27,49 +38,8 @@ export default function SuperPlexG() {
             </h5>
           </Col>
         </Row>
-        <section className={styles.theaters}>
-          <Row className="row-cols-3 row-cols-lg-6 g-0">
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-            <Link href="#">
-              <a>
-                <Col className="col py-3 border">월드타워</Col>
-              </a>
-            </Link>
-          </Row>
+        <section>
+          <TheaterLinks theaterLinks={THEATER_LINKS_DUMMY} />
         </section>
         <section>
           <article className={styles.articleLeft}>

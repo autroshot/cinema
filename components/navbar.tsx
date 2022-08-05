@@ -50,11 +50,15 @@ export default function Navbar() {
                   <NavDropdown.Item>홈</NavDropdown.Item>
                 </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.2">샤롯데</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  수퍼플렉스G
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">컬러리움</NavDropdown.Item>
+                <Link href="/special-screen/super-plex-g" passHref>
+                  <NavDropdown.Item>수퍼플렉스G</NavDropdown.Item>
+                </Link>
+                <Link href="/special-screen/colorium" passHref>
+                  <NavDropdown.Item>컬러리움</NavDropdown.Item>
+                </Link>
+                <Link href="/special-screen/cine-couple" passHref>
+                  <NavDropdown.Item>씨네 커플</NavDropdown.Item>
+                </Link>
               </NavDropdown>
             </Nav>
             <Nav>

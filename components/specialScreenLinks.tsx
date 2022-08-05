@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { Col, Row } from 'react-bootstrap';
 import styles from './specialScreenLinks.module.css';
-import superPlexG from '../public/super-plex-g.png';
-import colorium from '../public/colorium.png';
-import cineCouple from '../public/cine-couple.png';
+import superPlexG from '../public/logos/special-screen/super-plex-g.png';
+import colorium from '../public/logos/special-screen/colorium.png';
+import cineCouple from '../public/logos/special-screen/cine-couple.png';
 import Link from 'next/link';
 
 export default function SpecialScreenLinks() {

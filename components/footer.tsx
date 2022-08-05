@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import logo from '../public/logo-with-text-gray.png';
+import logo from '../public/logos/site-with-text-gray.png';
 import { Container } from 'react-bootstrap';
 
 export default function Footer() {

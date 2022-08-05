@@ -16,7 +16,9 @@ export default function SuperPlexG() {
           />
         </div>
         <div className="position-absolute top-50 start-50 translate-middle w-100 h-100">
-          <Container>hello</Container>
+          <Container>
+            <h5 className="text-white">기네스북이 인정한 세계 최대 스케일</h5>
+          </Container>
         </div>
       </Container>
       <Container></Container>

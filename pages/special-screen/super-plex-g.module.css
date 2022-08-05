@@ -8,3 +8,20 @@
   text-align: center;
   border-collapse: collapse;
 }
+
+.textGray {
+  color: #c0bfbe;
+}
+
+.textLarge {
+  font-size: 4rem;
+}
+
+.articleLeft {
+  margin-top: 7rem;
+}
+
+.articleRight {
+  composes: articleLeft;
+  text-align: right;
+}

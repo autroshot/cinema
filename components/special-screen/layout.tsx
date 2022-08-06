@@ -10,6 +10,7 @@ export default function Layout(props: Props) {
       <Container fluid className="position-relative p-0 bg-black">
         <TitleWithVideo
           src={props.src}
+          poster={props.poster}
           logo={props.logo}
           alt={props.alt}
           text={props.text}

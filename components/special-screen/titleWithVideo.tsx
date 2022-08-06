@@ -27,7 +27,7 @@ export default function TitleWithVideo(props: Props) {
   );
 }
 
-interface Props {
+export interface Props {
   src: string;
   logo: StaticImageData;
   alt: string;

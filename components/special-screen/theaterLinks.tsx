@@ -17,7 +17,7 @@ export default function TheaterLinks(props: Props) {
   );
 }
 
-interface Props {
+export interface Props {
   theaterLinks: Array<theaterLink>;
 }
 

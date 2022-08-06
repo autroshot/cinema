@@ -45,9 +45,9 @@ export default function Index() {
           <Link href="/special-screen/cine-couple">
             <a>
               <Card className="border-0">
-                <Image src={cineCouple} alt="씨네 커플" />
+                <Image src={cineCouple} alt="씨네커플" />
                 <Card.Body>
-                  <Card.Title>씨네 커플</Card.Title>
+                  <Card.Title>씨네커플</Card.Title>
                   <Card.Text>연인을 위한 두근두근 커플석</Card.Text>
                 </Card.Body>
               </Card>

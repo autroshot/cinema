@@ -33,12 +33,7 @@ export default function SpecialScreenLinks() {
           </Link>
           <Link href="/special-screen/cine-couple">
             <a className="ms-lg-5">
-              <Image
-                src={cineCouple}
-                alt="씨네 커플"
-                width={95.7}
-                height={30}
-              />
+              <Image src={cineCouple} alt="씨네커플" width={95.7} height={30} />
             </a>
           </Link>
         </Col>

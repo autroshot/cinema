@@ -57,7 +57,7 @@ export default function Navbar() {
                   <NavDropdown.Item>컬러리움</NavDropdown.Item>
                 </Link>
                 <Link href="/special-screen/cine-couple" passHref>
-                  <NavDropdown.Item>씨네 커플</NavDropdown.Item>
+                  <NavDropdown.Item>씨네커플</NavDropdown.Item>
                 </Link>
               </NavDropdown>
             </Nav>

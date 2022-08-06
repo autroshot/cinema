@@ -1,4 +1,5 @@
 .video {
+  width: 100%;
   max-width: 1920px;
-  height: 596px;
+  height: auto;
 }

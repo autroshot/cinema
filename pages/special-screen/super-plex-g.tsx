@@ -24,7 +24,8 @@ export default function SuperPlexG() {
     <>
       <Container fluid className="position-relative p-0 bg-black">
         <TitleWithVideo
-          src="https://rr4---sn-3pm7dnes.c.drive.google.com/videoplayback?expire=1659754018&ei=4p3tYqOQGMKArvIPs4u5mAo&ip=112.169.99.10&cp=QVRKQUhfU1BPSVhPOk82eDB2c29VYkxmUDZ6QUF3OW50bHdic1ZmNzlyVW9RN3MzM0RmdzAzYXQ&id=9d83690da034dc09&itag=37&source=webdrive&requiressl=yes&mh=FQ&mm=32&mn=sn-3pm7dnes&ms=su&mv=m&mvi=4&pl=18&sc=yes&ttl=transient&susc=dr&driveid=1aPuTEWEA6-wnLMGhpeTaKQvitR95lXQo&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=3.854&lmt=1659737949107094&mt=1659739238&subapp=DRIVE_WEB_FILE_VIEWER&txp=0011224&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRAIga9HfGhUsT1wAqGRZrgYEWaiPgaGOQvPxVvByKe7CK14CICywI6e70lBCSP2X-2-4s83zmevyqW40cnDRttF8FjEC&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc&lsig=AG3C_xAwRQIhAJnOvcQzrZ0aH8HSaDurn5X_2vZdhtxrTbw6vCDUNt1KAiBmmH_Yw-4hI2loT4yjFSYRautbdx7Ike0_eb-Iusiwyg==&cpn=Kjs84EjKbpsvLBNu&c=WEB_EMBEDDED_PLAYER&cver=1.20220803.01.00"
+          src="https://drive.google.com/uc?export=download&id=1aPuTEWEA6-wnLMGhpeTaKQvitR95lXQo"
+          poster="/images/special-screen/super-plex-g-video-poster.jpg"
           logo={logo}
           alt="수퍼플렉스G"
           text="기네스북이 인정한 세계 최대 스케일"

@@ -27,7 +27,8 @@ export default function Colorium() {
     <>
       <Container fluid className="position-relative p-0 bg-black">
         <TitleWithVideo
-          src="https://rr4---sn-3pm7dner.c.drive.google.com/videoplayback?expire=1659754129&ei=UZ7tYuGkJsaF-LYP4riZqAs&ip=112.169.99.10&cp=QVRKQUhfU1FQSlhPOk82eDB3dHBVYkxmUDZ6QkJ4OW50bHdic1dnODlyVW9RN3M0NEVmdzAzYXQ&id=460640553de784b1&itag=37&source=webdrive&requiressl=yes&mh=RF&mm=32&mn=sn-3pm7dner&ms=su&mv=m&mvi=4&pl=18&sc=yes&ttl=transient&susc=dr&driveid=1ZdM8lwLuXvBsazxYfnGRC3hs5LqdV2cr&app=explorer&mime=video/mp4&vprv=1&prv=1&dur=5.433&lmt=1659738018918252&mt=1659739238&subapp=DRIVE_WEB_FILE_VIEWER&txp=0011224&sparams=expire,ei,ip,cp,id,itag,source,requiressl,ttl,susc,driveid,app,mime,vprv,prv,dur,lmt&sig=AOq0QJ8wRQIhALtOX6hNlN7YVnnqFdKlpLNOhrh03lZT-o5GKCmbXF47AiBH1Ii50CVFRSXt5YwU21YYG-EKMEVfwPSvDPDqKwbDAw==&lsparams=mh,mm,mn,ms,mv,mvi,pl,sc&lsig=AG3C_xAwRQIhAN50aw2m3s3E2LZVq0la7g8TopYPzooaFE05y35dai22AiBP88tlV5e9j8k6C7cRhWrrQPxvWeC9xQSVzoe6rX5yWw==&cpn=O4U69Z9tkdwtSIv9&c=WEB_EMBEDDED_PLAYER&cver=1.20220803.01.00"
+          src="https://drive.google.com/uc?export=download&id=1ZdM8lwLuXvBsazxYfnGRC3hs5LqdV2cr"
+          poster="/images/special-screen/colorium-video-poster.jpg"
           logo={logo}
           alt="컬러리움"
           text="세상의 모든 색으로 영화를 보다"

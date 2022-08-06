@@ -9,6 +9,7 @@ export default function TitleWithVideo(props: Props) {
         <video
           className={styles.video}
           src={props.src}
+          poster={props.poster}
           muted
           autoPlay
           loop
@@ -29,6 +30,7 @@ export default function TitleWithVideo(props: Props) {
 
 export interface Props {
   src: string;
+  poster: string;
   logo: StaticImageData;
   alt: string;
   text: string;

@@ -9,7 +9,7 @@ import image3 from '../../public/images/special-screen/colorium-detail-3.jpg';
 import image4 from '../../public/images/special-screen/colorium-detail-4.jpg';
 import image5 from '../../public/images/special-screen/colorium-detail-5.png';
 import image6 from '../../public/images/special-screen/colorium-detail-6.jpg';
-import styles from './super-plex-g.module.css';
+import styles from './common.module.css';
 
 export default function Colorium() {
   const THEATER_LINKS_DUMMY = [

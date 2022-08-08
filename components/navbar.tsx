@@ -62,7 +62,16 @@ export default function Navbar() {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#login">로그인</Nav.Link>
+              <Nav.Link as="div">
+                <Link href="/admin/">
+                  <a>관리자</a>
+                </Link>
+              </Nav.Link>
+              <Nav.Link as="div">
+                <Link href="#">
+                  <a>로그인</a>
+                </Link>
+              </Nav.Link>
             </Nav>
           </BootstrapNavBar.Collapse>
         </Container>

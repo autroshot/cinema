@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: ScriptProps) {
         <Nav.Item>
           <Nav.Link as="div">
             <Link href="/">
-              <a>관리자 모드 나가기</a>
+              <a>관리자 나가기</a>
             </Link>
           </Nav.Link>
         </Nav.Item>

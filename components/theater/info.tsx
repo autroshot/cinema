@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import TheaterModal from './TheaterModal';
 
 export default function Info() {
-  const [modalType, setModalType] = useState<null | string>(null);
+  const [modalType, setModalType] = useState<null | modalType>(null);
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function Info() {
     </>
   );
 
-  function handleClick(newModalType: string) {
+  function handleClick(newModalType: modalType) {
     setModalType(newModalType);
   }
 
@@ -52,3 +52,5 @@ export default function Info() {
     setModalType(null);
   }
 }
+
+export type modalType = '대중교통 안내' | '자가용/주차 안내' | '지도';

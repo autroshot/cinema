@@ -1,4 +1,4 @@
-import { Modal } from 'react-bootstrap';
+import Modal from 'react-bootstrap/Modal';
 
 export default function YoutubeModal(props: Props) {
   return (
@@ -6,12 +6,11 @@ export default function YoutubeModal(props: Props) {
       size="lg"
       show={props.youtubeId ? true : false}
       onHide={props.onHide}
-      aria-labelledby="trailer"
       animation={false}
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="trailer">트레일러</Modal.Title>
+        <Modal.Title>트레일러</Modal.Title>
       </Modal.Header>
       <Modal.Body className="p-0 d-flex">
         <iframe
@@ -22,7 +21,7 @@ export default function YoutubeModal(props: Props) {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></iframe>
+        />
       </Modal.Body>
     </Modal>
   );

@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import TheaterModal from './TheaterModal';
 
 export default function Info() {
+  const [modalType, setModalType] = useState<null | string>(null);
+
   return (
     <>
       <Row>
@@ -18,24 +22,33 @@ export default function Info() {
       </Row>
       <Row className="mt-5">
         <Col>
-          <span role="button">
+          <span role="button" onClick={() => handleClick('대중교통 안내')}>
             <span className="material-symbols-outlined">directions_subway</span>{' '}
             대중교통 안내
           </span>
         </Col>
         <Col>
-          <span role="button">
+          <span role="button" onClick={() => handleClick('자가용/주차 안내')}>
             <span className="material-symbols-outlined">directions_car</span>{' '}
-            자가용/주차안내
+            자가용/주차 안내
           </span>
         </Col>
         <Col>
-          <span role="button">
-            <span className="material-symbols-outlined">location_on</span>{' '}
-            지도보기
+          <span role="button" onClick={() => handleClick('지도')}>
+            <span className="material-symbols-outlined">location_on</span> 지도
+            보기
           </span>
         </Col>
       </Row>
+      <TheaterModal onHide={handleHide} type={modalType} />
     </>
   );
+
+  function handleClick(newModalType: string) {
+    setModalType(newModalType);
+  }
+
+  function handleHide() {
+    setModalType(null);
+  }
 }

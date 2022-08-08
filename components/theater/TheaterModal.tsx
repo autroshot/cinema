@@ -1,7 +1,7 @@
+import Markdown from 'marked-react';
 import { Col, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { modalType } from './info';
-import styles from './TheaterModal.module.css';
 
 export default function TheaterModal(props: Props) {
   let content = '';
@@ -38,7 +38,7 @@ export default function TheaterModal(props: Props) {
           <Col>
             <span>
               <h5>지하철로 오시는 길</h5>
-              <p className={styles.whiteSpace}>{content}</p>
+              <Markdown>{content}</Markdown>
             </span>
           </Col>
         </Row>

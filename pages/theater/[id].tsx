@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 import { Col, Container, Row } from 'react-bootstrap';
+import Info from '../../components/theater/info';
+import RecommendedMovie from '../../components/theater/recommendedMovie';
 import styles from './theater.module.css';
 
 export default function Theater() {
@@ -15,8 +17,12 @@ export default function Theater() {
       </span>
       <section className="my-3">
         <Row>
-          <Col>정보</Col>
-          <Col>추천 영화</Col>
+          <Col>
+            <Info />
+          </Col>
+          <Col>
+            <RecommendedMovie />
+          </Col>
         </Row>
       </section>
       <section>상영시간표</section>

@@ -7,7 +7,7 @@ export default function Info() {
 
   return (
     <>
-      <Row>
+      <Row className="row-cols-1 row-cols-sm-2 g-1">
         <Col>
           <b>&middot;</b> 총 상영관 수 <b>21개관</b>
         </Col>

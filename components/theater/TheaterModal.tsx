@@ -24,7 +24,7 @@ export default function TheaterModal(props: Props) {
       <Modal.Header closeButton>
         <Modal.Title>{props.type}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={props.type !== '지도' ? undefined : 'p-0 d-flex'}>
         {createBody(props.type, CAR_DUMMY, PARKING_DUMMY)}
       </Modal.Body>
     </Modal>

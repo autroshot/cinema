@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { setTimeout } from 'timers';
 
 export default function ShareURL() {
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (show === true) {
+      setTimeout(() => setShow(false), 1500);
+    }
+  });
 
   return (
     <OverlayTrigger

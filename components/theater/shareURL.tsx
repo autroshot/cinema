@@ -4,10 +4,17 @@ import { setTimeout } from 'timers';
 
 export default function ShareURL() {
   const [show, setShow] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    if (show === true) {
-      setTimeout(() => setShow(false), 1500);
+    if (clicked === true) {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        setShow(true);
+        setTimeout(() => {
+          setShow(false);
+          setClicked(false);
+        }, 1500);
+      });
     }
   });
 
@@ -24,7 +31,7 @@ export default function ShareURL() {
       <span
         className="material-symbols-outlined me-3"
         role="button"
-        onClick={() => setShow(true)}
+        onClick={() => setClicked(true)}
       >
         share
       </span>

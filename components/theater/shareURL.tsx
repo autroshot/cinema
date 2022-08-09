@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 export default function ShareURL() {
+  const [show, setShow] = useState(false);
+
   return (
     <OverlayTrigger
       placement="top"

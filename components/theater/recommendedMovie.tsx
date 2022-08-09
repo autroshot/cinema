@@ -3,6 +3,7 @@ import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap';
 import { setTimeout } from 'timers/promises';
 import movieImage from '../../public/images/dummy/movies/01.jpg';
 import styles from './recommendedMovie.module.css';
+import ShareURL from './shareURL';
 
 export default function RecommendedMovie() {
   return (
@@ -30,19 +31,7 @@ export default function RecommendedMovie() {
           </div>
           <hr />
           <div>
-            <OverlayTrigger
-              placement="top"
-              show={false}
-              overlay={
-                <Popover id="popover-url">
-                  <Popover.Body>URL이 복사되었습니다.</Popover.Body>
-                </Popover>
-              }
-            >
-              <span className="material-symbols-outlined me-3" role="button">
-                share
-              </span>
-            </OverlayTrigger>
+            <ShareURL />
             <span className="material-symbols-outlined me-3" role="button">
               <span className={styles.favorite}>favorite</span>
             </span>

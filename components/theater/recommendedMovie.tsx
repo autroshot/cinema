@@ -1,5 +1,6 @@
 import Image from 'next/image';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap';
+import { setTimeout } from 'timers/promises';
 import movieImage from '../../public/images/dummy/movies/01.jpg';
 import styles from './recommendedMovie.module.css';
 
@@ -29,9 +30,19 @@ export default function RecommendedMovie() {
           </div>
           <hr />
           <div>
-            <span className="material-symbols-outlined me-3" role="button">
-              share
-            </span>
+            <OverlayTrigger
+              placement="top"
+              show={false}
+              overlay={
+                <Popover id="popover-url">
+                  <Popover.Body>URL이 복사되었습니다.</Popover.Body>
+                </Popover>
+              }
+            >
+              <span className="material-symbols-outlined me-3" role="button">
+                share
+              </span>
+            </OverlayTrigger>
             <span className="material-symbols-outlined me-3" role="button">
               <span className={styles.favorite}>favorite</span>
             </span>

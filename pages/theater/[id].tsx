@@ -16,11 +16,11 @@ export default function Theater() {
         <span className={styles.favoriteBorder}>favorite</span>
       </span>
       <section className="my-3">
-        <Row>
+        <Row className="row-cols-1 row-cols-sm-2">
           <Col>
             <Info />
           </Col>
-          <Col>
+          <Col className="mt-3 mt-sm-0">
             <RecommendedMovie />
           </Col>
         </Row>

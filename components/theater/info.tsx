@@ -20,7 +20,7 @@ export default function Info() {
           <b>서울 송파구 올림픽로 300 (신천동) 5층-11층</b>
         </Col>
       </Row>
-      <Row className="mt-5">
+      <Row className="mt-4 row-cols-1 row-cols-sm-3 g-1">
         <Col>
           <span role="button" onClick={() => handleClick('대중교통 안내')}>
             <span className="material-symbols-outlined">directions_subway</span>{' '}

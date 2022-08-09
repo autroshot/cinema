@@ -40,11 +40,15 @@ export default function SlideContent(props: Props) {
           {props.reviewScore.toFixed(1)} |{' '}
           {props.liked ? (
             <span className="material-symbols-outlined">
-              <span className={styles.favorite}>favorite</span>
+              <span className={styles.favorite} role="button">
+                favorite
+              </span>
             </span>
           ) : (
             <span className="material-symbols-outlined">
-              <span className={styles.favoriteBorder}>favorite</span>
+              <span className={styles.favoriteBorder} role="button">
+                favorite
+              </span>
             </span>
           )}
         </Card.Text>

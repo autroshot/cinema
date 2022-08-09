@@ -29,8 +29,10 @@ export default function RecommendedMovie() {
           </div>
           <hr />
           <div>
-            <span className="material-symbols-outlined me-3">share</span>
-            <span className="material-symbols-outlined me-3">
+            <span className="material-symbols-outlined me-3" role="button">
+              share
+            </span>
+            <span className="material-symbols-outlined me-3" role="button">
               <span className={styles.favorite}>favorite</span>
             </span>
             <Button className="btn-sm btn-primary">예매하기</Button>

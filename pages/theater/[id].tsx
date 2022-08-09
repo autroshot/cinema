@@ -13,7 +13,9 @@ export default function Theater() {
       <div>현재 id: {id}</div>
       <h1 className="d-inline">월드타워</h1>{' '}
       <span className="material-symbols-outlined">
-        <span className={styles.favoriteBorder}>favorite</span>
+        <span className={styles.favoriteBorder} role="button">
+          favorite
+        </span>
       </span>
       <section className="my-3">
         <Row className="row-cols-1 row-cols-sm-2">

@@ -75,6 +75,15 @@ function createBody(
         </>
       );
     case '지도':
-      return <div>지도...</div>;
+      return (
+        <iframe
+          width="800"
+          height="450"
+          frameBorder="0"
+          referrerPolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC61vjGwfXwd_d9BTESJEBJKfY4ozMbvsM&q=place_id:ChIJe-TQ0zOlfDURLRV7utwMM3w"
+          allowFullScreen
+        />
+      );
   }
 }

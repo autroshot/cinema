@@ -5,7 +5,7 @@ import { Container, Nav } from 'react-bootstrap';
 export default function AdminLayout({ children }: ScriptProps) {
   return (
     <Container>
-      <Nav>
+      <Nav className="bg-light">
         <Nav.Item>
           <Nav.Link as="div">
             <Link href="/admin/">

@@ -135,7 +135,9 @@ export default function Detail() {
     </Container>
   );
 
-  function handleChange(event: React.FormEvent<HTMLInputElement>) {
+  function handleChange(
+    event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
     const name = event.currentTarget.name;
     const value = event.currentTarget.value;
     setValues((prevState) => {

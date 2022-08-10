@@ -16,15 +16,24 @@ export default function Detail() {
   const router = useRouter();
   const { id } = router.query;
 
-  const [name, setName] = useState('월드타워');
+  const [values, setValues] = useState({
+    name: '월드타워',
+    street_address: '서울 송파구 올림픽로 300 (신천동) 5층-11층',
+    kakao_map_id: 'ChIJe-TQ0zOlfDURLRV7utwMM3w',
+    subway: SUBWAY_DUMMY,
+    bus: BUS_DUMMY,
+    car: CAR_DUMMY,
+    parking: PARKING_DUMMY,
+  });
 
   return (
     <Container className="mt-4">
       <h3>영화관 상세</h3>
       <p>현재 id: {id}</p>
-      <Table bordered>
+      <Table className={styles.table}>
         <colgroup>
           <col className={styles.attrCol} />
+          <col className={styles.valueCol} />
         </colgroup>
         <thead>
           <tr>
@@ -40,47 +49,98 @@ export default function Detail() {
           <tr>
             <td>name</td>
             <td>
-              <input type="text" value={name} onChange={handleChange} />
+              <input
+                className="w-100"
+                name="name"
+                type="text"
+                value={values.name}
+                onInput={handleChange}
+              />
             </td>
           </tr>
           <tr>
             <td>street_address</td>
-            <td>서울 송파구 올림픽로 300 (신천동) 5층-11층</td>
+            <td>
+              <input
+                className="w-100"
+                name="street_address"
+                type="text"
+                value={values.street_address}
+                onInput={handleChange}
+              />
+            </td>
           </tr>
           <tr>
             <td>kakao_map_id</td>
-            <td>ChIJe-TQ0zOlfDURLRV7utwMM3w</td>
+            <td>
+              <input
+                className="w-100"
+                name="kakao_map_id"
+                type="text"
+                value={values.kakao_map_id}
+                onInput={handleChange}
+              />
+            </td>
           </tr>
           <tr>
             <td>subway</td>
-            <td className="p-0">
+            <td>
               <textarea
+                className="w-100"
                 name="subway"
-                cols={100}
                 rows={10}
-                defaultValue={SUBWAY_DUMMY}
+                value={values.subway}
+                onInput={handleChange}
               />
             </td>
           </tr>
           <tr>
             <td>bus</td>
-            <td>김포공항</td>
+            <td>
+              <textarea
+                className="w-100"
+                name="bus"
+                rows={10}
+                value={values.bus}
+                onInput={handleChange}
+              />
+            </td>
           </tr>
           <tr>
             <td>car</td>
-            <td>김포공항</td>
+            <td>
+              <textarea
+                className="w-100"
+                name="car"
+                rows={10}
+                value={values.car}
+                onInput={handleChange}
+              />
+            </td>
           </tr>
           <tr>
             <td>parking</td>
-            <td>김포공항</td>
+            <td>
+              <textarea
+                className="w-100"
+                name="parking"
+                rows={10}
+                value={values.parking}
+                onInput={handleChange}
+              />
+            </td>
           </tr>
         </tbody>
       </Table>
     </Container>
   );
 
-  function handleChange(e: React.FormEvent<HTMLInputElement>) {
-    setName(e.currentTarget.value);
+  function handleChange(event: React.FormEvent<HTMLInputElement>) {
+    const name = event.currentTarget.name;
+    const value = event.currentTarget.value;
+    setValues((prevState) => {
+      return { ...prevState, [name]: value };
+    });
   }
 }
 

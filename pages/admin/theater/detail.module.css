@@ -1,3 +1,11 @@
+.table {
+  table-layout: fixed;
+}
+
 .attrCol {
-  background-color: lightgray;
+  width: 8rem;
+}
+
+.valueCol {
+  width: auto;
 }

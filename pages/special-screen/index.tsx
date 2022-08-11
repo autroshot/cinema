@@ -1,8 +1,8 @@
 import { Card, Col, Container, Row } from 'react-bootstrap';
 import Image from 'next/image';
-import superPlexG from '../../public/images/special-screen/super-plex-g.jpg';
-import colorium from '../../public/images/special-screen/colorium.jpg';
-import cineCouple from '../../public/images/special-screen/cine-couple.jpg';
+import superPlexG from 'public/images/special-screen/super-plex-g.jpg';
+import colorium from 'public/images/special-screen/colorium.jpg';
+import cineCouple from 'public/images/special-screen/cine-couple.jpg';
 import Head from 'next/head';
 import Link from 'next/link';
 

@@ -1,5 +1,4 @@
 import Markdown from 'marked-react';
-import { Col, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { modalType } from './info';
 

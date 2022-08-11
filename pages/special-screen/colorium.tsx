@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import logo from '../../public/logos/special-screen/colorium-white.png';
-import image1 from '../../public/images/special-screen/colorium-detail-1.jpg';
-import image2 from '../../public/images/special-screen/colorium-detail-2.jpg';
-import image3 from '../../public/images/special-screen/colorium-detail-3.jpg';
-import image4 from '../../public/images/special-screen/colorium-detail-4.jpg';
-import image5 from '../../public/images/special-screen/colorium-detail-5.png';
-import image6 from '../../public/images/special-screen/colorium-detail-6.jpg';
+import logo from 'public/logos/special-screen/colorium-white.png';
+import image1 from 'public/images/special-screen/colorium-detail-1.jpg';
+import image2 from 'public/images/special-screen/colorium-detail-2.jpg';
+import image3 from 'public/images/special-screen/colorium-detail-3.jpg';
+import image4 from 'public/images/special-screen/colorium-detail-4.jpg';
+import image5 from 'public/images/special-screen/colorium-detail-5.png';
+import image6 from 'public/images/special-screen/colorium-detail-6.jpg';
 import styles from './common.module.css';
-import Layout from '../../components/special-screen/layout';
+import Layout from 'components/special-screen/layout';
 
 export default function Colorium() {
   const THEATER_LINKS_DUMMY = [

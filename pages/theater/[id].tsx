@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Col, Container, Row } from 'react-bootstrap';
-import Info from '../../components/theater/info';
-import RecommendedMovie from '../../components/theater/recommendedMovie';
+import Info from 'components/theater/info';
+import RecommendedMovie from 'components/theater/recommendedMovie';
 import styles from './theater.module.css';
 
 export default function Theater() {

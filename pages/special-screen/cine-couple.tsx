@@ -1,8 +1,8 @@
-import Layout from '../../components/special-screen/layout';
+import Layout from 'components/special-screen/layout';
 import Image from 'next/image';
-import logo from '../../public/logos/special-screen/cine-couple-white.png';
-import image1 from '../../public/images/special-screen/cine-couple-detail-1.jpg';
-import image2 from '../../public/images/special-screen/cine-couple-detail-2.jpg';
+import logo from 'public/logos/special-screen/cine-couple-white.png';
+import image1 from 'public/images/special-screen/cine-couple-detail-1.jpg';
+import image2 from 'public/images/special-screen/cine-couple-detail-2.jpg';
 import styles from './common.module.css';
 
 export default function CineCouple() {

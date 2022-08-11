@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import { Button, Col, OverlayTrigger, Popover, Row } from 'react-bootstrap';
-import { setTimeout } from 'timers/promises';
-import movieImage from '../../public/images/dummy/movies/01.jpg';
+import { Button, Col, Row } from 'react-bootstrap';
+import movieImage from 'public/images/dummy/movies/01.jpg';
 import styles from './recommendedMovie.module.css';
 import ShareURL from './shareURL';
 

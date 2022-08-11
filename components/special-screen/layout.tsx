@@ -1,5 +1,4 @@
-import { StaticImageData } from 'next/image';
-import { Children, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import TheaterLinks, { Props as theaterLinksProps } from './theaterLinks';
 import TitleWithVideo, { Props as titleWithVideoProps } from './titleWithVideo';

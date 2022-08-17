@@ -19,7 +19,10 @@ export default function Index() {
           </b>
         </h1>
         <h5 className="ms-3 mt-3">영화의 순간을 더욱 특별하게</h5>
-        <div className="mt-5 d-flex justify-content-around flex-wrap">
+        <div
+          className="mt-5 d-flex justify-content-around flex-wrap"
+          data-cy="specialScreenLinks"
+        >
           <Link href="/special-screen/super-plex-g">
             <a>
               <Card className="mb-4 mb-lg-0 border-0">

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Container, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import styles from './index.module.css';
 
 export default function Index() {
@@ -45,6 +45,11 @@ export default function Index() {
           </Link>
         </tbody>
       </Table>
+      <Row>
+        <Col>
+          <Button>새 영화관 만들기</Button>
+        </Col>
+      </Row>
     </Container>
   );
 }

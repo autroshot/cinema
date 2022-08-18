@@ -9,3 +9,7 @@
 .valueCol {
   width: auto;
 }
+
+.warning {
+  color: #664d03;
+}

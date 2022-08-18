@@ -146,7 +146,12 @@ export default function CreateForm() {
         </Table>
         <Row>
           <Col>
-            <Alert variant="warning">빈 칸이 있습니다.</Alert>
+            <Alert variant="warning">
+              <span className="material-symbols-rounded me-1">
+                <span className={styles.warning}>warning</span>
+              </span>
+              빈 칸이 있습니다.
+            </Alert>
           </Col>
         </Row>
         <Row className="mb-3">

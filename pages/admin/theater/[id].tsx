@@ -32,12 +32,12 @@ export default function Detail() {
       <p>현재 id: {id}</p>
       <Table className={styles.table}>
         <colgroup>
-          <col className={styles.attrCol} />
+          <col className={styles.fieldCol} />
           <col className={styles.valueCol} />
         </colgroup>
         <thead>
           <tr>
-            <th>속성</th>
+            <th>필드</th>
             <th>값</th>
           </tr>
         </thead>

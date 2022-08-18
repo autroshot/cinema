@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
 
 export default function CreateForm() {
@@ -15,7 +15,7 @@ export default function CreateForm() {
 
   return (
     <Container className="mt-4">
-      <h3>새 영화관 만들기</h3>
+      <h3>새 영화관 등록</h3>
       <Table className={styles.table}>
         <colgroup>
           <col className={styles.attrCol} />
@@ -114,6 +114,14 @@ export default function CreateForm() {
           </tr>
         </tbody>
       </Table>
+      <Row className="mb-3">
+        <Col>
+          <Button>등록</Button>
+          <Button variant="secondary" className="ms-3">
+            취소
+          </Button>
+        </Col>
+      </Row>
     </Container>
   );
 

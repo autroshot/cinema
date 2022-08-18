@@ -47,59 +47,74 @@ export default function Detail() {
             <td>100</td>
           </tr>
           <tr>
-            <td>name</td>
+            <td>
+              <label htmlFor="name">name</label>
+            </td>
             <td>
               <input
-                className="w-100"
+                id="name"
                 name="name"
                 type="text"
+                className="w-100"
                 value={values.name}
                 onInput={handleChange}
               />
             </td>
           </tr>
           <tr>
-            <td>street_address</td>
+            <td>
+              <label htmlFor="street_address">street_address</label>
+            </td>
             <td>
               <input
-                className="w-100"
+                id="street_address"
                 name="street_address"
                 type="text"
+                className="w-100"
                 value={values.street_address}
                 onInput={handleChange}
               />
             </td>
           </tr>
           <tr>
-            <td>kakao_map_id</td>
+            <td>
+              <label htmlFor="kakao_map_id">kakao_map_id</label>
+            </td>
             <td>
               <input
-                className="w-100"
+                id="kakao_map_id"
                 name="kakao_map_id"
                 type="text"
+                className="w-100"
                 value={values.kakao_map_id}
                 onInput={handleChange}
               />
             </td>
           </tr>
           <tr>
-            <td>subway</td>
+            <td>
+              <label htmlFor="subway">subway</label>
+            </td>
             <td>
               <textarea
-                className="w-100"
+                id="subway"
                 name="subway"
                 rows={10}
+                className="w-100"
                 value={values.subway}
                 onInput={handleChange}
               />
             </td>
           </tr>
           <tr>
-            <td>bus</td>
+            <td>
+              <label htmlFor="bus">bus</label>
+            </td>
             <td>
               <textarea
-                className="w-100"
+                id="bus"
                 name="bus"
+                className="w-100"
                 rows={10}
                 value={values.bus}
                 onInput={handleChange}
@@ -107,11 +122,14 @@ export default function Detail() {
             </td>
           </tr>
           <tr>
-            <td>car</td>
+            <td>
+              <label htmlFor="car">car</label>
+            </td>
             <td>
               <textarea
-                className="w-100"
+                id="car"
                 name="car"
+                className="w-100"
                 rows={10}
                 value={values.car}
                 onInput={handleChange}
@@ -119,11 +137,14 @@ export default function Detail() {
             </td>
           </tr>
           <tr>
-            <td>parking</td>
+            <td>
+              <label htmlFor="parking">parking</label>
+            </td>
             <td>
               <textarea
-                className="w-100"
+                id="parking"
                 name="parking"
+                className="w-100"
                 rows={10}
                 value={values.parking}
                 onInput={handleChange}

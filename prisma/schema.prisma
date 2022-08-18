@@ -14,9 +14,9 @@ datasource db {
 
 model theater {
   id             Int     @id @default(autoincrement())
-  name           String  @unique
-  street_address String  @unique
-  kakao_map_id   String  @unique @db.VarChar(1000)
+  name           String  @unique @db.VarChar(50)
+  street_address String
+  kakao_map_id   String  @db.VarChar(1000)
   subway         String? @db.VarChar(1000)
   bus            String? @db.VarChar(1000)
   car            String? @db.VarChar(1000)

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
@@ -41,6 +42,7 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.name}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -56,6 +58,7 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.street_address}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -71,6 +74,7 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.kakao_map_id}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -86,6 +90,7 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.subway}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -101,6 +106,7 @@ export default function CreateForm() {
                   rows={10}
                   value={values.bus}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -116,6 +122,7 @@ export default function CreateForm() {
                   rows={10}
                   value={values.car}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -131,6 +138,7 @@ export default function CreateForm() {
                   rows={10}
                   value={values.parking}
                   onInput={handleChange}
+                  required
                 />
               </td>
             </tr>
@@ -139,9 +147,11 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <Button type="submit">등록</Button>
-            <Button type="button" variant="secondary" className="ms-3">
-              취소
-            </Button>
+            <Link href="/admin/theater">
+              <Button type="button" variant="secondary" className="ms-3">
+                취소
+              </Button>
+            </Link>
           </Col>
         </Row>
       </form>

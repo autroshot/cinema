@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
 
 export default function CreateForm() {
@@ -144,6 +144,11 @@ export default function CreateForm() {
             </tr>
           </tbody>
         </Table>
+        <Row>
+          <Col>
+            <Alert variant="warning">빈 칸이 있습니다.</Alert>
+          </Col>
+        </Row>
         <Row className="mb-3">
           <Col>
             <Button type="submit">등록</Button>

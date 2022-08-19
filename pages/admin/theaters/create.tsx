@@ -175,7 +175,7 @@ export default function CreateForm() {
     });
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!validate(Object.values(values))) {
@@ -184,7 +184,15 @@ export default function CreateForm() {
     }
     setShowWarning(false);
     const json = JSON.stringify(values);
-    console.log(json);
+
+    const response = await fetch('/api/theaters', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: json,
+    });
+
+    const result = await response.json();
+    console.log(result);
   }
 
   function validate(values: string[]) {

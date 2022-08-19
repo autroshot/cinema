@@ -47,7 +47,7 @@ export default function Index() {
       </Table>
       <Row>
         <Col>
-          <Link href="/admin/theater/createForm">
+          <Link href="/admin/theater/create">
             <Button>영화관 등록</Button>
           </Link>
         </Col>

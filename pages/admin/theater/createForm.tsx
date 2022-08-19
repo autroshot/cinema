@@ -18,7 +18,7 @@ export default function CreateForm() {
   return (
     <Container className="mt-4">
       <h3>영화관 등록</h3>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Table className={styles.table}>
           <colgroup>
             <col className={styles.fieldCol} />
@@ -43,7 +43,6 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.name}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -59,7 +58,6 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.street_address}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -75,7 +73,6 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.kakao_map_id}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -91,7 +88,6 @@ export default function CreateForm() {
                   className="w-100"
                   value={values.subway}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -107,7 +103,6 @@ export default function CreateForm() {
                   rows={10}
                   value={values.bus}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -123,7 +118,6 @@ export default function CreateForm() {
                   rows={10}
                   value={values.car}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -139,7 +133,6 @@ export default function CreateForm() {
                   rows={10}
                   value={values.parking}
                   onChange={handleChange}
-                  required
                 />
               </td>
             </tr>
@@ -181,10 +174,22 @@ export default function CreateForm() {
       return { ...prevState, [name]: value };
     });
   }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!validate(Object.values(values))) {
+      setShowWarning(true);
+      return;
+    }
+    setShowWarning(false);
+    const json = JSON.stringify(values);
+    console.log(json);
+  }
+
+  function validate(values: string[]) {
+    return !values.some((value) => value.length === 0);
+  }
 }
 
 CreateForm.isAdminPage = true;
-
-function validate(values: string[]) {
-  return values.some((value) => value.length === 0);
-}

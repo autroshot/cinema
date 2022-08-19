@@ -1,11 +1,20 @@
 import { Prisma } from '@prisma/client';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap';
-import styles from './detail.module.css';
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Row,
+  Spinner,
+  Table,
+} from 'react-bootstrap';
+import styles from './create.module.css';
 
 export default function CreateForm() {
   const [showWarning, setShowWarning] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
   const [values, setValues] = useState<Values>({
     name: '',
     street_address: '',
@@ -17,152 +26,168 @@ export default function CreateForm() {
   });
 
   return (
-    <Container className="mt-4">
-      <h3>영화관 등록</h3>
-      <form onSubmit={handleSubmit}>
-        <Table className={styles.table}>
-          <colgroup>
-            <col className={styles.fieldCol} />
-            <col className={styles.valueCol} />
-          </colgroup>
-          <thead>
-            <tr>
-              <th>필드</th>
-              <th>값</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <label htmlFor="name">name</label>
-              </td>
-              <td>
-                <input
-                  id="name"
-                  name="name"
-                  type="text"
-                  className="w-100"
-                  value={values.name}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="street_address">street_address</label>
-              </td>
-              <td>
-                <input
-                  id="street_address"
-                  name="street_address"
-                  type="text"
-                  className="w-100"
-                  value={values.street_address}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="kakao_map_id">kakao_map_id</label>
-              </td>
-              <td>
-                <input
-                  id="kakao_map_id"
-                  name="kakao_map_id"
-                  type="text"
-                  className="w-100"
-                  value={values.kakao_map_id}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="subway">subway</label>
-              </td>
-              <td>
-                <textarea
-                  id="subway"
-                  name="subway"
-                  rows={10}
-                  className="w-100"
-                  value={values.subway}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="bus">bus</label>
-              </td>
-              <td>
-                <textarea
-                  id="bus"
-                  name="bus"
-                  className="w-100"
-                  rows={10}
-                  value={values.bus}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="car">car</label>
-              </td>
-              <td>
-                <textarea
-                  id="car"
-                  name="car"
-                  className="w-100"
-                  rows={10}
-                  value={values.car}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label htmlFor="parking">parking</label>
-              </td>
-              <td>
-                <textarea
-                  id="parking"
-                  name="parking"
-                  className="w-100"
-                  rows={10}
-                  value={values.parking}
-                  onChange={handleChange}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-        {showWarning ? (
-          <Row>
+    <>
+      <Container className="mt-4">
+        <h3>영화관 등록</h3>
+        <form onSubmit={handleSubmit}>
+          <Table className={styles.table}>
+            <colgroup>
+              <col className={styles.fieldCol} />
+              <col className={styles.valueCol} />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>필드</th>
+                <th>값</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <label htmlFor="name">name</label>
+                </td>
+                <td>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    className="w-100"
+                    value={values.name}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="street_address">street_address</label>
+                </td>
+                <td>
+                  <input
+                    id="street_address"
+                    name="street_address"
+                    type="text"
+                    className="w-100"
+                    value={values.street_address}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="kakao_map_id">kakao_map_id</label>
+                </td>
+                <td>
+                  <input
+                    id="kakao_map_id"
+                    name="kakao_map_id"
+                    type="text"
+                    className="w-100"
+                    value={values.kakao_map_id}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="subway">subway</label>
+                </td>
+                <td>
+                  <textarea
+                    id="subway"
+                    name="subway"
+                    rows={10}
+                    className="w-100"
+                    value={values.subway}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="bus">bus</label>
+                </td>
+                <td>
+                  <textarea
+                    id="bus"
+                    name="bus"
+                    className="w-100"
+                    rows={10}
+                    value={values.bus}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="car">car</label>
+                </td>
+                <td>
+                  <textarea
+                    id="car"
+                    name="car"
+                    className="w-100"
+                    rows={10}
+                    value={values.car}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <label htmlFor="parking">parking</label>
+                </td>
+                <td>
+                  <textarea
+                    id="parking"
+                    name="parking"
+                    className="w-100"
+                    rows={10}
+                    value={values.parking}
+                    onChange={handleChange}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+          {showWarning ? (
+            <Row>
+              <Col>
+                <Alert variant="warning">
+                  <span className="material-symbols-rounded me-1">
+                    <span className={styles.warning}>warning</span>
+                  </span>
+                  빈 칸이 있습니다.
+                </Alert>
+              </Col>
+            </Row>
+          ) : null}
+          <Row className="mb-3">
             <Col>
-              <Alert variant="warning">
-                <span className="material-symbols-rounded me-1">
-                  <span className={styles.warning}>warning</span>
-                </span>
-                빈 칸이 있습니다.
-              </Alert>
+              <Button type="submit">등록</Button>
+              <Link href="/admin/theaters">
+                <Button type="button" variant="secondary" className="ms-3">
+                  취소
+                </Button>
+              </Link>
             </Col>
           </Row>
-        ) : null}
-        <Row className="mb-3">
-          <Col>
-            <Button type="submit">등록</Button>
-            <Link href="/admin/theaters">
-              <Button type="button" variant="secondary" className="ms-3">
-                취소
-              </Button>
-            </Link>
-          </Col>
-        </Row>
-      </form>
-    </Container>
+        </form>
+      </Container>
+      {showLoading ? (
+        <div className={styles.overlay}>
+          <div className="h-100 d-flex justify-content-center align-items-center">
+            <Spinner
+              animation="border"
+              role="status"
+              variant="primary"
+              className="text"
+            >
+              <span className="visually-hidden">처리 중...</span>
+            </Spinner>
+          </div>
+        </div>
+      ) : null}
+    </>
   );
 
   function handleChange(
@@ -184,6 +209,7 @@ export default function CreateForm() {
       return;
     }
     setShowWarning(false);
+    setShowLoading(true);
     const json = JSON.stringify(values);
 
     const response = await fetch('/api/theaters', {
@@ -191,6 +217,7 @@ export default function CreateForm() {
       headers: { 'Content-Type': 'application/json' },
       body: json,
     });
+    setShowLoading(false);
 
     if (response.status === 201) {
       console.log('insert 성공!');

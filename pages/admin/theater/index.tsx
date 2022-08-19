@@ -48,7 +48,7 @@ export default function Index() {
       <Row>
         <Col>
           <Link href="/admin/theater/createForm">
-            <Button>새 영화관 등록</Button>
+            <Button>영화관 등록</Button>
           </Link>
         </Col>
       </Row>

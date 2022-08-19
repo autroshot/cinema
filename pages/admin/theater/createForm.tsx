@@ -17,7 +17,7 @@ export default function CreateForm() {
 
   return (
     <Container className="mt-4">
-      <h3>새 영화관 등록</h3>
+      <h3>영화관 등록</h3>
       <form>
         <Table className={styles.table}>
           <colgroup>

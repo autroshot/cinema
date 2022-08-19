@@ -4,6 +4,7 @@ import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
 
 export default function CreateForm() {
+  const [showWarning, setShowWarning] = useState(false);
   const [values, setValues] = useState({
     name: '',
     street_address: '',
@@ -41,7 +42,7 @@ export default function CreateForm() {
                   type="text"
                   className="w-100"
                   value={values.name}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
@@ -57,7 +58,7 @@ export default function CreateForm() {
                   type="text"
                   className="w-100"
                   value={values.street_address}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
@@ -73,7 +74,7 @@ export default function CreateForm() {
                   type="text"
                   className="w-100"
                   value={values.kakao_map_id}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
@@ -89,7 +90,7 @@ export default function CreateForm() {
                   rows={10}
                   className="w-100"
                   value={values.subway}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
@@ -105,7 +106,7 @@ export default function CreateForm() {
                   className="w-100"
                   rows={10}
                   value={values.bus}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
@@ -121,7 +122,7 @@ export default function CreateForm() {
                   className="w-100"
                   rows={10}
                   value={values.car}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
@@ -137,23 +138,25 @@ export default function CreateForm() {
                   className="w-100"
                   rows={10}
                   value={values.parking}
-                  onInput={handleChange}
+                  onChange={handleChange}
                   required
                 />
               </td>
             </tr>
           </tbody>
         </Table>
-        <Row>
-          <Col>
-            <Alert variant="warning">
-              <span className="material-symbols-rounded me-1">
-                <span className={styles.warning}>warning</span>
-              </span>
-              빈 칸이 있습니다.
-            </Alert>
-          </Col>
-        </Row>
+        {showWarning ? (
+          <Row>
+            <Col>
+              <Alert variant="warning">
+                <span className="material-symbols-rounded me-1">
+                  <span className={styles.warning}>warning</span>
+                </span>
+                빈 칸이 있습니다.
+              </Alert>
+            </Col>
+          </Row>
+        ) : null}
         <Row className="mb-3">
           <Col>
             <Button type="submit">등록</Button>
@@ -173,6 +176,7 @@ export default function CreateForm() {
   ) {
     const name = event.currentTarget.name;
     const value = event.currentTarget.value;
+
     setValues((prevState) => {
       return { ...prevState, [name]: value };
     });
@@ -180,3 +184,7 @@ export default function CreateForm() {
 }
 
 CreateForm.isAdminPage = true;
+
+function validate(values: string[]) {
+  return values.some((value) => value.length === 0);
+}

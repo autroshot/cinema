@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { Alert, Button, Col, Container, Row, Table } from 'react-bootstrap';
@@ -5,7 +6,7 @@ import styles from './detail.module.css';
 
 export default function CreateForm() {
   const [showWarning, setShowWarning] = useState(false);
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<Values>({
     name: '',
     street_address: '',
     kakao_map_id: '',
@@ -191,12 +192,20 @@ export default function CreateForm() {
       body: json,
     });
 
-    const result = await response.json();
-    console.log(result);
+    if (response.status === 201) {
+      console.log('insert 성공!');
+    }
   }
 
   function validate(values: string[]) {
     return !values.some((value) => value.length === 0);
+  }
+
+  interface Values extends Prisma.theaterCreateInput {
+    subway: string;
+    bus: string;
+    car: string;
+    parking: string;
   }
 }
 

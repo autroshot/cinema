@@ -22,7 +22,7 @@ export default function AdminLayout({ children }: ScriptProps) {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link as="div">
-            <Link href="#">
+            <Link href="">
               <a>회원</a>
             </Link>
           </Nav.Link>

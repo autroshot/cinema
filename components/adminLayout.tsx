@@ -15,7 +15,7 @@ export default function AdminLayout({ children }: ScriptProps) {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link as="div">
-            <Link href="/admin/theater">
+            <Link href="/admin/theaters">
               <a>영화관</a>
             </Link>
           </Nav.Link>

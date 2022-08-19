@@ -13,31 +13,31 @@ export default function Index() {
           </tr>
         </thead>
         <tbody>
-          <Link href="/admin/theater/100">
+          <Link href="/admin/theaters/100">
             <tr role="link" className={styles.cursorPointer}>
               <td>100</td>
               <td>월드타워</td>
             </tr>
           </Link>
-          <Link href="/admin/theater/101">
+          <Link href="/admin/theaters/101">
             <tr role="link" className={styles.cursorPointer}>
               <td>101</td>
               <td>수원</td>
             </tr>
           </Link>
-          <Link href="/admin/theater/102">
+          <Link href="/admin/theaters/102">
             <tr role="link" className={styles.cursorPointer}>
               <td>102</td>
               <td>건대입구</td>
             </tr>
           </Link>
-          <Link href="/admin/theater/103">
+          <Link href="/admin/theaters/103">
             <tr role="link" className={styles.cursorPointer}>
               <td>103</td>
               <td>노원</td>
             </tr>
           </Link>
-          <Link href="/admin/theater/104">
+          <Link href="/admin/theaters/104">
             <tr role="link" className={styles.cursorPointer}>
               <td>104</td>
               <td>김포공항</td>
@@ -47,7 +47,7 @@ export default function Index() {
       </Table>
       <Row>
         <Col>
-          <Link href="/admin/theater/create">
+          <Link href="/admin/theaters/create">
             <Button>영화관 등록</Button>
           </Link>
         </Col>

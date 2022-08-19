@@ -153,7 +153,7 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <Button type="submit">등록</Button>
-            <Link href="/admin/theater">
+            <Link href="/admin/theaters">
               <Button type="button" variant="secondary" className="ms-3">
                 취소
               </Button>

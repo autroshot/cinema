@@ -14,24 +14,24 @@ export default function SpecialScreenLinks() {
           <h5 className="me-auto">
             <b>스페셜관</b>
           </h5>
-          <Link href="/special-screen/">
+          <Link href="/special-screens/">
             <a>더보기 &gt;</a>
           </Link>
         </Col>
       </Row>
       <Row>
         <Col className="mt-3 d-flex d-flex justify-content-between justify-content-lg-start">
-          <Link href="/special-screen/super-plex-g">
+          <Link href="/special-screens/super-plex-g">
             <a>
               <Image src={superPlexG} alt="수퍼플렉스G" />
             </a>
           </Link>
-          <Link href="/special-screen/colorium">
+          <Link href="/special-screens/colorium">
             <a className="ms-lg-5">
               <Image src={colorium} alt="컬러리움" />
             </a>
           </Link>
-          <Link href="/special-screen/cine-couple">
+          <Link href="/special-screens/cine-couple">
             <a className="ms-lg-5">
               <Image src={cineCouple} alt="씨네커플" width={95.7} height={30} />
             </a>

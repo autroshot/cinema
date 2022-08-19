@@ -23,7 +23,7 @@ export default function Index() {
           className="mt-5 d-flex justify-content-around flex-wrap"
           data-cy="specialScreenLinks"
         >
-          <Link href="/special-screen/super-plex-g">
+          <Link href="/special-screens/super-plex-g">
             <a>
               <Card className="mb-4 mb-lg-0 border-0">
                 <Image src={superPlexG} alt="수퍼플렉스G" priority />
@@ -34,7 +34,7 @@ export default function Index() {
               </Card>
             </a>
           </Link>
-          <Link href="/special-screen/colorium">
+          <Link href="/special-screens/colorium">
             <a>
               <Card className="mb-4 mb-lg-0 border-0">
                 <Image src={colorium} alt="컬러리움" />
@@ -45,7 +45,7 @@ export default function Index() {
               </Card>
             </a>
           </Link>
-          <Link href="/special-screen/cine-couple">
+          <Link href="/special-screens/cine-couple">
             <a>
               <Card className="border-0">
                 <Image src={cineCouple} alt="씨네커플" />

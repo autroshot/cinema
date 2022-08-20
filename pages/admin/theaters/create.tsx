@@ -1,3 +1,4 @@
+import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
 import Link from 'next/link';
 import { RequestData, ResponseData } from 'pages/api/theaters';
@@ -14,7 +15,7 @@ import {
 import styles from './detail.module.css';
 
 export default function CreateForm() {
-  const [showWarning, setShowWarning] = useState(false);
+  const [alert, setAlert] = useState<null | string>(null);
   const [showLoading, setShowLoading] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
   const [values, setValues] = useState<RequestData>({
@@ -154,15 +155,10 @@ export default function CreateForm() {
               </tr>
             </tbody>
           </Table>
-          {showWarning ? (
+          {alert ? (
             <Row>
               <Col>
-                <Alert variant="warning">
-                  <span className="material-symbols-rounded me-1">
-                    <span className={styles.warning}>warning</span>
-                  </span>
-                  필숫값이 비어 있습니다.
-                </Alert>
+                <MyAlert message={alert} />
               </Col>
             </Row>
           ) : null}
@@ -212,27 +208,28 @@ export default function CreateForm() {
     event.preventDefault();
 
     if (!validate(values)) {
-      setShowWarning(true);
+      setAlert('필숫값이 비어 있습니다.');
       return;
     }
-    setShowWarning(false);
+    setAlert(null);
     setShowLoading(true);
-    const json = JSON.stringify(values);
 
+    const requestJson = JSON.stringify(values);
     const response = await fetch('/api/theaters', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: json,
+      body: requestJson,
     });
     setShowLoading(false);
 
     if (response.status === 500) {
-      const ResponseJson = (await response.json()) as ResponseData;
-      console.log(ResponseJson.message);
+      const responseJson = (await response.json()) as ResponseData;
+      setAlert(responseJson.message);
+      return;
     }
-
     if (response.status === 201) {
       setShowCompletion(true);
+      return;
     }
   }
 

@@ -1,13 +1,12 @@
-import { Prisma } from '@prisma/client';
 import NoticeModal from 'components/admin/noticeModal';
 import Link from 'next/link';
+import { RequestData, ResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
 import {
   Alert,
   Button,
   Col,
   Container,
-  Modal,
   Row,
   Spinner,
   Table,
@@ -18,7 +17,7 @@ export default function CreateForm() {
   const [showWarning, setShowWarning] = useState(false);
   const [showLoading, setShowLoading] = useState(false);
   const [showCompletion, setShowCompletion] = useState(false);
-  const [values, setValues] = useState<Values>({
+  const [values, setValues] = useState<RequestData>({
     name: '',
     street_address: '',
     kakao_map_id: '',
@@ -227,6 +226,11 @@ export default function CreateForm() {
     });
     setShowLoading(false);
 
+    if (response.status === 500) {
+      const ResponseJson = (await response.json()) as ResponseData;
+      console.log(ResponseJson.message);
+    }
+
     if (response.status === 201) {
       setShowCompletion(true);
     }
@@ -236,19 +240,12 @@ export default function CreateForm() {
     setShowCompletion(false);
   }
 
-  function validate(values: Values) {
+  function validate(values: RequestData) {
     return (
       values.name.length !== 0 &&
       values.street_address.length !== 0 &&
       values.kakao_map_id.length !== 0
     );
-  }
-
-  interface Values extends Prisma.theaterCreateInput {
-    subway: string;
-    bus: string;
-    car: string;
-    parking: string;
   }
 }
 

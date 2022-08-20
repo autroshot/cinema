@@ -17,20 +17,28 @@ export default async function handler(
       res.status(201).end();
     } catch (err) {
       console.error(err);
-      res.status(500).end();
+
+      if (
+        err instanceof Prisma.PrismaClientKnownRequestError &&
+        err.code === 'P2002'
+      ) {
+        res.status(500).json({ message: '고유 제약 조건 오류' });
+      } else {
+        res.status(500).json({ message: '서버 오류' });
+      }
     }
   } else {
     res.status(405).end();
   }
 }
 
-interface RequestData extends Prisma.theaterCreateInput {
+export interface RequestData extends Prisma.theaterCreateInput {
   subway: string;
   bus: string;
   car: string;
   parking: string;
 }
 
-interface ResponseData {
+export interface ResponseData {
   message: string;
 }

@@ -4,8 +4,8 @@ export default function NoticeModal(props: Props) {
   return (
     <Modal
       size="sm"
-      show={true}
-      onHide={handleClose}
+      show={props.show}
+      onHide={props.onClose}
       animation={false}
       centered
     >
@@ -14,19 +14,15 @@ export default function NoticeModal(props: Props) {
       </Modal.Header>
       <Modal.Body>등록이 완료되었습니다.</Modal.Body>
       <Modal.Footer className="justify-content-center p-2">
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="primary" onClick={props.onClose}>
           확인
         </Button>
       </Modal.Footer>
     </Modal>
   );
+}
 
-  interface Props {
-    show: boolean;
-    onClose: () => void;
-  }
-
-  function handleClose() {
-    setShowCompletion(false);
-  }
+interface Props {
+  show: boolean;
+  onClose: () => void;
 }

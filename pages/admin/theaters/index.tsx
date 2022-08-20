@@ -1,13 +1,19 @@
 import Link from 'next/link';
+import { ReadManyResponseData } from 'pages/api/theaters';
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './index.module.css';
 
 export default function Index() {
-  const [theaters, setTheaters] = useState(null);
+  const [theaters, setTheaters] = useState<null | ReadManyResponseData>(null);
+  console.log(theaters);
 
   useEffect(() => {
-    // TODO
+    fetch('/api/theaters')
+      .then((res) => res.json())
+      .then((theaters: ReadManyResponseData) => {
+        setTheaters(theaters);
+      });
   }, []);
 
   return (

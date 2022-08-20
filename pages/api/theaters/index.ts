@@ -4,10 +4,18 @@ import { prisma } from 'db';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<CreateResponseData | ReadManyResponseData>
 ) {
   switch (req.method) {
     case 'GET':
+      const theaters = await prisma.theater.findMany({
+        select: {
+          id: true,
+          name: true,
+        },
+      });
+
+      res.status(200).json(theaters);
       break;
 
     case 'POST':
@@ -46,6 +54,13 @@ export interface RequestData extends Prisma.theaterCreateInput {
   parking: string;
 }
 
-export interface ResponseData {
+export interface CreateResponseData {
   message: string;
+}
+
+export type ReadManyResponseData = SimpleTheater[];
+
+interface SimpleTheater {
+  id: number;
+  name: string;
 }

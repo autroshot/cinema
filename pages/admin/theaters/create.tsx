@@ -1,7 +1,7 @@
 import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
 import Link from 'next/link';
-import { RequestData, ResponseData } from 'pages/api/theaters';
+import { RequestData, CreateResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
@@ -215,7 +215,7 @@ export default function CreateForm() {
     setLoading(false);
 
     if (response.status === 500) {
-      const responseJson = (await response.json()) as ResponseData;
+      const responseJson = (await response.json()) as CreateResponseData;
       setAlert(responseJson.message);
       return;
     }

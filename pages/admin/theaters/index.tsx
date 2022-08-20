@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Button, Col, Container, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './index.module.css';
 
 export default function Index() {
@@ -13,6 +13,13 @@ export default function Index() {
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td colSpan={2} className="text-center">
+              <Spinner animation="border" size="sm" role="status">
+                <span className="visually-hidden">불러오는 중...</span>
+              </Spinner>
+            </td>
+          </tr>
           <Link href="/admin/theaters/100">
             <tr role="link" className={styles.cursorPointer}>
               <td>100</td>

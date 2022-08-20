@@ -54,6 +54,7 @@ export default function CreateForm() {
                     id="name"
                     name="name"
                     type="text"
+                    placeholder="필숫값"
                     className="w-100"
                     value={values.name}
                     onChange={handleChange}
@@ -69,6 +70,7 @@ export default function CreateForm() {
                     id="street_address"
                     name="street_address"
                     type="text"
+                    placeholder="필숫값"
                     className="w-100"
                     value={values.street_address}
                     onChange={handleChange}
@@ -84,6 +86,7 @@ export default function CreateForm() {
                     id="kakao_map_id"
                     name="kakao_map_id"
                     type="text"
+                    placeholder="필숫값"
                     className="w-100"
                     value={values.kakao_map_id}
                     onChange={handleChange}
@@ -159,7 +162,7 @@ export default function CreateForm() {
                   <span className="material-symbols-rounded me-1">
                     <span className={styles.warning}>warning</span>
                   </span>
-                  빈 칸이 있습니다.
+                  필숫값이 비어 있습니다.
                 </Alert>
               </Col>
             </Row>
@@ -209,7 +212,7 @@ export default function CreateForm() {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    if (!validate(Object.values(values))) {
+    if (!validate(values)) {
       setShowWarning(true);
       return;
     }
@@ -233,8 +236,12 @@ export default function CreateForm() {
     setShowCompletion(false);
   }
 
-  function validate(values: string[]) {
-    return !values.some((value) => value.length === 0);
+  function validate(values: Values) {
+    return (
+      values.name.length !== 0 &&
+      values.street_address.length !== 0 &&
+      values.kakao_map_id.length !== 0
+    );
   }
 
   interface Values extends Prisma.theaterCreateInput {

@@ -1,8 +1,15 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './index.module.css';
 
 export default function Index() {
+  const [theaters, setTheaters] = useState(null);
+
+  useEffect(() => {
+    // TODO
+  }, []);
+
   return (
     <Container className="mt-4">
       <Table striped bordered hover>

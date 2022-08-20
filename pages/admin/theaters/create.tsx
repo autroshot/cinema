@@ -3,21 +3,13 @@ import NoticeModal from 'components/admin/noticeModal';
 import Link from 'next/link';
 import { RequestData, ResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
-import {
-  Alert,
-  Button,
-  Col,
-  Container,
-  Row,
-  Spinner,
-  Table,
-} from 'react-bootstrap';
+import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
 
 export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
-  const [showLoading, setShowLoading] = useState(false);
-  const [showCompletion, setShowCompletion] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
   const [values, setValues] = useState<RequestData>({
     name: '',
     street_address: '',
@@ -164,8 +156,8 @@ export default function CreateForm() {
           ) : null}
           <Row className="mb-3">
             <Col>
-              <Button type="submit" disabled={showLoading}>
-                {showLoading ? (
+              <Button type="submit" disabled={loading}>
+                {loading ? (
                   <>
                     <Spinner
                       as="span"
@@ -189,7 +181,7 @@ export default function CreateForm() {
           </Row>
         </form>
       </Container>
-      <NoticeModal show={showCompletion} onClose={handleClose} />
+      <NoticeModal show={completed} onClose={handleClose} />
     </>
   );
 
@@ -212,7 +204,7 @@ export default function CreateForm() {
       return;
     }
     setAlert(null);
-    setShowLoading(true);
+    setLoading(true);
 
     const requestJson = JSON.stringify(values);
     const response = await fetch('/api/theaters', {
@@ -220,7 +212,7 @@ export default function CreateForm() {
       headers: { 'Content-Type': 'application/json' },
       body: requestJson,
     });
-    setShowLoading(false);
+    setLoading(false);
 
     if (response.status === 500) {
       const responseJson = (await response.json()) as ResponseData;
@@ -228,13 +220,13 @@ export default function CreateForm() {
       return;
     }
     if (response.status === 201) {
-      setShowCompletion(true);
+      setCompleted(true);
       return;
     }
   }
 
   function handleClose() {
-    setShowCompletion(false);
+    setCompleted(false);
   }
 
   function validate(values: RequestData) {

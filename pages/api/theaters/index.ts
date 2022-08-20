@@ -4,15 +4,18 @@ import { prisma } from 'db';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<CreateResponseData | ReadManyResponseData>
+  res: NextApiResponse<PostResponseData | GetResponseData>
 ) {
   switch (req.method) {
     case 'GET':
+      const orderBy = req.query as GetRequestData;
+
       const theaters = await prisma.theater.findMany({
         select: {
           id: true,
           name: true,
         },
+        orderBy: orderBy,
       });
 
       res.status(200).json(theaters);
@@ -20,7 +23,7 @@ export default async function handler(
 
     case 'POST':
       try {
-        const body = req.body as RequestData;
+        const body = req.body as PostRequestData;
 
         await prisma.theater.create({
           data: { ...body },
@@ -47,18 +50,19 @@ export default async function handler(
   }
 }
 
-export interface RequestData extends Prisma.theaterCreateInput {
+export interface PostRequestData extends Prisma.theaterCreateInput {
   subway: string;
   bus: string;
   car: string;
   parking: string;
 }
 
-export interface CreateResponseData {
+export interface PostResponseData {
   message: string;
 }
 
-export type ReadManyResponseData = SimpleTheater[];
+export type GetRequestData = Prisma.theaterOrderByWithRelationInput;
+export type GetResponseData = SimpleTheater[];
 
 interface SimpleTheater {
   id: number;

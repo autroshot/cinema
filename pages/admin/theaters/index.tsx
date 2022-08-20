@@ -1,20 +1,54 @@
 import Link from 'next/link';
-import { ReadManyResponseData } from 'pages/api/theaters';
+import { GetRequestData, GetResponseData } from 'pages/api/theaters';
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './index.module.css';
 
 export default function Index() {
-  const [theaters, setTheaters] = useState<null | ReadManyResponseData>(null);
-  console.log(theaters);
+  const [theaters, setTheaters] = useState<null | GetResponseData>(null);
 
   useEffect(() => {
-    fetch('/api/theaters')
+    const orderBy: GetRequestData = { id: 'asc' };
+    const queryString = new URLSearchParams(orderBy).toString();
+
+    fetch(`/api/theaters?${queryString}`)
       .then((res) => res.json())
-      .then((theaters: ReadManyResponseData) => {
+      .then((theaters: GetResponseData) => {
         setTheaters(theaters);
       });
   }, []);
+
+  let tableContent: JSX.Element | JSX.Element[];
+  if (theaters === null) {
+    tableContent = (
+      <tr>
+        <td colSpan={2} className="text-center">
+          <Spinner animation="border" size="sm" role="status">
+            <span className="visually-hidden">불러오는 중...</span>
+          </Spinner>
+        </td>
+      </tr>
+    );
+  } else if (theaters.length === 0) {
+    tableContent = (
+      <tr>
+        <td colSpan={2} className="text-center">
+          데이터가 없습니다.
+        </td>
+      </tr>
+    );
+  } else {
+    tableContent = theaters.map((theater) => {
+      return (
+        <Link key={theater.id} href={`/admin/theaters/${theater.id}`}>
+          <tr role="link" className={styles.cursorPointer}>
+            <td>{theater.id}</td>
+            <td>{theater.name}</td>
+          </tr>
+        </Link>
+      );
+    });
+  }
 
   return (
     <Container className="mt-4">
@@ -26,13 +60,7 @@ export default function Index() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td colSpan={2} className="text-center">
-              <Spinner animation="border" size="sm" role="status">
-                <span className="visually-hidden">불러오는 중...</span>
-              </Spinner>
-            </td>
-          </tr>
+          {tableContent}
           <Link href="/admin/theaters/100">
             <tr role="link" className={styles.cursorPointer}>
               <td>100</td>

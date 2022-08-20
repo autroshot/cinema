@@ -1,7 +1,7 @@
 import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
 import Link from 'next/link';
-import { RequestData, CreateResponseData } from 'pages/api/theaters';
+import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
 import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
 import styles from './detail.module.css';
@@ -10,7 +10,7 @@ export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [values, setValues] = useState<RequestData>({
+  const [values, setValues] = useState<PostRequestData>({
     name: '',
     street_address: '',
     kakao_map_id: '',
@@ -215,7 +215,7 @@ export default function CreateForm() {
     setLoading(false);
 
     if (response.status === 500) {
-      const responseJson = (await response.json()) as CreateResponseData;
+      const responseJson = (await response.json()) as PostResponseData;
       setAlert(responseJson.message);
       return;
     }
@@ -229,7 +229,7 @@ export default function CreateForm() {
     setCompleted(false);
   }
 
-  function validate(values: RequestData) {
+  function validate(values: PostRequestData) {
     return (
       values.name.length !== 0 &&
       values.street_address.length !== 0 &&

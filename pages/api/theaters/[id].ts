@@ -1,4 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import { prisma } from 'db';
+import { Prisma } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
@@ -6,7 +8,23 @@ export default async function handler(
 ) {
   switch (req.method) {
     case 'PUT':
-      // TODO:
+      const id = +(req.query.id as string);
+      const body = req.body as PutRequestData;
+
+      try {
+        await prisma.theater.update({
+          where: {
+            id: id,
+          },
+          data: {
+            ...body,
+          },
+        });
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: '서버 오류' });
+      }
+
       break;
 
     case 'DELETE':
@@ -18,6 +36,8 @@ export default async function handler(
       break;
   }
 }
+
+export type PutRequestData = Prisma.theaterUpdateInput;
 
 export interface ResponseData {
   message: string;

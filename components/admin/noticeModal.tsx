@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button, Modal } from 'react-bootstrap';
 
 export default function NoticeModal(props: Props) {
@@ -14,9 +15,17 @@ export default function NoticeModal(props: Props) {
       </Modal.Header>
       <Modal.Body>등록이 완료되었습니다.</Modal.Body>
       <Modal.Footer className="justify-content-center p-2">
-        <Button variant="primary" onClick={props.onClose}>
-          확인
-        </Button>
+        {props.href ? (
+          <Link href={props.href}>
+            <Button variant="primary" onClick={props.onClose}>
+              {props.linkText}
+            </Button>
+          </Link>
+        ) : (
+          <Button variant="primary" onClick={props.onClose}>
+            확인
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );
@@ -24,5 +33,7 @@ export default function NoticeModal(props: Props) {
 
 interface Props {
   show: boolean;
+  href?: string;
+  linkText?: string;
   onClose: () => void;
 }

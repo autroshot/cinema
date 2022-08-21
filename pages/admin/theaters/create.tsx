@@ -181,7 +181,12 @@ export default function CreateForm() {
           </Row>
         </form>
       </Container>
-      <NoticeModal show={completed} onClose={handleClose} />
+      <NoticeModal
+        show={completed}
+        href="/admin/theaters"
+        linkText="목록으로 돌아가기"
+        onClose={handleClose}
+      />
     </>
   );
 

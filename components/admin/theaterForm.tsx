@@ -19,6 +19,16 @@ export default function TheaterForm(props: Props) {
           </tr>
         </thead>
         <tbody>
+          {props.id ? (
+            <tr>
+              <td>
+                <label htmlFor="id">id</label>
+              </td>
+              <td>
+                <span id="id">{props.id}</span>
+              </td>
+            </tr>
+          ) : null}
           <tr>
             <td>
               <label htmlFor="name">name</label>
@@ -161,6 +171,7 @@ export default function TheaterForm(props: Props) {
               <>등록</>
             )}
           </Button>
+          {props.id ? <Button type="button">삭제</Button> : null}
           <Link href="/admin/theaters">
             <Button type="button" variant="secondary" className="ms-3">
               취소
@@ -173,6 +184,7 @@ export default function TheaterForm(props: Props) {
 }
 
 interface Props {
+  id?: number;
   values: TheaterFormValues;
   alert: null | string;
   loading: boolean;

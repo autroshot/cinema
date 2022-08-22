@@ -1,8 +1,12 @@
+import { theater } from '@prisma/client';
 import NoticeModal from 'components/admin/noticeModal';
 import TheaterForm from 'components/admin/theaterForm';
+import { useRouter } from 'next/router';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
-import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { GetResponseData } from 'pages/api/theaters/[id]';
+import React, { useEffect, useState } from 'react';
+import { Container, Spinner } from 'react-bootstrap';
+import { TheaterFormValues } from './create';
 
 export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
@@ -17,19 +21,50 @@ export default function CreateForm() {
     car: '',
     parking: '',
   });
+  const [loadingTheater, setLoadingTheater] = useState(true);
+
+  const router = useRouter();
+  const id = +(router.query.id as string);
+  useEffect(() => {
+    fetch(`/api/theaters/${id}`)
+      .then((res) => res.json())
+      .then((theater: GetResponseData) => {
+        if (theater === null) {
+          setLoadingTheater(false);
+        } else {
+          setValues(toFormValues(theater));
+          setLoadingTheater(false);
+        }
+      });
+  }, [id]);
+
+  let content: JSX.Element;
+  if (loadingTheater) {
+    content = (
+      <Spinner animation="border" size="sm" role="status">
+        <span className="visually-hidden">불러오는 중...</span>
+      </Spinner>
+    );
+  } else if (values.name.length === 0) {
+    content = <>데이터가 없습니다.</>;
+  } else {
+    content = (
+      <TheaterForm
+        id={id}
+        values={values}
+        loading={loading}
+        alert={alert}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
+    );
+  }
 
   return (
     <>
       <Container className="mt-4">
         <h3>영화관 상세</h3>
-        <TheaterForm
-          id={10}
-          values={values}
-          loading={loading}
-          alert={alert}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-        />
+        {content}
       </Container>
       <NoticeModal
         show={completed}
@@ -91,6 +126,17 @@ export default function CreateForm() {
     );
   }
 
+  function toFormValues(theater: theater) {
+    const result = { ...theater };
+
+    if (theater.subway === null) result.subway = '';
+    if (theater.bus === null) result.bus = '';
+    if (theater.car === null) result.car = '';
+    if (theater.parking === null) result.parking = '';
+
+    return result as TheaterFormValues;
+  }
+
   function toRequestData(values: TheaterFormValues): PostRequestData {
     const result = { ...values } as PostRequestData;
 
@@ -101,16 +147,6 @@ export default function CreateForm() {
 
     return result;
   }
-}
-
-export interface TheaterFormValues {
-  name: string;
-  street_address: string;
-  kakao_map_id: string;
-  subway: string;
-  bus: string;
-  car: string;
-  parking: string;
 }
 
 CreateForm.isAdminPage = true;

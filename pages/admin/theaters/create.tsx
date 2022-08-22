@@ -46,6 +46,7 @@ export default function CreateForm() {
                     id="name"
                     name="name"
                     type="text"
+                    maxLength={50}
                     placeholder="필숫값"
                     className="w-100"
                     value={values.name}
@@ -62,6 +63,7 @@ export default function CreateForm() {
                     id="street_address"
                     name="street_address"
                     type="text"
+                    maxLength={200}
                     placeholder="필숫값"
                     className="w-100"
                     value={values.street_address}
@@ -78,6 +80,7 @@ export default function CreateForm() {
                     id="kakao_map_id"
                     name="kakao_map_id"
                     type="text"
+                    maxLength={1000}
                     placeholder="필숫값"
                     className="w-100"
                     value={values.kakao_map_id}
@@ -93,6 +96,7 @@ export default function CreateForm() {
                   <textarea
                     id="subway"
                     name="subway"
+                    maxLength={1000}
                     rows={10}
                     className="w-100"
                     value={values.subway}
@@ -108,6 +112,7 @@ export default function CreateForm() {
                   <textarea
                     id="bus"
                     name="bus"
+                    maxLength={1000}
                     className="w-100"
                     rows={10}
                     value={values.bus}
@@ -123,6 +128,7 @@ export default function CreateForm() {
                   <textarea
                     id="car"
                     name="car"
+                    maxLength={1000}
                     className="w-100"
                     rows={10}
                     value={values.car}
@@ -138,6 +144,7 @@ export default function CreateForm() {
                   <textarea
                     id="parking"
                     name="parking"
+                    maxLength={1000}
                     className="w-100"
                     rows={10}
                     value={values.parking}
@@ -253,8 +260,6 @@ export default function CreateForm() {
   }
 }
 
-CreateForm.isAdminPage = true;
-
 interface Values {
   name: string;
   street_address: string;
@@ -264,3 +269,5 @@ interface Values {
   car: string;
   parking: string;
 }
+
+CreateForm.isAdminPage = true;

@@ -9,9 +9,7 @@ import { Container, Spinner } from 'react-bootstrap';
 import { TheaterFormValues } from './create';
 
 export default function CreateForm() {
-  const [alert, setAlert] = useState<null | string>(null);
-  const [loading, setLoading] = useState(false);
-  const [completed, setCompleted] = useState(false);
+  const [id, setId] = useState(-1);
   const [values, setValues] = useState<TheaterFormValues>({
     name: '',
     street_address: '',
@@ -22,21 +20,27 @@ export default function CreateForm() {
     parking: '',
   });
   const [loadingTheater, setLoadingTheater] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [alert, setAlert] = useState<null | string>(null);
+  const [completed, setCompleted] = useState(false);
 
   const router = useRouter();
-  const id = +(router.query.id as string);
   useEffect(() => {
-    fetch(`/api/theaters/${id}`)
+    if (!router.query.id) return;
+
+    const queryId = +(router.query.id as string);
+    fetch(`/api/theaters/${queryId}`)
       .then((res) => res.json())
       .then((theater: GetResponseData) => {
         if (theater === null) {
           setLoadingTheater(false);
         } else {
           setValues(toFormValues(theater));
+          setId(queryId);
           setLoadingTheater(false);
         }
       });
-  }, [id]);
+  }, [router.query.id]);
 
   let content: JSX.Element;
   if (loadingTheater) {
@@ -45,7 +49,7 @@ export default function CreateForm() {
         <span className="visually-hidden">불러오는 중...</span>
       </Spinner>
     );
-  } else if (values.name.length === 0) {
+  } else if (id === -1) {
     content = <>데이터가 없습니다.</>;
   } else {
     content = (

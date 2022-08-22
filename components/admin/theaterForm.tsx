@@ -168,10 +168,14 @@ export default function TheaterForm(props: Props) {
                 처리 중...
               </>
             ) : (
-              <>등록</>
+              <>{props.id ? '업데이트' : '등록'}</>
             )}
           </Button>
-          {props.id ? <Button type="button">삭제</Button> : null}
+          {props.id ? (
+            <Button type="button" className="ms-3">
+              삭제
+            </Button>
+          ) : null}
           <Link href="/admin/theaters">
             <Button type="button" variant="secondary" className="ms-3">
               취소

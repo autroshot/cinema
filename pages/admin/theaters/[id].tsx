@@ -1,159 +1,43 @@
-import { useRouter } from 'next/router';
+import NoticeModal from 'components/admin/noticeModal';
+import TheaterForm from 'components/admin/theaterForm';
+import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
-import { Container, Table } from 'react-bootstrap';
-import styles from './detail.module.css';
+import { Container } from 'react-bootstrap';
 
-export default function Detail() {
-  const SUBWAY_DUMMY =
-    '- [8호선 잠실역]\n- 8호선 개찰구 통과 후 지하 1층 대합실 이동(10번, 11번 출구 방면) > 우측 10M 앞 쇼핑몰 게이트 통과(10번 11번 출구 사이 통로) > 아쿠아리움 출구 옆 엘리베이터 이용\n- [2호선 잠실역]\n- <롯데몰 영업시간 내> 2호선 출구 중앙 잠실광역버스 환승센터 방면(독도 조형물 입구 앞) > 좌측 쇼핑몰 게이트(삼송빵집 옆)통과 후 우측 방면 > 라인캐릭터 샵 / 전망대 입구 사이 300M 직진 > 아쿠아리움 출구 옆 엘리베이터 이용\n- <롯데몰 영업시간 외> 1층 지상으로 이동(1번 출구) > 약 300m 직진 > 송파구청(8호선 11,12번 출구) 방면 엔제리너스 옆 쇼핑몰 게이트 통과 > 에잇세컨즈/유니클로 사이 엘리베이터 이용';
-  const BUS_DUMMY =
-    '- [지선버스]\n - 잠실역1번,11번출구 정류장 하차(정류장번호 24134) > 송파구청(8호선 11,12번 출구) 방면 엔제리너스 옆 쇼핑몰 게이트 이용 > 투명 엘리베이터 또는 에잇세컨즈/유니클로 사이 엘리베이터 이용\n - [광역버스]\n - <롯데몰 영업시간 내> 잠실광역환승센터(지하) 하차(정류장번호 24050) > 2호선 출구 중앙 잠실광역버스 환승센터 방면(독도 조형물 입구 앞) > 좌측 쇼핑몰 게이트(삼송빵집 옆)통과 후 우측 방면 > 라인캐릭터 샵 / 전망대 입구 사이 300M 직진 > 아쿠아리움 출구 옆 엘리베이터 이용\n - <롯데몰 영업시간 외> 1층 지상으로 이동(잠실역 1번 출구) > 약 300m 직진 > 송파구청(8호선 11,12번 출구) 방면 엔제리너스 옆 쇼핑몰 게이트 통과 > 에잇세컨즈/유니클로 사이 엘리베이터 이용';
-  const CAR_DUMMY =
-    '- [내비게이션 검색] 롯데시네마월드타워\n- [주소] 서울특별시 송파구 올림픽로 300 롯데월드몰 (서울특별시 송파구 신천동 29번지 롯데월드몰)\n- [주차장 이용방법]\n- 롯데월드 몰/타워 주차장 입구로 이동 (모든 주차장 입구 영화관 주차장 연결 가능)\n- B2 ~ B6층 기둥 알파벳 S ~ W 구역 인근 주차\n- 기둥 알파벳 V/W 양쪽 입구 내부 엘리베이터 이용하여 5~10층 이동';
-  const PARKING_DUMMY =
-    '- 영화 관람 후 할인 적용 시 10분당 200원(최대 4시간 4,800원)\n- 심야 할인 적용\n- 오후 10시 ~ 오전 6시 10분당 100원 (최대 4시간 2,400원)\n- 모바일/앱 예매 시 우측 상단 ‘주차권’ 버튼 클릭\n- 주차 정산은 지하 주차장 층별 주차 정산기 이용\n- 롯데월드몰 주차 요금\n- 운영 시간에 따라 요금 상이 (10분당 300원 ~ 500원)';
-
-  const router = useRouter();
-  const { id } = router.query;
-
-  const [values, setValues] = useState({
-    name: '월드타워',
-    street_address: '서울 송파구 올림픽로 300 (신천동) 5층-11층',
-    kakao_map_id: 'ChIJe-TQ0zOlfDURLRV7utwMM3w',
-    subway: SUBWAY_DUMMY,
-    bus: BUS_DUMMY,
-    car: CAR_DUMMY,
-    parking: PARKING_DUMMY,
+export default function CreateForm() {
+  const [alert, setAlert] = useState<null | string>(null);
+  const [loading, setLoading] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [values, setValues] = useState<TheaterFormValues>({
+    name: '',
+    street_address: '',
+    kakao_map_id: '',
+    subway: '',
+    bus: '',
+    car: '',
+    parking: '',
   });
 
   return (
-    <Container className="mt-4">
-      <h3>영화관 상세</h3>
-      <p>현재 id: {id}</p>
-      <Table className={styles.table}>
-        <colgroup>
-          <col className={styles.fieldCol} />
-          <col className={styles.valueCol} />
-        </colgroup>
-        <thead>
-          <tr>
-            <th>필드</th>
-            <th>값</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>id</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="name">name</label>
-            </td>
-            <td>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                className="w-100"
-                value={values.name}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="street_address">street_address</label>
-            </td>
-            <td>
-              <input
-                id="street_address"
-                name="street_address"
-                type="text"
-                className="w-100"
-                value={values.street_address}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="kakao_map_id">kakao_map_id</label>
-            </td>
-            <td>
-              <input
-                id="kakao_map_id"
-                name="kakao_map_id"
-                type="text"
-                className="w-100"
-                value={values.kakao_map_id}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="subway">subway</label>
-            </td>
-            <td>
-              <textarea
-                id="subway"
-                name="subway"
-                rows={10}
-                className="w-100"
-                value={values.subway}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="bus">bus</label>
-            </td>
-            <td>
-              <textarea
-                id="bus"
-                name="bus"
-                className="w-100"
-                rows={10}
-                value={values.bus}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="car">car</label>
-            </td>
-            <td>
-              <textarea
-                id="car"
-                name="car"
-                className="w-100"
-                rows={10}
-                value={values.car}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <label htmlFor="parking">parking</label>
-            </td>
-            <td>
-              <textarea
-                id="parking"
-                name="parking"
-                className="w-100"
-                rows={10}
-                value={values.parking}
-                onInput={handleChange}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </Table>
-    </Container>
+    <>
+      <Container className="mt-4">
+        <h3>영화관 상세</h3>
+        <TheaterForm
+          id={10}
+          values={values}
+          loading={loading}
+          alert={alert}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
+      </Container>
+      <NoticeModal
+        show={completed}
+        href="/admin/theaters"
+        linkText="목록으로 돌아가기"
+        onClose={handleClose}
+      />
+    </>
   );
 
   function handleChange(
@@ -161,10 +45,72 @@ export default function Detail() {
   ) {
     const name = event.currentTarget.name;
     const value = event.currentTarget.value;
+
     setValues((prevState) => {
       return { ...prevState, [name]: value };
     });
   }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!validate(values)) {
+      setAlert('필숫값이 비어 있습니다.');
+      return;
+    }
+    setAlert(null);
+    setLoading(true);
+
+    const response = await fetch('/api/theaters', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(toRequestData(values)),
+    });
+    setLoading(false);
+
+    if (response.status === 500) {
+      const responseJson = (await response.json()) as PostResponseData;
+      setAlert(responseJson.message);
+      return;
+    }
+    if (response.status === 201) {
+      setCompleted(true);
+      return;
+    }
+  }
+
+  function handleClose() {
+    setCompleted(false);
+  }
+
+  function validate(values: TheaterFormValues) {
+    return (
+      values.name.length !== 0 &&
+      values.street_address.length !== 0 &&
+      values.kakao_map_id.length !== 0
+    );
+  }
+
+  function toRequestData(values: TheaterFormValues): PostRequestData {
+    const result = { ...values } as PostRequestData;
+
+    if (values.subway.length === 0) result.subway = null;
+    if (values.bus.length === 0) result.bus = null;
+    if (values.car.length === 0) result.car = null;
+    if (values.parking.length === 0) result.parking = null;
+
+    return result;
+  }
 }
 
-Detail.isAdminPage = true;
+export interface TheaterFormValues {
+  name: string;
+  street_address: string;
+  kakao_map_id: string;
+  subway: string;
+  bus: string;
+  car: string;
+  parking: string;
+}
+
+CreateForm.isAdminPage = true;

@@ -1,10 +1,8 @@
-import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
-import Link from 'next/link';
+import TheaterForm from 'components/admin/theaterForm';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
-import { Button, Col, Container, Row, Spinner, Table } from 'react-bootstrap';
-import styles from './detail.module.css';
+import { Container } from 'react-bootstrap';
 
 export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
@@ -24,169 +22,13 @@ export default function CreateForm() {
     <>
       <Container className="mt-4">
         <h3>영화관 등록</h3>
-        <form onSubmit={handleSubmit}>
-          <Table className={styles.table}>
-            <colgroup>
-              <col className={styles.fieldCol} />
-              <col className={styles.valueCol} />
-            </colgroup>
-            <thead>
-              <tr>
-                <th>필드</th>
-                <th>값</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <label htmlFor="name">name</label>
-                </td>
-                <td>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    maxLength={50}
-                    placeholder="필숫값"
-                    className="w-100"
-                    value={values.name}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="street_address">street_address</label>
-                </td>
-                <td>
-                  <input
-                    id="street_address"
-                    name="street_address"
-                    type="text"
-                    maxLength={200}
-                    placeholder="필숫값"
-                    className="w-100"
-                    value={values.street_address}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="kakao_map_id">kakao_map_id</label>
-                </td>
-                <td>
-                  <input
-                    id="kakao_map_id"
-                    name="kakao_map_id"
-                    type="text"
-                    maxLength={1000}
-                    placeholder="필숫값"
-                    className="w-100"
-                    value={values.kakao_map_id}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="subway">subway</label>
-                </td>
-                <td>
-                  <textarea
-                    id="subway"
-                    name="subway"
-                    maxLength={1000}
-                    rows={10}
-                    className="w-100"
-                    value={values.subway}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="bus">bus</label>
-                </td>
-                <td>
-                  <textarea
-                    id="bus"
-                    name="bus"
-                    maxLength={1000}
-                    className="w-100"
-                    rows={10}
-                    value={values.bus}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="car">car</label>
-                </td>
-                <td>
-                  <textarea
-                    id="car"
-                    name="car"
-                    maxLength={1000}
-                    className="w-100"
-                    rows={10}
-                    value={values.car}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="parking">parking</label>
-                </td>
-                <td>
-                  <textarea
-                    id="parking"
-                    name="parking"
-                    maxLength={1000}
-                    className="w-100"
-                    rows={10}
-                    value={values.parking}
-                    onChange={handleChange}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
-          {alert ? (
-            <Row>
-              <Col>
-                <MyAlert message={alert} />
-              </Col>
-            </Row>
-          ) : null}
-          <Row className="mb-3">
-            <Col>
-              <Button type="submit" disabled={loading}>
-                {loading ? (
-                  <>
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />{' '}
-                    처리 중...
-                  </>
-                ) : (
-                  <>등록</>
-                )}
-              </Button>
-              <Link href="/admin/theaters">
-                <Button type="button" variant="secondary" className="ms-3">
-                  취소
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-        </form>
+        <TheaterForm
+          values={values}
+          loading={loading}
+          alert={alert}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+        />
       </Container>
       <NoticeModal
         show={completed}

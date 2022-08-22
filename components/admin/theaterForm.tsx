@@ -174,7 +174,7 @@ export default function TheaterForm(props: Props) {
 
 interface Props {
   values: TheaterFormValues;
-  alert: string;
+  alert: null | string;
   loading: boolean;
   onChange: (
     event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>

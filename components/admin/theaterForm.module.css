@@ -1,0 +1,11 @@
+.table {
+  table-layout: fixed;
+}
+
+.fieldCol {
+  width: 8rem;
+}
+
+.valueCol {
+  width: auto;
+}

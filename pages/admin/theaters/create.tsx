@@ -10,7 +10,7 @@ export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [values, setValues] = useState<Values>({
+  const [values, setValues] = useState<TheaterFormValues>({
     name: '',
     street_address: '',
     kakao_map_id: '',
@@ -240,7 +240,7 @@ export default function CreateForm() {
     setCompleted(false);
   }
 
-  function validate(values: Values) {
+  function validate(values: TheaterFormValues) {
     return (
       values.name.length !== 0 &&
       values.street_address.length !== 0 &&
@@ -248,7 +248,7 @@ export default function CreateForm() {
     );
   }
 
-  function toRequestData(values: Values): PostRequestData {
+  function toRequestData(values: TheaterFormValues): PostRequestData {
     const result = { ...values } as PostRequestData;
 
     if (values.subway.length === 0) result.subway = null;
@@ -260,7 +260,7 @@ export default function CreateForm() {
   }
 }
 
-interface Values {
+export interface TheaterFormValues {
   name: string;
   street_address: string;
   kakao_map_id: string;

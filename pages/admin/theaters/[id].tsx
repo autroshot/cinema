@@ -100,8 +100,8 @@ export default function CreateForm() {
     setAlert(null);
     setLoading(true);
 
-    const response = await fetch('/api/theaters', {
-      method: 'POST',
+    const response = await fetch(`/api/theaters/${id}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(toRequestData(values)),
     });
@@ -112,7 +112,7 @@ export default function CreateForm() {
       setAlert(responseJson.message);
       return;
     }
-    if (response.status === 201) {
+    if (response.status === 204) {
       setCompleted(true);
       return;
     }

@@ -10,7 +10,7 @@ export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
   const [loading, setLoading] = useState(false);
   const [completed, setCompleted] = useState(false);
-  const [values, setValues] = useState<PostRequestData>({
+  const [values, setValues] = useState<Values>({
     name: '',
     street_address: '',
     kakao_map_id: '',
@@ -211,11 +211,10 @@ export default function CreateForm() {
     setAlert(null);
     setLoading(true);
 
-    const requestJson = JSON.stringify(values);
     const response = await fetch('/api/theaters', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: requestJson,
+      body: JSON.stringify(toRequestData(values)),
     });
     setLoading(false);
 
@@ -234,13 +233,34 @@ export default function CreateForm() {
     setCompleted(false);
   }
 
-  function validate(values: PostRequestData) {
+  function validate(values: Values) {
     return (
       values.name.length !== 0 &&
       values.street_address.length !== 0 &&
       values.kakao_map_id.length !== 0
     );
   }
+
+  function toRequestData(values: Values): PostRequestData {
+    const result = { ...values } as PostRequestData;
+
+    if (values.subway.length === 0) result.subway = null;
+    if (values.bus.length === 0) result.bus = null;
+    if (values.car.length === 0) result.car = null;
+    if (values.parking.length === 0) result.parking = null;
+
+    return result;
+  }
 }
 
 CreateForm.isAdminPage = true;
+
+interface Values {
+  name: string;
+  street_address: string;
+  kakao_map_id: string;
+  subway: string;
+  bus: string;
+  car: string;
+  parking: string;
+}

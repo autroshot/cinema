@@ -50,13 +50,7 @@ export default async function handler(
   }
 }
 
-export interface PostRequestData extends Prisma.theaterCreateInput {
-  subway: string;
-  bus: string;
-  car: string;
-  parking: string;
-}
-
+export type PostRequestData = Prisma.theaterCreateInput;
 export interface PostResponseData {
   message: string;
 }

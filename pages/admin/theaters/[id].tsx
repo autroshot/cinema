@@ -72,6 +72,7 @@ export default function CreateForm() {
       </Container>
       <NoticeModal
         show={completed}
+        bodyText="수정이 완료되었습니다."
         href="/admin/theaters"
         linkText="목록으로 돌아가기"
         onClose={handleClose}

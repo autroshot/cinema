@@ -168,7 +168,7 @@ export default function TheaterForm(props: Props) {
                 처리 중...
               </>
             ) : (
-              <>{props.id ? '업데이트' : '등록'}</>
+              <>{props.id ? '수정' : '등록'}</>
             )}
           </Button>
           {props.id ? (

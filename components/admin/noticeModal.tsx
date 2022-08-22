@@ -13,7 +13,7 @@ export default function NoticeModal(props: Props) {
       <Modal.Header closeButton>
         <Modal.Title>알림</Modal.Title>
       </Modal.Header>
-      <Modal.Body>등록이 완료되었습니다.</Modal.Body>
+      <Modal.Body>{props.bodyText}</Modal.Body>
       <Modal.Footer className="justify-content-center p-2">
         {props.href ? (
           <Link href={props.href}>
@@ -33,6 +33,7 @@ export default function NoticeModal(props: Props) {
 
 interface Props {
   show: boolean;
+  bodyText: string;
   href?: string;
   linkText?: string;
   onClose: () => void;

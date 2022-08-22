@@ -6,24 +6,20 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<GetResponseData | ErrorResponseData>
 ) {
-  switch (req.method) {
-    case 'GET':
-      try {
+  try {
+    switch (req.method) {
+      case 'GET':
         const Theater = await prisma.theater.findUnique({
           where: {
             id: getId(),
           },
         });
         res.status(200).json(Theater);
-      } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: '서버 오류' });
-      }
+        break;
 
-    case 'PUT':
-      const body = req.body as PutRequestData;
+      case 'PUT':
+        const body = req.body as PutRequestData;
 
-      try {
         await prisma.theater.update({
           where: {
             id: getId(),
@@ -32,20 +28,21 @@ export default async function handler(
             ...body,
           },
         });
-      } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: '서버 오류' });
-      }
 
-      break;
+        res.status(204).end();
+        break;
 
-    case 'DELETE':
-      // TODO:
-      break;
+      case 'DELETE':
+        // TODO:
+        break;
 
-    default:
-      res.status(405).end();
-      break;
+      default:
+        res.status(405).end();
+        break;
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: '서버 오류' });
   }
 
   function getId() {

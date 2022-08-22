@@ -32,7 +32,6 @@ export default async function handler(
         res.status(201).end();
       } catch (err) {
         console.error(err);
-
         if (
           err instanceof Prisma.PrismaClientKnownRequestError &&
           err.code === 'P2002'

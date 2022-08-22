@@ -18,18 +18,30 @@ export default async function handler(
         break;
 
       case 'PUT':
-        const body = req.body as PutRequestData;
+        try {
+          const body = req.body as PutRequestData;
 
-        await prisma.theater.update({
-          where: {
-            id: getId(),
-          },
-          data: {
-            ...body,
-          },
-        });
+          await prisma.theater.update({
+            where: {
+              id: getId(),
+            },
+            data: {
+              ...body,
+            },
+          });
 
-        res.status(204).end();
+          res.status(204).end();
+        } catch (err) {
+          console.error(err);
+          if (
+            err instanceof Prisma.PrismaClientKnownRequestError &&
+            err.code === 'P2002'
+          ) {
+            res.status(500).json({ message: '고유 제약 조건 오류' });
+          } else {
+            res.status(500).json({ message: '서버 오류' });
+          }
+        }
         break;
 
       case 'DELETE':

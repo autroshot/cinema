@@ -77,7 +77,20 @@ export default function CreateForm() {
                 className="ms-3"
                 onClick={handleDeleteButtonClick}
               >
-                삭제
+                {processing ? (
+                  <>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />{' '}
+                    처리 중...
+                  </>
+                ) : (
+                  <>삭제</>
+                )}
               </Button>
               <Link href="/admin/theaters">
                 <Button type="button" variant="secondary" className="ms-3">

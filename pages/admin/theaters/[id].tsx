@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Container, Spinner } from 'react-bootstrap';
 import { TheaterFormValues } from './create';
 
-export default function CreateForm() {
+export default function Detail() {
   const [id, setId] = useState(-1);
   const [values, setValues] = useState<TheaterFormValues>({
     name: '',
@@ -217,4 +217,4 @@ export default function CreateForm() {
   }
 }
 
-CreateForm.isAdminPage = true;
+Detail.isAdminPage = true;

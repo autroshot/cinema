@@ -1,4 +1,4 @@
-import Buttons from 'components/admin/theater/detail/buttons';
+import Buttons from 'components/admin/theater/createForm/buttons';
 import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';

@@ -1,4 +1,5 @@
 import { theater } from '@prisma/client';
+import ConfirmModal from 'components/admin/confirmModal';
 import NoticeModal from 'components/admin/noticeModal';
 import TheaterForm from 'components/admin/theaterForm';
 import { useRouter } from 'next/router';
@@ -23,6 +24,7 @@ export default function CreateForm() {
   const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
   const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -60,6 +62,7 @@ export default function CreateForm() {
         alert={alert}
         onChange={handleChange}
         onSubmit={handleSubmit}
+        onDeleteButtonClick={handleDeleteButtonClick}
       />
     );
   }
@@ -76,6 +79,12 @@ export default function CreateForm() {
         href="/admin/theaters"
         linkText="목록으로 돌아가기"
         onClose={handleClose}
+      />
+      <ConfirmModal
+        contentName={values.name}
+        show={showConfirmModal}
+        onClose={handleConfirmModalClose}
+        onDelete={handleDelete}
       />
     </>
   );
@@ -119,10 +128,34 @@ export default function CreateForm() {
     }
   }
 
-  async function handleDelete() {}
+  async function handleDelete() {
+    setProcessing(true);
+    const response = await fetch(`/api/theaters/${id}`, {
+      method: 'DELETE',
+    });
+    setProcessing(false);
+
+    if (response.status === 500) {
+      const responseJson = (await response.json()) as PostResponseData;
+      setAlert(responseJson.message);
+      return;
+    }
+    if (response.status === 204) {
+      setShowCompleteModal(true);
+      return;
+    }
+  }
 
   function handleClose() {
     setShowCompleteModal(false);
+  }
+
+  function handleConfirmModalClose() {
+    setShowConfirmModal(false);
+  }
+
+  function handleDeleteButtonClick() {
+    setShowConfirmModal(true);
   }
 
   function validate(values: TheaterFormValues) {

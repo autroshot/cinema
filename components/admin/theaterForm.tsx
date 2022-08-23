@@ -172,7 +172,11 @@ export default function TheaterForm(props: Props) {
             )}
           </Button>
           {props.id ? (
-            <Button type="button" className="ms-3">
+            <Button
+              type="button"
+              className="ms-3"
+              onClick={props.onDeleteButtonClick}
+            >
               삭제
             </Button>
           ) : null}
@@ -196,4 +200,5 @@ interface Props {
     event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  onDeleteButtonClick?: () => void;
 }

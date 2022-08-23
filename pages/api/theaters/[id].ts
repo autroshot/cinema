@@ -45,7 +45,12 @@ export default async function handler(
         break;
 
       case 'DELETE':
-        // TODO:
+        await prisma.theater.delete({
+          where: {
+            id: getId(),
+          },
+        });
+        res.status(204).end();
         break;
 
       default:

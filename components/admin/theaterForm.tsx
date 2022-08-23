@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { TheaterFormValues } from 'pages/admin/theaters/create';
 import { Button, Col, Row, Spinner, Table } from 'react-bootstrap';
-import MyAlert from './myAlert';
 import styles from './theaterForm.module.css';
 
 export default function TheaterForm(props: Props) {
@@ -146,13 +145,6 @@ export default function TheaterForm(props: Props) {
           </tr>
         </tbody>
       </Table>
-      {props.alert ? (
-        <Row>
-          <Col>
-            <MyAlert message={props.alert} />
-          </Col>
-        </Row>
-      ) : null}
       <Row className="mb-3">
         <Col>
           <Button type="submit" disabled={props.processing}>
@@ -194,7 +186,6 @@ export default function TheaterForm(props: Props) {
 interface Props {
   id?: number;
   values: TheaterFormValues;
-  alert: null | string;
   processing: boolean;
   onChange: (
     event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>

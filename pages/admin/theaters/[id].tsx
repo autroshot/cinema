@@ -1,12 +1,14 @@
 import { theater } from '@prisma/client';
 import ConfirmModal from 'components/admin/confirmModal';
+import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
+import TheaterContent from 'components/admin/theaterContent';
 import TheaterForm from 'components/admin/theaterForm';
 import { useRouter } from 'next/router';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import { GetResponseData } from 'pages/api/theaters/[id]';
 import React, { useEffect, useState } from 'react';
-import { Container, Spinner } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { TheaterFormValues } from './create';
 
 export default function CreateForm() {
@@ -44,34 +46,21 @@ export default function CreateForm() {
       });
   }, [router.query.id]);
 
-  let content: JSX.Element;
-  if (loadingTheater) {
-    content = (
-      <Spinner animation="border" size="sm" role="status">
-        <span className="visually-hidden">불러오는 중...</span>
-      </Spinner>
-    );
-  } else if (id === -1) {
-    content = <>데이터가 없습니다.</>;
-  } else {
-    content = (
-      <TheaterForm
-        id={id}
-        values={values}
-        processing={processing}
-        alert={alert}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        onDeleteButtonClick={handleDeleteButtonClick}
-      />
-    );
-  }
-
   return (
     <>
       <Container className="mt-4">
         <h3>영화관 상세</h3>
-        {content}
+        <TheaterContent loading={loadingTheater} noData={id === -1}>
+          <TheaterForm
+            id={id}
+            values={values}
+            processing={processing}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            onDeleteButtonClick={handleDeleteButtonClick}
+          />
+        </TheaterContent>
+        {alert ? <MyAlert message={alert} /> : null}
       </Container>
       <NoticeModal
         show={showCompleteModal}

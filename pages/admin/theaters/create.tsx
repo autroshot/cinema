@@ -1,3 +1,4 @@
+import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
 import TheaterForm from 'components/admin/theaterForm';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
@@ -25,10 +26,10 @@ export default function CreateForm() {
         <TheaterForm
           values={values}
           processing={loading}
-          alert={alert}
           onChange={handleChange}
           onSubmit={handleSubmit}
         />
+        {alert ? <MyAlert message={alert} /> : null}
       </Container>
       <NoticeModal
         show={completed}

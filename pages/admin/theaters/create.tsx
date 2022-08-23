@@ -24,7 +24,7 @@ export default function CreateForm() {
         <h3>영화관 등록</h3>
         <TheaterForm
           values={values}
-          loading={loading}
+          processing={loading}
           alert={alert}
           onChange={handleChange}
           onSubmit={handleSubmit}

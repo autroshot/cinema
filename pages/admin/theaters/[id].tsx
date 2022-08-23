@@ -20,7 +20,7 @@ export default function CreateForm() {
     parking: '',
   });
   const [loadingTheater, setLoadingTheater] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
   const [completed, setCompleted] = useState(false);
 
@@ -56,7 +56,7 @@ export default function CreateForm() {
       <TheaterForm
         id={id}
         values={values}
-        loading={loading}
+        processing={processing}
         alert={alert}
         onChange={handleChange}
         onSubmit={handleSubmit}
@@ -99,14 +99,14 @@ export default function CreateForm() {
       return;
     }
     setAlert(null);
-    setLoading(true);
+    setProcessing(true);
 
     const response = await fetch(`/api/theaters/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(toRequestData(values)),
     });
-    setLoading(false);
+    setProcessing(false);
 
     if (response.status === 500) {
       const responseJson = (await response.json()) as PostResponseData;
@@ -118,6 +118,8 @@ export default function CreateForm() {
       return;
     }
   }
+
+  async function handleDelete() {}
 
   function handleClose() {
     setCompleted(false);

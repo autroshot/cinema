@@ -155,8 +155,8 @@ export default function TheaterForm(props: Props) {
       ) : null}
       <Row className="mb-3">
         <Col>
-          <Button type="submit" disabled={props.loading}>
-            {props.loading ? (
+          <Button type="submit" disabled={props.processing}>
+            {props.processing ? (
               <>
                 <Spinner
                   as="span"
@@ -191,7 +191,7 @@ interface Props {
   id?: number;
   values: TheaterFormValues;
   alert: null | string;
-  loading: boolean;
+  processing: boolean;
   onChange: (
     event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;

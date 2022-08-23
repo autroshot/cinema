@@ -22,7 +22,7 @@ export default function CreateForm() {
   const [loadingTheater, setLoadingTheater] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
-  const [completed, setCompleted] = useState(false);
+  const [showCompleteModal, setShowCompleteModal] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -71,7 +71,7 @@ export default function CreateForm() {
         {content}
       </Container>
       <NoticeModal
-        show={completed}
+        show={showCompleteModal}
         bodyText="수정이 완료되었습니다."
         href="/admin/theaters"
         linkText="목록으로 돌아가기"
@@ -114,7 +114,7 @@ export default function CreateForm() {
       return;
     }
     if (response.status === 204) {
-      setCompleted(true);
+      setShowCompleteModal(true);
       return;
     }
   }
@@ -122,7 +122,7 @@ export default function CreateForm() {
   async function handleDelete() {}
 
   function handleClose() {
-    setCompleted(false);
+    setShowCompleteModal(false);
   }
 
   function validate(values: TheaterFormValues) {

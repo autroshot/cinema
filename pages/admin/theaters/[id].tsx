@@ -64,23 +64,19 @@ export default function Detail() {
           </TheaterContent>
         </form>
       </Container>
-      {completeType === 'update' ? (
-        <NoticeModal
-          show={true}
-          bodyText="수정이 완료되었습니다."
-          href="/admin/theaters"
-          linkText="목록으로 돌아가기"
-          onClose={handleClose}
-        />
-      ) : null}
-      {completeType === 'delete' ? (
-        <NoticeModal
-          show={true}
-          bodyText="삭제가 완료되었습니다."
-          href="/admin/theaters"
-          linkText="목록으로 돌아가기"
-        />
-      ) : null}
+      <NoticeModal
+        show={completeType === 'update'}
+        bodyText="수정이 완료되었습니다."
+        href="/admin/theaters"
+        linkText="목록으로 돌아가기"
+        onClose={handleClose}
+      />
+      <NoticeModal
+        show={completeType === 'delete'}
+        bodyText="삭제가 완료되었습니다."
+        href="/admin/theaters"
+        linkText="목록으로 돌아가기"
+      />
       <ConfirmModal
         contentName={values.name}
         show={showConfirmModal}
@@ -142,6 +138,7 @@ export default function Detail() {
       return;
     }
     if (response.status === 204) {
+      setShowConfirmModal(false);
       setCompleteType('delete');
       return;
     }

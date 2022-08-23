@@ -11,6 +11,7 @@ import { GetResponseData } from 'pages/api/theaters/[id]';
 import React, { useEffect, useState } from 'react';
 import { Button, Container, Spinner } from 'react-bootstrap';
 import { TheaterFormValues } from './create';
+import Buttons from 'components/admin/theater/detail/buttons';
 
 export default function Detail() {
   const [id, setId] = useState(-1);
@@ -56,47 +57,10 @@ export default function Detail() {
             <>
               <TheaterForm id={id} values={values} onChange={handleChange} />
               {alert ? <MyAlert message={alert} /> : null}
-              <Button type="submit" disabled={processing}>
-                {processing ? (
-                  <>
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />{' '}
-                    처리 중...
-                  </>
-                ) : (
-                  <>수정</>
-                )}
-              </Button>
-              <Button
-                type="button"
-                className="ms-3"
-                onClick={handleDeleteButtonClick}
-              >
-                {processing ? (
-                  <>
-                    <Spinner
-                      as="span"
-                      animation="border"
-                      size="sm"
-                      role="status"
-                      aria-hidden="true"
-                    />{' '}
-                    처리 중...
-                  </>
-                ) : (
-                  <>삭제</>
-                )}
-              </Button>
-              <Link href="/admin/theaters">
-                <Button type="button" variant="secondary" className="ms-3">
-                  취소
-                </Button>
-              </Link>
+              <Buttons
+                processing={processing}
+                onDeleteButtonClick={handleDeleteButtonClick}
+              />
             </>
           </TheaterContent>
         </form>

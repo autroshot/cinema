@@ -1,17 +1,16 @@
 import { theater } from '@prisma/client';
+import Buttons from 'components/admin/theater/detail/buttons';
 import ConfirmModal from 'components/admin/theater/detail/confirmModal';
+import TheaterContent from 'components/admin/theater/detail/theaterContent';
 import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
-import TheaterContent from 'components/admin/theater/detail/theaterContent';
 import TheaterForm from 'components/admin/theater/theaterForm';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import { GetResponseData } from 'pages/api/theaters/[id]';
 import React, { useEffect, useState } from 'react';
-import { Button, Container, Spinner } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { TheaterFormValues } from './create';
-import Buttons from 'components/admin/theater/detail/buttons';
 
 export default function Detail() {
   const [id, setId] = useState(-1);
@@ -27,7 +26,7 @@ export default function Detail() {
   const [loadingTheater, setLoadingTheater] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
-  const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [completeType, setCompleteType] = useState<CompleteType>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const router = useRouter();
@@ -51,7 +50,7 @@ export default function Detail() {
   return (
     <>
       <Container className="my-3">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleUpdate}>
           <h3>영화관 상세</h3>
           <TheaterContent loading={loadingTheater} noData={id === -1}>
             <>
@@ -65,13 +64,23 @@ export default function Detail() {
           </TheaterContent>
         </form>
       </Container>
-      <NoticeModal
-        show={showCompleteModal}
-        bodyText="수정이 완료되었습니다."
-        href="/admin/theaters"
-        linkText="목록으로 돌아가기"
-        onClose={handleClose}
-      />
+      {completeType === 'update' ? (
+        <NoticeModal
+          show={true}
+          bodyText="수정이 완료되었습니다."
+          href="/admin/theaters"
+          linkText="목록으로 돌아가기"
+          onClose={handleClose}
+        />
+      ) : null}
+      {completeType === 'delete' ? (
+        <NoticeModal
+          show={true}
+          bodyText="삭제가 완료되었습니다."
+          href="/admin/theaters"
+          linkText="목록으로 돌아가기"
+        />
+      ) : null}
       <ConfirmModal
         contentName={values.name}
         show={showConfirmModal}
@@ -92,7 +101,7 @@ export default function Detail() {
     });
   }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleUpdate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!validate(values)) {
@@ -115,7 +124,7 @@ export default function Detail() {
       return;
     }
     if (response.status === 204) {
-      setShowCompleteModal(true);
+      setCompleteType('update');
       return;
     }
   }
@@ -133,13 +142,13 @@ export default function Detail() {
       return;
     }
     if (response.status === 204) {
-      setShowCompleteModal(true);
+      setCompleteType('delete');
       return;
     }
   }
 
   function handleClose() {
-    setShowCompleteModal(false);
+    setCompleteType(null);
   }
 
   function handleConfirmModalClose() {
@@ -180,5 +189,7 @@ export default function Detail() {
     return result;
   }
 }
+
+type CompleteType = null | 'update' | 'delete';
 
 Detail.isAdminPage = true;

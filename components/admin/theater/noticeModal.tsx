@@ -8,18 +8,17 @@ export default function NoticeModal(props: Props) {
       show={props.show}
       onHide={props.onClose}
       animation={false}
+      backdrop={props.onClose ? true : 'static'}
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton={props.onClose ? true : false}>
         <Modal.Title>알림</Modal.Title>
       </Modal.Header>
       <Modal.Body>{props.bodyText}</Modal.Body>
       <Modal.Footer className="justify-content-center p-2">
         {props.href ? (
           <Link href={props.href}>
-            <Button variant="primary" onClick={props.onClose}>
-              {props.linkText}
-            </Button>
+            <Button variant="primary">{props.linkText}</Button>
           </Link>
         ) : (
           <Button variant="primary" onClick={props.onClose}>
@@ -36,5 +35,5 @@ interface Props {
   bodyText: string;
   href?: string;
   linkText?: string;
-  onClose: () => void;
+  onClose?: () => void;
 }

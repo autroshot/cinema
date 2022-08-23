@@ -1,4 +1,4 @@
-import Theaters from 'components/admin/theaters';
+import Theaters from 'components/admin/theater/index/theaters';
 import Link from 'next/link';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 

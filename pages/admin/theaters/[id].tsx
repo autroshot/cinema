@@ -1,9 +1,9 @@
 import { theater } from '@prisma/client';
-import ConfirmModal from 'components/admin/confirmModal';
-import MyAlert from 'components/admin/myAlert';
-import NoticeModal from 'components/admin/noticeModal';
-import TheaterContent from 'components/admin/theaterContent';
-import TheaterForm from 'components/admin/theaterForm';
+import ConfirmModal from 'components/admin/theater/detail/confirmModal';
+import MyAlert from 'components/admin/theater/myAlert';
+import NoticeModal from 'components/admin/theater/noticeModal';
+import TheaterContent from 'components/admin/theater/detail/theaterContent';
+import TheaterForm from 'components/admin/theater/theaterForm';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';

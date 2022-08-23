@@ -1,6 +1,6 @@
-import MyAlert from 'components/admin/myAlert';
-import NoticeModal from 'components/admin/noticeModal';
-import TheaterForm from 'components/admin/theaterForm';
+import MyAlert from 'components/admin/theater/myAlert';
+import NoticeModal from 'components/admin/theater/noticeModal';
+import TheaterForm from 'components/admin/theater/theaterForm';
 import Link from 'next/link';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';

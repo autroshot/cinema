@@ -1,9 +1,10 @@
 import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
 import TheaterForm from 'components/admin/theaterForm';
+import Link from 'next/link';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container, Spinner } from 'react-bootstrap';
 
 export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
@@ -21,15 +22,33 @@ export default function CreateForm() {
 
   return (
     <>
-      <Container className="mt-4">
-        <h3>영화관 등록</h3>
-        <TheaterForm
-          values={values}
-          processing={loading}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-        />
-        {alert ? <MyAlert message={alert} /> : null}
+      <Container className="my-3">
+        <form onSubmit={handleSubmit}>
+          <h3>영화관 등록</h3>
+          <TheaterForm values={values} onChange={handleChange} />
+          {alert ? <MyAlert message={alert} /> : null}
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <>
+                <Spinner
+                  as="span"
+                  animation="border"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />{' '}
+                처리 중...
+              </>
+            ) : (
+              <>등록</>
+            )}
+          </Button>
+          <Link href="/admin/theaters">
+            <Button type="button" variant="secondary" className="ms-3">
+              취소
+            </Button>
+          </Link>
+        </form>
       </Container>
       <NoticeModal
         show={completed}

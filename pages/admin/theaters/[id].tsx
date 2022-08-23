@@ -4,11 +4,12 @@ import MyAlert from 'components/admin/myAlert';
 import NoticeModal from 'components/admin/noticeModal';
 import TheaterContent from 'components/admin/theaterContent';
 import TheaterForm from 'components/admin/theaterForm';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import { GetResponseData } from 'pages/api/theaters/[id]';
 import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container, Spinner } from 'react-bootstrap';
 import { TheaterFormValues } from './create';
 
 export default function CreateForm() {
@@ -48,19 +49,44 @@ export default function CreateForm() {
 
   return (
     <>
-      <Container className="mt-4">
-        <h3>영화관 상세</h3>
-        <TheaterContent loading={loadingTheater} noData={id === -1}>
-          <TheaterForm
-            id={id}
-            values={values}
-            processing={processing}
-            onChange={handleChange}
-            onSubmit={handleSubmit}
-            onDeleteButtonClick={handleDeleteButtonClick}
-          />
-        </TheaterContent>
-        {alert ? <MyAlert message={alert} /> : null}
+      <Container className="my-3">
+        <form onSubmit={handleSubmit}>
+          <h3>영화관 상세</h3>
+          <TheaterContent loading={loadingTheater} noData={id === -1}>
+            <>
+              <TheaterForm id={id} values={values} onChange={handleChange} />
+              {alert ? <MyAlert message={alert} /> : null}
+              <Button type="submit" disabled={processing}>
+                {processing ? (
+                  <>
+                    <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                    />{' '}
+                    처리 중...
+                  </>
+                ) : (
+                  <>수정</>
+                )}
+              </Button>
+              <Button
+                type="button"
+                className="ms-3"
+                onClick={handleDeleteButtonClick}
+              >
+                삭제
+              </Button>
+              <Link href="/admin/theaters">
+                <Button type="button" variant="secondary" className="ms-3">
+                  취소
+                </Button>
+              </Link>
+            </>
+          </TheaterContent>
+        </form>
       </Container>
       <NoticeModal
         show={showCompleteModal}

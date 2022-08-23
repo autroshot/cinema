@@ -1,10 +1,10 @@
+import Buttons from 'components/admin/theater/detail/buttons';
 import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';
-import Link from 'next/link';
 import { PostRequestData, PostResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
-import { Button, Container, Spinner } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 export default function CreateForm() {
   const [alert, setAlert] = useState<null | string>(null);
@@ -27,27 +27,7 @@ export default function CreateForm() {
           <h3>영화관 등록</h3>
           <TheaterForm values={values} onChange={handleChange} />
           {alert ? <MyAlert message={alert} /> : null}
-          <Button type="submit" disabled={loading}>
-            {loading ? (
-              <>
-                <Spinner
-                  as="span"
-                  animation="border"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-                />{' '}
-                처리 중...
-              </>
-            ) : (
-              <>등록</>
-            )}
-          </Button>
-          <Link href="/admin/theaters">
-            <Button type="button" variant="secondary" className="ms-3">
-              취소
-            </Button>
-          </Link>
+          <Buttons loading={loading} />
         </form>
       </Container>
       <NoticeModal

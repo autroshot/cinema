@@ -1,3 +1,5 @@
+import { RequestData } from 'pages/api/test/theaters/deleteByName';
+
 describe('관리자 페이지 방문', () => {
   it('영화관', () => {
     cy.visit('/');
@@ -26,7 +28,8 @@ describe('영화관 CRUD', () => {
   const duplicatedName = '월드타워';
 
   beforeEach(() => {
-    cy.request('/api/theaters');
+    const body: RequestData = { name: '테스트 이름' };
+    cy.request('DELETE', '/api/test/theaters/deleteByName', body);
   });
 
   it.only('영화관 C', () => {

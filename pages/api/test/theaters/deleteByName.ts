@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
+import { Prisma } from '@prisma/client';
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,13 +9,25 @@ export default async function handler(
   try {
     switch (req.method) {
       case 'DELETE':
-        const body = req.body as RequestData;
-        await prisma.theater.delete({
-          where: {
-            ...body,
-          },
-        });
-        res.status(204).end();
+        try {
+          const body = req.body as RequestData;
+          await prisma.theater.delete({
+            where: {
+              ...body,
+            },
+          });
+          res.status(204).end();
+        } catch (err) {
+          console.error(err);
+          if (
+            err instanceof Prisma.PrismaClientKnownRequestError &&
+            err.code === 'P2025'
+          ) {
+            res.status(200).json({ message: '레코드가 존재하지 않습니다.' });
+          } else {
+            res.status(500).json({ message: '서버 오류' });
+          }
+        }
         break;
 
       default:

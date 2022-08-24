@@ -21,10 +21,10 @@ describe('영화관 CRUD', () => {
   const THEATER_DUMMY = {
     name: '테스트 이름',
     street_address: '서울특별시 중구 세종대로 110',
-    kakao_map_id: 'ChIJ81IZg_KifDURyA2TiacuQ3w',
+    google_maps_place_id: 'ChIJ81IZg_KifDURyA2TiacuQ3w',
   };
 
-  it.only('영화관 CR', () => {
+  it('영화관 CR', () => {
     cy.visit('http://localhost:3000/admin/theaters/create');
     cy.contains('name').click().type(THEATER_DUMMY.name);
   });

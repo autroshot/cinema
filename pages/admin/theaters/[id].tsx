@@ -17,7 +17,7 @@ export default function Detail() {
   const [values, setValues] = useState<TheaterFormValues>({
     name: '',
     street_address: '',
-    kakao_map_id: '',
+    google_maps_place_id: '',
     subway: '',
     bus: '',
     car: '',
@@ -160,7 +160,7 @@ export default function Detail() {
     return (
       values.name.length !== 0 &&
       values.street_address.length !== 0 &&
-      values.kakao_map_id.length !== 0
+      values.google_maps_place_id.length !== 0
     );
   }
 

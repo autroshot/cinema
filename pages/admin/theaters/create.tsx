@@ -13,7 +13,7 @@ export default function CreateForm() {
   const [values, setValues] = useState<TheaterFormValues>({
     name: '',
     street_address: '',
-    kakao_map_id: '',
+    google_maps_place_id: '',
     subway: '',
     bus: '',
     car: '',
@@ -87,7 +87,7 @@ export default function CreateForm() {
     return (
       values.name.length !== 0 &&
       values.street_address.length !== 0 &&
-      values.kakao_map_id.length !== 0
+      values.google_maps_place_id.length !== 0
     );
   }
 
@@ -106,7 +106,7 @@ export default function CreateForm() {
 export interface TheaterFormValues {
   name: string;
   street_address: string;
-  kakao_map_id: string;
+  google_maps_place_id: string;
   subway: string;
   bus: string;
   car: string;

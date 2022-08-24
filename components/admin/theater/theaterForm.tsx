@@ -62,17 +62,17 @@ export default function TheaterForm(props: Props) {
         </tr>
         <tr>
           <td>
-            <label htmlFor="kakao_map_id">kakao_map_id</label>
+            <label htmlFor="google_maps_place_id">google_maps_place_id</label>
           </td>
           <td>
             <input
-              id="kakao_map_id"
-              name="kakao_map_id"
+              id="google_maps_place_id"
+              name="google_maps_place_id"
               type="text"
               maxLength={1000}
               placeholder="필숫값"
               className="w-100"
-              value={props.values.kakao_map_id}
+              value={props.values.google_maps_place_id}
               onChange={props.onChange}
             />
           </td>

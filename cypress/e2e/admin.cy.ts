@@ -20,7 +20,7 @@ describe('관리자 페이지 방문', () => {
 });
 
 const THEATER_DUMMY = {
-  name: '테스트 이름',
+  name: '테스트 영화관',
   street_address: '서울특별시 중구 세종대로 110',
   google_maps_place_id: 'ChIJ81IZg_KifDURyA2TiacuQ3w',
 };
@@ -28,7 +28,7 @@ describe('영화관 CRUD', () => {
   const duplicatedName = '월드타워';
 
   beforeEach(() => {
-    const body: RequestData = { name: '테스트 이름' };
+    const body: RequestData = { name: THEATER_DUMMY.name };
     cy.request('DELETE', '/api/test/theaters/deleteByName', body);
   });
 
@@ -48,7 +48,10 @@ describe('영화관 CRUD', () => {
     cy.get('button').contains('등록').click();
     cy.get('[data-cy="alert"]').should('include.text', '고유 제약 조건 오류');
 
-    cy.contains('name').click().type(THEATER_DUMMY.name);
+    cy.contains('name')
+      .click()
+      .type('{selectAll}{del}')
+      .type(THEATER_DUMMY.name);
     cy.get('button').contains('등록').click();
     cy.contains('등록이 완료되었습니다.');
     cy.contains('목록으로 돌아가기').click();

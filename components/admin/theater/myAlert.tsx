@@ -3,7 +3,7 @@ import styles from './myAlert.module.css';
 
 export default function MyAlert(props: Props) {
   return (
-    <Alert variant="warning">
+    <Alert variant="warning" data-cy="alert">
       <span className="material-symbols-rounded me-1">
         <span className={styles.warning}>warning</span>
       </span>

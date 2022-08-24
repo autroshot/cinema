@@ -17,16 +17,40 @@ describe('관리자 페이지 방문', () => {
   });
 });
 
+const THEATER_DUMMY = {
+  name: '테스트 이름',
+  street_address: '서울특별시 중구 세종대로 110',
+  google_maps_place_id: 'ChIJ81IZg_KifDURyA2TiacuQ3w',
+};
 describe('영화관 CRUD', () => {
-  const THEATER_DUMMY = {
-    name: '테스트 이름',
-    street_address: '서울특별시 중구 세종대로 110',
-    google_maps_place_id: 'ChIJ81IZg_KifDURyA2TiacuQ3w',
-  };
+  const duplicatedName = '월드타워';
 
-  it('영화관 CR', () => {
+  beforeEach(() => {
+    cy.request('/api/theaters');
+  });
+
+  it.only('영화관 C', () => {
     cy.visit('http://localhost:3000/admin/theaters/create');
+    cy.contains('name').click().type(duplicatedName);
+    cy.contains('google_maps_place_id')
+      .click()
+      .type(THEATER_DUMMY.google_maps_place_id);
+    cy.get('button').contains('등록').click();
+    cy.get('[data-cy="alert"]').should(
+      'include.text',
+      '필숫값이 비어 있습니다.'
+    );
+
+    cy.contains('street_address').click().type(THEATER_DUMMY.street_address);
+    cy.get('button').contains('등록').click();
+    cy.get('[data-cy="alert"]').should('include.text', '고유 제약 조건 오류');
+
     cy.contains('name').click().type(THEATER_DUMMY.name);
+    cy.get('button').contains('등록').click();
+    cy.contains('등록이 완료되었습니다.');
+    cy.contains('목록으로 돌아가기').click();
+
+    cy.get('[data-cy="theaters"]').contains(THEATER_DUMMY.name);
   });
 });
 

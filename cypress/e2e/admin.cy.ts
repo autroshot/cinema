@@ -29,3 +29,5 @@ describe('영화관 CRUD', () => {
     cy.contains('name').click().type(THEATER_DUMMY.name);
   });
 });
+
+export {};

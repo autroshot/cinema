@@ -4,7 +4,8 @@ import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 
 export default function Index() {
   return (
-    <Container className="mt-4">
+    <Container className="my-3">
+      <h3 data-cy="title">영화관 목록</h3>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -12,7 +13,7 @@ export default function Index() {
             <th>name</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-cy="theaters">
           <Theaters />
         </tbody>
       </Table>

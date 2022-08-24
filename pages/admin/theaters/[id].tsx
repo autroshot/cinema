@@ -51,7 +51,7 @@ export default function Detail() {
     <>
       <Container className="my-3">
         <form onSubmit={handleUpdate}>
-          <h3>영화관 상세</h3>
+          <h3 data-cy="title">영화관 상세</h3>
           <TheaterContent loading={loadingTheater} noData={id === -1}>
             <>
               <TheaterForm id={id} values={values} onChange={handleChange} />

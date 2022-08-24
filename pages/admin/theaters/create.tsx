@@ -24,7 +24,7 @@ export default function CreateForm() {
     <>
       <Container className="my-3">
         <form onSubmit={handleSubmit}>
-          <h3>영화관 등록</h3>
+          <h3 data-cy="title">영화관 등록</h3>
           <TheaterForm values={values} onChange={handleChange} />
           {alert ? <MyAlert message={alert} /> : null}
           <Buttons loading={loading} />

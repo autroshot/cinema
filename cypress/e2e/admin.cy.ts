@@ -1,5 +1,3 @@
-import { RequestData } from 'pages/api/test/theaters/deleteByName';
-
 describe('관리자 페이지 방문', () => {
   it('영화관', () => {
     cy.visit('/');
@@ -28,11 +26,10 @@ describe('영화관 CRUD', () => {
   const duplicatedName = '월드타워';
 
   beforeEach(() => {
-    const body: RequestData = { name: THEATER_DUMMY.name };
-    cy.request('DELETE', '/api/test/theaters/deleteByName', body);
+    cy.exec('npx prisma db seed');
   });
 
-  it.only('영화관 C', () => {
+  it('영화관 C', () => {
     cy.visit('http://localhost:3000/admin/theaters/create');
     cy.contains('name').click().type(duplicatedName);
     cy.contains('google_maps_place_id')

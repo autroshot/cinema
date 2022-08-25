@@ -2,22 +2,24 @@ import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import TheaterModal from './TheaterModal';
 
-export default function Info() {
+export default function Info(props: Props) {
   const [modalType, setModalType] = useState<null | modalType>(null);
 
   return (
     <>
       <Row className="row-cols-1 row-cols-sm-2 g-1">
         <Col>
+          {/* TODO: 미구현 */}
           <b>&middot;</b> 총 상영관 수 <b>21개관</b>
         </Col>
         <Col>
+          {/* TODO: 미구현 */}
           <b>&middot;</b> 총 좌석수 <b>4,609석</b>
         </Col>
       </Row>
       <Row className="mt-3">
         <Col>
-          <b>서울 송파구 올림픽로 300 (신천동) 5층-11층</b>
+          <b>{props.streetAddress}</b>
         </Col>
       </Row>
       <Row className="mt-4 row-cols-1 row-cols-sm-3 g-1">
@@ -54,3 +56,7 @@ export default function Info() {
 }
 
 export type modalType = '대중교통 안내' | '자가용/주차 안내' | '지도';
+
+interface Props {
+  streetAddress: string;
+}

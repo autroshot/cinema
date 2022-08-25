@@ -11,6 +11,7 @@ export default function Theater({ theater }: Props) {
 
   return (
     <Container className="my-3">
+      {/* TODO: 개발용 */}
       <div>현재 id: {theater.id}</div>
       <h1 className="d-inline">{theater.name}</h1>{' '}
       <span className="material-symbols-outlined">
@@ -21,7 +22,7 @@ export default function Theater({ theater }: Props) {
       <section className="my-3">
         <Row className="row-cols-1 row-cols-sm-2">
           <Col>
-            <Info />
+            <Info streetAddress={theater.street_address} />
           </Col>
           <Col className="mt-3 mt-sm-0">
             <RecommendedMovie />

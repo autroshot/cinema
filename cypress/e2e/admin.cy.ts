@@ -29,7 +29,7 @@ describe('영화관 CRUD', () => {
     cy.exec('npx prisma db seed');
   });
 
-  it('영화관 C', () => {
+  it('C', () => {
     cy.visit('http://localhost:3000/admin/theaters/create');
     cy.contains('name').click().type(duplicatedName);
     cy.contains('google_maps_place_id')
@@ -54,6 +54,17 @@ describe('영화관 CRUD', () => {
     cy.contains('목록으로 돌아가기').click();
 
     cy.get('[data-cy="theaters"]').contains(THEATER_DUMMY.name);
+  });
+
+  it('R', () => {
+    cy.visit('http://localhost:3000/admin/theaters');
+    cy.get('[data-cy="theaters"]').contains('월드타워');
+    cy.get('[data-cy="theaters"]').contains('수원');
+    cy.get('[data-cy="theaters"]').contains('건대입구');
+
+    cy.get('[data-cy="theaters"]').contains('월드타워').click();
+    cy.get('[data-cy="title"]').should('have.text', '영화관 상세');
+    cy.contains('월드타워');
   });
 });
 

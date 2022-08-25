@@ -15,9 +15,11 @@ export default function TheaterLinks() {
   if (error) return <>서버 오류</>;
   if (!data)
     return (
-      <Spinner animation="border" size="sm" role="status">
-        <span className="visually-hidden">불러오는 중...</span>
-      </Spinner>
+      <div className="text-center">
+        <Spinner animation="border" size="sm" role="status">
+          <span className="visually-hidden">불러오는 중...</span>
+        </Spinner>
+      </div>
     );
   return (
     <>

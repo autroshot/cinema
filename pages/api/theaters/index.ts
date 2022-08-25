@@ -55,7 +55,7 @@ export default async function handler(
 }
 
 export type PostRequestData = Prisma.theaterCreateInput;
-type PostResponseData = theater;
+export type PostResponseData = theater;
 export interface ErrorResponseData {
   message: string;
 }

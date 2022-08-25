@@ -73,7 +73,7 @@ describe('영화관 CRUD', () => {
     cy.contains('월드타워');
   });
 
-  it.only('U', () => {
+  it('U', () => {
     cy.visit('http://localhost:3000/admin/theaters/1');
 
     cy.contains('google_maps_place_id').click().type('{selectAll}{del}');
@@ -119,6 +119,24 @@ describe('영화관 CRUD', () => {
     cy.get('#bus').should('have.value', THEATER_DUMMY.bus);
     cy.get('#car').should('have.value', THEATER_DUMMY.car);
     cy.get('#parking').should('have.value', THEATER_DUMMY.parking);
+  });
+
+  it.only('D', () => {
+    cy.request('POST', 'api/theaters', THEATER_DUMMY);
+    cy.visit('/admin/theaters/4');
+
+    cy.get('button').contains('삭제').click();
+    cy.contains('삭제 재확인');
+    cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
+    cy.contains('삭제가 완료되었습니다.');
+    cy.contains('목록으로 돌아가기').click();
+
+    cy.get('[data-cy="theaters"]').should(
+      'not.contain.text',
+      THEATER_DUMMY.name
+    );
+    cy.visit('/admin/theaters/4');
+    cy.contains('데이터가 없습니다.');
   });
 });
 

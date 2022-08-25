@@ -15,7 +15,10 @@ export default function ConfirmModal(props: Props) {
       <Modal.Body className="text-break">
         {props.contentName}을/를 정말 삭제하시겠습니까?
       </Modal.Body>
-      <Modal.Footer className="justify-content-center p-2">
+      <Modal.Footer
+        className="justify-content-center p-2"
+        data-cy="confirmButtons"
+      >
         <Button variant="primary" onClick={props.onDelete}>
           삭제
         </Button>

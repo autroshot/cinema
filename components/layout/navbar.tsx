@@ -7,8 +7,18 @@ import {
   NavDropdown,
 } from 'react-bootstrap';
 import Link from 'next/link';
+import useSWR from 'swr';
+import { GetRequestData, GetResponseData } from 'pages/api/theaters';
 
 export default function Navbar() {
+  const orderBy: GetRequestData = { name: 'asc' };
+  const queryString = new URLSearchParams(orderBy).toString();
+
+  const { data, error } = useSWR<GetResponseData>(
+    `/api/theaters?${queryString}`,
+    (url) => fetch(url).then((res) => res.json())
+  );
+
   return (
     <Container>
       <BootstrapNavBar expand="md" bg="white" className="py-0">

@@ -7,18 +7,9 @@ import {
   NavDropdown,
 } from 'react-bootstrap';
 import Link from 'next/link';
-import useSWR from 'swr';
-import { GetRequestData, GetResponseData } from 'pages/api/theaters';
+import TheaterLinks from './theaterLinks';
 
 export default function Navbar() {
-  const orderBy: GetRequestData = { name: 'asc' };
-  const queryString = new URLSearchParams(orderBy).toString();
-
-  const { data, error } = useSWR<GetResponseData>(
-    `/api/theaters?${queryString}`,
-    (url) => fetch(url).then((res) => res.json())
-  );
-
   return (
     <Container>
       <BootstrapNavBar expand="md" bg="white" className="py-0">
@@ -44,21 +35,7 @@ export default function Navbar() {
                 <NavDropdown.Item href="">상영예정작</NavDropdown.Item>
               </NavDropdown>
               <NavDropdown title="영화관" id="basic-nav-dropdown">
-                <Link href="/theaters/1000" passHref>
-                  <NavDropdown.Item>건대입구</NavDropdown.Item>
-                </Link>
-                <Link href="/theaters/1001" passHref>
-                  <NavDropdown.Item>김포공항</NavDropdown.Item>
-                </Link>
-                <Link href="/theaters/1002" passHref>
-                  <NavDropdown.Item>노원</NavDropdown.Item>
-                </Link>
-                <Link href="/theaters/1003" passHref>
-                  <NavDropdown.Item>수원</NavDropdown.Item>
-                </Link>
-                <Link href="/theaters/1004" passHref>
-                  <NavDropdown.Item>월드타워</NavDropdown.Item>
-                </Link>
+                <TheaterLinks />
               </NavDropdown>
               <NavDropdown title="스페셜관" id="basic-nav-dropdown">
                 <Link href="/special-screens/" passHref>

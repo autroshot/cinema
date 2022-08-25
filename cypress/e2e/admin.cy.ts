@@ -78,7 +78,7 @@ describe('영화관 CRUD', () => {
   it('U', () => {
     cy.visit('http://localhost:3000/admin/theaters/1');
 
-    cy.contains('google_maps_place_id').click().type('{selectAll}{del}');
+    cy.contains('name').click().type('{selectAll}{del}');
     cy.get('button').contains('수정').click();
     cy.get('[data-cy="alert"]').should(
       'include.text',

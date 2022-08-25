@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { ScriptProps } from 'next/script';
 import { Container, Nav } from 'react-bootstrap';
 
-export default function AdminLayout({ children }: ScriptProps) {
+export default function Layout({ children }: ScriptProps) {
   return (
     <Container>
       <Nav className="bg-light">

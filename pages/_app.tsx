@@ -1,10 +1,10 @@
 import 'styles/globals.css';
 import 'styles/custom.scss';
 import type { AppProps } from 'next/app';
-import GeneralLayout from 'components/layout/generalLayout';
+import GeneralLayout from 'components/layout/general/layout';
 import { SSRProvider } from 'react-bootstrap';
 import { NextPage } from 'next';
-import AdminLayout from 'components/layout/adminLayout';
+import AdminLayout from 'components/layout/admin/layout';
 
 function MyApp({ Component, pageProps }: AppPropsWithAdmin) {
   return (

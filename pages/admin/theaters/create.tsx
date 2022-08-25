@@ -84,16 +84,14 @@ export default function CreateForm() {
   }
 
   function validate(values: TheaterFormValues) {
-    return (
-      values.name.length !== 0 &&
-      values.street_address.length !== 0 &&
-      values.google_maps_place_id.length !== 0
-    );
+    return values.name.length !== 0 && values.street_address.length !== 0;
   }
 
   function toRequestData(values: TheaterFormValues): PostRequestData {
     const result = { ...values } as PostRequestData;
 
+    if (values.google_maps_place_id.length === 0)
+      result.google_maps_place_id = null;
     if (values.subway.length === 0) result.subway = null;
     if (values.bus.length === 0) result.bus = null;
     if (values.car.length === 0) result.car = null;

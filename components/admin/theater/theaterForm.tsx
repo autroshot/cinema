@@ -70,7 +70,6 @@ export default function TheaterForm(props: Props) {
               name="google_maps_place_id"
               type="text"
               maxLength={1000}
-              placeholder="필숫값"
               className="w-100"
               value={props.values.google_maps_place_id}
               onChange={props.onChange}

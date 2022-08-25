@@ -157,16 +157,13 @@ export default function Detail() {
   }
 
   function validate(values: TheaterFormValues) {
-    return (
-      values.name.length !== 0 &&
-      values.street_address.length !== 0 &&
-      values.google_maps_place_id.length !== 0
-    );
+    return values.name.length !== 0 && values.street_address.length !== 0;
   }
 
   function toFormValues(theater: theater) {
     const result = { ...theater };
 
+    if (theater.google_maps_place_id === null) result.google_maps_place_id = '';
     if (theater.subway === null) result.subway = '';
     if (theater.bus === null) result.bus = '';
     if (theater.car === null) result.car = '';

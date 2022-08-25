@@ -9,12 +9,12 @@ export default async function handler(
   try {
     switch (req.method) {
       case 'GET':
-        const Theater = await prisma.theater.findUnique({
+        const theater = await prisma.theater.findUnique({
           where: {
             id: getId(),
           },
         });
-        res.status(200).json(Theater);
+        res.status(200).json(theater);
         break;
 
       case 'PUT':

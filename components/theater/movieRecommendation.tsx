@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { Button, Col, Row } from 'react-bootstrap';
 import movieImage from 'public/images/dummy/movies/01.jpg';
-import styles from './recommendedMovie.module.css';
+import styles from './movieRecommendation.module.css';
 import ShareURL from './shareURL';
 
-export default function RecommendedMovie(props: Props) {
+export default function MovieRecommendation(props: Props) {
   return (
     <section className="bg-light p-3 rounded-2">
       <Row>

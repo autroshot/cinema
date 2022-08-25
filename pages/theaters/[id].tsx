@@ -1,11 +1,10 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import Info from 'components/theater/info';
-import RecommendedMovie from 'components/theater/recommendedMovie';
+import MovieRecommendation from 'components/theater/movieRecommendation';
 import styles from './theater.module.css';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { GetResponseData } from 'pages/api/theaters/[id]';
 import { prisma } from 'db';
-import { props } from 'cypress/types/bluebird';
 
 export default function Theater({ theater }: Props) {
   if (theater === null) return <>데이터가 없습니다.</>;
@@ -33,7 +32,7 @@ export default function Theater({ theater }: Props) {
             />
           </Col>
           <Col className="mt-3 mt-sm-0">
-            <RecommendedMovie theaterName={theater.name} />
+            <MovieRecommendation theaterName={theater.name} />
           </Col>
         </Row>
       </section>

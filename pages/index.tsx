@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { Container } from 'react-bootstrap';
 import TrailerCarousel from '../components/trailer-carousel/carousel';
 import MovieCarousel from '../components/movie-carousel/carousel';
-import SpecialScreenLinks from '../components/specialScreenLinks';
+import SpecialScreenLinks from '../components/home/specialScreenLinks';
 
 export default function Home() {
   return (

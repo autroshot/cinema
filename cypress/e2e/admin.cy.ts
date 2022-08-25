@@ -121,7 +121,7 @@ describe('영화관 CRUD', () => {
     cy.get('#parking').should('have.value', THEATER_DUMMY.parking);
   });
 
-  it.only('D', () => {
+  it('D', () => {
     cy.request('POST', 'api/theaters', THEATER_DUMMY);
     cy.visit('/admin/theaters/4');
 

@@ -6,7 +6,7 @@ import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';
 import { useRouter } from 'next/router';
-import { PostRequestData, PostResponseData } from 'pages/api/theaters';
+import { PostRequestData, ErrorResponseData } from 'pages/api/theaters';
 import { GetResponseData } from 'pages/api/theaters/[id]';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
@@ -115,7 +115,7 @@ export default function Detail() {
     setProcessing(false);
 
     if (response.status === 500) {
-      const responseJson = (await response.json()) as PostResponseData;
+      const responseJson = (await response.json()) as ErrorResponseData;
       setAlert(responseJson.message);
       return;
     }
@@ -133,7 +133,7 @@ export default function Detail() {
     setProcessing(false);
 
     if (response.status === 500) {
-      const responseJson = (await response.json()) as PostResponseData;
+      const responseJson = (await response.json()) as ErrorResponseData;
       setAlert(responseJson.message);
       return;
     }

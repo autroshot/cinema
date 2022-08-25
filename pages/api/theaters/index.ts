@@ -1,10 +1,10 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, theater } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<PostResponseData | GetResponseData>
+  res: NextApiResponse<ErrorResponseData | GetResponseData | PostResponseData>
 ) {
   try {
     switch (req.method) {
@@ -26,11 +26,11 @@ export default async function handler(
         try {
           const body = req.body as PostRequestData;
 
-          await prisma.theater.create({
+          const theater = await prisma.theater.create({
             data: { ...body },
           });
 
-          res.status(201).end();
+          res.status(201).json(theater);
         } catch (err) {
           console.error(err);
           if (
@@ -55,7 +55,8 @@ export default async function handler(
 }
 
 export type PostRequestData = Prisma.theaterCreateInput;
-export interface PostResponseData {
+type PostResponseData = theater;
+export interface ErrorResponseData {
   message: string;
 }
 

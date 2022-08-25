@@ -22,7 +22,14 @@ export default function Theater({ theater }: Props) {
       <section className="my-3">
         <Row className="row-cols-1 row-cols-sm-2">
           <Col>
-            <Info streetAddress={theater.street_address} />
+            <Info
+              streetAddress={theater.street_address}
+              subway={theater.subway}
+              bus={theater.bus}
+              car={theater.car}
+              parking={theater.parking}
+              googleMapsPlaceId={theater.google_maps_place_id}
+            />
           </Col>
           <Col className="mt-3 mt-sm-0">
             <RecommendedMovie />

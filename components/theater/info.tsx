@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import TheaterModal from './TheaterModal';
+import PublicTransportModal from './publicTransportModal';
 
 export default function Info(props: Props) {
-  const [modalType, setModalType] = useState<null | modalType>(null);
+  const [showPublicTransportModal, setShowPublicTransportModal] =
+    useState(false);
+  const [showCarModal, setShowCarModal] = useState(false);
+  const [showMapModal, setShowMapModal] = useState(false);
 
   return (
     <>
@@ -24,39 +27,41 @@ export default function Info(props: Props) {
       </Row>
       <Row className="mt-4 row-cols-1 row-cols-sm-3 g-1">
         <Col>
-          <span role="button" onClick={() => handleClick('대중교통 안내')}>
+          <span role="button" onClick={() => setShowPublicTransportModal(true)}>
             <span className="material-symbols-outlined">directions_subway</span>{' '}
             대중교통 안내
           </span>
         </Col>
         <Col>
-          <span role="button" onClick={() => handleClick('자가용/주차 안내')}>
+          <span role="button" onClick={() => setShowCarModal(true)}>
             <span className="material-symbols-outlined">directions_car</span>{' '}
             자가용/주차 안내
           </span>
         </Col>
         <Col>
-          <span role="button" onClick={() => handleClick('지도')}>
+          <span role="button" onClick={() => setShowMapModal(true)}>
             <span className="material-symbols-outlined">location_on</span> 지도
             보기
           </span>
         </Col>
       </Row>
-      <TheaterModal onHide={handleHide} type={modalType} />
+      <PublicTransportModal
+        show={showPublicTransportModal}
+        subway={props.subway}
+        bus={props.bus}
+        onHide={() => setShowPublicTransportModal(false)}
+      />
     </>
   );
-
-  function handleClick(newModalType: modalType) {
-    setModalType(newModalType);
-  }
-
-  function handleHide() {
-    setModalType(null);
-  }
 }
 
 export type modalType = '대중교통 안내' | '자가용/주차 안내' | '지도';
 
 interface Props {
   streetAddress: string;
+  subway: string | null;
+  bus: string | null;
+  car: string | null;
+  parking: string | null;
+  googleMapsPlaceId: string;
 }

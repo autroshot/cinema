@@ -106,6 +106,7 @@ describe('영화관 CRUD', () => {
 
     cy.contains('수정이 완료되었습니다.');
     cy.reload();
+    cy.get('[data-cy="title"]').should('have.text', '영화관 상세');
     cy.get('#name').should('have.value', THEATER_DUMMY.name);
     cy.get('#street_address').should(
       'have.value',

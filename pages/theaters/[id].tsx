@@ -1,13 +1,27 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import Info from 'components/theater/info';
 import MovieRecommendation from 'components/theater/movieRecommendation';
 import styles from './theater.module.css';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { GetResponseData } from 'pages/api/theaters/[id]';
 import { prisma } from 'db';
+import { useRouter } from 'next/router';
 
 export default function Theater({ theater }: Props) {
-  if (theater === null) return <>데이터가 없습니다.</>;
+  const router = useRouter();
+  if (router.isFallback) {
+    return (
+      <Container className="my-3">
+        <div className="text-center">
+          <Spinner animation="border" size="sm" role="status">
+            <span className="visually-hidden">불러오는 중...</span>
+          </Spinner>
+        </div>
+      </Container>
+    );
+  }
+  if (theater === null)
+    return <Container className="my-3">데이터가 없습니다.</Container>;
 
   return (
     <Container className="my-3">
@@ -53,7 +67,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { params: { id: theater.id.toString() } };
   });
 
-  return { paths: paths, fallback: false };
+  return { paths: paths, fallback: true };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {

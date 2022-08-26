@@ -9,19 +9,19 @@ export default async function handler(
   try {
     switch (req.method) {
       case 'GET':
-        const theater = await prisma.theater.findUnique({
+        const foundTheater = await prisma.theater.findUnique({
           where: {
             id: getId(),
           },
         });
-        res.status(200).json(theater);
+        res.status(200).json(foundTheater);
         break;
 
       case 'PUT':
         try {
           const body = req.body as PutRequestData;
 
-          await prisma.theater.update({
+          const updatedTheater = await prisma.theater.update({
             where: {
               id: getId(),
             },
@@ -29,6 +29,7 @@ export default async function handler(
               ...body,
             },
           });
+          await res.revalidate(`/theaters/${updatedTheater.id}`);
 
           res.status(204).end();
         } catch (err) {
@@ -45,11 +46,12 @@ export default async function handler(
         break;
 
       case 'DELETE':
-        await prisma.theater.delete({
+        const deletedTheater = await prisma.theater.delete({
           where: {
             id: getId(),
           },
         });
+        await res.revalidate(`/theaters/${deletedTheater.id}`);
         res.status(204).end();
         break;
 

@@ -22,11 +22,22 @@ model theater {
 }
 
 model screen {
-  no           Int     @id @db.UnsignedTinyInt
-  total_row    Int     @db.UnsignedTinyInt
-  total_column Int     @db.UnsignedTinyInt
-  theater      theater @relation(fields: [theater_id], references: [id])
-  theater_id   Int     @db.UnsignedSmallInt
+  no                 Int                 @id @db.UnsignedTinyInt
+  total_row          Int                 @db.UnsignedTinyInt
+  total_column       Int                 @db.UnsignedTinyInt
+  theater            theater             @relation(fields: [theater_id], references: [id])
+  theater_id         Int                 @db.UnsignedSmallInt
+  unselectable_seats unselectable_seat[]
 
   @@index([theater_id])
+}
+
+model unselectable_seat {
+  row       Int    @db.UnsignedTinyInt
+  column    Int    @db.UnsignedTinyInt
+  screen    screen @relation(fields: [screen_no], references: [no])
+  screen_no Int    @db.UnsignedTinyInt
+
+  @@id([row, column, screen_no])
+  @@index([screen_no])
 }

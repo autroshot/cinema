@@ -33,11 +33,19 @@ model screen {
 }
 
 model unselectable_seat {
-  row       Int    @db.UnsignedTinyInt
-  column    Int    @db.UnsignedTinyInt
-  screen    screen @relation(fields: [screen_no], references: [no])
-  screen_no Int    @db.UnsignedTinyInt
+  row                       Int                    @db.UnsignedTinyInt
+  column                    Int                    @db.UnsignedTinyInt
+  screen                    screen                 @relation(fields: [screen_no], references: [no])
+  screen_no                 Int                    @db.UnsignedTinyInt
+  unselectable_seat_type    unselectable_seat_type @relation(fields: [unselectable_seat_type_id], references: [id])
+  unselectable_seat_type_id Int                    @db.UnsignedTinyInt
 
   @@id([row, column, screen_no])
-  @@index([screen_no])
+  @@index([screen_no, unselectable_seat_type_id])
+}
+
+model unselectable_seat_type {
+  id                 Int                 @id @db.UnsignedTinyInt
+  name               String              @db.VarChar(20)
+  unselectable_seats unselectable_seat[]
 }

@@ -10,12 +10,23 @@ datasource db {
 }
 
 model theater {
-  id                   Int     @id @default(autoincrement()) @db.UnsignedSmallInt
-  name                 String  @unique @db.VarChar(50)
-  street_address       String  @db.VarChar(200)
-  google_maps_place_id String? @db.VarChar(1000)
-  subway               String? @db.VarChar(1000)
-  bus                  String? @db.VarChar(1000)
-  car                  String? @db.VarChar(1000)
-  parking              String? @db.VarChar(1000)
+  id                   Int      @id @default(autoincrement()) @db.UnsignedSmallInt
+  name                 String   @unique @db.VarChar(50)
+  street_address       String   @db.VarChar(200)
+  google_maps_place_id String?  @db.VarChar(1000)
+  subway               String?  @db.VarChar(1000)
+  bus                  String?  @db.VarChar(1000)
+  car                  String?  @db.VarChar(1000)
+  parking              String?  @db.VarChar(1000)
+  screens              screen[]
+}
+
+model screen {
+  no           Int     @id @db.UnsignedTinyInt
+  total_row    Int     @db.UnsignedTinyInt
+  total_column Int     @db.UnsignedTinyInt
+  theater      theater @relation(fields: [theater_id], references: [id])
+  theater_id   Int     @db.UnsignedSmallInt
+
+  @@index([theater_id])
 }

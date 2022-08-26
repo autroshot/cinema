@@ -27,7 +27,9 @@ export default function Theater({ theater }: Props) {
     <Container className="my-3">
       {/* TODO: 개발용 */}
       <div>현재 id: {theater.id}</div>
-      <h1 className="d-inline">{theater.name}</h1>{' '}
+      <h1 className="d-inline" data-cy="title">
+        {theater.name}
+      </h1>{' '}
       <span className="material-symbols-outlined">
         <span className={styles.favoriteBorder} role="button">
           favorite

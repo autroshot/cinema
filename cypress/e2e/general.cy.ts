@@ -3,33 +3,35 @@ describe('페이지 방문', () => {
     cy.visit('/');
   });
 
-  it('스페셜관 인덱스', () => {
+  it('홈페이지 방문', () => {});
+
+  it('스페셜관 인덱스 페이지 네비바로 방문', () => {
     cy.contains('스페셜관').click();
     cy.contains('홈').click();
     cy.contains('영화의 순간을 더욱 특별하게');
-
-    cy.visit('/');
+  });
+  it('스페셜관 인덱스 페이지 홈의 링크로 방문', () => {
     cy.contains('더보기 >').click();
     cy.contains('영화의 순간을 더욱 특별하게');
   });
 
-  it('스페셜관 컬러리움', () => {
+  it('스페셜관 컬러리움 페이지 네비바로 방문', () => {
     cy.contains('스페셜관').click();
     cy.contains('컬러리움').click();
     cy.contains('국내 최초 14M 대형 LED 시네마');
-
-    cy.visit('/');
+  });
+  it('스페셜관 컬러리움 페이지 홈의 링크로 방문', () => {
+    cy.get('[alt="컬러리움"]').click();
+    cy.contains('국내 최초 14M 대형 LED 시네마');
+  });
+  it('스페셜관 컬러리움 페이지 스페셜관 인덱스로 방문', () => {
     cy.contains('스페셜관').click();
     cy.contains('홈').click();
     cy.get('[data-cy="specialScreenLinks"]').contains('컬러리움').click();
     cy.contains('국내 최초 14M 대형 LED 시네마');
-
-    cy.visit('/');
-    cy.get('[alt="컬러리움"]').click();
-    cy.contains('국내 최초 14M 대형 LED 시네마');
   });
 
-  it.only('영화관 상세', () => {
+  it('영화관 상세', () => {
     cy.contains('영화관').click();
     cy.contains('월드타워').click();
 

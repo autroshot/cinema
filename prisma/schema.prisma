@@ -10,7 +10,7 @@ datasource db {
 }
 
 model theater {
-  id                   Int     @id @default(autoincrement())
+  id                   Int     @id @default(autoincrement()) @db.UnsignedSmallInt
   name                 String  @unique @db.VarChar(50)
   street_address       String  @db.VarChar(200)
   google_maps_place_id String? @db.VarChar(1000)

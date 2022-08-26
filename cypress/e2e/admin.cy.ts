@@ -77,6 +77,10 @@ describe('영화관 CRUD', () => {
 
   it('U', () => {
     cy.visit('http://localhost:3000/admin/theaters/1');
+    cy.get('[data-cy="container"]').should(
+      'not.include.text',
+      '불러오는 중...'
+    );
 
     cy.contains('name').click().type('{selectAll}{del}');
     cy.get('button').contains('수정').click();

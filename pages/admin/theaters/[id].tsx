@@ -49,7 +49,7 @@ export default function Detail() {
 
   return (
     <>
-      <Container className="my-3">
+      <Container className="my-3" data-cy="container">
         <form onSubmit={handleUpdate}>
           <h3 data-cy="title">영화관 상세</h3>
           <TheaterContent loading={loadingTheater} noData={id === -1}>

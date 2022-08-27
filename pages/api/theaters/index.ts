@@ -60,10 +60,8 @@ export interface ErrorResponseData {
   message: string;
 }
 
-export type GetRequestData = Prisma.theaterOrderByWithRelationInput;
-export type GetResponseData = SimpleTheater[];
-
-interface SimpleTheater {
-  id: number;
-  name: string;
-}
+export type GetRequestData = Omit<
+  Prisma.theaterOrderByWithRelationInput,
+  'screens'
+>;
+export type GetResponseData = Pick<theater, 'id' | 'name'>[];

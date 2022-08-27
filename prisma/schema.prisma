@@ -28,6 +28,7 @@ model screen {
   theater            theater             @relation(fields: [theater_id], references: [id])
   theater_id         Int                 @db.UnsignedSmallInt
   unselectable_seats unselectable_seat[]
+  aisles             aisle[]
 
   @@index([theater_id])
 }
@@ -48,4 +49,21 @@ model unselectable_seat_type {
   id                 Int                 @id @db.UnsignedTinyInt
   name               String              @db.VarChar(20)
   unselectable_seats unselectable_seat[]
+}
+
+model aisle {
+  no            Int        @db.UnsignedTinyInt
+  screen        screen     @relation(fields: [screen_no], references: [no])
+  screen_no     Int        @db.UnsignedTinyInt
+  aisle_type    aisle_type @relation(fields: [aisle_type_id], references: [id])
+  aisle_type_id Int        @db.UnsignedTinyInt
+
+  @@id([no, screen_no])
+  @@index([aisle_type_id])
+}
+
+model aisle_type {
+  id     Int     @id @db.UnsignedTinyInt
+  name   String  @db.VarChar(20)
+  aisles aisle[]
 }

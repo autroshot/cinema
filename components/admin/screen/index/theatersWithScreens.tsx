@@ -1,13 +1,15 @@
 import Link from 'next/link';
+import { GetResponseData } from 'pages/api/screens';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 
 export default function TheatersWithScreens() {
-  const [theaters, setTheaters] = useState<null | GetResponseData>(null);
+  const [theatersIncludingScreens, setTheatersIncludingScreens] =
+    useState<null | GetResponseData>(null);
 
   useEffect(() => {}, []);
 
-  if (theaters === null) {
+  if (theatersIncludingScreens === null) {
     return (
       <tr>
         <td colSpan={2} className="text-center">
@@ -17,7 +19,7 @@ export default function TheatersWithScreens() {
         </td>
       </tr>
     );
-  } else if (theaters.length === 0) {
+  } else if (theatersIncludingScreens.length === 0) {
     return (
       <tr>
         <td colSpan={2} className="text-center">

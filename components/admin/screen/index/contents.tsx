@@ -3,11 +3,18 @@ import { GetResponseData } from 'pages/api/screens';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 
-export default function TheatersWithScreens() {
+export default function Contents() {
   const [theatersIncludingScreens, setTheatersIncludingScreens] =
-    useState<null | GetResponseData>(null);
+    useState<GetResponseData | null>(null);
+  console.log(theatersIncludingScreens);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetch('/api/screens')
+      .then((res) => res.json())
+      .then((data: GetResponseData) => {
+        setTheatersIncludingScreens(data);
+      });
+  }, []);
 
   if (theatersIncludingScreens === null) {
     return (
@@ -28,6 +35,12 @@ export default function TheatersWithScreens() {
       </tr>
     );
   } else {
-    return <>상영관이 포함된 영화관들</>;
+    return (
+      <tr>
+        <td colSpan={2} className="text-center">
+          상영관들이 포함된 영화관들
+        </td>
+      </tr>
+    );
   }
 }

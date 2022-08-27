@@ -1,3 +1,4 @@
+import Contents from 'components/admin/screen/index/contents';
 import { Container, Table } from 'react-bootstrap';
 
 export default function Index() {
@@ -11,7 +12,9 @@ export default function Index() {
             <th>name</th>
           </tr>
         </thead>
-        <tbody data-cy="theaters">영화관 및 상영관 목록</tbody>
+        <tbody data-cy="theaters">
+          <Contents />
+        </tbody>
       </Table>
     </Container>
   );

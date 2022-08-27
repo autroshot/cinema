@@ -22,6 +22,13 @@ export default function Layout({ children }: ScriptProps) {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link as="div">
+            <Link href="/admin/screens">
+              <a>상영관</a>
+            </Link>
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link as="div">
             <Link href="">
               <a>회원</a>
             </Link>

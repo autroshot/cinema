@@ -1,6 +1,8 @@
 import { Prisma, theater } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
+import type { ErrorResponseData } from '../commonTypes';
+export type { ErrorResponseData };
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,9 +58,6 @@ export default async function handler(
 
 export type PostRequestData = Prisma.theaterCreateInput;
 export type PostResponseData = theater;
-export interface ErrorResponseData {
-  message: string;
-}
 
 export type GetRequestData = Omit<
   Prisma.theaterOrderByWithRelationInput,

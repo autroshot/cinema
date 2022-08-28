@@ -22,7 +22,7 @@ model theater {
 }
 
 model screen {
-  no                 Int                 @id @db.UnsignedTinyInt
+  no                 Int                 @db.UnsignedTinyInt
   total_row          Int                 @db.UnsignedTinyInt
   total_column       Int                 @db.UnsignedTinyInt
   theater            theater             @relation(fields: [theater_id], references: [id])
@@ -30,19 +30,20 @@ model screen {
   unselectable_seats unselectable_seat[]
   aisles             aisle[]
 
-  @@index([theater_id])
+  @@id([theater_id, no])
 }
 
 model unselectable_seat {
   row                       Int                    @db.UnsignedTinyInt
   column                    Int                    @db.UnsignedTinyInt
-  screen                    screen                 @relation(fields: [screen_no], references: [no])
+  screen                    screen                 @relation(fields: [theater_id, screen_no], references: [theater_id, no])
+  theater_id                Int                    @db.UnsignedSmallInt
   screen_no                 Int                    @db.UnsignedTinyInt
   unselectable_seat_type    unselectable_seat_type @relation(fields: [unselectable_seat_type_id], references: [id])
   unselectable_seat_type_id Int                    @db.UnsignedTinyInt
 
-  @@id([row, column, screen_no])
-  @@index([screen_no, unselectable_seat_type_id])
+  @@id([theater_id, screen_no, row, column])
+  @@index([unselectable_seat_type_id])
 }
 
 model unselectable_seat_type {
@@ -53,12 +54,13 @@ model unselectable_seat_type {
 
 model aisle {
   no            Int        @db.UnsignedTinyInt
-  screen        screen     @relation(fields: [screen_no], references: [no])
+  screen        screen     @relation(fields: [theater_id, screen_no], references: [theater_id, no])
+  theater_id    Int        @db.UnsignedSmallInt
   screen_no     Int        @db.UnsignedTinyInt
   aisle_type    aisle_type @relation(fields: [aisle_type_id], references: [id])
   aisle_type_id Int        @db.UnsignedTinyInt
 
-  @@id([no, screen_no])
+  @@id([theater_id, screen_no, no])
   @@index([aisle_type_id])
 }
 

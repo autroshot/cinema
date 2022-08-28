@@ -44,3 +44,36 @@ export const theaters: Prisma.theaterCreateInput[] = [
     parking: null,
   },
 ];
+
+export const screens: Prisma.Enumerable<Prisma.screenCreateManyInput> = [
+  {
+    no: 1,
+    total_row: 13,
+    total_column: 46,
+    theater_id: 1,
+  },
+  {
+    no: 2,
+    total_row: 11,
+    total_column: 16,
+    theater_id: 1,
+  },
+  {
+    no: 3,
+    total_row: 11,
+    total_column: 20,
+    theater_id: 1,
+  },
+  {
+    no: 4,
+    total_row: 14,
+    total_column: 26,
+    theater_id: 1,
+  },
+  {
+    no: 5,
+    total_row: 13,
+    total_column: 46,
+    theater_id: 1,
+  },
+];

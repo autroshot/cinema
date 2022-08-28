@@ -1,4 +1,4 @@
-import Theaters from 'components/admin/theater/index/theaters';
+import Contents from 'components/admin/theater/index/theaters';
 import Link from 'next/link';
 import { Button, Col, Container, Row, Table } from 'react-bootstrap';
 
@@ -14,7 +14,7 @@ export default function Index() {
           </tr>
         </thead>
         <tbody data-cy="theaters">
-          <Theaters />
+          <Contents />
         </tbody>
       </Table>
       <Row>

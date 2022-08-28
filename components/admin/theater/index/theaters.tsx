@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import styles from './theaters.module.css';
 
-export default function Theaters() {
+export default function Contents() {
   const [theaters, setTheaters] = useState<null | GetResponseData>(null);
 
   useEffect(() => {

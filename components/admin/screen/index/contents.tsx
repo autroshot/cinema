@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { GetResponseData } from 'pages/api/screens';
 import React, { useEffect, useState } from 'react';
-import { Button, Spinner, Stack } from 'react-bootstrap';
+import { Button, Col, Row, Spinner } from 'react-bootstrap';
 import styles from './contents.module.css';
 
 export default function Contents() {
@@ -50,15 +50,23 @@ export default function Contents() {
                 </td>
               </tr>
               <tr role="link">
-                <td colSpan={2} className="text-center">
-                  <Stack direction="horizontal" gap={4} className="mx-2">
-                    {theaterIncludingScreens.screens.map((screen) => {
-                      return <div key={screen.no}>{screen.no}관</div>;
-                    })}
-                    <Button size="sm" className="ms-auto">
-                      새 상영관 생성
+                <td colSpan={2}>
+                  <div className="mx-3">
+                    <Row>
+                      {theaterIncludingScreens.screens.map((screen) => {
+                        return (
+                          <Col xs={2} sm={1} key={screen.no} className="mb-1">
+                            <span className={styles.wordBreak}>
+                              {screen.no}관
+                            </span>
+                          </Col>
+                        );
+                      })}
+                    </Row>
+                    <Button size="sm" className="my-2">
+                      상영관 만들기
                     </Button>
-                  </Stack>
+                  </div>
                 </td>
               </tr>
             </React.Fragment>

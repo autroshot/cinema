@@ -1,3 +1,7 @@
 .cursorPointer {
   cursor: pointer;
 }
+
+.wordBreak {
+  word-break: keep-all;
+}

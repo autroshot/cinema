@@ -2,8 +2,8 @@ import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import Info from 'components/theater/info';
 import MovieRecommendation from 'components/theater/movieRecommendation';
 import styles from './theater.module.css';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { GetResponseData } from 'pages/api/theaters/[id]';
+import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetResponseData } from 'pages/api/theaters/[id]';
 import { prisma } from 'db';
 import { useRouter } from 'next/router';
 

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GetResponseData } from 'pages/api/screens';
+import type { GetResponseData } from 'pages/api/screens';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 

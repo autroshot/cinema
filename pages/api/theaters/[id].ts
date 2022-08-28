@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
 import { Prisma, theater } from '@prisma/client';
-import { ErrorResponseData } from '../commonTypes';
+import type { ErrorResponseData } from '../commonTypes';
 
 export default async function handler(
   req: NextApiRequest,

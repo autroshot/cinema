@@ -1,4 +1,4 @@
-import { PostResponseData } from 'pages/api/theaters';
+import type { PostResponseData } from 'pages/api/theaters';
 
 describe('관리자 페이지 방문', () => {
   it('영화관', () => {

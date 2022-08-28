@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { GetRequestData, GetResponseData } from 'pages/api/theaters';
+import type { GetRequestData, GetResponseData } from 'pages/api/theaters';
 import { NavDropdown, Spinner } from 'react-bootstrap';
 import useSWR from 'swr';
 

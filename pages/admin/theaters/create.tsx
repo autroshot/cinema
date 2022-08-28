@@ -2,7 +2,7 @@ import Buttons from 'components/admin/theater/createForm/buttons';
 import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';
-import { PostRequestData, ErrorResponseData } from 'pages/api/theaters';
+import type { PostRequestData, ErrorResponseData } from 'pages/api/theaters';
 import React, { useState } from 'react';
 import { Container } from 'react-bootstrap';
 

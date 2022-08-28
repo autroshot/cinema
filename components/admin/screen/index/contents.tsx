@@ -6,7 +6,6 @@ import { Spinner } from 'react-bootstrap';
 export default function Contents() {
   const [theatersIncludingScreens, setTheatersIncludingScreens] =
     useState<GetResponseData | null>(null);
-  console.log(theatersIncludingScreens);
 
   useEffect(() => {
     fetch('/api/screens')

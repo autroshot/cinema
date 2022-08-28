@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { GetRequestData, GetResponseData } from 'pages/api/theaters';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
-import styles from './theaters.module.css';
+import styles from './contents.module.css';
 
 export default function Contents() {
   const [theaters, setTheaters] = useState<null | GetResponseData>(null);

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button, Col, Collapse, Row } from 'react-bootstrap';
 import styles from './screens.module.css';
 
@@ -12,7 +13,15 @@ export default function Screens(props: Props) {
                 {props.screens.map((screen) => {
                   return (
                     <Col xs={2} sm={1} key={screen.no} className="mb-1">
-                      <span className={styles.wordBreak}>{screen.no}관</span>
+                      <Link
+                        href={`/admin/screens/${props.theaterId}/${screen.no}`}
+                      >
+                        <a>
+                          <span className={styles.wordBreak}>
+                            {screen.no}관
+                          </span>
+                        </a>
+                      </Link>
                     </Col>
                   );
                 })}

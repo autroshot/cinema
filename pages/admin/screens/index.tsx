@@ -5,7 +5,7 @@ export default function Index() {
   return (
     <Container className="my-3">
       <h3 data-cy="title">영화관 및 상영관 목록</h3>
-      <Table striped bordered hover>
+      <Table bordered hover>
         <thead>
           <tr>
             <th>id</th>

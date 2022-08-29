@@ -5,3 +5,12 @@
 .wordBreak {
   word-break: keep-all;
 }
+
+.closedCollapseArrow {
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+}
+.openedCollapseArrow {
+  transform: rotate(180deg);
+  transition: transform 0.2s linear;
+}

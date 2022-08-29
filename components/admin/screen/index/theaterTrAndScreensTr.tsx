@@ -18,8 +18,14 @@ export default function TheaterTrAndScreensTr({
       >
         <td>{theaterIncludingScreens.id}</td>
         <td className="d-flex">
-          {theaterIncludingScreens.name}
-          <span className="material-symbols-outlined ms-auto">expand_less</span>
+          <span className="me-auto">{theaterIncludingScreens.name}</span>
+          <span
+            className={
+              open ? styles.openedCollapseArrow : styles.closedCollapseArrow
+            }
+          >
+            <span className="material-symbols-outlined fs-4">expand_less</span>
+          </span>
         </td>
       </tr>
       <tr id={`${theaterIncludingScreens.id}-theater-screens`}>

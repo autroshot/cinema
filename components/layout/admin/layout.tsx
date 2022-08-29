@@ -5,37 +5,37 @@ import { Container, Nav } from 'react-bootstrap';
 export default function Layout({ children }: ScriptProps) {
   return (
     <Container>
-      <Nav className="bg-light">
-        <Nav.Item>
-          <Nav.Link as="div">
+      <Nav className="bg-light" as="ul">
+        <Nav.Item as="li">
+          <Nav.Link>
             <Link href="/admin/">
               <a>홈</a>
             </Link>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as="div">
+        <Nav.Item as="li">
+          <Nav.Link>
             <Link href="/admin/theaters">
               <a>영화관</a>
             </Link>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as="div">
+        <Nav.Item as="li">
+          <Nav.Link>
             <Link href="/admin/screens">
               <a>상영관</a>
             </Link>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link as="div">
+        <Nav.Item as="li">
+          <Nav.Link>
             <Link href="">
               <a>회원</a>
             </Link>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item className="ms-auto">
-          <Nav.Link as="div">
+        <Nav.Item as="li" className="ms-auto">
+          <Nav.Link>
             <Link href="/">
               <a>관리자 나가기</a>
             </Link>

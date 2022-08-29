@@ -34,7 +34,7 @@ export default function Layout({ children }: ScriptProps) {
             </Link>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item as="li" className="ms-auto">
+        <Nav.Item as="li" className="ms-0 ms-sm-auto">
           <Nav.Link>
             <Link href="/">
               <a>관리자 나가기</a>

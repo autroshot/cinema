@@ -49,7 +49,7 @@ export default function Contents() {
                   </span>
                 </td>
               </tr>
-              <tr role="link">
+              <tr>
                 <td colSpan={2}>
                   <div className="mx-3">
                     <Row>

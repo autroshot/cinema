@@ -1,33 +1,21 @@
 import { useState } from 'react';
 import { Button, Col, Collapse, Row } from 'react-bootstrap';
 import styles from './contents.module.css';
+import Theater from './theater';
 
-export default function TheaterTrAndScreensTr({
+export default function TheaterAndScreensLayout({
   theaterIncludingScreens,
 }: Props) {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <tr
-        role="button"
-        className={styles.cursorPointer}
+      <Theater
+        id={theaterIncludingScreens.id}
+        name={theaterIncludingScreens.name}
+        open={open}
         onClick={() => setOpen(!open)}
-        aria-controls={`${theaterIncludingScreens.id}-theater-screens`}
-        aria-expanded={open}
-      >
-        <td>{theaterIncludingScreens.id}</td>
-        <td className="d-flex">
-          <span className="me-auto">{theaterIncludingScreens.name}</span>
-          <span
-            className={
-              open ? styles.openedCollapseArrow : styles.closedCollapseArrow
-            }
-          >
-            <span className="material-symbols-outlined fs-4">expand_less</span>
-          </span>
-        </td>
-      </tr>
+      />
       <tr id={`${theaterIncludingScreens.id}-theater-screens`}>
         <td colSpan={2} className="p-0">
           <Collapse in={open}>

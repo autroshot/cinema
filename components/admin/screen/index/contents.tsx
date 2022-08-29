@@ -3,7 +3,7 @@ import type { GetResponseData } from 'pages/api/screens';
 import React, { useEffect, useState } from 'react';
 import { Button, Col, Row, Spinner } from 'react-bootstrap';
 import styles from './contents.module.css';
-import TheaterTrAndScreensTr from './theaterTrAndScreensTr';
+import TheaterAndScreensLayout from './theaterAndScreensLayout';
 
 export default function Contents() {
   const [theatersIncludingScreens, setTheatersIncludingScreens] =
@@ -40,7 +40,7 @@ export default function Contents() {
       <>
         {theatersIncludingScreens.map((theaterIncludingScreens) => {
           return (
-            <TheaterTrAndScreensTr
+            <TheaterAndScreensLayout
               key={theaterIncludingScreens.id}
               theaterIncludingScreens={theaterIncludingScreens}
             />

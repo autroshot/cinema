@@ -1,0 +1,12 @@
+.cursorPointer {
+  cursor: pointer;
+}
+
+.closedCollapseArrow {
+  transform: rotate(0deg);
+  transition: transform 0.2s linear;
+}
+.openedCollapseArrow {
+  transform: rotate(180deg);
+  transition: transform 0.2s linear;
+}

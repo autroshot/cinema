@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Button, Col, Collapse, Row } from 'react-bootstrap';
-import styles from './contents.module.css';
+import Screens from './screens';
 import Theater from './theater';
 
 export default function TheaterAndScreensLayout({
@@ -16,28 +15,11 @@ export default function TheaterAndScreensLayout({
         open={open}
         onClick={() => setOpen(!open)}
       />
-      <tr id={`${theaterIncludingScreens.id}-theater-screens`}>
-        <td colSpan={2} className="p-0">
-          <Collapse in={open}>
-            <div id={`${theaterIncludingScreens.id}-theater-screens`}>
-              <div className="mx-3 my-2">
-                <Row>
-                  {theaterIncludingScreens.screens.map((screen) => {
-                    return (
-                      <Col xs={2} sm={1} key={screen.no} className="mb-1">
-                        <span className={styles.wordBreak}>{screen.no}관</span>
-                      </Col>
-                    );
-                  })}
-                </Row>
-                <Button size="sm" className="my-2">
-                  상영관 만들기
-                </Button>
-              </div>
-            </div>
-          </Collapse>
-        </td>
-      </tr>
+      <Screens
+        theaterId={theaterIncludingScreens.id}
+        screens={theaterIncludingScreens.screens}
+        open={open}
+      />
     </>
   );
 }

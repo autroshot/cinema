@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import type { GetResponseData } from 'pages/api/screens';
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Spinner } from 'react-bootstrap';
-import styles from './contents.module.css';
+import { Spinner } from 'react-bootstrap';
 import TheaterAndScreensLayout from './theaterAndScreensLayout';
 
 export default function Contents() {

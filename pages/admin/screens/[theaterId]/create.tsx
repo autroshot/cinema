@@ -42,14 +42,36 @@ export default function CreateForm() {
             <span className="material-symbols-outlined ms-1 fs-3" role="button">
               <span className={styles.add}>add_circle</span>
             </span>
+            <Row className="mt-3">
+              <Col>
+                <FloatingLabel controlId="aisleType" label="통로 유형">
+                  <Form.Select>
+                    <option value="row">row</option>
+                    <option value="column">column</option>
+                  </Form.Select>
+                </FloatingLabel>
+              </Col>
+              <Col>
+                <FloatingLabel controlId="aisleNo" label="번호">
+                  <Form.Control name="aisleNo" type="number" />
+                </FloatingLabel>
+              </Col>
+              <Col
+                xs={1}
+                className="d-flex align-items-center justify-content-center"
+              >
+                <span className="material-symbols-outlined fs-2" role="button">
+                  <span className={styles.delete}>do_not_disturb_on</span>
+                </span>
+              </Col>
+            </Row>
 
             <Row className="mt-3">
               <Col>
                 <FloatingLabel controlId="aisleType" label="통로 유형">
                   <Form.Select>
-                    <option>Open this select menu</option>
-                    <option value="1">row</option>
-                    <option value="2">column</option>
+                    <option value="row">row</option>
+                    <option value="column">column</option>
                   </Form.Select>
                 </FloatingLabel>
               </Col>
@@ -71,33 +93,8 @@ export default function CreateForm() {
               <Col>
                 <FloatingLabel controlId="aisleType" label="통로 유형">
                   <Form.Select>
-                    <option>Open this select menu</option>
-                    <option value="1">row</option>
-                    <option value="2">column</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="aisleNo" label="번호">
-                  <Form.Control name="aisleNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="aisleType" label="통로 유형">
-                  <Form.Select>
-                    <option>Open this select menu</option>
-                    <option value="1">row</option>
-                    <option value="2">column</option>
+                    <option value="row">row</option>
+                    <option value="column">column</option>
                   </Form.Select>
                 </FloatingLabel>
               </Col>
@@ -117,6 +114,7 @@ export default function CreateForm() {
             </Row>
           </Col>
         </Row>
+
         <Row className="mb-3">
           <Col>
             <span>선택 불가능한 좌석</span>
@@ -127,20 +125,19 @@ export default function CreateForm() {
               <Col>
                 <FloatingLabel controlId="seatType" label="좌석 유형">
                   <Form.Select>
-                    <option>Open this select menu</option>
-                    <option value="1">nonexist</option>
-                    <option value="2">disabled</option>
+                    <option value="nonexistent">nonexistent</option>
+                    <option value="unavailable">unavailable</option>
                   </Form.Select>
                 </FloatingLabel>
               </Col>
               <Col>
                 <FloatingLabel controlId="rowNo" label="행 번호">
-                  <Form.Control name="aisleNo" type="number" />
+                  <Form.Control name="rowNo" type="number" />
                 </FloatingLabel>
               </Col>
               <Col>
                 <FloatingLabel controlId="columnNo" label="열 번호">
-                  <Form.Control name="aisleNo" type="number" />
+                  <Form.Control name="columnNo" type="number" />
                 </FloatingLabel>
               </Col>
               <Col
@@ -156,20 +153,19 @@ export default function CreateForm() {
               <Col>
                 <FloatingLabel controlId="seatType" label="좌석 유형">
                   <Form.Select>
-                    <option>Open this select menu</option>
-                    <option value="1">nonexist</option>
-                    <option value="2">disabled</option>
+                    <option value="nonexistent">nonexistent</option>
+                    <option value="unavailable">unavailable</option>
                   </Form.Select>
                 </FloatingLabel>
               </Col>
               <Col>
                 <FloatingLabel controlId="rowNo" label="행 번호">
-                  <Form.Control name="aisleNo" type="number" />
+                  <Form.Control name="rowNo" type="number" />
                 </FloatingLabel>
               </Col>
               <Col>
                 <FloatingLabel controlId="columnNo" label="열 번호">
-                  <Form.Control name="aisleNo" type="number" />
+                  <Form.Control name="columnNo" type="number" />
                 </FloatingLabel>
               </Col>
               <Col
@@ -185,20 +181,19 @@ export default function CreateForm() {
               <Col>
                 <FloatingLabel controlId="seatType" label="좌석 유형">
                   <Form.Select>
-                    <option>Open this select menu</option>
-                    <option value="1">nonexist</option>
-                    <option value="2">disabled</option>
+                    <option value="nonexistent">nonexistent</option>
+                    <option value="unavailable">unavailable</option>
                   </Form.Select>
                 </FloatingLabel>
               </Col>
               <Col>
                 <FloatingLabel controlId="rowNo" label="행 번호">
-                  <Form.Control name="aisleNo" type="number" />
+                  <Form.Control name="rowNo" type="number" />
                 </FloatingLabel>
               </Col>
               <Col>
                 <FloatingLabel controlId="columnNo" label="열 번호">
-                  <Form.Control name="aisleNo" type="number" />
+                  <Form.Control name="columnNo" type="number" />
                 </FloatingLabel>
               </Col>
               <Col
@@ -212,6 +207,7 @@ export default function CreateForm() {
             </Row>
           </Col>
         </Row>
+
         <Button>좌석 배치도 확인</Button>
         <div className="mb-3">좌석 배치도</div>
         <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>

@@ -28,7 +28,7 @@ export default function Screens(props: Props) {
               </Row>
               <Link href={`/admin/screens/${props.theaterId}/create`}>
                 <Button size="sm" className="my-2">
-                  상영관 만들기
+                  상영관 등록
                 </Button>
               </Link>
             </div>

@@ -1,4 +1,6 @@
 import { useRouter } from 'next/router';
+import { PostRequestData } from 'pages/api/screens';
+import { useState } from 'react';
 import {
   Button,
   Col,
@@ -10,6 +12,12 @@ import {
 import styles from './create.module.css';
 
 export default function CreateForm() {
+  const [screen, setScreen] = useState<ScreenFormValues>({
+    no: '',
+    total_row: '',
+    total_column: '',
+  });
+
   const router = useRouter();
   const { theaterId } = router.query;
 
@@ -20,19 +28,37 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <FloatingLabel controlId="no" label="번호">
-              <Form.Control name="no" type="number" />
+              <Form.Control
+                name="no"
+                type="number"
+                value={screen.no}
+                onChange={handleChange}
+                min="1"
+              />
             </FloatingLabel>
           </Col>
         </Row>
         <Row className="mb-3">
           <Col>
-            <FloatingLabel controlId="row" label="행 개수">
-              <Form.Control name="row" type="number" />
+            <FloatingLabel controlId="total_row" label="행 개수">
+              <Form.Control
+                name="total_row"
+                type="number"
+                value={screen.total_row}
+                onChange={handleChange}
+                min="1"
+              />
             </FloatingLabel>
           </Col>
           <Col>
-            <FloatingLabel controlId="column" label="열 개수">
-              <Form.Control name="column" type="number" />
+            <FloatingLabel controlId="total_column" label="열 개수">
+              <Form.Control
+                name="total_column"
+                type="number"
+                value={screen.total_column}
+                onChange={handleChange}
+                min="1"
+              />
             </FloatingLabel>
           </Col>
         </Row>
@@ -216,6 +242,21 @@ export default function CreateForm() {
       </form>
     </Container>
   );
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const name = event.currentTarget.name;
+    const value = event.currentTarget.value;
+
+    setScreen((prevState) => {
+      return { ...prevState, [name]: value };
+    });
+  }
+}
+
+interface ScreenFormValues {
+  no: string;
+  total_row: string;
+  total_column: string;
 }
 
 CreateForm.isAdminPage = true;

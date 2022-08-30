@@ -17,7 +17,6 @@ export default function CreateForm() {
     <Container className="my-3">
       <form action="">
         <h3 data-cy="title">상영관 등록</h3>
-        <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
         <Row className="mb-3">
           <Col>
             <FloatingLabel controlId="no" label="번호">
@@ -55,7 +54,7 @@ export default function CreateForm() {
                 </FloatingLabel>
               </Col>
               <Col>
-                <FloatingLabel controlId="aisleNo" label="행 또는 열의 번호">
+                <FloatingLabel controlId="aisleNo" label="번호">
                   <Form.Control name="aisleNo" type="number" />
                 </FloatingLabel>
               </Col>
@@ -79,7 +78,7 @@ export default function CreateForm() {
                 </FloatingLabel>
               </Col>
               <Col>
-                <FloatingLabel controlId="aisleNo" label="행 또는 열의 번호">
+                <FloatingLabel controlId="aisleNo" label="번호">
                   <Form.Control name="aisleNo" type="number" />
                 </FloatingLabel>
               </Col>
@@ -103,7 +102,7 @@ export default function CreateForm() {
                 </FloatingLabel>
               </Col>
               <Col>
-                <FloatingLabel controlId="aisleNo" label="행 또는 열의 번호">
+                <FloatingLabel controlId="aisleNo" label="번호">
                   <Form.Control name="aisleNo" type="number" />
                 </FloatingLabel>
               </Col>
@@ -213,7 +212,9 @@ export default function CreateForm() {
             </Row>
           </Col>
         </Row>
-        <div className="mb-3">좌석배치도</div>
+        <Button>좌석 배치도 확인</Button>
+        <div className="mb-3">좌석 배치도</div>
+        <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
         <Button>등록</Button>
         <Button>취소</Button>
       </form>

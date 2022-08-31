@@ -1,6 +1,5 @@
 import AddButton from 'components/admin/screen/createForm/addButton';
 import AisleInputs from 'components/admin/screen/createForm/aisleInputs';
-import DeleteButton from 'components/admin/screen/createForm/deleteButton';
 import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';

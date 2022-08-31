@@ -1,4 +1,5 @@
 import AddButton from 'components/admin/screen/createForm/addButton';
+import AisleInputs from 'components/admin/screen/createForm/aisleInputs';
 import DeleteButton from 'components/admin/screen/createForm/deleteButton';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
@@ -44,6 +45,7 @@ export default function CreateForm() {
             </FloatingLabel>
           </Col>
         </Row>
+
         <Row className="mb-3">
           <Col>
             <FloatingLabel controlId="total_row" label="행 개수">
@@ -68,53 +70,11 @@ export default function CreateForm() {
             </FloatingLabel>
           </Col>
         </Row>
+
         <Row className="mb-3">
           <Col>
             <h5>통로</h5>
-            {aisles.map((aisle, index) => {
-              return (
-                <Row className="mt-3" key={index}>
-                  <Col>
-                    <FloatingLabel controlId="aisleType" label="통로 유형">
-                      <Form.Select
-                        name="aisle_type_id"
-                        value={aisle.aisle_type_id}
-                        onChange={(event) =>
-                          handleAislesChange(
-                            event as React.ChangeEvent<HTMLSelectElement>,
-                            index
-                          )
-                        }
-                      >
-                        <option value="1">row</option>
-                        <option value="2">column</option>
-                      </Form.Select>
-                    </FloatingLabel>
-                  </Col>
-                  <Col>
-                    <FloatingLabel controlId="aisleNo" label="번호">
-                      <Form.Control
-                        name="no"
-                        type="number"
-                        value={aisle.no}
-                        onChange={(event) =>
-                          handleAislesChange(
-                            event as React.ChangeEvent<HTMLInputElement>,
-                            index
-                          )
-                        }
-                      />
-                    </FloatingLabel>
-                  </Col>
-                  <Col
-                    xs={1}
-                    className="d-flex align-items-center justify-content-center"
-                  >
-                    <DeleteButton />
-                  </Col>
-                </Row>
-              );
-            })}
+            <AisleInputs aisles={aisles} onChange={handleAislesChange} />
             <div className="d-grid" onClick={handleAisleInputAdd}>
               <AddButton />
             </div>
@@ -225,7 +185,7 @@ interface ScreenFormValues {
   total_column: string;
 }
 
-type AisleFormValues = {
+export type AisleFormValues = {
   no: string;
   aisle_type_id: string;
 }[];

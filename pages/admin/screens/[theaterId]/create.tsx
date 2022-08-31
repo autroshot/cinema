@@ -20,7 +20,7 @@ export default function CreateForm() {
     total_row: '',
     total_column: '',
   });
-  const [aisles, setAisles] = useState<AisleFormValues>([]);
+  const [aisles, setAisles] = useState<AisleFormValue[]>([]);
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
   >([]);
@@ -175,10 +175,10 @@ interface ScreenFormValues {
   total_column: string;
 }
 
-export type AisleFormValues = {
+export type AisleFormValue = {
   no: string;
   aisle_type_id: string;
-}[];
+};
 
 export type UnselectableSeatFormValue = {
   row: string;

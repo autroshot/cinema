@@ -17,6 +17,9 @@ export default function CreateForm() {
     total_row: '',
     total_column: '',
   });
+  const [aisles, setAisles] = useState<AisleFormValues>([]);
+  const [unselectableSeats, setUnselectableSeats] =
+    useState<UnselectableSeatFormValues>([]);
 
   const router = useRouter();
   const { theaterId } = router.query;
@@ -65,172 +68,91 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <span>통로</span>
-            <span className="material-symbols-outlined ms-1 fs-3" role="button">
+            <span
+              className="material-symbols-outlined ms-1 fs-3"
+              role="button"
+              onClick={() => handleAdd('aisles')}
+            >
               <span className={styles.add}>add_circle</span>
             </span>
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="aisleType" label="통로 유형">
-                  <Form.Select>
-                    <option value="row">row</option>
-                    <option value="column">column</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="aisleNo" label="번호">
-                  <Form.Control name="aisleNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
-
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="aisleType" label="통로 유형">
-                  <Form.Select>
-                    <option value="row">row</option>
-                    <option value="column">column</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="aisleNo" label="번호">
-                  <Form.Control name="aisleNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="aisleType" label="통로 유형">
-                  <Form.Select>
-                    <option value="row">row</option>
-                    <option value="column">column</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="aisleNo" label="번호">
-                  <Form.Control name="aisleNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
+            {aisles.map((aisle, index) => {
+              return (
+                <Row className="mt-3" key={index}>
+                  <Col>
+                    <FloatingLabel controlId="aisleType" label="통로 유형">
+                      <Form.Select>
+                        <option value="row">row</option>
+                        <option value="column">column</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                  </Col>
+                  <Col>
+                    <FloatingLabel controlId="aisleNo" label="번호">
+                      <Form.Control name="aisleNo" type="number" />
+                    </FloatingLabel>
+                  </Col>
+                  <Col
+                    xs={1}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <span
+                      className="material-symbols-outlined fs-2"
+                      role="button"
+                    >
+                      <span className={styles.delete}>do_not_disturb_on</span>
+                    </span>
+                  </Col>
+                </Row>
+              );
+            })}
           </Col>
         </Row>
 
         <Row className="mb-3">
           <Col>
             <span>선택 불가능한 좌석</span>
-            <span className="material-symbols-outlined ms-1 fs-3" role="button">
+            <span
+              className="material-symbols-outlined ms-1 fs-3"
+              role="button"
+              onClick={() => handleAdd('unselectableSeats')}
+            >
               <span className={styles.add}>add_circle</span>
             </span>
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="seatType" label="좌석 유형">
-                  <Form.Select>
-                    <option value="nonexistent">nonexistent</option>
-                    <option value="unavailable">unavailable</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="rowNo" label="행 번호">
-                  <Form.Control name="rowNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="columnNo" label="열 번호">
-                  <Form.Control name="columnNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="seatType" label="좌석 유형">
-                  <Form.Select>
-                    <option value="nonexistent">nonexistent</option>
-                    <option value="unavailable">unavailable</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="rowNo" label="행 번호">
-                  <Form.Control name="rowNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="columnNo" label="열 번호">
-                  <Form.Control name="columnNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
-            <Row className="mt-3">
-              <Col>
-                <FloatingLabel controlId="seatType" label="좌석 유형">
-                  <Form.Select>
-                    <option value="nonexistent">nonexistent</option>
-                    <option value="unavailable">unavailable</option>
-                  </Form.Select>
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="rowNo" label="행 번호">
-                  <Form.Control name="rowNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col>
-                <FloatingLabel controlId="columnNo" label="열 번호">
-                  <Form.Control name="columnNo" type="number" />
-                </FloatingLabel>
-              </Col>
-              <Col
-                xs={1}
-                className="d-flex align-items-center justify-content-center"
-              >
-                <span className="material-symbols-outlined fs-2" role="button">
-                  <span className={styles.delete}>do_not_disturb_on</span>
-                </span>
-              </Col>
-            </Row>
+            {unselectableSeats.map((unselectableSeat, index) => {
+              return (
+                <Row className="mt-3" key={index}>
+                  <Col>
+                    <FloatingLabel controlId="seatType" label="좌석 유형">
+                      <Form.Select>
+                        <option value="nonexistent">nonexistent</option>
+                        <option value="unavailable">unavailable</option>
+                      </Form.Select>
+                    </FloatingLabel>
+                  </Col>
+                  <Col>
+                    <FloatingLabel controlId="rowNo" label="행 번호">
+                      <Form.Control name="rowNo" type="number" />
+                    </FloatingLabel>
+                  </Col>
+                  <Col>
+                    <FloatingLabel controlId="columnNo" label="열 번호">
+                      <Form.Control name="columnNo" type="number" />
+                    </FloatingLabel>
+                  </Col>
+                  <Col
+                    xs={1}
+                    className="d-flex align-items-center justify-content-center"
+                  >
+                    <span
+                      className="material-symbols-outlined fs-2"
+                      role="button"
+                    >
+                      <span className={styles.delete}>do_not_disturb_on</span>
+                    </span>
+                  </Col>
+                </Row>
+              );
+            })}
           </Col>
         </Row>
 
@@ -251,6 +173,24 @@ export default function CreateForm() {
       return { ...prevState, [name]: value };
     });
   }
+
+  function handleAdd(type: 'aisles' | 'unselectableSeats') {
+    switch (type) {
+      case 'aisles':
+        setAisles([...aisles, { no: '', aisle_type_id: '' }]);
+        break;
+      case 'unselectableSeats':
+        setUnselectableSeats([
+          ...unselectableSeats,
+          {
+            row: '',
+            column: '',
+            unselectable_seat_type_id: '',
+          },
+        ]);
+        break;
+    }
+  }
 }
 
 interface ScreenFormValues {
@@ -258,5 +198,16 @@ interface ScreenFormValues {
   total_row: string;
   total_column: string;
 }
+
+type AisleFormValues = {
+  no: string;
+  aisle_type_id: string;
+}[];
+
+type UnselectableSeatFormValues = {
+  row: string;
+  column: string;
+  unselectable_seat_type_id: string;
+}[];
 
 CreateForm.isAdminPage = true;

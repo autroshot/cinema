@@ -23,6 +23,7 @@ export default function CreateForm() {
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
   >([]);
+  const [validated, setValidated] = useState(false);
 
   const router = useRouter();
   const { theaterId } = router.query;
@@ -106,10 +107,14 @@ export default function CreateForm() {
         <div className="mb-3">
           <Button>좌석 배치도 확인</Button>
         </div>
-        <div className="mb-3">좌석 배치도</div>
-        <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
-        <Button>등록</Button>
-        <Button>취소</Button>
+        {validated ? (
+          <>
+            <div className="mb-3">좌석 배치도</div>
+            <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
+            <Button>등록</Button>
+            <Button>취소</Button>
+          </>
+        ) : null}
       </form>
     </Container>
   );

@@ -71,7 +71,7 @@ export default function CreateForm() {
             <span
               className="material-symbols-outlined ms-1 fs-3"
               role="button"
-              onClick={() => handleAdd('aisles')}
+              onClick={handleAisleInputAdd}
             >
               <span className={styles.add}>add_circle</span>
             </span>
@@ -133,7 +133,7 @@ export default function CreateForm() {
             <span
               className="material-symbols-outlined ms-1 fs-3"
               role="button"
-              onClick={() => handleAdd('unselectableSeats')}
+              onClick={handleUnselectableSeatInputAdd}
             >
               <span className={styles.add}>add_circle</span>
             </span>
@@ -219,22 +219,18 @@ export default function CreateForm() {
     }
   }
 
-  function handleAdd(type: 'aisles' | 'unselectableSeats') {
-    switch (type) {
-      case 'aisles':
-        setAisles([...aisles, { no: '', aisle_type_id: '1' }]);
-        break;
-      case 'unselectableSeats':
-        setUnselectableSeats([
-          ...unselectableSeats,
-          {
-            row: '',
-            column: '',
-            unselectable_seat_type_id: '1',
-          },
-        ]);
-        break;
-    }
+  function handleAisleInputAdd() {
+    setAisles([...aisles, { no: '', aisle_type_id: '1' }]);
+  }
+  function handleUnselectableSeatInputAdd() {
+    setUnselectableSeats([
+      ...unselectableSeats,
+      {
+        row: '',
+        column: '',
+        unselectable_seat_type_id: '1',
+      },
+    ]);
   }
 }
 

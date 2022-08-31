@@ -87,7 +87,7 @@ export default function CreateForm() {
             <h5>선택 불가능한 좌석</h5>
             <UnselectableSeatInputs
               unselectableSeats={unselectableSeats}
-              onChange={}
+              onChange={handleUnselectableSeatsChange}
             />
             <div className="d-grid" onClick={handleUnselectableSeatInputAdd}>
               <AddButton />
@@ -139,6 +139,20 @@ export default function CreateForm() {
     }
   }
 
+  function handleUnselectableSeatsChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) {
+    const name = event.currentTarget.name as keyof UnselectableSeatFormValue;
+    const value = event.currentTarget.value;
+
+    setUnselectableSeats((unselectableSeats) => {
+      const unselectableSeatsCopy = [...unselectableSeats];
+      unselectableSeatsCopy[index][name] = value;
+      return unselectableSeatsCopy;
+    });
+  }
+
   function handleAisleInputAdd() {
     setAisles([...aisles, { no: '', aisle_type_id: '1' }]);
   }
@@ -165,10 +179,12 @@ export type AisleFormValues = {
   aisle_type_id: string;
 }[];
 
-export type UnselectableSeatFormValues = {
+export type UnselectableSeatFormValues = UnselectableSeatFormValue[];
+
+type UnselectableSeatFormValue = {
   row: string;
   column: string;
   unselectable_seat_type_id: string;
-}[];
+};
 
 CreateForm.isAdminPage = true;

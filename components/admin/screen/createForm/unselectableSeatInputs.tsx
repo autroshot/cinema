@@ -10,20 +10,49 @@ export default function UnselectableSeatInputs(props: Props) {
           <Row className="mt-3" key={index}>
             <Col>
               <FloatingLabel controlId="seatType" label="좌석 유형">
-                <Form.Select>
-                  <option value="nonexistent">nonexistent</option>
-                  <option value="unavailable">unavailable</option>
+                <Form.Select
+                  name="unselectable_seat_type_id"
+                  value={unselectableSeat.unselectable_seat_type_id}
+                  onChange={(event) =>
+                    props.onChange(
+                      event as React.ChangeEvent<HTMLSelectElement>,
+                      index
+                    )
+                  }
+                >
+                  <option value="1">nonexistent</option>
+                  <option value="2">unavailable</option>
                 </Form.Select>
               </FloatingLabel>
             </Col>
             <Col>
-              <FloatingLabel controlId="rowNo" label="행 번호">
-                <Form.Control name="rowNo" type="number" />
+              <FloatingLabel controlId="row" label="행 번호">
+                <Form.Control
+                  name="row"
+                  type="number"
+                  value={unselectableSeat.row}
+                  onChange={(event) =>
+                    props.onChange(
+                      event as React.ChangeEvent<HTMLInputElement>,
+                      index
+                    )
+                  }
+                />
               </FloatingLabel>
             </Col>
             <Col>
-              <FloatingLabel controlId="columnNo" label="열 번호">
-                <Form.Control name="columnNo" type="number" />
+              <FloatingLabel controlId="column" label="열 번호">
+                <Form.Control
+                  name="column"
+                  type="number"
+                  value={unselectableSeat.column}
+                  onChange={(event) =>
+                    props.onChange(
+                      event as React.ChangeEvent<HTMLInputElement>,
+                      index
+                    )
+                  }
+                />
               </FloatingLabel>
             </Col>
             <Col

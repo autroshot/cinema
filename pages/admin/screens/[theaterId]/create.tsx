@@ -78,7 +78,11 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <h5>통로 만들기</h5>
-            <AisleInputs aisles={aisles} onChange={handleAislesChange} />
+            <AisleInputs
+              aisles={aisles}
+              onChange={handleAislesChange}
+              onDelete={handleAisleInputDelete}
+            />
             <div className="d-grid" onClick={handleAisleInputAdd}>
               <AddButton />
             </div>
@@ -91,6 +95,7 @@ export default function CreateForm() {
             <UnselectableSeatInputs
               unselectableSeats={unselectableSeats}
               onChange={handleUnselectableSeatsChange}
+              onDelete={handleUnselectableSeatInputDelete}
             />
             <div className="d-grid" onClick={handleUnselectableSeatInputAdd}>
               <AddButton />
@@ -129,7 +134,6 @@ export default function CreateForm() {
       return aisleCopy;
     });
   }
-
   function handleUnselectableSeatsChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
@@ -156,6 +160,17 @@ export default function CreateForm() {
         unselectable_seat_type_id: '1',
       },
     ]);
+  }
+
+  function handleAisleInputDelete(index: number) {
+    const aislesCopy = [...aisles];
+    aislesCopy.splice(index, 1);
+    setAisles(aislesCopy);
+  }
+  function handleUnselectableSeatInputDelete(index: number) {
+    const unselectableSeatsCopy = [...unselectableSeats];
+    unselectableSeatsCopy.splice(index, 1);
+    setUnselectableSeats(unselectableSeatsCopy);
   }
 }
 

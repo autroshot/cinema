@@ -64,7 +64,9 @@ export default function UnselectableSeatInputs(props: Props) {
               xs={1}
               className="d-flex align-items-center justify-content-center"
             >
-              <DeleteButton />
+              <span onClick={() => props.onDelete(index)}>
+                <DeleteButton />
+              </span>
             </Col>
           </Row>
         );
@@ -79,4 +81,5 @@ interface Props {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
   ) => void;
+  onDelete: (index: number) => void;
 }

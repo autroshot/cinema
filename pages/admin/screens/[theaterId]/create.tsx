@@ -89,7 +89,7 @@ export default function CreateForm() {
           </Col>
         </Row>
 
-        <Row className="mb-3">
+        <Row className="mb-4">
           <Col>
             <h5>선택 불가능한 좌석 지정하기</h5>
             <UnselectableSeatInputs
@@ -103,7 +103,9 @@ export default function CreateForm() {
           </Col>
         </Row>
 
-        <Button>좌석 배치도 확인</Button>
+        <div className="mb-3">
+          <Button>좌석 배치도 확인</Button>
+        </div>
         <div className="mb-3">좌석 배치도</div>
         <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
         <Button>등록</Button>

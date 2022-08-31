@@ -1,6 +1,7 @@
 import AddButton from 'components/admin/screen/createForm/addButton';
 import AisleInputs from 'components/admin/screen/createForm/aisleInputs';
 import DeleteButton from 'components/admin/screen/createForm/deleteButton';
+import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
 import { useState } from 'react';
@@ -84,36 +85,10 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <h5>선택 불가능한 좌석</h5>
-            {unselectableSeats.map((unselectableSeat, index) => {
-              return (
-                <Row className="mt-3" key={index}>
-                  <Col>
-                    <FloatingLabel controlId="seatType" label="좌석 유형">
-                      <Form.Select>
-                        <option value="nonexistent">nonexistent</option>
-                        <option value="unavailable">unavailable</option>
-                      </Form.Select>
-                    </FloatingLabel>
-                  </Col>
-                  <Col>
-                    <FloatingLabel controlId="rowNo" label="행 번호">
-                      <Form.Control name="rowNo" type="number" />
-                    </FloatingLabel>
-                  </Col>
-                  <Col>
-                    <FloatingLabel controlId="columnNo" label="열 번호">
-                      <Form.Control name="columnNo" type="number" />
-                    </FloatingLabel>
-                  </Col>
-                  <Col
-                    xs={1}
-                    className="d-flex align-items-center justify-content-center"
-                  >
-                    <DeleteButton />
-                  </Col>
-                </Row>
-              );
-            })}
+            <UnselectableSeatInputs
+              unselectableSeats={unselectableSeats}
+              onChange={}
+            />
             <div className="d-grid" onClick={handleUnselectableSeatInputAdd}>
               <AddButton />
             </div>
@@ -190,7 +165,7 @@ export type AisleFormValues = {
   aisle_type_id: string;
 }[];
 
-type UnselectableSeatFormValues = {
+export type UnselectableSeatFormValues = {
   row: string;
   column: string;
   unselectable_seat_type_id: string;

@@ -1,4 +1,5 @@
 import AddButton from 'components/admin/screen/createForm/addButton';
+import DeleteButton from 'components/admin/screen/createForm/deleteButton';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
 import { useState } from 'react';
@@ -10,7 +11,6 @@ import {
   Form,
   Row,
 } from 'react-bootstrap';
-import styles from './create.module.css';
 
 export default function CreateForm() {
   const [screen, setScreen] = useState<ScreenFormValues>({
@@ -110,12 +110,7 @@ export default function CreateForm() {
                     xs={1}
                     className="d-flex align-items-center justify-content-center"
                   >
-                    <span
-                      className="material-symbols-outlined fs-2"
-                      role="button"
-                    >
-                      <span className={styles.delete}>do_not_disturb_on</span>
-                    </span>
+                    <DeleteButton />
                   </Col>
                 </Row>
               );
@@ -154,12 +149,7 @@ export default function CreateForm() {
                     xs={1}
                     className="d-flex align-items-center justify-content-center"
                   >
-                    <span
-                      className="material-symbols-outlined fs-2"
-                      role="button"
-                    >
-                      <span className={styles.delete}>do_not_disturb_on</span>
-                    </span>
+                    <DeleteButton />
                   </Col>
                 </Row>
               );

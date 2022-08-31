@@ -1,3 +1,4 @@
+import AddButton from 'components/admin/screen/createForm/addButton';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
 import { useState } from 'react';
@@ -27,7 +28,9 @@ export default function CreateForm() {
   return (
     <Container className="my-3">
       <form action="">
-        <h3 data-cy="title">상영관 등록</h3>
+        <h3 data-cy="title" className="mb-3">
+          상영관 등록
+        </h3>
         <Row className="mb-3">
           <Col>
             <FloatingLabel controlId="no" label="번호">
@@ -67,14 +70,7 @@ export default function CreateForm() {
         </Row>
         <Row className="mb-3">
           <Col>
-            <span>통로</span>
-            <span
-              className="material-symbols-outlined ms-1 fs-3"
-              role="button"
-              onClick={handleAisleInputAdd}
-            >
-              <span className={styles.add}>add_circle</span>
-            </span>
+            <h5>통로</h5>
             {aisles.map((aisle, index) => {
               return (
                 <Row className="mt-3" key={index}>
@@ -124,19 +120,15 @@ export default function CreateForm() {
                 </Row>
               );
             })}
+            <div className="d-grid" onClick={handleAisleInputAdd}>
+              <AddButton />
+            </div>
           </Col>
         </Row>
 
         <Row className="mb-3">
           <Col>
-            <span>선택 불가능한 좌석</span>
-            <span
-              className="material-symbols-outlined ms-1 fs-3"
-              role="button"
-              onClick={handleUnselectableSeatInputAdd}
-            >
-              <span className={styles.add}>add_circle</span>
-            </span>
+            <h5>선택 불가능한 좌석</h5>
             {unselectableSeats.map((unselectableSeat, index) => {
               return (
                 <Row className="mt-3" key={index}>
@@ -172,6 +164,9 @@ export default function CreateForm() {
                 </Row>
               );
             })}
+            <div className="d-grid" onClick={handleUnselectableSeatInputAdd}>
+              <AddButton />
+            </div>
           </Col>
         </Row>
 

@@ -81,7 +81,7 @@ export default function CreateForm() {
                   <Col>
                     <FloatingLabel controlId="aisleType" label="통로 유형">
                       <Form.Select
-                        name="aisleTypeId"
+                        name="aisle_type_id"
                         value={aisle.aisle_type_id}
                         onChange={(event) =>
                           handleAislesChange(
@@ -98,7 +98,7 @@ export default function CreateForm() {
                   <Col>
                     <FloatingLabel controlId="aisleNo" label="번호">
                       <Form.Control
-                        name="aisleNo"
+                        name="no"
                         type="number"
                         value={aisle.no}
                         onChange={(event) =>
@@ -201,7 +201,7 @@ export default function CreateForm() {
     const value = event.currentTarget.value;
 
     switch (name) {
-      case 'aisleNo':
+      case 'no':
         setAisles((aisle) => {
           const aisleCopy = [...aisle];
           aisleCopy[index].no = value;
@@ -209,7 +209,7 @@ export default function CreateForm() {
         });
         break;
 
-      case 'aisleTypeId':
+      case 'aisle_type_id':
         setAisles((aisle) => {
           const aisleCopy = [...aisle];
           aisleCopy[index].aisle_type_id = value;

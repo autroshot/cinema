@@ -80,15 +80,34 @@ export default function CreateForm() {
                 <Row className="mt-3" key={index}>
                   <Col>
                     <FloatingLabel controlId="aisleType" label="통로 유형">
-                      <Form.Select>
-                        <option value="row">row</option>
-                        <option value="column">column</option>
+                      <Form.Select
+                        name="aisleTypeId"
+                        value={aisle.aisle_type_id}
+                        onChange={(event) =>
+                          handleAislesChange(
+                            event as React.ChangeEvent<HTMLSelectElement>,
+                            index
+                          )
+                        }
+                      >
+                        <option value="1">row</option>
+                        <option value="2">column</option>
                       </Form.Select>
                     </FloatingLabel>
                   </Col>
                   <Col>
                     <FloatingLabel controlId="aisleNo" label="번호">
-                      <Form.Control name="aisleNo" type="number" />
+                      <Form.Control
+                        name="aisleNo"
+                        type="number"
+                        value={aisle.no}
+                        onChange={(event) =>
+                          handleAislesChange(
+                            event as React.ChangeEvent<HTMLInputElement>,
+                            index
+                          )
+                        }
+                      />
                     </FloatingLabel>
                   </Col>
                   <Col
@@ -174,10 +193,36 @@ export default function CreateForm() {
     });
   }
 
+  function handleAislesChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    index: number
+  ) {
+    const name = event.currentTarget.name;
+    const value = event.currentTarget.value;
+
+    switch (name) {
+      case 'aisleNo':
+        setAisles((aisle) => {
+          const aisleCopy = [...aisle];
+          aisleCopy[index].no = value;
+          return aisleCopy;
+        });
+        break;
+
+      case 'aisleTypeId':
+        setAisles((aisle) => {
+          const aisleCopy = [...aisle];
+          aisleCopy[index].aisle_type_id = value;
+          return aisleCopy;
+        });
+        break;
+    }
+  }
+
   function handleAdd(type: 'aisles' | 'unselectableSeats') {
     switch (type) {
       case 'aisles':
-        setAisles([...aisles, { no: '', aisle_type_id: '' }]);
+        setAisles([...aisles, { no: '', aisle_type_id: '1' }]);
         break;
       case 'unselectableSeats':
         setUnselectableSeats([
@@ -185,7 +230,7 @@ export default function CreateForm() {
           {
             row: '',
             column: '',
-            unselectable_seat_type_id: '',
+            unselectable_seat_type_id: '1',
           },
         ]);
         break;

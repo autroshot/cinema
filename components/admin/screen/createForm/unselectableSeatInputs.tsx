@@ -12,6 +12,7 @@ export default function UnselectableSeatInputs(props: Props) {
               <FloatingLabel controlId="seatType" label="좌석 유형">
                 <Form.Select
                   name="unselectable_seat_type_id"
+                  aria-label="좌석 유형 항목"
                   value={unselectableSeat.unselectable_seat_type_id}
                   onChange={(event) =>
                     props.onChange(
@@ -30,6 +31,8 @@ export default function UnselectableSeatInputs(props: Props) {
                 <Form.Control
                   name="row"
                   type="number"
+                  placeholder="1"
+                  min="1"
                   value={unselectableSeat.row}
                   onChange={(event) =>
                     props.onChange(
@@ -45,6 +48,8 @@ export default function UnselectableSeatInputs(props: Props) {
                 <Form.Control
                   name="column"
                   type="number"
+                  placeholder="1"
+                  min="1"
                   value={unselectableSeat.column}
                   onChange={(event) =>
                     props.onChange(

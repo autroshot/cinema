@@ -12,6 +12,7 @@ export default function AisleInputs(props: Props) {
               <FloatingLabel controlId="aisleType" label="통로 유형">
                 <Form.Select
                   name="aisle_type_id"
+                  aria-label="통로 유형 항목"
                   value={aisle.aisle_type_id}
                   onChange={(event) =>
                     props.onChange(
@@ -26,10 +27,12 @@ export default function AisleInputs(props: Props) {
               </FloatingLabel>
             </Col>
             <Col>
-              <FloatingLabel controlId="aisleNo" label="번호">
+              <FloatingLabel controlId="aisleNo" label="해당 번호">
                 <Form.Control
                   name="no"
                   type="number"
+                  placeholder="1"
+                  min="1"
                   value={aisle.no}
                   onChange={(event) =>
                     props.onChange(

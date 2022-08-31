@@ -35,13 +35,14 @@ export default function CreateForm() {
         </h3>
         <Row className="mb-3">
           <Col>
-            <FloatingLabel controlId="no" label="번호">
+            <FloatingLabel controlId="no" label="상영관 번호">
               <Form.Control
                 name="no"
                 type="number"
+                min="1"
+                placeholder="1"
                 value={screen.no}
                 onChange={handleChange}
-                min="1"
               />
             </FloatingLabel>
           </Col>
@@ -49,24 +50,26 @@ export default function CreateForm() {
 
         <Row className="mb-3">
           <Col>
-            <FloatingLabel controlId="total_row" label="행 개수">
+            <FloatingLabel controlId="total_row" label="좌석 행 개수">
               <Form.Control
                 name="total_row"
                 type="number"
+                min="1"
+                placeholder="1"
                 value={screen.total_row}
                 onChange={handleChange}
-                min="1"
               />
             </FloatingLabel>
           </Col>
           <Col>
-            <FloatingLabel controlId="total_column" label="열 개수">
+            <FloatingLabel controlId="total_column" label="좌석 열 개수">
               <Form.Control
                 name="total_column"
                 type="number"
+                min="1"
+                placeholder="1"
                 value={screen.total_column}
                 onChange={handleChange}
-                min="1"
               />
             </FloatingLabel>
           </Col>
@@ -74,7 +77,7 @@ export default function CreateForm() {
 
         <Row className="mb-3">
           <Col>
-            <h5>통로</h5>
+            <h5>통로 만들기</h5>
             <AisleInputs aisles={aisles} onChange={handleAislesChange} />
             <div className="d-grid" onClick={handleAisleInputAdd}>
               <AddButton />
@@ -84,7 +87,7 @@ export default function CreateForm() {
 
         <Row className="mb-3">
           <Col>
-            <h5>선택 불가능한 좌석</h5>
+            <h5>선택 불가능한 좌석 지정하기</h5>
             <UnselectableSeatInputs
               unselectableSeats={unselectableSeats}
               onChange={handleUnselectableSeatsChange}

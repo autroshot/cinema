@@ -120,26 +120,14 @@ export default function CreateForm() {
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
   ) {
-    const name = event.currentTarget.name;
+    const name = event.currentTarget.name as keyof AisleFormValue;
     const value = event.currentTarget.value;
 
-    switch (name) {
-      case 'no':
-        setAisles((aisle) => {
-          const aisleCopy = [...aisle];
-          aisleCopy[index].no = value;
-          return aisleCopy;
-        });
-        break;
-
-      case 'aisle_type_id':
-        setAisles((aisle) => {
-          const aisleCopy = [...aisle];
-          aisleCopy[index].aisle_type_id = value;
-          return aisleCopy;
-        });
-        break;
-    }
+    setAisles((aisle) => {
+      const aisleCopy = [...aisle];
+      aisleCopy[index][name] = value;
+      return aisleCopy;
+    });
   }
 
   function handleUnselectableSeatsChange(

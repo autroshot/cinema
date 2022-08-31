@@ -21,8 +21,9 @@ export default function CreateForm() {
     total_column: '',
   });
   const [aisles, setAisles] = useState<AisleFormValues>([]);
-  const [unselectableSeats, setUnselectableSeats] =
-    useState<UnselectableSeatFormValues>([]);
+  const [unselectableSeats, setUnselectableSeats] = useState<
+    UnselectableSeatFormValue[]
+  >([]);
 
   const router = useRouter();
   const { theaterId } = router.query;
@@ -179,9 +180,7 @@ export type AisleFormValues = {
   aisle_type_id: string;
 }[];
 
-export type UnselectableSeatFormValues = UnselectableSeatFormValue[];
-
-type UnselectableSeatFormValue = {
+export type UnselectableSeatFormValue = {
   row: string;
   column: string;
   unselectable_seat_type_id: string;

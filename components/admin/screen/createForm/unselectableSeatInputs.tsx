@@ -1,4 +1,4 @@
-import { UnselectableSeatFormValues } from 'pages/admin/screens/[theaterId]/create';
+import { UnselectableSeatFormValue } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import DeleteButton from './deleteButton';
 
@@ -69,7 +69,7 @@ export default function UnselectableSeatInputs(props: Props) {
 }
 
 interface Props {
-  unselectableSeats: UnselectableSeatFormValues;
+  unselectableSeats: UnselectableSeatFormValue[];
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number

@@ -20,7 +20,12 @@ import * as yup from 'yup';
 export default function CreateForm() {
   const schema = yup
     .object({
-      screenNo: yup.number().positive().integer().required(),
+      screenNo: yup
+        .number()
+        .typeError('필숫값입니다.')
+        .positive()
+        .integer()
+        .required(),
       totalRow: yup.number().positive().integer().required(),
       totalColumn: yup.number().positive().integer().required(),
     })
@@ -60,20 +65,23 @@ export default function CreateForm() {
 
   return (
     <Container className="my-3">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Form noValidate onSubmit={handleSubmit(onSubmit)}>
         <h3 data-cy="title" className="mb-3">
           상영관 등록
         </h3>
         <Row className="mb-3">
           <Col>
-            <FloatingLabel controlId="no" label="상영관 번호">
+            <FloatingLabel controlId="screenNo" label="상영관 번호">
               <Form.Control
                 type="number"
                 min="1"
                 placeholder="1"
                 {...register('screenNo')}
-                isInvalid={invalidatedScreenInput.screen_no}
+                isInvalid={!!errors.screenNo}
               />
+              <Form.Control.Feedback type="invalid" className="fs-6">
+                {errors.screenNo?.message}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Col>
         </Row>
@@ -145,7 +153,7 @@ export default function CreateForm() {
             <Button>취소</Button>
           </>
         ) : null}
-      </form>
+      </Form>
     </Container>
   );
 

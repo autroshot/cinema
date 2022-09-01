@@ -25,13 +25,13 @@ export default function CreateForm() {
     UnselectableSeatFormValue[]
   >([]);
 
-  const [invalidatedInputs, setInvalidatedInputs] = useState({
+  const [invalidatedScreenInput, setInvalidatedScreenInput] = useState({
     screen_no: false,
     total_row: false,
     total_column: false,
   });
-  const [alert, setAlert] = useState<null | string>(null);
   const [validated, setValidated] = useState(false);
+  const [alert, setAlert] = useState<null | string>(null);
 
   const router = useRouter();
   const { theaterId } = router.query;
@@ -52,7 +52,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.no}
                 onChange={handleChange}
-                isInvalid={invalidatedInputs.screen_no}
+                isInvalid={invalidatedScreenInput.screen_no}
               />
             </FloatingLabel>
           </Col>
@@ -68,7 +68,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.total_row}
                 onChange={handleChange}
-                isInvalid={invalidatedInputs.total_row}
+                isInvalid={invalidatedScreenInput.total_row}
               />
             </FloatingLabel>
           </Col>
@@ -81,7 +81,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.total_column}
                 onChange={handleChange}
-                isInvalid={invalidatedInputs.total_column}
+                isInvalid={invalidatedScreenInput.total_column}
               />
             </FloatingLabel>
           </Col>
@@ -204,11 +204,11 @@ export default function CreateForm() {
     };
 
     if (Object.values(newErrors).includes(true)) {
-      setInvalidatedInputs(newErrors);
+      setInvalidatedScreenInput(newErrors);
       setAlert('빈 칸이 있습니다.');
       return;
     }
-    setInvalidatedInputs(newErrors);
+    setInvalidatedScreenInput(newErrors);
     setAlert(null);
   }
 }

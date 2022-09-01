@@ -25,7 +25,7 @@ export default function CreateForm() {
     UnselectableSeatFormValue[]
   >([]);
 
-  const [errors, setErrors] = useState({
+  const [invalidatedInputs, setInvalidatedInputs] = useState({
     screen_no: false,
     total_row: false,
     total_column: false,
@@ -52,7 +52,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.no}
                 onChange={handleChange}
-                isInvalid={errors.screen_no}
+                isInvalid={invalidatedInputs.screen_no}
               />
             </FloatingLabel>
           </Col>
@@ -68,7 +68,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.total_row}
                 onChange={handleChange}
-                isInvalid={errors.total_row}
+                isInvalid={invalidatedInputs.total_row}
               />
             </FloatingLabel>
           </Col>
@@ -81,7 +81,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.total_column}
                 onChange={handleChange}
-                isInvalid={errors.total_column}
+                isInvalid={invalidatedInputs.total_column}
               />
             </FloatingLabel>
           </Col>
@@ -204,11 +204,11 @@ export default function CreateForm() {
     };
 
     if (Object.values(newErrors).includes(true)) {
-      setErrors(newErrors);
+      setInvalidatedInputs(newErrors);
       setAlert('빈 칸이 있습니다.');
       return;
     }
-    setErrors(newErrors);
+    setInvalidatedInputs(newErrors);
     setAlert(null);
   }
 }

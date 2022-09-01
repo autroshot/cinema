@@ -30,6 +30,10 @@ export default function CreateForm() {
     total_row: false,
     total_column: false,
   });
+  const [invalidatedAisleInputs, setInvalidatedAisleInputs] = useState<
+    InvalidatedAisleInput[]
+  >([]);
+
   const [validated, setValidated] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
 
@@ -92,6 +96,7 @@ export default function CreateForm() {
             <h5>통로 만들기</h5>
             <AisleInputs
               aisles={aisles}
+              invalidatedAisleInputs={invalidatedAisleInputs}
               onChange={handleAislesChange}
               onDelete={handleAisleInputDelete}
             />
@@ -169,6 +174,7 @@ export default function CreateForm() {
 
   function handleAisleInputAdd() {
     setAisles([...aisles, { no: '', aisle_type_id: '1' }]);
+    setInvalidatedAisleInputs([...invalidatedAisleInputs, { no: false }]);
   }
   function handleUnselectableSeatInputAdd() {
     setUnselectableSeats([
@@ -185,6 +191,10 @@ export default function CreateForm() {
     const aislesCopy = [...aisles];
     aislesCopy.splice(index, 1);
     setAisles(aislesCopy);
+
+    const invalidatedAisleInputsCopy = [...invalidatedAisleInputs];
+    invalidatedAisleInputsCopy.splice(index, 1);
+    setInvalidatedAisleInputs(invalidatedAisleInputsCopy);
   }
   function handleUnselectableSeatInputDelete(index: number) {
     const unselectableSeatsCopy = [...unselectableSeats];
@@ -197,19 +207,30 @@ export default function CreateForm() {
   }
 
   function validate() {
-    const newErrors = {
+    const newInvalidatedScreenInput = {
       screen_no: screen.no.length === 0,
       total_row: screen.total_row.length === 0,
       total_column: screen.total_column.length === 0,
     };
+    const aislesCopy = [...aisles];
+    const newInvalidatedAisleInputs: InvalidatedAisleInput[] = aislesCopy.map(
+      (aisle) => {
+        return { no: aisle.no.length === 0 };
+      }
+    );
 
-    if (Object.values(newErrors).includes(true)) {
-      setInvalidatedScreenInput(newErrors);
+    if (
+      Object.values(newInvalidatedScreenInput).includes(true) ||
+      newInvalidatedAisleInputs.some((newInvalidatedAisleInput) =>
+        Object.values(newInvalidatedAisleInput).includes(true)
+      )
+    ) {
       setAlert('빈 칸이 있습니다.');
-      return;
+    } else {
+      setAlert(null);
     }
-    setInvalidatedScreenInput(newErrors);
-    setAlert(null);
+    setInvalidatedScreenInput(newInvalidatedScreenInput);
+    setInvalidatedAisleInputs(newInvalidatedAisleInputs);
   }
 }
 
@@ -229,5 +250,9 @@ export type UnselectableSeatFormValue = {
   column: string;
   unselectable_seat_type_id: string;
 };
+
+export interface InvalidatedAisleInput {
+  no: boolean;
+}
 
 CreateForm.isAdminPage = true;

@@ -1,4 +1,7 @@
-import { AisleFormValue } from 'pages/admin/screens/[theaterId]/create';
+import {
+  AisleFormValue,
+  InvalidatedAisleInput,
+} from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import DeleteButton from './deleteButton';
 
@@ -40,6 +43,7 @@ export default function AisleInputs(props: Props) {
                       index
                     )
                   }
+                  isInvalid={props.invalidatedAisleInputs[index].no}
                 />
               </FloatingLabel>
             </Col>
@@ -60,6 +64,7 @@ export default function AisleInputs(props: Props) {
 
 interface Props {
   aisles: AisleFormValue[];
+  invalidatedAisleInputs: InvalidatedAisleInput[];
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number

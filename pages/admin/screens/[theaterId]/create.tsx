@@ -13,8 +13,11 @@ import {
   Form,
   Row,
 } from 'react-bootstrap';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 export default function CreateForm() {
+  const { register, handleSubmit } = useForm<FormInput>();
+
   const [screen, setScreen] = useState<ScreenFormValues>({
     no: '',
     total_row: '',
@@ -40,9 +43,11 @@ export default function CreateForm() {
   const router = useRouter();
   const { theaterId } = router.query;
 
+  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
+
   return (
     <Container className="my-3">
-      <form action="">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h3 data-cy="title" className="mb-3">
           상영관 등록
         </h3>
@@ -50,12 +55,10 @@ export default function CreateForm() {
           <Col>
             <FloatingLabel controlId="no" label="상영관 번호">
               <Form.Control
-                name="no"
                 type="number"
                 min="1"
                 placeholder="1"
-                value={screen.no}
-                onChange={handleChange}
+                {...register('screenNo')}
                 isInvalid={invalidatedScreenInput.screen_no}
               />
             </FloatingLabel>
@@ -66,12 +69,10 @@ export default function CreateForm() {
           <Col>
             <FloatingLabel controlId="total_row" label="좌석 행 개수">
               <Form.Control
-                name="total_row"
                 type="number"
                 min="1"
                 placeholder="1"
-                value={screen.total_row}
-                onChange={handleChange}
+                {...register('totalRow')}
                 isInvalid={invalidatedScreenInput.total_row}
               />
             </FloatingLabel>
@@ -79,12 +80,10 @@ export default function CreateForm() {
           <Col>
             <FloatingLabel controlId="total_column" label="좌석 열 개수">
               <Form.Control
-                name="total_column"
                 type="number"
                 min="1"
                 placeholder="1"
-                value={screen.total_column}
-                onChange={handleChange}
+                {...register('totalColumn')}
                 isInvalid={invalidatedScreenInput.total_column}
               />
             </FloatingLabel>
@@ -120,6 +119,7 @@ export default function CreateForm() {
           </Col>
         </Row>
 
+        <Button type="submit">테스트용 제출</Button>
         {alert ? <MyAlert message={alert} /> : null}
         <div className="mb-3">
           <Button onClick={handleSeatingMapMake}>좌석 배치도 확인</Button>
@@ -253,6 +253,12 @@ export type UnselectableSeatFormValue = {
 
 export interface InvalidatedAisleInput {
   no: boolean;
+}
+
+interface FormInput {
+  screenNo: number;
+  totalRow: number;
+  totalColumn: number;
 }
 
 CreateForm.isAdminPage = true;

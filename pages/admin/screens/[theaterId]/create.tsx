@@ -16,7 +16,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 export default function CreateForm() {
-  const { register, handleSubmit } = useForm<FormInput>();
+  const { register, handleSubmit } = useForm<FormInputs>();
 
   const [screen, setScreen] = useState<ScreenFormValues>({
     no: '',
@@ -43,7 +43,7 @@ export default function CreateForm() {
   const router = useRouter();
   const { theaterId } = router.query;
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
 
   return (
     <Container className="my-3">
@@ -255,7 +255,7 @@ export interface InvalidatedAisleInput {
   no: boolean;
 }
 
-interface FormInput {
+interface FormInputs {
   screenNo: number;
   totalRow: number;
   totalColumn: number;

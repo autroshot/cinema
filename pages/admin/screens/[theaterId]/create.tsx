@@ -1,6 +1,7 @@
 import AddButton from 'components/admin/screen/createForm/addButton';
 import AisleInputs from 'components/admin/screen/createForm/aisleInputs';
 import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
+import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
 import { useState } from 'react';
@@ -23,6 +24,13 @@ export default function CreateForm() {
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
   >([]);
+
+  const [errors, setErrors] = useState({
+    screen_no: false,
+    total_row: false,
+    total_column: false,
+  });
+  const [alert, setAlert] = useState<null | string>(null);
   const [validated, setValidated] = useState(false);
 
   const router = useRouter();
@@ -44,6 +52,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.no}
                 onChange={handleChange}
+                isInvalid={errors.screen_no}
               />
             </FloatingLabel>
           </Col>
@@ -59,6 +68,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.total_row}
                 onChange={handleChange}
+                isInvalid={errors.total_row}
               />
             </FloatingLabel>
           </Col>
@@ -71,6 +81,7 @@ export default function CreateForm() {
                 placeholder="1"
                 value={screen.total_column}
                 onChange={handleChange}
+                isInvalid={errors.total_column}
               />
             </FloatingLabel>
           </Col>
@@ -104,8 +115,9 @@ export default function CreateForm() {
           </Col>
         </Row>
 
+        {alert ? <MyAlert message={alert} /> : null}
         <div className="mb-3">
-          <Button>좌석 배치도 확인</Button>
+          <Button onClick={handleSeatingMapMake}>좌석 배치도 확인</Button>
         </div>
         {validated ? (
           <>
@@ -178,6 +190,26 @@ export default function CreateForm() {
     const unselectableSeatsCopy = [...unselectableSeats];
     unselectableSeatsCopy.splice(index, 1);
     setUnselectableSeats(unselectableSeatsCopy);
+  }
+
+  function handleSeatingMapMake() {
+    validate();
+  }
+
+  function validate() {
+    const newErrors = {
+      screen_no: screen.no.length === 0,
+      total_row: screen.total_row.length === 0,
+      total_column: screen.total_column.length === 0,
+    };
+
+    if (Object.values(newErrors).includes(true)) {
+      setErrors(newErrors);
+      setAlert('빈 칸이 있습니다.');
+      return;
+    }
+    setErrors(newErrors);
+    setAlert(null);
   }
 }
 

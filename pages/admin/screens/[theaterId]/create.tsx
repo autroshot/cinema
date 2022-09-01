@@ -14,9 +14,22 @@ import {
   Row,
 } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 export default function CreateForm() {
-  const { register, handleSubmit } = useForm<FormInputs>();
+  const schema = yup
+    .object({
+      screenNo: yup.number().positive().integer().required(),
+      totalRow: yup.number().positive().integer().required(),
+      totalColumn: yup.number().positive().integer().required(),
+    })
+    .required();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>({ resolver: yupResolver(schema) });
 
   const [screen, setScreen] = useState<ScreenFormValues>({
     no: '',

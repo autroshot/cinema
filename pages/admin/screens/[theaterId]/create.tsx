@@ -4,7 +4,7 @@ import UnselectableSeatInputs from 'components/admin/screen/createForm/unselecta
 import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Button,
   Col,
@@ -16,25 +16,47 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { setTimeout } from 'timers';
+import { watch } from 'fs';
 
 export default function CreateForm() {
+  console.log('rendered');
   const schema = yup
     .object({
       screenNo: yup
         .number()
         .typeError('필숫값입니다.')
-        .positive()
-        .integer()
-        .required(),
-      totalRow: yup.number().positive().integer().required(),
-      totalColumn: yup.number().positive().integer().required(),
+        .positive('양수만 가능합니다.')
+        .integer('정수만 가능합니다.')
+        .required('필숫값입니다.'),
+      totalRow: yup
+        .number()
+        .typeError('필숫값입니다.')
+        .positive('양수만 가능합니다.')
+        .integer('정수만 가능합니다.')
+        .required('필숫값입니다.'),
+      totalColumn: yup
+        .number()
+        .typeError('필숫값입니다.')
+        .positive('양수만 가능합니다.')
+        .integer('정수만 가능합니다.')
+        .required('필숫값입니다.'),
     })
     .required();
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormInputs>({ resolver: yupResolver(schema) });
+    watch,
+    formState: { isValid, errors },
+  } = useForm<FormInputs>({
+    defaultValues: {
+      screenNo: null,
+      totalRow: null,
+      totalColumn: null,
+    },
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
 
   const [screen, setScreen] = useState<ScreenFormValues>({
     no: '',
@@ -61,7 +83,9 @@ export default function CreateForm() {
   const router = useRouter();
   const { theaterId } = router.query;
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+    console.log(data);
+  };
 
   return (
     <Container className="my-3">
@@ -77,7 +101,7 @@ export default function CreateForm() {
                 min="1"
                 placeholder="1"
                 {...register('screenNo')}
-                isInvalid={!!errors.screenNo}
+                isInvalid={Boolean(errors.screenNo)}
               />
               <Form.Control.Feedback type="invalid" className="fs-6">
                 {errors.screenNo?.message}
@@ -88,25 +112,31 @@ export default function CreateForm() {
 
         <Row className="mb-3">
           <Col>
-            <FloatingLabel controlId="total_row" label="좌석 행 개수">
+            <FloatingLabel controlId="totalRow" label="좌석 행 개수">
               <Form.Control
                 type="number"
                 min="1"
                 placeholder="1"
                 {...register('totalRow')}
-                isInvalid={invalidatedScreenInput.total_row}
+                isInvalid={Boolean(errors.totalRow)}
               />
+              <Form.Control.Feedback type="invalid" className="fs-6">
+                {errors.totalRow?.message}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Col>
           <Col>
-            <FloatingLabel controlId="total_column" label="좌석 열 개수">
+            <FloatingLabel controlId="totalColumn" label="좌석 열 개수">
               <Form.Control
                 type="number"
                 min="1"
                 placeholder="1"
                 {...register('totalColumn')}
-                isInvalid={invalidatedScreenInput.total_column}
+                isInvalid={Boolean(errors.totalColumn)}
               />
+              <Form.Control.Feedback type="invalid" className="fs-6">
+                {errors.totalColumn?.message}
+              </Form.Control.Feedback>
             </FloatingLabel>
           </Col>
         </Row>
@@ -139,20 +169,18 @@ export default function CreateForm() {
             </div>
           </Col>
         </Row>
-
-        <Button type="submit">테스트용 제출</Button>
         {alert ? <MyAlert message={alert} /> : null}
-        <div className="mb-3">
-          <Button onClick={handleSeatingMapMake}>좌석 배치도 확인</Button>
-        </div>
-        {validated ? (
+        {isValid ? (
           <>
             <div className="mb-3">좌석 배치도</div>
+            <div>{JSON.stringify(watch())}</div>
             <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
-            <Button>등록</Button>
+            <Button className="me-3">등록</Button>
             <Button>취소</Button>
           </>
-        ) : null}
+        ) : (
+          <div>모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.</div>
+        )}
       </Form>
     </Container>
   );
@@ -277,9 +305,9 @@ export interface InvalidatedAisleInput {
 }
 
 interface FormInputs {
-  screenNo: number;
-  totalRow: number;
-  totalColumn: number;
+  screenNo: number | null;
+  totalRow: number | null;
+  totalColumn: number | null;
 }
 
 CreateForm.isAdminPage = true;

@@ -57,26 +57,15 @@ export default function CreateForm() {
     resolver: yupResolver(schema),
   });
 
-  const [screen, setScreen] = useState<ScreenFormValues>({
-    no: '',
-    total_row: '',
-    total_column: '',
-  });
   const [aisles, setAisles] = useState<AisleFormValue[]>([]);
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
   >([]);
 
-  const [invalidatedScreenInput, setInvalidatedScreenInput] = useState({
-    screen_no: false,
-    total_row: false,
-    total_column: false,
-  });
   const [invalidatedAisleInputs, setInvalidatedAisleInputs] = useState<
     InvalidatedAisleInput[]
   >([]);
 
-  const [validated, setValidated] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
 
   const router = useRouter();
@@ -184,15 +173,6 @@ export default function CreateForm() {
     </Container>
   );
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const name = event.currentTarget.name;
-    const value = event.currentTarget.value;
-
-    setScreen((prevState) => {
-      return { ...prevState, [name]: value };
-    });
-  }
-
   function handleAislesChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
@@ -251,34 +231,7 @@ export default function CreateForm() {
   }
 
   function handleSeatingMapMake() {
-    validate();
-  }
-
-  function validate() {
-    const newInvalidatedScreenInput = {
-      screen_no: screen.no.length === 0,
-      total_row: screen.total_row.length === 0,
-      total_column: screen.total_column.length === 0,
-    };
-    const aislesCopy = [...aisles];
-    const newInvalidatedAisleInputs: InvalidatedAisleInput[] = aislesCopy.map(
-      (aisle) => {
-        return { no: aisle.no.length === 0 };
-      }
-    );
-
-    if (
-      Object.values(newInvalidatedScreenInput).includes(true) ||
-      newInvalidatedAisleInputs.some((newInvalidatedAisleInput) =>
-        Object.values(newInvalidatedAisleInput).includes(true)
-      )
-    ) {
-      setAlert('빈 칸이 있습니다.');
-    } else {
-      setAlert(null);
-    }
-    setInvalidatedScreenInput(newInvalidatedScreenInput);
-    setInvalidatedAisleInputs(newInvalidatedAisleInputs);
+    // TODO:
   }
 }
 

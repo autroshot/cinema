@@ -141,7 +141,8 @@ export default function CreateForm() {
           <Col>
             <h5>통로 만들기</h5>
             <AisleInputs
-              aisles={aisles}
+              fields={fields}
+              register={register}
               invalidatedAisleInputs={invalidatedAisleInputs}
               onChange={handleAislesChange}
               onDelete={handleAisleInputDelete}
@@ -264,7 +265,7 @@ export interface InvalidatedAisleInput {
   no: boolean;
 }
 
-interface FormInputs {
+export interface FormInputs {
   screenNo: number | null;
   totalRow: number | null;
   totalColumn: number | null;

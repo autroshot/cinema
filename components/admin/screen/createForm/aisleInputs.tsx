@@ -1,28 +1,23 @@
 import {
   AisleFormValue,
+  FormInputs,
   InvalidatedAisleInput,
 } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { FieldArrayWithId, UseFormRegister } from 'react-hook-form';
 import DeleteButton from './deleteButton';
 
 export default function AisleInputs(props: Props) {
   return (
     <>
-      {props.aisles.map((aisle, index) => {
+      {props.fields.map((field, index) => {
         return (
-          <Row className="mt-3" key={index}>
+          <Row className="mt-3" key={field.id}>
             <Col>
               <FloatingLabel controlId="aisleType" label="통로 유형">
                 <Form.Select
-                  name="aisle_type_id"
                   aria-label="통로 유형 항목"
-                  value={aisle.aisle_type_id}
-                  onChange={(event) =>
-                    props.onChange(
-                      event as React.ChangeEvent<HTMLSelectElement>,
-                      index
-                    )
-                  }
+                  {...props.register(`aisles.${index}.type`)}
                 >
                   <option value="1">row</option>
                   <option value="2">column</option>
@@ -32,18 +27,10 @@ export default function AisleInputs(props: Props) {
             <Col>
               <FloatingLabel controlId="aisleNo" label="해당 번호">
                 <Form.Control
-                  name="no"
                   type="number"
-                  placeholder="1"
                   min="1"
-                  value={aisle.no}
-                  onChange={(event) =>
-                    props.onChange(
-                      event as React.ChangeEvent<HTMLInputElement>,
-                      index
-                    )
-                  }
-                  isInvalid={props.invalidatedAisleInputs[index].no}
+                  placeholder="1"
+                  {...props.register(`aisles.${index}.no`)}
                 />
               </FloatingLabel>
             </Col>
@@ -63,7 +50,8 @@ export default function AisleInputs(props: Props) {
 }
 
 interface Props {
-  aisles: AisleFormValue[];
+  register: UseFormRegister<FormInputs>;
+  fields: FieldArrayWithId<FormInputs, 'aisles', 'id'>[];
   invalidatedAisleInputs: InvalidatedAisleInput[];
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,

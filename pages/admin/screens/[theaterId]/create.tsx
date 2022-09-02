@@ -144,7 +144,11 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <h5>통로 만들기</h5>
-            <AisleInputs fields={fields} register={register} />
+            <AisleInputs
+              fields={fields}
+              register={register}
+              onRemove={remove}
+            />
             <div
               className="d-grid"
               onClick={() => append({ type: 1, no: null })}

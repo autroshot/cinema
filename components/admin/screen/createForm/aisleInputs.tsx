@@ -4,7 +4,11 @@ import {
   InvalidatedAisleInput,
 } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
-import { FieldArrayWithId, UseFormRegister } from 'react-hook-form';
+import {
+  FieldArrayWithId,
+  UseFieldArrayRemove,
+  UseFormRegister,
+} from 'react-hook-form';
 import DeleteButton from './deleteButton';
 
 export default function AisleInputs(props: Props) {
@@ -38,7 +42,7 @@ export default function AisleInputs(props: Props) {
               xs={1}
               className="d-flex align-items-center justify-content-center"
             >
-              <span onClick={() => console.log('통로 input 삭제 버튼 클릭됨')}>
+              <span onClick={() => props.onRemove(index)}>
                 <DeleteButton />
               </span>
             </Col>
@@ -52,4 +56,5 @@ export default function AisleInputs(props: Props) {
 interface Props {
   register: UseFormRegister<FormInputs>;
   fields: FieldArrayWithId<FormInputs, 'aisles', 'id'>[];
+  onRemove: UseFieldArrayRemove;
 }

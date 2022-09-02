@@ -140,13 +140,7 @@ export default function CreateForm() {
         <Row className="mb-3">
           <Col>
             <h5>통로 만들기</h5>
-            <AisleInputs
-              fields={fields}
-              register={register}
-              invalidatedAisleInputs={invalidatedAisleInputs}
-              onChange={handleAislesChange}
-              onDelete={handleAisleInputDelete}
-            />
+            <AisleInputs fields={fields} register={register} />
             <div className="d-grid" onClick={handleAisleInputAdd}>
               <AddButton />
             </div>

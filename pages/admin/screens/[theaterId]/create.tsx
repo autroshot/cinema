@@ -68,13 +68,8 @@ export default function CreateForm() {
   });
   const { fields, append, remove } = useFieldArray({ control, name: 'aisles' });
 
-  const [aisles, setAisles] = useState<AisleFormValue[]>([]);
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
-  >([]);
-
-  const [invalidatedAisleInputs, setInvalidatedAisleInputs] = useState<
-    InvalidatedAisleInput[]
   >([]);
 
   const [alert, setAlert] = useState<null | string>(null);
@@ -187,19 +182,6 @@ export default function CreateForm() {
     </Container>
   );
 
-  function handleAislesChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    index: number
-  ) {
-    const name = event.currentTarget.name as keyof AisleFormValue;
-    const value = event.currentTarget.value;
-
-    setAisles((aisle) => {
-      const aisleCopy = [...aisle];
-      aisleCopy[index][name] = value;
-      return aisleCopy;
-    });
-  }
   function handleUnselectableSeatsChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number
@@ -214,10 +196,6 @@ export default function CreateForm() {
     });
   }
 
-  function handleAisleInputAdd() {
-    setAisles([...aisles, { no: '', aisle_type_id: '1' }]);
-    setInvalidatedAisleInputs([...invalidatedAisleInputs, { no: false }]);
-  }
   function handleUnselectableSeatInputAdd() {
     setUnselectableSeats([
       ...unselectableSeats,
@@ -227,16 +205,6 @@ export default function CreateForm() {
         unselectable_seat_type_id: '1',
       },
     ]);
-  }
-
-  function handleAisleInputDelete(index: number) {
-    const aislesCopy = [...aisles];
-    aislesCopy.splice(index, 1);
-    setAisles(aislesCopy);
-
-    const invalidatedAisleInputsCopy = [...invalidatedAisleInputs];
-    invalidatedAisleInputsCopy.splice(index, 1);
-    setInvalidatedAisleInputs(invalidatedAisleInputsCopy);
   }
   function handleUnselectableSeatInputDelete(index: number) {
     const unselectableSeatsCopy = [...unselectableSeats];
@@ -249,26 +217,11 @@ export default function CreateForm() {
   }
 }
 
-interface ScreenFormValues {
-  no: string;
-  total_row: string;
-  total_column: string;
-}
-
-export type AisleFormValue = {
-  no: string;
-  aisle_type_id: string;
-};
-
 export type UnselectableSeatFormValue = {
   row: string;
   column: string;
   unselectable_seat_type_id: string;
 };
-
-export interface InvalidatedAisleInput {
-  no: boolean;
-}
 
 export interface FormInputs {
   screenNo: number | null;

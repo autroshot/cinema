@@ -1,8 +1,4 @@
-import {
-  AisleFormValue,
-  FormInputs,
-  InvalidatedAisleInput,
-} from 'pages/admin/screens/[theaterId]/create';
+import { FormInputs } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   FieldArrayWithId,

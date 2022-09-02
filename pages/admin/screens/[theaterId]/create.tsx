@@ -4,7 +4,7 @@ import UnselectableSeatInputs from 'components/admin/screen/createForm/unselecta
 import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Button,
   Col,
@@ -16,37 +16,36 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { setTimeout } from 'timers';
-import { watch } from 'fs';
 
 export default function CreateForm() {
-  console.log('rendered');
+  yup.setLocale({
+    mixed: {
+      notType: function notType(_ref) {
+        switch (_ref.type) {
+          case 'number':
+            return '필숫값입니다.';
+          default:
+            return 'Wrong type error';
+        }
+      },
+      required: '필숫값입니다.',
+    },
+    number: {
+      positive: '양수만 가능합니다.',
+      integer: '정수만 가능합니다.',
+    },
+  });
   const schema = yup
     .object({
-      screenNo: yup
-        .number()
-        .typeError('필숫값입니다.')
-        .positive('양수만 가능합니다.')
-        .integer('정수만 가능합니다.')
-        .required('필숫값입니다.'),
-      totalRow: yup
-        .number()
-        .typeError('필숫값입니다.')
-        .positive('양수만 가능합니다.')
-        .integer('정수만 가능합니다.')
-        .required('필숫값입니다.'),
-      totalColumn: yup
-        .number()
-        .typeError('필숫값입니다.')
-        .positive('양수만 가능합니다.')
-        .integer('정수만 가능합니다.')
-        .required('필숫값입니다.'),
+      screenNo: yup.number().positive().integer().required(),
+      totalRow: yup.number().positive().integer().required(),
+      totalColumn: yup.number().positive().integer().required(),
     })
     .required();
   const {
     register,
-    handleSubmit,
     watch,
+    handleSubmit,
     formState: { isValid, errors },
   } = useForm<FormInputs>({
     defaultValues: {
@@ -54,8 +53,8 @@ export default function CreateForm() {
       totalRow: null,
       totalColumn: null,
     },
-    resolver: yupResolver(schema),
     mode: 'onChange',
+    resolver: yupResolver(schema),
   });
 
   const [screen, setScreen] = useState<ScreenFormValues>({

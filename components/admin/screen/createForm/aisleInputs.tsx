@@ -6,6 +6,7 @@ import {
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   FieldArrayWithId,
+  FieldErrorsImpl,
   UseFieldArrayRemove,
   UseFormRegister,
 } from 'react-hook-form';
@@ -35,7 +36,11 @@ export default function AisleInputs(props: Props) {
                   min="1"
                   placeholder="1"
                   {...props.register(`aisles.${index}.no`)}
+                  isInvalid={Boolean(props.errors.aisles?.[index]?.no)}
                 />
+                <Form.Control.Feedback type="invalid" className="fs-6">
+                  {props.errors.aisles?.[index]?.no?.message}
+                </Form.Control.Feedback>
               </FloatingLabel>
             </Col>
             <Col
@@ -54,7 +59,16 @@ export default function AisleInputs(props: Props) {
 }
 
 interface Props {
-  register: UseFormRegister<FormInputs>;
   fields: FieldArrayWithId<FormInputs, 'aisles', 'id'>[];
+  errors: FieldErrorsImpl<{
+    screenNo: number;
+    totalRow: number;
+    totalColumn: number;
+    aisles: {
+      type: number;
+      no: number;
+    }[];
+  }>;
+  register: UseFormRegister<FormInputs>;
   onRemove: UseFieldArrayRemove;
 }

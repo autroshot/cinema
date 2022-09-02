@@ -41,7 +41,6 @@ export default function CreateForm() {
     totalColumn: yup.number().positive().integer(),
     aisles: yup.array().of(
       yup.object({
-        type: yup.number().positive().integer(),
         no: yup.number().positive().integer(),
       })
     ),
@@ -146,6 +145,7 @@ export default function CreateForm() {
             <h5>통로 만들기</h5>
             <AisleInputs
               fields={fields}
+              errors={errors}
               register={register}
               onRemove={remove}
             />

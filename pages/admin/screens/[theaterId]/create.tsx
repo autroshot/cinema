@@ -35,13 +35,18 @@ export default function CreateForm() {
       integer: '정수만 가능합니다.',
     },
   });
-  const schema = yup
-    .object({
-      screenNo: yup.number().positive().integer().required(),
-      totalRow: yup.number().positive().integer().required(),
-      totalColumn: yup.number().positive().integer().required(),
-    })
-    .required();
+  const schema = yup.object({
+    screenNo: yup.number().positive().integer(),
+    totalRow: yup.number().positive().integer(),
+    totalColumn: yup.number().positive().integer(),
+    aisles: yup.array().of(
+      yup.object({
+        type: yup.number().positive().integer(),
+        no: yup.number().positive().integer(),
+      })
+    ),
+  });
+
   const {
     register,
     watch,
@@ -260,6 +265,7 @@ interface FormInputs {
   screenNo: number | null;
   totalRow: number | null;
   totalColumn: number | null;
+  aisles: { type: number; no: number | null }[];
 }
 
 CreateForm.isAdminPage = true;

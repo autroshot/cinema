@@ -13,7 +13,7 @@ import {
   Form,
   Row,
 } from 'react-bootstrap';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -48,6 +48,7 @@ export default function CreateForm() {
   });
 
   const {
+    control,
     register,
     watch,
     handleSubmit,
@@ -61,6 +62,7 @@ export default function CreateForm() {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
+  const { fields, append, remove } = useFieldArray({ control, name: 'aisles' });
 
   const [aisles, setAisles] = useState<AisleFormValue[]>([]);
   const [unselectableSeats, setUnselectableSeats] = useState<

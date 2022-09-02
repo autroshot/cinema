@@ -58,7 +58,11 @@ export default function CreateForm() {
       screenNo: null,
       totalRow: null,
       totalColumn: null,
-      aisles: [{ type: 1, no: 1 }],
+      aisles: [
+        { type: 1, no: 1 },
+        { type: 2, no: 3 },
+        { type: 1, no: 100 },
+      ],
     },
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -141,7 +145,10 @@ export default function CreateForm() {
           <Col>
             <h5>통로 만들기</h5>
             <AisleInputs fields={fields} register={register} />
-            <div className="d-grid" onClick={handleAisleInputAdd}>
+            <div
+              className="d-grid"
+              onClick={() => append({ type: 1, no: null })}
+            >
               <AddButton />
             </div>
           </Col>

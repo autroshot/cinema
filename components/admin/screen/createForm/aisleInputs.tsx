@@ -38,7 +38,7 @@ export default function AisleInputs(props: Props) {
               xs={1}
               className="d-flex align-items-center justify-content-center"
             >
-              <span onClick={() => props.onDelete(index)}>
+              <span onClick={() => console.log('통로 input 삭제 버튼 클릭됨')}>
                 <DeleteButton />
               </span>
             </Col>
@@ -52,10 +52,4 @@ export default function AisleInputs(props: Props) {
 interface Props {
   register: UseFormRegister<FormInputs>;
   fields: FieldArrayWithId<FormInputs, 'aisles', 'id'>[];
-  invalidatedAisleInputs: InvalidatedAisleInput[];
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    index: number
-  ) => void;
-  onDelete: (index: number) => void;
 }

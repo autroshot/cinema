@@ -58,6 +58,7 @@ export default function CreateForm() {
       screenNo: null,
       totalRow: null,
       totalColumn: null,
+      aisles: [{ type: 1, no: 1 }],
     },
     mode: 'onChange',
     resolver: yupResolver(schema),

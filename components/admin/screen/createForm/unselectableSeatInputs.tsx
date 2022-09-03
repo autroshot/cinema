@@ -3,7 +3,11 @@ import {
   UnselectableSeatFormValue,
 } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
-import { FieldArrayWithId, UseFormRegister } from 'react-hook-form';
+import {
+  FieldArrayWithId,
+  UseFieldArrayRemove,
+  UseFormRegister,
+} from 'react-hook-form';
 import DeleteButton from './deleteButton';
 
 export default function UnselectableSeatInputs(props: Props) {
@@ -47,7 +51,7 @@ export default function UnselectableSeatInputs(props: Props) {
               xs={1}
               className="d-flex align-items-center justify-content-center"
             >
-              <span onClick={() => props.onDelete(index)}>
+              <span onClick={() => props.onRemove(index)}>
                 <DeleteButton />
               </span>
             </Col>
@@ -61,9 +65,5 @@ export default function UnselectableSeatInputs(props: Props) {
 interface Props {
   fields: FieldArrayWithId<FormInputs, 'unselectableSeats', 'id'>[];
   register: UseFormRegister<FormInputs>;
-  onChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    index: number
-  ) => void;
-  onDelete: (index: number) => void;
+  onRemove: UseFieldArrayRemove;
 }

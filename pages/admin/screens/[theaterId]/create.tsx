@@ -179,8 +179,7 @@ export default function CreateForm() {
             <UnselectableSeatInputs
               fields={unselectableSeatFields}
               register={register}
-              onChange={handleUnselectableSeatsChange}
-              onDelete={handleUnselectableSeatInputDelete}
+              onRemove={unselectableSeatRemove}
             />
             <div
               className="d-grid"

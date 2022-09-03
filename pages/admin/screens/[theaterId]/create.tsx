@@ -72,7 +72,11 @@ export default function CreateForm() {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
-  const { fields, append, remove } = useFieldArray({ control, name: 'aisles' });
+  const {
+    fields: aisleFields,
+    append: aisleAppend,
+    remove: aisleRemove,
+  } = useFieldArray({ control, name: 'aisles' });
 
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
@@ -145,14 +149,14 @@ export default function CreateForm() {
           <Col>
             <h5>통로 만들기</h5>
             <AisleInputs
-              fields={fields}
+              fields={aisleFields}
               errors={errors}
               register={register}
-              onRemove={remove}
+              onRemove={aisleRemove}
             />
             <div
               className="d-grid"
-              onClick={() => append({ type: 1, no: null })}
+              onClick={() => aisleAppend({ type: 1, no: null })}
             >
               <AddButton />
             </div>

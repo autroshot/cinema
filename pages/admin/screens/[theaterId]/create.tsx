@@ -44,6 +44,12 @@ export default function CreateForm() {
         no: yup.number().positive().integer(),
       })
     ),
+    unselectableSeats: yup.array().of(
+      yup.object({
+        row: yup.number().positive().integer(),
+        column: yup.number().positive().integer(),
+      })
+    ),
   });
 
   const {

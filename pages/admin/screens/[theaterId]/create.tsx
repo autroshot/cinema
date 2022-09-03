@@ -36,7 +36,7 @@ export default function CreateForm() {
     },
   });
   const schema = yup.object({
-    screenNo: yup.number().positive().integer(),
+    no: yup.number().positive().integer(),
     totalRow: yup.number().positive().integer(),
     totalColumn: yup.number().positive().integer(),
     aisles: yup.array().of(
@@ -60,7 +60,7 @@ export default function CreateForm() {
     formState: { isValid, errors },
   } = useForm<FormInputs>({
     defaultValues: {
-      screenNo: null,
+      no: null,
       totalRow: null,
       totalColumn: null,
       aisles: [
@@ -109,11 +109,11 @@ export default function CreateForm() {
                 type="number"
                 min="1"
                 placeholder="1"
-                {...register('screenNo')}
-                isInvalid={Boolean(errors.screenNo)}
+                {...register('no')}
+                isInvalid={Boolean(errors.no)}
               />
               <Form.Control.Feedback type="invalid" className="fs-6">
-                {errors.screenNo?.message}
+                {errors.no?.message}
               </Form.Control.Feedback>
             </FloatingLabel>
           </Col>
@@ -239,7 +239,7 @@ export type UnselectableSeatFormValue = {
 };
 
 export interface FormInputs {
-  screenNo: number | null;
+  no: number | null;
   totalRow: number | null;
   totalColumn: number | null;
   aisles: { typeId: number; no: number | null }[];

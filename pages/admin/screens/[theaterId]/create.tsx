@@ -15,6 +15,7 @@ import {
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
 
 export default function CreateForm() {
   yup.setLocale({
@@ -154,25 +155,27 @@ export default function CreateForm() {
             <UnselectableSeatInputs control={control} register={register} />
           </Col>
         </Row>
+
+        <Row className="mb-4">
+          <Col>
+            {isValid ? (
+              <>
+                <div className="mb-3">좌석 배치도</div>
+                <div>{JSON.stringify(watch())}</div>
+                <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
+              </>
+            ) : (
+              <div>
+                모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.
+              </div>
+            )}
+          </Col>
+        </Row>
         {alert ? <MyAlert message={alert} /> : null}
-        {isValid ? (
-          <>
-            <div className="mb-3">좌석 배치도</div>
-            <div>{JSON.stringify(watch())}</div>
-            <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
-            <Button className="me-3">등록</Button>
-            <Button>취소</Button>
-          </>
-        ) : (
-          <div>모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.</div>
-        )}
+        <BottomButtons disabled={!isValid} loading={false} />
       </Form>
     </Container>
   );
-
-  function handleSeatingMapMake() {
-    // TODO:
-  }
 }
 
 export interface FormInputs {

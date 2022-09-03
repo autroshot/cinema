@@ -139,6 +139,7 @@ export default function CreateForm() {
               </Form.Control.Feedback>
             </FloatingLabel>
           </Col>
+
           <Col>
             <FloatingLabel controlId="totalColumn" label="좌석 열 개수">
               <Form.Control

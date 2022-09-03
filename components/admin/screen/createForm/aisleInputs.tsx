@@ -7,6 +7,7 @@ import {
   UseFormRegister,
 } from 'react-hook-form';
 import DeleteButton from './deleteButton';
+import styles from './common.module.css';
 
 export default function AisleInputs(props: Props) {
   return (
@@ -25,6 +26,7 @@ export default function AisleInputs(props: Props) {
                 </Form.Select>
               </FloatingLabel>
             </Col>
+
             <Col>
               <FloatingLabel controlId="aisleNo" label="해당 번호">
                 <Form.Control
@@ -39,13 +41,14 @@ export default function AisleInputs(props: Props) {
                 </Form.Control.Feedback>
               </FloatingLabel>
             </Col>
-            <Col
-              xs={1}
-              className="d-flex align-items-center justify-content-center"
-            >
-              <span onClick={() => props.onRemove(index)}>
+
+            <Col xs={1} className={styles.fixedHeight}>
+              <div
+                onClick={() => props.onRemove(index)}
+                className="h-100 d-flex align-items-center justify-content-center"
+              >
                 <DeleteButton />
-              </span>
+              </div>
             </Col>
           </Row>
         );

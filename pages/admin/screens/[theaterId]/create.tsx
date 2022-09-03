@@ -78,19 +78,10 @@ export default function CreateForm() {
     resolver: yupResolver(schema),
   });
   const {
-    fields: aisleFields,
-    append: aisleAppend,
-    remove: aisleRemove,
-  } = useFieldArray({ control, name: 'aisles' });
-  const {
     fields: unselectableSeatFields,
     append: unselectableSeatAppend,
     remove: unselectableSeatRemove,
   } = useFieldArray({ control, name: 'unselectableSeats' });
-
-  const [unselectableSeats, setUnselectableSeats] = useState<
-    UnselectableSeatFormValue[]
-  >([]);
 
   const [alert, setAlert] = useState<null | string>(null);
 
@@ -198,46 +189,10 @@ export default function CreateForm() {
     </Container>
   );
 
-  function handleUnselectableSeatsChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    index: number
-  ) {
-    const name = event.currentTarget.name as keyof UnselectableSeatFormValue;
-    const value = event.currentTarget.value;
-
-    setUnselectableSeats((unselectableSeats) => {
-      const unselectableSeatsCopy = [...unselectableSeats];
-      unselectableSeatsCopy[index][name] = value;
-      return unselectableSeatsCopy;
-    });
-  }
-
-  function handleUnselectableSeatInputAdd() {
-    setUnselectableSeats([
-      ...unselectableSeats,
-      {
-        row: '',
-        column: '',
-        unselectable_seat_type_id: '1',
-      },
-    ]);
-  }
-  function handleUnselectableSeatInputDelete(index: number) {
-    const unselectableSeatsCopy = [...unselectableSeats];
-    unselectableSeatsCopy.splice(index, 1);
-    setUnselectableSeats(unselectableSeatsCopy);
-  }
-
   function handleSeatingMapMake() {
     // TODO:
   }
 }
-
-export type UnselectableSeatFormValue = {
-  row: string;
-  column: string;
-  unselectable_seat_type_id: string;
-};
 
 export interface FormInputs {
   no: number | null;

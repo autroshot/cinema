@@ -2,10 +2,7 @@ import { FormInputs } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   Control,
-  FieldArrayWithId,
-  FieldErrorsImpl,
   useFieldArray,
-  UseFieldArrayRemove,
   UseFormRegister,
   useFormState,
 } from 'react-hook-form';

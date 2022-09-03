@@ -1,7 +1,4 @@
-import {
-  FormInputs,
-  UnselectableSeatFormValue,
-} from 'pages/admin/screens/[theaterId]/create';
+import { FormInputs } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   FieldArrayWithId,

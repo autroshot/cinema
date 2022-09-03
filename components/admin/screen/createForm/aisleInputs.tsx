@@ -18,7 +18,7 @@ export default function AisleInputs(props: Props) {
               <FloatingLabel controlId="aisleType" label="통로 유형">
                 <Form.Select
                   aria-label="통로 유형 항목"
-                  {...props.register(`aisles.${index}.type`)}
+                  {...props.register(`aisles.${index}.typeId`)}
                 >
                   <option value="1">row</option>
                   <option value="2">column</option>

@@ -64,9 +64,9 @@ export default function CreateForm() {
       totalRow: null,
       totalColumn: null,
       aisles: [
-        { type: 1, no: 1 },
-        { type: 2, no: 3 },
-        { type: 1, no: 100 },
+        { typeId: 1, no: 1 },
+        { typeId: 2, no: 3 },
+        { typeId: 1, no: 100 },
       ],
     },
     mode: 'onChange',
@@ -161,7 +161,7 @@ export default function CreateForm() {
             />
             <div
               className="d-grid"
-              onClick={() => aisleAppend({ type: 1, no: null })}
+              onClick={() => aisleAppend({ typeId: 1, no: null })}
             >
               <AddButton />
             </div>
@@ -242,7 +242,7 @@ export interface FormInputs {
   screenNo: number | null;
   totalRow: number | null;
   totalColumn: number | null;
-  aisles: { type: number; no: number | null }[];
+  aisles: { typeId: number; no: number | null }[];
   unselectableSeats: {
     typeId: number;
     row: number | null;

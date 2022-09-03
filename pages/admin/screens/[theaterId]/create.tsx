@@ -1,4 +1,3 @@
-import AddButton from 'components/admin/screen/createForm/addButton';
 import AisleInputs from 'components/admin/screen/createForm/aisleInputs';
 import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
 import MyAlert from 'components/admin/theater/myAlert';
@@ -13,7 +12,7 @@ import {
   Form,
   Row,
 } from 'react-bootstrap';
-import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -77,11 +76,6 @@ export default function CreateForm() {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
-  const {
-    fields: unselectableSeatFields,
-    append: unselectableSeatAppend,
-    remove: unselectableSeatRemove,
-  } = useFieldArray({ control, name: 'unselectableSeats' });
 
   const [alert, setAlert] = useState<null | string>(null);
 
@@ -157,20 +151,7 @@ export default function CreateForm() {
         <Row className="mb-4">
           <Col>
             <h5>선택 불가능한 좌석 지정하기</h5>
-            <UnselectableSeatInputs
-              fields={unselectableSeatFields}
-              errors={errors}
-              register={register}
-              onRemove={unselectableSeatRemove}
-            />
-            <div
-              className="d-grid"
-              onClick={() =>
-                unselectableSeatAppend({ typeId: 1, row: null, column: null })
-              }
-            >
-              <AddButton />
-            </div>
+            <UnselectableSeatInputs control={control} register={register} />
           </Col>
         </Row>
         {alert ? <MyAlert message={alert} /> : null}

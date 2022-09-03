@@ -1,18 +1,28 @@
 import { FormInputs } from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
-  FieldArrayWithId,
-  FieldErrorsImpl,
-  UseFieldArrayRemove,
+  Control,
+  useFieldArray,
   UseFormRegister,
+  useFormState,
 } from 'react-hook-form';
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
+import AddButton from './addButton';
 
 export default function UnselectableSeatInputs(props: Props) {
+  const { fields, append, remove } = useFieldArray({
+    control: props.control,
+    name: 'unselectableSeats',
+  });
+  const { errors } = useFormState({
+    control: props.control,
+    name: 'unselectableSeats',
+  });
+
   return (
     <>
-      {props.fields.map((field, index) => {
+      {fields.map((field, index) => {
         return (
           <Row className="mt-3" key={field.id}>
             <Col>
@@ -34,12 +44,10 @@ export default function UnselectableSeatInputs(props: Props) {
                   placeholder="1"
                   min="1"
                   {...props.register(`unselectableSeats.${index}.row`)}
-                  isInvalid={Boolean(
-                    props.errors.unselectableSeats?.[index]?.row
-                  )}
+                  isInvalid={Boolean(errors.unselectableSeats?.[index]?.row)}
                 />
                 <Form.Control.Feedback type="invalid" className="fs-6">
-                  {props.errors.unselectableSeats?.[index]?.row?.message}
+                  {errors.unselectableSeats?.[index]?.row?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>
             </Col>
@@ -51,19 +59,17 @@ export default function UnselectableSeatInputs(props: Props) {
                   placeholder="1"
                   min="1"
                   {...props.register(`unselectableSeats.${index}.column`)}
-                  isInvalid={Boolean(
-                    props.errors.unselectableSeats?.[index]?.column
-                  )}
+                  isInvalid={Boolean(errors.unselectableSeats?.[index]?.column)}
                 />
                 <Form.Control.Feedback type="invalid" className="fs-6">
-                  {props.errors.unselectableSeats?.[index]?.column?.message}
+                  {errors.unselectableSeats?.[index]?.column?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>
             </Col>
 
             <Col xs={1} className={styles.fixedHeight}>
               <div
-                onClick={() => props.onRemove(index)}
+                onClick={() => remove(index)}
                 className="h-100 d-flex align-items-center justify-content-center"
               >
                 <DeleteButton />
@@ -72,26 +78,17 @@ export default function UnselectableSeatInputs(props: Props) {
           </Row>
         );
       })}
+      <div
+        className="d-grid"
+        onClick={() => append({ typeId: 1, row: null, column: null })}
+      >
+        <AddButton />
+      </div>
     </>
   );
 }
 
 interface Props {
-  fields: FieldArrayWithId<FormInputs, 'unselectableSeats', 'id'>[];
-  errors: FieldErrorsImpl<{
-    no: number;
-    totalRow: number;
-    totalColumn: number;
-    aisles: {
-      typeId: number;
-      no: number;
-    }[];
-    unselectableSeats: {
-      typeId: number;
-      row: number;
-      column: number;
-    }[];
-  }>;
+  control: Control<FormInputs, any>;
   register: UseFormRegister<FormInputs>;
-  onRemove: UseFieldArrayRemove;
 }

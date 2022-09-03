@@ -1,25 +1,22 @@
-import { UnselectableSeatFormValue } from 'pages/admin/screens/[theaterId]/create';
+import {
+  FormInputs,
+  UnselectableSeatFormValue,
+} from 'pages/admin/screens/[theaterId]/create';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { FieldArrayWithId, UseFormRegister } from 'react-hook-form';
 import DeleteButton from './deleteButton';
 
 export default function UnselectableSeatInputs(props: Props) {
   return (
     <>
-      {props.unselectableSeats.map((unselectableSeat, index) => {
+      {props.fields.map((field, index) => {
         return (
-          <Row className="mt-3" key={index}>
+          <Row className="mt-3" key={field.id}>
             <Col>
               <FloatingLabel controlId="seatType" label="좌석 유형">
                 <Form.Select
-                  name="unselectable_seat_type_id"
                   aria-label="좌석 유형 항목"
-                  value={unselectableSeat.unselectable_seat_type_id}
-                  onChange={(event) =>
-                    props.onChange(
-                      event as React.ChangeEvent<HTMLSelectElement>,
-                      index
-                    )
-                  }
+                  {...props.register(`unselectableSeats.${index}.typeId`)}
                 >
                   <option value="1">nonexistent</option>
                   <option value="2">unavailable</option>
@@ -29,34 +26,20 @@ export default function UnselectableSeatInputs(props: Props) {
             <Col>
               <FloatingLabel controlId="row" label="행 번호">
                 <Form.Control
-                  name="row"
                   type="number"
                   placeholder="1"
                   min="1"
-                  value={unselectableSeat.row}
-                  onChange={(event) =>
-                    props.onChange(
-                      event as React.ChangeEvent<HTMLInputElement>,
-                      index
-                    )
-                  }
+                  {...props.register(`unselectableSeats.${index}.row`)}
                 />
               </FloatingLabel>
             </Col>
             <Col>
               <FloatingLabel controlId="column" label="열 번호">
                 <Form.Control
-                  name="column"
                   type="number"
                   placeholder="1"
                   min="1"
-                  value={unselectableSeat.column}
-                  onChange={(event) =>
-                    props.onChange(
-                      event as React.ChangeEvent<HTMLInputElement>,
-                      index
-                    )
-                  }
+                  {...props.register(`unselectableSeats.${index}.column`)}
                 />
               </FloatingLabel>
             </Col>
@@ -76,7 +59,8 @@ export default function UnselectableSeatInputs(props: Props) {
 }
 
 interface Props {
-  unselectableSeats: UnselectableSeatFormValue[];
+  fields: FieldArrayWithId<FormInputs, 'unselectableSeats', 'id'>[];
+  register: UseFormRegister<FormInputs>;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     index: number

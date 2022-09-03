@@ -68,6 +68,11 @@ export default function CreateForm() {
         { typeId: 2, no: 3 },
         { typeId: 1, no: 100 },
       ],
+      unselectableSeats: [
+        { typeId: 1, row: 1, column: 5 },
+        { typeId: 2, row: 3, column: 6 },
+        { typeId: 2, row: 100, column: 7 },
+      ],
     },
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -172,7 +177,8 @@ export default function CreateForm() {
           <Col>
             <h5>선택 불가능한 좌석 지정하기</h5>
             <UnselectableSeatInputs
-              unselectableSeats={unselectableSeats}
+              fields={unselectableSeatFields}
+              register={register}
               onChange={handleUnselectableSeatsChange}
               onDelete={handleUnselectableSeatInputDelete}
             />

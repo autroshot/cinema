@@ -182,7 +182,12 @@ export default function CreateForm() {
               onChange={handleUnselectableSeatsChange}
               onDelete={handleUnselectableSeatInputDelete}
             />
-            <div className="d-grid" onClick={handleUnselectableSeatInputAdd}>
+            <div
+              className="d-grid"
+              onClick={() =>
+                unselectableSeatAppend({ typeId: 1, row: null, column: null })
+              }
+            >
               <AddButton />
             </div>
           </Col>

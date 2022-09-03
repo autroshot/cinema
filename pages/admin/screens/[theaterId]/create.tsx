@@ -77,6 +77,11 @@ export default function CreateForm() {
     append: aisleAppend,
     remove: aisleRemove,
   } = useFieldArray({ control, name: 'aisles' });
+  const {
+    fields: unselectableSeatFields,
+    append: unselectableSeatAppend,
+    remove: unselectableSeatRemove,
+  } = useFieldArray({ control, name: 'unselectableSeats' });
 
   const [unselectableSeats, setUnselectableSeats] = useState<
     UnselectableSeatFormValue[]
@@ -238,6 +243,11 @@ export interface FormInputs {
   totalRow: number | null;
   totalColumn: number | null;
   aisles: { type: number; no: number | null }[];
+  unselectableSeats: {
+    typeId: number;
+    row: number | null;
+    column: number | null;
+  }[];
 }
 
 CreateForm.isAdminPage = true;

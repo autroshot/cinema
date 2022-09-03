@@ -5,6 +5,7 @@ import {
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   FieldArrayWithId,
+  FieldErrorsImpl,
   UseFieldArrayRemove,
   UseFormRegister,
 } from 'react-hook-form';
@@ -34,7 +35,13 @@ export default function UnselectableSeatInputs(props: Props) {
                   placeholder="1"
                   min="1"
                   {...props.register(`unselectableSeats.${index}.row`)}
+                  isInvalid={Boolean(
+                    props.errors.unselectableSeats?.[index]?.row
+                  )}
                 />
+                <Form.Control.Feedback type="invalid" className="fs-6">
+                  {props.errors.unselectableSeats?.[index]?.row?.message}
+                </Form.Control.Feedback>
               </FloatingLabel>
             </Col>
             <Col>
@@ -44,7 +51,13 @@ export default function UnselectableSeatInputs(props: Props) {
                   placeholder="1"
                   min="1"
                   {...props.register(`unselectableSeats.${index}.column`)}
+                  isInvalid={Boolean(
+                    props.errors.unselectableSeats?.[index]?.column
+                  )}
                 />
+                <Form.Control.Feedback type="invalid" className="fs-6">
+                  {props.errors.unselectableSeats?.[index]?.column?.message}
+                </Form.Control.Feedback>
               </FloatingLabel>
             </Col>
             <Col
@@ -64,6 +77,20 @@ export default function UnselectableSeatInputs(props: Props) {
 
 interface Props {
   fields: FieldArrayWithId<FormInputs, 'unselectableSeats', 'id'>[];
+  errors: FieldErrorsImpl<{
+    no: number;
+    totalRow: number;
+    totalColumn: number;
+    aisles: {
+      typeId: number;
+      no: number;
+    }[];
+    unselectableSeats: {
+      typeId: number;
+      row: number;
+      column: number;
+    }[];
+  }>;
   register: UseFormRegister<FormInputs>;
   onRemove: UseFieldArrayRemove;
 }

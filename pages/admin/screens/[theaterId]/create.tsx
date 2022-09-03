@@ -178,6 +178,7 @@ export default function CreateForm() {
             <h5>선택 불가능한 좌석 지정하기</h5>
             <UnselectableSeatInputs
               fields={unselectableSeatFields}
+              errors={errors}
               register={register}
               onRemove={unselectableSeatRemove}
             />

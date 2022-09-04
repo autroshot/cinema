@@ -4,14 +4,7 @@ import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens';
 import { useState } from 'react';
-import {
-  Button,
-  Col,
-  Container,
-  FloatingLabel,
-  Form,
-  Row,
-} from 'react-bootstrap';
+import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -46,7 +39,18 @@ export default function CreateForm() {
     ),
     unselectableSeats: yup.array().of(
       yup.object({
-        row: yup.number().positive().integer(),
+        row: yup
+          .number()
+          .positive()
+          .integer()
+          .test(
+            'less-than-or-equal-to-total-row',
+            '좌석 행 개수 이하여야 합니다.',
+            function (value) {
+              // yup 타입이 업데이트되지 않아 this를 any로 단언한다.
+              return (value as number) <= (this as any).from[1].value.totalRow;
+            }
+          ),
         column: yup.number().positive().integer(),
       })
     ),

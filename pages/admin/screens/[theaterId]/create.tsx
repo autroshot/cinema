@@ -51,7 +51,20 @@ export default function CreateForm() {
               return (value as number) <= (this as any).from[1].value.totalRow;
             }
           ),
-        column: yup.number().positive().integer(),
+        column: yup
+          .number()
+          .positive()
+          .integer()
+          .test(
+            'less-than-or-equal-to-total-column',
+            '좌석 열 개수 이하여야 합니다.',
+            function (value) {
+              // yup 타입이 업데이트되지 않아 this를 any로 단언한다.
+              return (
+                (value as number) <= (this as any).from[1].value.totalColumn
+              );
+            }
+          ),
       })
     ),
   });
@@ -61,6 +74,7 @@ export default function CreateForm() {
     register,
     watch,
     handleSubmit,
+    trigger,
     formState: { isValid, errors },
   } = useForm<FormInputs>({
     defaultValues: {
@@ -116,7 +130,11 @@ export default function CreateForm() {
 
         <Row className="mb-3">
           <Col>
-            <FloatingLabel controlId="totalRow" label="좌석 행 개수">
+            <FloatingLabel
+              controlId="totalRow"
+              label="좌석 행 개수"
+              onChange={() => trigger('unselectableSeats')}
+            >
               <Form.Control
                 type="number"
                 min="1"
@@ -131,7 +149,11 @@ export default function CreateForm() {
           </Col>
 
           <Col>
-            <FloatingLabel controlId="totalColumn" label="좌석 열 개수">
+            <FloatingLabel
+              controlId="totalColumn"
+              label="좌석 열 개수"
+              onChange={() => trigger('unselectableSeats')}
+            >
               <Form.Control
                 type="number"
                 min="1"

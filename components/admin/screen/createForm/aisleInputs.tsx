@@ -37,7 +37,7 @@ export default function AisleInputs(props: Props) {
               <FloatingLabel controlId="aisleNo" label="해당 번호">
                 <Form.Control
                   type="number"
-                  min="1"
+                  min="2"
                   placeholder="1"
                   {...props.register(`aisles.${index}.no`)}
                   isInvalid={Boolean(errors.aisles?.[index]?.no)}

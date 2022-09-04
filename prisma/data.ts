@@ -209,3 +209,14 @@ export const screens: Prisma.Enumerable<Prisma.screenCreateManyInput> = [
     theater_id: 3,
   },
 ];
+
+export const aisleTypes: Prisma.aisle_typeCreateInput[] = [
+  { id: 1, name: 'row' },
+  { id: 2, name: 'column' },
+];
+
+export const unselectableSeatTypes: Prisma.unselectable_seat_typeCreateInput[] =
+  [
+    { id: 1, name: 'nonexistent' },
+    { id: 2, name: 'unavailable' },
+  ];

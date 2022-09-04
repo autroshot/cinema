@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import type { GetResponseData } from 'pages/api/screens/index.page';
 import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';

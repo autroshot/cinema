@@ -1,4 +1,4 @@
-import { TheaterFormValues } from 'pages/admin/theaters/create';
+import { TheaterFormValues } from 'pages/admin/theaters/create.page';
 import { Table } from 'react-bootstrap';
 import styles from './theaterForm.module.css';
 

@@ -1,5 +1,8 @@
 import Link from 'next/link';
-import type { GetRequestData, GetResponseData } from 'pages/api/theaters';
+import type {
+  GetRequestData,
+  GetResponseData,
+} from 'pages/api/theaters/index.page';
 import { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import styles from './contents.module.css';

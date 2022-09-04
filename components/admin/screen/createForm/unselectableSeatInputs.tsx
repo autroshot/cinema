@@ -1,4 +1,4 @@
-import { FormInputs } from 'pages/admin/screens/[theaterId]/create';
+import { FormInputs } from 'pages/admin/screens/[theaterId]/create.page';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   Control,

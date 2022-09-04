@@ -3,7 +3,7 @@ import Info from 'components/theater/info';
 import MovieRecommendation from 'components/theater/movieRecommendation';
 import styles from './theater.module.css';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { GetResponseData } from 'pages/api/theaters/[id]';
+import type { GetResponseData } from 'pages/api/theaters/[id].page';
 import { prisma } from 'db';
 import { useRouter } from 'next/router';
 

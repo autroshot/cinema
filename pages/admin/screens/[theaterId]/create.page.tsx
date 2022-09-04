@@ -2,7 +2,7 @@ import AisleInputs from 'components/admin/screen/createForm/aisleInputs';
 import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
 import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
-import { PostRequestData } from 'pages/api/screens';
+import { PostRequestData } from 'pages/api/screens/index.page';
 import { useState } from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';

@@ -6,11 +6,14 @@ import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';
 import { useRouter } from 'next/router';
-import type { PostRequestData, ErrorResponseData } from 'pages/api/theaters';
-import type { GetResponseData } from 'pages/api/theaters/[id]';
+import type {
+  PostRequestData,
+  ErrorResponseData,
+} from 'pages/api/theaters/index.page';
+import type { GetResponseData } from 'pages/api/theaters/[id].page';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { TheaterFormValues } from './create';
+import { TheaterFormValues } from './create.page';
 
 export default function Detail() {
   const [id, setId] = useState(-1);

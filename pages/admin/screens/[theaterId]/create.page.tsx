@@ -9,7 +9,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
 import { schema } from './create.yup';
-import SeatingMap from 'components/admin/screen/createForm/seatingMap';
+import SeatingMap, {
+  Values,
+} from 'components/admin/screen/createForm/seatingMap';
 
 export default function CreateForm() {
   const {
@@ -134,10 +136,8 @@ export default function CreateForm() {
           <Col>
             {isValid ? (
               <>
-                <div className="mb-3">좌석 배치도</div>
-                <div>{JSON.stringify(watch())}</div>
-                <SeatingMap />
-                <p>{theaterId} 영화관에 새 상영관을 등록합니다.</p>
+                <h5 className="mb-3">좌석 배치도</h5>
+                <SeatingMap values={toSeatingMapValues(watch())} />
               </>
             ) : (
               <div>
@@ -146,11 +146,26 @@ export default function CreateForm() {
             )}
           </Col>
         </Row>
+        <p>{theaterId} 영화관에 해당 상영관을 등록합니다.</p>
         {alert ? <MyAlert message={alert} /> : null}
         <BottomButtons disabled={!isValid} loading={false} />
       </Form>
     </Container>
   );
+
+  function toSeatingMapValues(formInputs: FormInputs) {
+    const result: Values = {
+      totalRow: formInputs.totalRow as number,
+      totalColumn: formInputs.totalColumn as number,
+      aisles: formInputs.aisles as { typeId: number; no: number }[],
+      unselectableSeats: formInputs.unselectableSeats as {
+        row: number;
+        column: number;
+      }[],
+    };
+
+    return result;
+  }
 }
 
 export interface FormInputs {

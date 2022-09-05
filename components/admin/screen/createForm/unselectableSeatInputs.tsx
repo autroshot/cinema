@@ -4,6 +4,7 @@ import {
   Control,
   useFieldArray,
   UseFormRegister,
+  UseFormResetField,
   useFormState,
 } from 'react-hook-form';
 import DeleteButton from './deleteButton';
@@ -13,13 +14,17 @@ import { useEffect, useState } from 'react';
 import { GetResponseData } from 'pages/api/unselectable-seat-types/index.page';
 import axios from 'axios';
 
-export default function UnselectableSeatInputs(props: Props) {
+export default function UnselectableSeatInputs({
+  control,
+  register,
+  resetField,
+}: Props) {
   const { fields, append, remove } = useFieldArray({
-    control: props.control,
+    control: control,
     name: 'unselectableSeats',
   });
   const { errors } = useFormState({
-    control: props.control,
+    control: control,
     name: 'unselectableSeats',
   });
 
@@ -27,8 +32,9 @@ export default function UnselectableSeatInputs(props: Props) {
   useEffect(() => {
     axios.get<GetResponseData>('/api/unselectable-seat-types').then((res) => {
       setTypes(res.data);
+      resetField('unselectableSeats');
     });
-  }, []);
+  }, [resetField]);
 
   return (
     <>
@@ -39,7 +45,7 @@ export default function UnselectableSeatInputs(props: Props) {
               <FloatingLabel controlId="unselectableSeatType" label="좌석 유형">
                 <Form.Select
                   aria-label="좌석 유형 항목"
-                  {...props.register(`unselectableSeats.${index}.typeId`)}
+                  {...register(`unselectableSeats.${index}.typeId`)}
                 >
                   {types.map((type) => {
                     return (
@@ -58,7 +64,7 @@ export default function UnselectableSeatInputs(props: Props) {
                   type="number"
                   placeholder="1"
                   min="1"
-                  {...props.register(`unselectableSeats.${index}.row`)}
+                  {...register(`unselectableSeats.${index}.row`)}
                   isInvalid={Boolean(errors.unselectableSeats?.[index]?.row)}
                 />
                 <Form.Control.Feedback type="invalid" className="fs-6">
@@ -73,7 +79,7 @@ export default function UnselectableSeatInputs(props: Props) {
                   type="number"
                   placeholder="1"
                   min="1"
-                  {...props.register(`unselectableSeats.${index}.column`)}
+                  {...register(`unselectableSeats.${index}.column`)}
                   isInvalid={Boolean(errors.unselectableSeats?.[index]?.column)}
                 />
                 <Form.Control.Feedback type="invalid" className="fs-6">
@@ -106,4 +112,5 @@ export default function UnselectableSeatInputs(props: Props) {
 interface Props {
   control: Control<FormInputs, any>;
   register: UseFormRegister<FormInputs>;
+  resetField: UseFormResetField<FormInputs>;
 }

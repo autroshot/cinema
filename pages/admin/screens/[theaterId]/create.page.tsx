@@ -17,6 +17,7 @@ export default function CreateForm() {
     watch,
     handleSubmit,
     trigger,
+    resetField,
     formState: { isValid, errors },
   } = useForm<FormInputs>({
     defaultValues: {
@@ -120,7 +121,11 @@ export default function CreateForm() {
         <Row className="mb-4">
           <Col>
             <h5>선택 불가능한 좌석 지정하기</h5>
-            <UnselectableSeatInputs control={control} register={register} />
+            <UnselectableSeatInputs
+              control={control}
+              register={register}
+              resetField={resetField}
+            />
           </Col>
         </Row>
 

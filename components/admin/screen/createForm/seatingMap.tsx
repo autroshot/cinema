@@ -1,6 +1,6 @@
 import { FormInputs } from 'pages/admin/screens/[theaterId]/create.page';
 import { string } from 'yup';
-import SeatButton from './seatButton';
+import SeatButton, { seatButtonType } from './seatButton';
 import styles from './seatingMap.module.css';
 
 export default function SeatingMap({ values }: Props) {
@@ -19,97 +19,6 @@ export default function SeatingMap({ values }: Props) {
                 <td>&#160;</td>
               </tr>
               {createTableContent()}
-              {/* <tr>
-                <td className={styles.td}>A</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>
-                  <SeatButton type="general" value={1} />
-                </td>
-                <td className={styles.td}>
-                  <SeatButton type="selected" value={2} />
-                </td>
-                <td className={styles.td}>
-                  <SeatButton type="unselectable" value={3} />
-                </td>
-                <td className={styles.td}>
-                  <SeatButton type="general" value={4} />
-                </td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>3</td>
-                <td className={styles.td}>4</td>
-                <td className={styles.td}>&#160;</td>
-              </tr>
-              <tr>
-                <td className={styles.td}>B</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>
-                  <SeatButton type="general" value={15} />
-                </td>
-                <td className={styles.td}>
-                  <SeatButton type="general" value={55} />
-                </td>
-                <td className={styles.td}>
-                  <SeatButton type="general" value={99} />
-                </td>
-                <td className={styles.td}>
-                  <SeatButton type="selected" value={11} />
-                </td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>3</td>
-                <td className={styles.td}>4</td>
-                <td className={styles.td}>&#160;</td>
-              </tr>
-              <tr>
-                <td className={styles.td}>C</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>9</td>
-                <td className={styles.td}>10</td>
-                <td className={styles.td}>11</td>
-                <td className={styles.td}>12</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>3</td>
-                <td className={styles.td}>4</td>
-                <td className={styles.td}>&#160;</td>
-              </tr>
-              <tr>
-                <td className={styles.td}>D</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>13</td>
-                <td className={styles.td}>14</td>
-                <td className={styles.td}>15</td>
-                <td className={styles.td}>16</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>3</td>
-                <td className={styles.td}>4</td>
-                <td className={styles.td}>&#160;</td>
-              </tr>
-              <tr>
-                <td>&#160;</td>
-              </tr>
-              <tr>
-                <td className={styles.td}>D</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>13</td>
-                <td className={styles.td}>14</td>
-                <td className={styles.td}>15</td>
-                <td className={styles.td}>16</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>3</td>
-                <td className={styles.td}>4</td>
-                <td className={styles.td}>&#160;</td>
-              </tr>
-              <tr>
-                <td className={styles.td}>D</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>13</td>
-                <td className={styles.td}>14</td>
-                <td className={styles.td}>15</td>
-                <td className={styles.td}>16</td>
-                <td className={styles.td}>&#160;</td>
-                <td className={styles.td}>3</td>
-                <td className={styles.td}>4</td>
-                <td className={styles.td}>&#160;</td>
-              </tr> */}
             </tbody>
           </table>
         </div>
@@ -124,9 +33,18 @@ export default function SeatingMap({ values }: Props) {
       const tds: JSX.Element[] = [];
 
       for (let j = 1; j <= values.totalColumn; j++) {
+        const isUnselectableSeat = values.unselectableSeats.some(
+          (unselectableSeat) => {
+            return unselectableSeat.row === i && unselectableSeat.column === j;
+          }
+        );
+        const type: seatButtonType = isUnselectableSeat
+          ? 'unselectable'
+          : 'general';
+
         tds.push(
           <td key={j} className={styles.td}>
-            <SeatButton type="general" value={j} />
+            <SeatButton type={type} value={j} />
           </td>
         );
       }

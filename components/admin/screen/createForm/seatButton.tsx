@@ -14,5 +14,7 @@ export default function seatButton(props: Props) {
 
 interface Props {
   value?: number;
-  type: 'general' | 'selected' | 'unselectable';
+  type: seatButtonType;
 }
+
+export type seatButtonType = 'general' | 'selected' | 'unselectable';

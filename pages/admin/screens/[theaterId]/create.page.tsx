@@ -42,7 +42,6 @@ export default function CreateForm() {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data);
   };
-
   return (
     <Container className="my-3">
       <Form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -147,13 +146,19 @@ export default function CreateForm() {
 
   function toSeatingMapValues(formInputs: FormInputs) {
     const result: Values = {
-      totalRow: formInputs.totalRow as number,
-      totalColumn: formInputs.totalColumn as number,
-      aisles: formInputs.aisles as { typeId: number; no: number }[],
-      unselectableSeats: formInputs.unselectableSeats as {
-        row: number;
-        column: number;
-      }[],
+      totalRow: Number(formInputs.totalRow),
+      totalColumn: Number(formInputs.totalColumn),
+      aisles: formInputs.aisles.map((aisle) => {
+        return { typeId: Number(aisle.typeId), no: Number(aisle.no) };
+      }),
+      unselectableSeats: formInputs.unselectableSeats.map(
+        (unselectableSeat) => {
+          return {
+            row: Number(unselectableSeat.row),
+            column: Number(unselectableSeat.column),
+          };
+        }
+      ),
     };
 
     return result;

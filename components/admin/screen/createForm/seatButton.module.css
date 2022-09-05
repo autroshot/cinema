@@ -1,6 +1,6 @@
 .button {
-  width: 2.2rem;
-  height: 2rem;
+  width: 2.1rem;
+  height: 1.9rem;
   border-radius: 0.8rem 0.8rem 0 0;
   position: relative;
 }
@@ -24,8 +24,8 @@
 
 .line {
   position: absolute;
-  border-top: 0.15rem solid black;
-  width: 3rem;
+  border-top: 0.2rem solid black;
+  width: 2.4rem;
   transform: rotate(-42.27deg);
-  margin-left: -0.95rem;
+  margin-left: -0.8rem;
 }

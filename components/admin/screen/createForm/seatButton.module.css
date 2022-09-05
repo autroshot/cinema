@@ -1,0 +1,31 @@
+.button {
+  width: 2.2rem;
+  height: 2rem;
+  border-radius: 0.8rem 0.8rem 0 0;
+  position: relative;
+}
+
+.general {
+  composes: button;
+  background-color: #e8e8e8;
+}
+
+.selected {
+  composes: button;
+  cursor: default !important;
+  background-color: #d32f2f;
+}
+
+.unselectable {
+  composes: button;
+  cursor: default !important;
+  background-color: #747474;
+}
+
+.line {
+  position: absolute;
+  border-top: 0.15rem solid black;
+  width: 3rem;
+  transform: rotate(-42.27deg);
+  margin-left: -0.95rem;
+}

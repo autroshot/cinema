@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
 import { schema } from './create.yup';
 

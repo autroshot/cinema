@@ -27,16 +27,8 @@ export default function CreateForm() {
       no: null,
       totalRow: null,
       totalColumn: null,
-      aisles: [
-        { typeId: 1, no: 2 },
-        { typeId: 2, no: 30 },
-        { typeId: 1, no: 100 },
-      ],
-      unselectableSeats: [
-        { typeId: 1, row: 1, column: 5 },
-        { typeId: 2, row: 3, column: 6 },
-        { typeId: 2, row: 100, column: 7 },
-      ],
+      aisles: [],
+      unselectableSeats: [],
     },
     mode: 'onChange',
     resolver: yupResolver(schema),
@@ -132,21 +124,21 @@ export default function CreateForm() {
           </Col>
         </Row>
 
-        <Row className="mb-4">
+        <Row>
           <Col>
             {isValid ? (
               <>
                 <h5 className="mb-3">좌석 배치도</h5>
                 <SeatingMap values={toSeatingMapValues(watch())} />
+                <p className="mt-3">
+                  {theaterId} 영화관에 해당 상영관을 등록합니다.
+                </p>
               </>
             ) : (
-              <div>
-                모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.
-              </div>
+              <p>모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.</p>
             )}
           </Col>
         </Row>
-        <p>{theaterId} 영화관에 해당 상영관을 등록합니다.</p>
         {alert ? <MyAlert message={alert} /> : null}
         <BottomButtons disabled={!isValid} loading={false} />
       </Form>

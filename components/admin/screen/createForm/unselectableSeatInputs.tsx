@@ -9,6 +9,8 @@ import {
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
+import { useState } from 'react';
+import { GetResponseData } from 'pages/api/unselectable-seat-types';
 
 export default function UnselectableSeatInputs(props: Props) {
   const { fields, append, remove } = useFieldArray({
@@ -20,13 +22,15 @@ export default function UnselectableSeatInputs(props: Props) {
     name: 'unselectableSeats',
   });
 
+  const [types, setTypes] = useState<GetResponseData>([]);
+
   return (
     <>
       {fields.map((field, index) => {
         return (
           <Row className="mt-3" key={field.id}>
             <Col>
-              <FloatingLabel controlId="seatType" label="좌석 유형">
+              <FloatingLabel controlId="unselectableSeatType" label="좌석 유형">
                 <Form.Select
                   aria-label="좌석 유형 항목"
                   {...props.register(`unselectableSeats.${index}.typeId`)}

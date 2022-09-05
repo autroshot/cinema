@@ -30,7 +30,6 @@ export default function SeatingMap({ values }: Props) {
     const trs: JSX.Element[] = [];
     let rowAisles = calculateAisles(values.aisles, 'row');
     let columnAisles = calculateAisles(values.aisles, 'column');
-    console.log(rowAisles);
 
     for (
       let currentRow = 1, indexRow = 1;
@@ -42,18 +41,33 @@ export default function SeatingMap({ values }: Props) {
       if (rowAisles.includes(currentRow)) {
         trs.push(
           <tr key={currentRow}>
-            <td>&#160;</td>
+            <td className={styles.td}>&#160;</td>
           </tr>
         );
         currentRow += 1;
         continue;
       }
 
-      for (let j = 1; j <= values.totalColumn; j += 1) {
+      for (
+        let currentColumn = 1, indexColumn = 1;
+        currentColumn <= values.totalColumn + columnAisles.length;
+
+      ) {
+        if (columnAisles.includes(currentColumn)) {
+          tds.push(
+            <td key={currentColumn} className={styles.td}>
+              &#160;
+            </td>
+          );
+          currentColumn += 1;
+          continue;
+        }
+
         const isUnselectableSeat = values.unselectableSeats.some(
           (unselectableSeat) => {
             return (
-              unselectableSeat.row === indexRow && unselectableSeat.column === j
+              unselectableSeat.row === indexRow &&
+              unselectableSeat.column === indexColumn
             );
           }
         );
@@ -62,10 +76,13 @@ export default function SeatingMap({ values }: Props) {
           : 'general';
 
         tds.push(
-          <td key={j} className={styles.td}>
-            <SeatButton type={type} value={j} />
+          <td key={currentColumn} className={styles.td}>
+            <SeatButton type={type} value={indexColumn} />
           </td>
         );
+
+        indexColumn += 1;
+        currentColumn += 1;
       }
 
       trs.push(

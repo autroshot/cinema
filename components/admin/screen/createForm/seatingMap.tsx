@@ -29,10 +29,10 @@ export default function SeatingMap({ values }: Props) {
   function createTableContent() {
     const trs: JSX.Element[] = [];
 
-    for (let i = 1; i <= values.totalRow; i++) {
+    for (let i = 1; i <= values.totalRow; i += 1) {
       const tds: JSX.Element[] = [];
 
-      for (let j = 1; j <= values.totalColumn; j++) {
+      for (let j = 1; j <= values.totalColumn; j += 1) {
         const isUnselectableSeat = values.unselectableSeats.some(
           (unselectableSeat) => {
             return unselectableSeat.row === i && unselectableSeat.column === j;

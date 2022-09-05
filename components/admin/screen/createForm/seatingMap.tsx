@@ -28,14 +28,33 @@ export default function SeatingMap({ values }: Props) {
 
   function createTableContent() {
     const trs: JSX.Element[] = [];
+    let rowAisles = calculateAisles(values.aisles, 'row');
+    let columnAisles = calculateAisles(values.aisles, 'column');
+    console.log(rowAisles);
 
-    for (let i = 1; i <= values.totalRow; i += 1) {
+    for (
+      let currentRow = 1, indexRow = 1;
+      currentRow <= values.totalRow + rowAisles.length;
+
+    ) {
       const tds: JSX.Element[] = [];
+
+      if (rowAisles.includes(currentRow)) {
+        trs.push(
+          <tr key={currentRow}>
+            <td>&#160;</td>
+          </tr>
+        );
+        currentRow += 1;
+        continue;
+      }
 
       for (let j = 1; j <= values.totalColumn; j += 1) {
         const isUnselectableSeat = values.unselectableSeats.some(
           (unselectableSeat) => {
-            return unselectableSeat.row === i && unselectableSeat.column === j;
+            return (
+              unselectableSeat.row === indexRow && unselectableSeat.column === j
+            );
           }
         );
         const type: seatButtonType = isUnselectableSeat
@@ -50,16 +69,45 @@ export default function SeatingMap({ values }: Props) {
       }
 
       trs.push(
-        <tr key={i}>
-          <td className={styles.td}>{numberToBase26(i)}</td>
+        <tr key={currentRow}>
+          <td className={styles.td}>{numberToBase26(indexRow)}</td>
           <td className={styles.td}>&#160;</td>
           {tds}
           <td className={styles.td}>&#160;</td>
         </tr>
       );
+      indexRow += 1;
+      currentRow += 1;
     }
 
     return trs;
+  }
+
+  function calculateAisles(
+    aisles: {
+      typeId: number;
+      no: number;
+    }[],
+    type: 'row' | 'column'
+  ) {
+    let result: number[];
+
+    result = [
+      ...new Set(
+        aisles
+          .filter((aisle) => aisle.typeId === (type === 'row' ? 1 : 2))
+          .map((aisle) => aisle.no)
+      ),
+    ].sort((a, b) => a - b);
+
+    let count = 0;
+    result = result.map((value) => {
+      value += count;
+      count += 1;
+      return value;
+    });
+
+    return result;
   }
 
   function numberToBase26(val: number, tail = ''): string {

@@ -9,7 +9,7 @@ import {
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GetResponseData } from 'pages/api/unselectable-seat-types';
 
 export default function UnselectableSeatInputs(props: Props) {
@@ -23,6 +23,9 @@ export default function UnselectableSeatInputs(props: Props) {
   });
 
   const [types, setTypes] = useState<GetResponseData>([]);
+  useEffect(() => {
+    // TODO: 미구현
+  }, []);
 
   return (
     <>

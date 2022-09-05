@@ -10,7 +10,8 @@ import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
 import { useEffect, useState } from 'react';
-import { GetResponseData } from 'pages/api/unselectable-seat-types';
+import { GetResponseData } from 'pages/api/unselectable-seat-types/index.page';
+import axios from 'axios';
 
 export default function UnselectableSeatInputs(props: Props) {
   const { fields, append, remove } = useFieldArray({
@@ -24,7 +25,9 @@ export default function UnselectableSeatInputs(props: Props) {
 
   const [types, setTypes] = useState<GetResponseData>([]);
   useEffect(() => {
-    // TODO: 미구현
+    axios.get<GetResponseData>('/api/unselectable-seat-types').then((res) => {
+      setTypes(res.data);
+    });
   }, []);
 
   return (
@@ -38,8 +41,13 @@ export default function UnselectableSeatInputs(props: Props) {
                   aria-label="좌석 유형 항목"
                   {...props.register(`unselectableSeats.${index}.typeId`)}
                 >
-                  <option value="1">nonexistent</option>
-                  <option value="2">unavailable</option>
+                  {types.map((type) => {
+                    return (
+                      <option key={type.id} value={type.id}>
+                        {type.name}
+                      </option>
+                    );
+                  })}
                 </Form.Select>
               </FloatingLabel>
             </Col>

@@ -34,7 +34,7 @@ export default function SeatingMap({ values }: Props) {
     for (
       let currentRow = 1, indexRow = 1;
       currentRow <= values.totalRow + rowAisles.length;
-
+      currentRow += 1
     ) {
       const tds: JSX.Element[] = [];
 
@@ -44,14 +44,13 @@ export default function SeatingMap({ values }: Props) {
             <td className={styles.td}>&#160;</td>
           </tr>
         );
-        currentRow += 1;
         continue;
       }
 
       for (
         let currentColumn = 1, indexColumn = 1;
         currentColumn <= values.totalColumn + columnAisles.length;
-
+        currentColumn += 1
       ) {
         if (columnAisles.includes(currentColumn)) {
           tds.push(
@@ -59,7 +58,6 @@ export default function SeatingMap({ values }: Props) {
               &#160;
             </td>
           );
-          currentColumn += 1;
           continue;
         }
 
@@ -75,7 +73,6 @@ export default function SeatingMap({ values }: Props) {
             </td>
           );
           indexColumn += 1;
-          currentColumn += 1;
           continue;
         }
 
@@ -86,7 +83,6 @@ export default function SeatingMap({ values }: Props) {
         );
 
         indexColumn += 1;
-        currentColumn += 1;
       }
 
       trs.push(
@@ -98,7 +94,6 @@ export default function SeatingMap({ values }: Props) {
         </tr>
       );
       indexRow += 1;
-      currentRow += 1;
     }
 
     return trs;

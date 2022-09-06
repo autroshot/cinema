@@ -14,7 +14,7 @@ export default function SeatingMap({ values }: Props) {
           <table>
             <tbody>
               <tr>
-                <td>&#160;</td>
+                <td>&nbsp;</td>
               </tr>
               {createTableContent()}
             </tbody>
@@ -39,7 +39,7 @@ export default function SeatingMap({ values }: Props) {
       if (rowAisles.includes(currentRow)) {
         trs.push(
           <tr key={currentRow}>
-            <td className={styles.td}>&#160;</td>
+            <td className={styles.td}>&nbsp;</td>
           </tr>
         );
         continue;
@@ -53,7 +53,7 @@ export default function SeatingMap({ values }: Props) {
         if (columnAisles.includes(currentColumn)) {
           tds.push(
             <td key={currentColumn} className={styles.td}>
-              &#160;
+              &nbsp;
             </td>
           );
           continue;
@@ -67,7 +67,7 @@ export default function SeatingMap({ values }: Props) {
         if (seatType === 'nonexistent') {
           tds.push(
             <td key={currentColumn} className={styles.td}>
-              &#160;
+              &nbsp;
             </td>
           );
           indexColumn += 1;
@@ -86,9 +86,9 @@ export default function SeatingMap({ values }: Props) {
       trs.push(
         <tr key={currentRow}>
           <td className={styles.td}>{numberToBase26(indexRow)}</td>
-          <td className={styles.td}>&#160;</td>
+          <td className={styles.td}>&nbsp;</td>
           {tds}
-          <td className={styles.td}>&#160;</td>
+          <td className={styles.td}>&nbsp;</td>
         </tr>
       );
       indexRow += 1;

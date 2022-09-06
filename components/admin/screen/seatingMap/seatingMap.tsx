@@ -1,5 +1,3 @@
-import { FormInputs } from 'pages/admin/screens/[theaterId]/create.page';
-import { string } from 'yup';
 import SeatButton, { seatButtonType } from './seatButton';
 import styles from './seatingMap.module.css';
 

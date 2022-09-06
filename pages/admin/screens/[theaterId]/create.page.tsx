@@ -11,7 +11,7 @@ import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
 import { schema } from './create.yup';
 import SeatingMap, {
   Values,
-} from 'components/admin/screen/createForm/seatingMap';
+} from 'components/admin/screen/seatingMap/seatingMap';
 
 export default function CreateForm() {
   const {

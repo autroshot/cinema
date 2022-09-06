@@ -28,8 +28,11 @@ export default function SeatingMap({ values }: Props) {
 
   function createTableContent() {
     const trs: JSX.Element[] = [];
-    let rowAisles = calculateAisles(values.aisles, 'row');
-    let columnAisles = calculateAisles(values.aisles, 'column');
+
+    const rowAisles = values.aisles.filter((aisle) => aisle.typeId === 1);
+    const columnAisles = values.aisles.filter((aisle) => aisle.typeId === 2);
+    const blankRowNumbers = calculateActualNumbers(rowAisles);
+    const blankColumnNumbers = calculateActualNumbers(columnAisles);
 
     for (
       let currentRow = 1, indexRow = 1;
@@ -38,7 +41,7 @@ export default function SeatingMap({ values }: Props) {
     ) {
       const tds: JSX.Element[] = [];
 
-      if (rowAisles.includes(currentRow)) {
+      if (blankRowNumbers.includes(currentRow)) {
         trs.push(<BlankTr key={currentRow} />);
         continue;
       }
@@ -48,7 +51,7 @@ export default function SeatingMap({ values }: Props) {
         currentColumn <= values.totalColumn + columnAisles.length;
         currentColumn += 1
       ) {
-        if (columnAisles.includes(currentColumn)) {
+        if (blankColumnNumbers.includes(currentColumn)) {
           tds.push(<BlankTd key={currentColumn} />);
           continue;
         }
@@ -87,25 +90,15 @@ export default function SeatingMap({ values }: Props) {
     return trs;
   }
 
-  function calculateAisles(
-    aisles: {
-      typeId: number;
-      no: number;
-    }[],
-    type: 'row' | 'column'
-  ) {
+  function calculateActualNumbers(aisles: { typeId: number; no: number }[]) {
     let result: number[];
 
-    result = [
-      ...new Set(
-        aisles
-          .filter((aisle) => aisle.typeId === (type === 'row' ? 1 : 2))
-          .map((aisle) => aisle.no)
-      ),
+    const sortedAisleNumbers = [
+      ...new Set(aisles.map((aisle) => aisle.no)),
     ].sort((a, b) => a - b);
 
     let count = 0;
-    result = result.map((value) => {
+    result = sortedAisleNumbers.map((value) => {
       value += count;
       count += 1;
       return value;

@@ -1,5 +1,7 @@
 import SeatButton, { seatButtonType } from './seatButton';
-import styles from './seatingMap.module.css';
+import styles from './common.module.css';
+import BlankTr from './blankTr';
+import BlankTd from './blankTd';
 
 export default function SeatingMap({ values }: Props) {
   return (
@@ -37,11 +39,7 @@ export default function SeatingMap({ values }: Props) {
       const tds: JSX.Element[] = [];
 
       if (rowAisles.includes(currentRow)) {
-        trs.push(
-          <tr key={currentRow}>
-            <td className={styles.td}>&nbsp;</td>
-          </tr>
-        );
+        trs.push(<BlankTr key={currentRow} />);
         continue;
       }
 
@@ -51,11 +49,7 @@ export default function SeatingMap({ values }: Props) {
         currentColumn += 1
       ) {
         if (columnAisles.includes(currentColumn)) {
-          tds.push(
-            <td key={currentColumn} className={styles.td}>
-              &nbsp;
-            </td>
-          );
+          tds.push(<BlankTd key={currentColumn} />);
           continue;
         }
 
@@ -65,11 +59,7 @@ export default function SeatingMap({ values }: Props) {
           values.unselectableSeats
         );
         if (seatType === 'nonexistent') {
-          tds.push(
-            <td key={currentColumn} className={styles.td}>
-              &nbsp;
-            </td>
-          );
+          tds.push(<BlankTd key={currentColumn} />);
           indexColumn += 1;
           continue;
         }
@@ -86,9 +76,9 @@ export default function SeatingMap({ values }: Props) {
       trs.push(
         <tr key={currentRow}>
           <td className={styles.td}>{numberToBase26(indexRow)}</td>
-          <td className={styles.td}>&nbsp;</td>
+          <BlankTd />
           {tds}
-          <td className={styles.td}>&nbsp;</td>
+          <BlankTd />
         </tr>
       );
       indexRow += 1;

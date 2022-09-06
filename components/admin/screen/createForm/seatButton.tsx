@@ -3,6 +3,7 @@ import styles from './seatButton.module.css';
 export default function seatButton(props: Props) {
   return (
     <button
+      type="button"
       className={styles[props.type]}
       tabIndex={props.type === 'unselectable' ? -1 : 0}
     >

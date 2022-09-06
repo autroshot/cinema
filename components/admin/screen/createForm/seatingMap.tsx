@@ -63,21 +63,25 @@ export default function SeatingMap({ values }: Props) {
           continue;
         }
 
-        const isUnselectableSeat = values.unselectableSeats.some(
-          (unselectableSeat) => {
-            return (
-              unselectableSeat.row === indexRow &&
-              unselectableSeat.column === indexColumn
-            );
-          }
+        const seatType = getSeatType(
+          indexRow,
+          indexColumn,
+          values.unselectableSeats
         );
-        const type: seatButtonType = isUnselectableSeat
-          ? 'unselectable'
-          : 'general';
+        if (seatType === 'nonexistent') {
+          tds.push(
+            <td key={currentColumn} className={styles.td}>
+              &#160;
+            </td>
+          );
+          indexColumn += 1;
+          currentColumn += 1;
+          continue;
+        }
 
         tds.push(
           <td key={currentColumn} className={styles.td}>
-            <SeatButton type={type} value={indexColumn} />
+            <SeatButton type={seatType} value={indexColumn} />
           </td>
         );
 
@@ -127,13 +131,40 @@ export default function SeatingMap({ values }: Props) {
     return result;
   }
 
-  function numberToBase26(val: number, tail = ''): string {
-    if (val <= 26) {
-      return `${String.fromCharCode(val + 64)}${tail}`;
+  function getSeatType(
+    indexRow: number,
+    indexColumn: number,
+    unselectableSeats: {
+      typeId: number;
+      row: number;
+      column: number;
+    }[]
+  ): seatButtonType | 'nonexistent' {
+    const targetUnselectableSeats = unselectableSeats.filter(
+      (unselectableSeat) => {
+        return (
+          unselectableSeat.row === indexRow &&
+          unselectableSeat.column === indexColumn
+        );
+      }
+    );
+    if (targetUnselectableSeats.length === 0) return 'general';
+    const isNonexistentSeat = targetUnselectableSeats.some(
+      (unselectableSeat) => {
+        return unselectableSeat.typeId === 1;
+      }
+    );
+    if (isNonexistentSeat) return 'nonexistent';
+    return 'unselectable';
+  }
+
+  function numberToBase26(value: number, tail = ''): string {
+    if (value <= 26) {
+      return `${String.fromCharCode(value + 64)}${tail}`;
     }
 
-    const remainder = val % 26 || 26;
-    const division = Math.trunc(val / 26) - (remainder === 26 ? 1 : 0);
+    const remainder = value % 26 || 26;
+    const division = Math.trunc(value / 26) - (remainder === 26 ? 1 : 0);
 
     return numberToBase26(
       division,
@@ -151,6 +182,7 @@ export interface Values {
   totalColumn: number;
   aisles: { typeId: number; no: number }[];
   unselectableSeats: {
+    typeId: number;
     row: number;
     column: number;
   }[];

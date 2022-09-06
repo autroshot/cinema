@@ -154,6 +154,7 @@ export default function CreateForm() {
       unselectableSeats: formInputs.unselectableSeats.map(
         (unselectableSeat) => {
           return {
+            typeId: Number(unselectableSeat.typeId),
             row: Number(unselectableSeat.row),
             column: Number(unselectableSeat.column),
           };

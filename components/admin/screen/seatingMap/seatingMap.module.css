@@ -1,0 +1,9 @@
+.td {
+  width: 2.4rem;
+  height: 2.2rem;
+}
+
+.overflow {
+  overflow: auto;
+  max-height: 58rem;
+}

@@ -1,5 +1,5 @@
 import SeatButton, { seatButtonType } from './seatButton';
-import styles from './common.module.css';
+import styles from './seatingMap.module.css';
 import BlankTr from './blankTr';
 import BlankTd from './blankTd';
 
@@ -8,19 +8,20 @@ export default function SeatingMap({ values }: Props) {
     <>
       {/* TODO: 테스트용 */}
       <div>{JSON.stringify(values)}</div>
-      <div className="bg-black text-white p-1 pb-5">
+      <div className="bg-black text-white p-1">
         <div className="d-grid text-white bg-secondary text-center p-1 m-1">
           S C R E E N
         </div>
-        <div className="bg-black text-white d-flex align-items-center justify-content-center text-center">
-          <table>
-            <tbody>
-              <tr>
-                <td>&nbsp;</td>
-              </tr>
-              {createTableContent()}
-            </tbody>
-          </table>
+        <div className="d-flex align-items-center justify-content-center text-center">
+          <div className={styles.overflow}>
+            <table>
+              <tbody>
+                <BlankTr />
+                {createTableContent()}
+                <BlankTr />
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

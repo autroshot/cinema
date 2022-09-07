@@ -3,7 +3,7 @@ import UnselectableSeatInputs from 'components/admin/screen/createForm/unselecta
 import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens/index.page';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,8 +12,13 @@ import { schema } from './create.yup';
 import SeatingMap, {
   Values,
 } from 'components/admin/screen/seatingMap/seatingMap';
+import { GetResponseData } from 'pages/api/theaters/[id].page';
+import axios from 'axios';
 
 export default function CreateForm() {
+  const [theaterName, setTheaterName] = useState<null | string>(null);
+  const [alert, setAlert] = useState<null | string>(null);
+
   const {
     control,
     register,
@@ -34,10 +39,16 @@ export default function CreateForm() {
     resolver: yupResolver(schema),
   });
 
-  const [alert, setAlert] = useState<null | string>(null);
-
   const router = useRouter();
   const { theaterId } = router.query;
+  useEffect(() => {
+    axios
+      .get<GetResponseData>(`/api/theaters/${theaterId}`)
+      .then((res) => {
+        setTheaterName(res.data ? res.data.name : null);
+      })
+      .catch((err) => setAlert(err));
+  }, [theaterId]);
 
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     console.log(data);
@@ -130,7 +141,7 @@ export default function CreateForm() {
                 <h5 className="mb-3">좌석 배치도</h5>
                 <SeatingMap values={toSeatingMapValues(watch())} />
                 <p className="mt-3">
-                  {theaterId} 영화관에 해당 상영관을 등록합니다.
+                  {theaterName} 영화관에 해당 상영관을 등록합니다.
                 </p>
               </>
             ) : (

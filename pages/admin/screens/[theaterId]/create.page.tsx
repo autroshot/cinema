@@ -63,15 +63,22 @@ export default function CreateForm() {
   };
 
   const router = useRouter();
-  const { theaterId } = router.query;
   useEffect(() => {
-    axios
-      .get<GetResponseData>(`/api/theaters/${theaterId}`)
-      .then((res) => {
-        setTheaterName(res.data ? res.data.name : null);
-      })
-      .catch((err) => setAlert(err));
-  }, [theaterId]);
+    if (router.isReady) {
+      axios
+        .get<GetResponseData>(`/api/theaters/${router.query.theaterId}`)
+        .then((res) => {
+          setTheaterName(res.data ? res.data.name : null);
+        })
+        .catch((err) => {
+          if (err.response) {
+            setAlert((err.response.data as ErrorResponseData).message);
+            return;
+          }
+          setAlert('오류');
+        });
+    }
+  }, [router]);
 
   return (
     <>
@@ -205,7 +212,7 @@ export default function CreateForm() {
       no: Number(formInputs.no),
       total_row: Number(formInputs.totalRow),
       total_column: Number(formInputs.totalColumn),
-      theater_id: Number(theaterId),
+      theater_id: Number(router.query.theaterId),
       unselectable_seats: formInputs.unselectableSeats.map(
         (unselectableSeat) => {
           return {

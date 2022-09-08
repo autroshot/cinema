@@ -5,6 +5,7 @@ import {
   useFieldArray,
   UseFormRegister,
   useFormState,
+  UseFormTrigger,
 } from 'react-hook-form';
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
@@ -23,7 +24,11 @@ export default function AisleInputs(props: Props) {
         return (
           <Row className="mt-3" key={field.id}>
             <Col>
-              <FloatingLabel controlId="aisleType" label="통로 유형">
+              <FloatingLabel
+                controlId="aisleType"
+                label="통로 유형"
+                onChange={() => props.trigger('aisles')}
+              >
                 <Form.Select
                   aria-label="통로 유형 항목"
                   {...props.register(`aisles.${index}.typeId`)}
@@ -68,4 +73,5 @@ export default function AisleInputs(props: Props) {
 interface Props {
   control: Control<FormInputs, any>;
   register: UseFormRegister<FormInputs>;
+  trigger: UseFormTrigger<FormInputs>;
 }

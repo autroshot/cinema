@@ -144,7 +144,11 @@ export default function CreateForm() {
           <Row className="mb-3">
             <Col>
               <h5>통로 만들기</h5>
-              <AisleInputs control={control} register={register} />
+              <AisleInputs
+                control={control}
+                register={register}
+                trigger={trigger}
+              />
             </Col>
           </Row>
           <Row className="mb-4">

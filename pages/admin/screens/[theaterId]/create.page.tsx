@@ -43,6 +43,7 @@ export default function CreateForm() {
     resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    // TODO: 테스트용
     console.log(data);
 
     setLoading(true);
@@ -231,6 +232,22 @@ export default function CreateForm() {
       }),
     };
   }
+}
+
+function sortAndRemoveOverlappingAisles(
+  aisles: { typeId: number; no: number }[]
+) {
+  const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
+  const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
+
+  const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))].sort(
+    (a, b) => a - b
+  );
+  const resultColumnAisles = [
+    ...new Set(columnAisles.map((aisle) => aisle.no)),
+  ].sort((a, b) => a - b);
+
+  return [...resultRowAisles, ...resultColumnAisles];
 }
 
 export interface FormInputs {

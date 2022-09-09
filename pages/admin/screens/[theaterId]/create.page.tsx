@@ -192,7 +192,7 @@ export default function CreateForm() {
   );
 
   function toSeatingMapValues(formInputs: FormInputs) {
-    const result: Values = {
+    return {
       totalRow: Number(formInputs.totalRow),
       totalColumn: Number(formInputs.totalColumn),
       unselectableSeats: formInputs.unselectableSeats.map(
@@ -204,12 +204,13 @@ export default function CreateForm() {
           };
         }
       ),
-      aisles: formInputs.aisles.map((aisle) => {
-        return { typeId: Number(aisle.typeId), no: Number(aisle.no) };
-      }),
+      aisles: sortAndRemoveOverlappingAisles(
+        'frontEnd',
+        formInputs.aisles.map((aisle) => {
+          return { typeId: Number(aisle.typeId), no: Number(aisle.no) };
+        })
+      ) as FrontEndAisles,
     };
-
-    return result;
   }
 
   function toRequestData(formInputs: FormInputs): PostRequestData {
@@ -227,25 +228,62 @@ export default function CreateForm() {
           };
         }
       ),
-      aisles: formInputs.aisles.map((aisle) => {
-        return { aisle_type_id: Number(aisle.typeId), no: Number(aisle.no) };
-      }),
+      aisles: sortAndRemoveOverlappingAisles(
+        'db',
+        formInputs.aisles.map((aisle) => {
+          return { aisle_type_id: Number(aisle.typeId), no: Number(aisle.no) };
+        })
+      ) as DbAisles,
     };
   }
 }
 
 function sortAndRemoveOverlappingAisles(
-  aisles: { typeId: number; no: number }[]
-) {
+  type: 'frontEnd' | 'db',
+  aisles: AislesType
+): AislesType {
+  let result;
+  if (type === 'frontEnd') {
+    result = sortAndRemoveOverlappingFrontEndAisles(aisles as FrontEndAisles);
+  } else {
+    result = sortAndRemoveOverlappingDBAisles(aisles as DbAisles);
+  }
+  return result;
+}
+
+function sortAndRemoveOverlappingFrontEndAisles(
+  aisles: FrontEndAisles
+): FrontEndAisles {
   const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
   const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
 
-  const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))].sort(
-    (a, b) => a - b
-  );
-  const resultColumnAisles = [
-    ...new Set(columnAisles.map((aisle) => aisle.no)),
-  ].sort((a, b) => a - b);
+  const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))]
+    .sort((a, b) => a - b)
+    .map((aisleNumber) => {
+      return { typeId: 1, no: aisleNumber };
+    });
+  const resultColumnAisles = [...new Set(columnAisles.map((aisle) => aisle.no))]
+    .sort((a, b) => a - b)
+    .map((aisleNumber) => {
+      return { typeId: 2, no: aisleNumber };
+    });
+
+  return [...resultRowAisles, ...resultColumnAisles];
+}
+function sortAndRemoveOverlappingDBAisles(aisles: DbAisles): DbAisles {
+  const rowAisles = aisles.filter((aisle) => aisle.aisle_type_id === 1);
+  const columnAisles = aisles.filter((aisle) => aisle.aisle_type_id === 2);
+
+  const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))]
+    .sort((a, b) => a - b)
+    .map((aisleNumber) => {
+      return { aisle_type_id: 1, no: aisleNumber };
+    });
+  const resultColumnAisles = [...new Set(columnAisles.map((aisle) => aisle.no))]
+    .sort((a, b) => a - b)
+    .map((aisleNumber) => {
+      return { aisle_type_id: 1, no: aisleNumber };
+    });
 
   return [...resultRowAisles, ...resultColumnAisles];
 }
@@ -261,5 +299,9 @@ export interface FormInputs {
     column: number | null;
   }[];
 }
+
+type AislesType = FrontEndAisles | DbAisles;
+type DbAisles = { aisle_type_id: number; no: number }[];
+type FrontEndAisles = { typeId: number; no: number }[];
 
 CreateForm.isAdminPage = true;

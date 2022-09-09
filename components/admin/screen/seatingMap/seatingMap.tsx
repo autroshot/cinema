@@ -92,20 +92,12 @@ export default function SeatingMap({ values }: Props) {
   }
 
   function calculateActualNumbers(aisles: { typeId: number; no: number }[]) {
-    let result: number[];
-
-    const sortedAisleNumbers = [
-      ...new Set(aisles.map((aisle) => aisle.no)),
-    ].sort((a, b) => a - b);
-
     let count = 0;
-    result = sortedAisleNumbers.map((value) => {
-      value += count;
+    return aisles.map((aisle) => {
+      const number = aisle.no + count;
       count += 1;
-      return value;
+      return number;
     });
-
-    return result;
   }
 
   function getSeatType(

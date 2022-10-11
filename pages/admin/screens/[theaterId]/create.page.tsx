@@ -301,7 +301,7 @@ export interface FormInputs {
 }
 
 type AislesType = FrontEndAisles | DbAisles;
-type DbAisles = { aisle_type_id: number; no: number }[];
 type FrontEndAisles = { typeId: number; no: number }[];
+type DbAisles = { aisle_type_id: number; no: number }[];
 
 CreateForm.isAdminPage = true;

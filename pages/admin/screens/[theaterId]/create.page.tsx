@@ -241,13 +241,11 @@ export default function CreateForm() {
 function sortAndRemoveOverlappingAisles(
   aisles: FrontEndAislesWithKind | DbAislesWithKind
 ): FrontEndAisles | DbAisles {
-  let result;
   if (aisles.kind === 'frontEnd') {
-    result = sortAndRemoveOverlappingFrontEndAisles(aisles.values);
+    return sortAndRemoveOverlappingFrontEndAisles(aisles.values);
   } else {
-    result = sortAndRemoveOverlappingDBAisles(aisles.values);
+    return sortAndRemoveOverlappingDBAisles(aisles.values);
   }
-  return result;
 }
 
 function sortAndRemoveOverlappingFrontEndAisles(

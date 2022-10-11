@@ -204,12 +204,12 @@ export default function CreateForm() {
           };
         }
       ),
-      aisles: sortAndRemoveOverlappingAisles(
-        'frontEnd',
-        formInputs.aisles.map((aisle) => {
+      aisles: sortAndRemoveOverlappingAisles({
+        kind: 'frontEnd',
+        values: formInputs.aisles.map((aisle) => {
           return { typeId: Number(aisle.typeId), no: Number(aisle.no) };
-        })
-      ) as FrontEndAisles,
+        }),
+      }) as FrontEndAisles,
     };
   }
 
@@ -228,25 +228,24 @@ export default function CreateForm() {
           };
         }
       ),
-      aisles: sortAndRemoveOverlappingAisles(
-        'db',
-        formInputs.aisles.map((aisle) => {
+      aisles: sortAndRemoveOverlappingAisles({
+        kind: 'db',
+        values: formInputs.aisles.map((aisle) => {
           return { aisle_type_id: Number(aisle.typeId), no: Number(aisle.no) };
-        })
-      ) as DbAisles,
+        }),
+      }) as DbAisles,
     };
   }
 }
 
 function sortAndRemoveOverlappingAisles(
-  type: 'frontEnd' | 'db',
-  aisles: AislesType
-): AislesType {
+  aisles: FrontEndAislesWithKind | DbAislesWithKind
+): FrontEndAisles | DbAisles {
   let result;
-  if (type === 'frontEnd') {
-    result = sortAndRemoveOverlappingFrontEndAisles(aisles as FrontEndAisles);
+  if (aisles.kind === 'frontEnd') {
+    result = sortAndRemoveOverlappingFrontEndAisles(aisles.values);
   } else {
-    result = sortAndRemoveOverlappingDBAisles(aisles as DbAisles);
+    result = sortAndRemoveOverlappingDBAisles(aisles.values);
   }
   return result;
 }
@@ -300,8 +299,9 @@ export interface FormInputs {
   }[];
 }
 
-type AislesType = FrontEndAisles | DbAisles;
 type FrontEndAisles = { typeId: number; no: number }[];
+type FrontEndAislesWithKind = { kind: 'frontEnd'; values: FrontEndAisles };
 type DbAisles = { aisle_type_id: number; no: number }[];
+type DbAislesWithKind = { kind: 'db'; values: DbAisles };
 
 CreateForm.isAdminPage = true;

@@ -241,10 +241,16 @@ export default function CreateForm() {
 function sortAndRemoveOverlappingAisles(
   aisles: FrontEndAislesWithKind | DbAislesWithKind
 ): FrontEndAisles | DbAisles {
-  if (aisles.kind === 'frontEnd') {
-    return sortAndRemoveOverlappingFrontEndAisles(aisles.values);
-  } else {
-    return sortAndRemoveOverlappingDBAisles(aisles.values);
+  switch (aisles.kind) {
+    case 'frontEnd':
+      return sortAndRemoveOverlappingFrontEndAisles(aisles.values);
+
+    case 'db':
+      return sortAndRemoveOverlappingDBAisles(aisles.values);
+
+    default:
+      const _exhaustiveCheck: never = aisles;
+      return _exhaustiveCheck;
   }
 }
 

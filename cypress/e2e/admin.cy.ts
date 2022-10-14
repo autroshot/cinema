@@ -166,10 +166,23 @@ describe('영화관 CRUD', () => {
 describe('상영관 등록 폼', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/admin/screens/4/create');
+    cy.get('[data-cy="error"]').should('not.be.visible');
   });
 
-  it('입력된 값이 유효한 숫자', () => {
-    cy.get('#screenNo').type('15');
+  it('입력된 값이 정수가 아님', () => {
+    cy.get('#screenNo').type('1.1');
+    cy.get('[data-cy="error"]').should('be.visible');
+    cy.get('#screenNo')
+      .siblings('[data-cy="error"]')
+      .should('have.text', '정수만 가능합니다.');
+  });
+
+  it('입력된 값이 음수', () => {
+    cy.get('#screenNo').type('-5');
+    cy.get('[data-cy="error"]').should('be.visible');
+    cy.get('#screenNo')
+      .siblings('[data-cy="error"]')
+      .should('have.text', '양수만 가능합니다.');
   });
 });
 

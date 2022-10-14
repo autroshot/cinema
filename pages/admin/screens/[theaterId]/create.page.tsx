@@ -98,7 +98,11 @@ export default function CreateForm() {
                   {...register('no')}
                   isInvalid={Boolean(errors.no)}
                 />
-                <Form.Control.Feedback type="invalid" className="fs-6">
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="fs-6"
+                  data-cy="error"
+                >
                   {errors.no?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>
@@ -118,7 +122,11 @@ export default function CreateForm() {
                   {...register('totalRow')}
                   isInvalid={Boolean(errors.totalRow)}
                 />
-                <Form.Control.Feedback type="invalid" className="fs-6">
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="fs-6"
+                  data-cy="error"
+                >
                   {errors.totalRow?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>
@@ -136,7 +144,11 @@ export default function CreateForm() {
                   {...register('totalColumn')}
                   isInvalid={Boolean(errors.totalColumn)}
                 />
-                <Form.Control.Feedback type="invalid" className="fs-6">
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="fs-6"
+                  data-cy="error"
+                >
                   {errors.totalColumn?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>

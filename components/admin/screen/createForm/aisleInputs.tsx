@@ -47,7 +47,11 @@ export default function AisleInputs(props: Props) {
                   {...props.register(`aisles.${index}.no`)}
                   isInvalid={Boolean(errors.aisles?.[index]?.no)}
                 />
-                <Form.Control.Feedback type="invalid" className="fs-6">
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="fs-6"
+                  data-cy="error"
+                >
                   {errors.aisles?.[index]?.no?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>

@@ -161,4 +161,14 @@ describe('영화관 CRUD', () => {
   });
 });
 
+describe('상영관 등록 폼', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/admin/screens/4/create');
+  });
+
+  it.only('입력된 값이 유효한 숫자', () => {
+    cy.get('#screenNo').type('15');
+  });
+});
+
 export {};

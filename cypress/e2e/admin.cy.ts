@@ -177,10 +177,10 @@ describe('상영관 등록 폼', () => {
       .should('have.text', '정수만 가능합니다.');
   });
 
-  it('입력된 값이 음수', () => {
-    cy.get('#screenNo').type('-5');
+  it.only('입력된 값이 음수', () => {
+    cy.get('#totalRow').type('-5');
     cy.get('[data-cy="error"]').should('be.visible');
-    cy.get('#screenNo')
+    cy.get('#totalRow')
       .siblings('[data-cy="error"]')
       .should('have.text', '양수만 가능합니다.');
   });

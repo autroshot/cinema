@@ -1,6 +1,6 @@
 import { Prisma } from '@prisma/client';
 
-export const theaters: Prisma.theaterCreateInput[] = [
+const theaters: Prisma.theaterCreateInput[] = [
   {
     name: '월드타워',
     street_address: '서울 송파구 올림픽로 300 (신천동) 5층-11층',
@@ -45,7 +45,7 @@ export const theaters: Prisma.theaterCreateInput[] = [
   },
 ];
 
-export const screens: Prisma.Enumerable<Prisma.screenCreateManyInput> = [
+const screens: Prisma.Enumerable<Prisma.screenCreateManyInput> = [
   {
     no: 1,
     total_row: 13,
@@ -210,13 +210,16 @@ export const screens: Prisma.Enumerable<Prisma.screenCreateManyInput> = [
   },
 ];
 
-export const aisleTypes: Prisma.aisle_typeCreateInput[] = [
+const aisleTypes: Prisma.aisle_typeCreateInput[] = [
   { id: 1, name: 'row' },
   { id: 2, name: 'column' },
 ];
 
-export const unselectableSeatTypes: Prisma.unselectable_seat_typeCreateInput[] =
-  [
-    { id: 1, name: 'nonexistent' },
-    { id: 2, name: 'unavailable' },
-  ];
+const unselectableSeatTypes: Prisma.unselectable_seat_typeCreateInput[] = [
+  { id: 1, name: 'nonexistent' },
+  { id: 2, name: 'unavailable' },
+];
+
+const testData = { theaters, screens, aisleTypes, unselectableSeatTypes };
+
+export default testData;

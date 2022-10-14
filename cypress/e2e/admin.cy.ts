@@ -1,11 +1,11 @@
 import type { PostResponseData } from 'pages/api/theaters/index.page';
 
 describe('관리자 페이지 방문', () => {
-  it('영화관', () => {
-    cy.visit('/');
+  beforeEach(() => {
+    cy.visit('http://localhost:3000/admin');
+  });
 
-    cy.contains('관리자').click();
-    cy.contains('관리자 인덱스 페이지');
+  it('영화관', () => {
     cy.contains('영화관').click();
     cy.get('[data-cy="title"]').should('have.text', '영화관 목록');
 
@@ -17,7 +17,9 @@ describe('관리자 페이지 방문', () => {
 
     cy.get('button').contains('영화관 등록').click();
     cy.get('[data-cy="title"]').should('have.text', '영화관 등록');
+  });
 
+  it('상영관', () => {
     cy.contains('상영관').click();
     cy.get('[data-cy="title"]').should('have.text', '영화관 및 상영관 목록');
 
@@ -166,7 +168,7 @@ describe('상영관 등록 폼', () => {
     cy.visit('http://localhost:3000/admin/screens/4/create');
   });
 
-  it.only('입력된 값이 유효한 숫자', () => {
+  it('입력된 값이 유효한 숫자', () => {
     cy.get('#screenNo').type('15');
   });
 });

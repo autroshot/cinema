@@ -166,6 +166,7 @@ describe('영화관 CRUD', () => {
 describe('상영관 등록 폼', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/admin/screens/4/create');
+    cy.contains('상영관 등록').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
   });
 
@@ -177,12 +178,45 @@ describe('상영관 등록 폼', () => {
       .should('have.text', '정수만 가능합니다.');
   });
 
-  it.only('입력된 값이 음수', () => {
+  it('입력된 값이 음수', () => {
     cy.get('#totalRow').type('-5');
     cy.get('[data-cy="error"]').should('be.visible');
     cy.get('#totalRow')
       .siblings('[data-cy="error"]')
       .should('have.text', '양수만 가능합니다.');
+  });
+
+  it('통로 인풋 추가/삭제', () => {
+    cy.contains('통로 만들기').nextAll('.row').should('have.length', 0);
+
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.contains('통로 만들기').nextAll('.row').should('have.length', 3);
+
+    cy.get('[data-cy="deleteAisleInput"]').eq(1).click();
+    cy.get('[data-cy="deleteAisleInput"]').eq(1).click();
+    cy.contains('통로 만들기').nextAll('.row').should('have.length', 1);
+  });
+
+  it('선택 불가능한 좌석 인풋 추가/삭제', () => {
+    cy.contains('선택 불가능한 좌석 지정하기')
+      .nextAll('.row')
+      .should('have.length', 0);
+
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.contains('선택 불가능한 좌석 지정하기')
+      .nextAll('.row')
+      .should('have.length', 4);
+
+    cy.get('[data-cy="deleteUnselectableSeatInput"]').eq(3).click();
+    cy.get('[data-cy="deleteUnselectableSeatInput"]').eq(1).click();
+    cy.contains('선택 불가능한 좌석 지정하기')
+      .nextAll('.row')
+      .should('have.length', 2);
   });
 });
 

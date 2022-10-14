@@ -60,6 +60,7 @@ export default function AisleInputs(props: Props) {
               <div
                 onClick={() => remove(index)}
                 className="h-100 d-flex align-items-center justify-content-center"
+                data-cy="deleteAisleInput"
               >
                 <DeleteButton />
               </div>
@@ -67,7 +68,11 @@ export default function AisleInputs(props: Props) {
           </Row>
         );
       })}
-      <div className="d-grid" onClick={() => append({ typeId: 1, no: null })}>
+      <div
+        className="d-grid"
+        onClick={() => append({ typeId: 1, no: null })}
+        data-cy="addAisleInput"
+      >
         <AddButton />
       </div>
     </>

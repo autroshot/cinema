@@ -96,6 +96,7 @@ export default function UnselectableSeatInputs({
               <div
                 onClick={() => remove(index)}
                 className="h-100 d-flex align-items-center justify-content-center"
+                data-cy="deleteUnselectableSeatInput"
               >
                 <DeleteButton />
               </div>
@@ -106,6 +107,7 @@ export default function UnselectableSeatInputs({
       <div
         className="d-grid"
         onClick={() => append({ typeId: 1, row: null, column: null })}
+        data-cy="addUnselectableSeatInput"
       >
         <AddButton />
       </div>

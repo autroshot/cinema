@@ -17,6 +17,16 @@ describe('관리자 페이지 방문', () => {
 
     cy.get('button').contains('영화관 등록').click();
     cy.get('[data-cy="title"]').should('have.text', '영화관 등록');
+
+    cy.contains('상영관').click();
+    cy.get('[data-cy="title"]').should('have.text', '영화관 및 상영관 목록');
+
+    cy.contains('월드타워').click();
+    cy.contains('15관');
+    cy.contains('상영관 등록').click();
+    cy.get('[data-cy="title"]').should('have.text', '상영관 등록');
+    cy.contains('취소').click();
+    cy.get('[data-cy="title"]').should('have.text', '영화관 및 상영관 목록');
   });
 });
 

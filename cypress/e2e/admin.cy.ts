@@ -187,16 +187,26 @@ describe('상영관 등록 폼', () => {
   });
 
   it('통로 인풋 추가/삭제', () => {
-    cy.contains('통로 만들기').nextAll('.row').should('have.length', 0);
+    cy.contains('통로 만들기').nextAll('.row').should('not.exist');
 
     cy.get('[data-cy="addAisleInput"]').click();
     cy.get('[data-cy="addAisleInput"]').click();
     cy.get('[data-cy="addAisleInput"]').click();
-    cy.contains('통로 만들기').nextAll('.row').should('have.length', 3);
+    cy.contains('통로 만들기').nextAll('.row').as('aisleInputs');
+    cy.get('@aisleInputs').should('have.length', 3);
 
-    cy.get('[data-cy="deleteAisleInput"]').eq(1).click();
-    cy.get('[data-cy="deleteAisleInput"]').eq(1).click();
-    cy.contains('통로 만들기').nextAll('.row').should('have.length', 1);
+    cy.get('@aisleInputs').eq(0).find('#aisleType').select('column');
+    cy.get('@aisleInputs').eq(0).find('#aisleNo').type('2');
+    cy.get('@aisleInputs').eq(1).find('#aisleNo').type('3');
+    cy.get('@aisleInputs').eq(2).find('#aisleNo').type('4');
+
+    cy.get('@aisleInputs').eq(1).find('[data-cy="deleteAisleInput"]').click();
+    cy.get('@aisleInputs').should('have.length', 2);
+
+    cy.get('@aisleInputs').eq(0).find('#aisleType').should('have.value', '2');
+    cy.get('@aisleInputs').eq(0).find('#aisleNo').should('have.value', '2');
+    cy.get('@aisleInputs').eq(1).find('#aisleType').should('have.value', '1');
+    cy.get('@aisleInputs').eq(1).find('#aisleNo').should('have.value', '4');
   });
 
   it('선택 불가능한 좌석 인풋 추가/삭제', () => {

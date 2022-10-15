@@ -209,10 +209,11 @@ describe('상영관 등록 폼', () => {
     cy.get('@aisleInputs').eq(1).find('#aisleNo').should('have.value', '4');
   });
 
-  it('선택 불가능한 좌석 인풋 추가/삭제', () => {
+  it.only('선택 불가능한 좌석 인풋 추가/삭제', () => {
+    cy.wait(1000);
     cy.contains('선택 불가능한 좌석 지정하기')
       .nextAll('.row')
-      .should('have.length', 0);
+      .should('not.exist');
 
     cy.get('[data-cy="addUnselectableSeatInput"]').click();
     cy.get('[data-cy="addUnselectableSeatInput"]').click();
@@ -220,13 +221,50 @@ describe('상영관 등록 폼', () => {
     cy.get('[data-cy="addUnselectableSeatInput"]').click();
     cy.contains('선택 불가능한 좌석 지정하기')
       .nextAll('.row')
-      .should('have.length', 4);
+      .as('unselectableSeatInput');
+    cy.get('@unselectableSeatInput').should('have.length', 4);
 
-    cy.get('[data-cy="deleteUnselectableSeatInput"]').eq(3).click();
-    cy.get('[data-cy="deleteUnselectableSeatInput"]').eq(1).click();
-    cy.contains('선택 불가능한 좌석 지정하기')
-      .nextAll('.row')
-      .should('have.length', 2);
+    cy.get('@unselectableSeatInput').eq(0).find('#row').type('1');
+    cy.get('@unselectableSeatInput').eq(0).find('#column').type('1');
+    cy.get('@unselectableSeatInput').eq(1).find('#row').type('2');
+    cy.get('@unselectableSeatInput').eq(1).find('#column').type('2');
+    cy.get('@unselectableSeatInput')
+      .eq(1)
+      .find('#unselectableSeatType')
+      .select('unavailable');
+    cy.get('@unselectableSeatInput').eq(2).find('#row').type('3');
+    cy.get('@unselectableSeatInput').eq(2).find('#column').type('3');
+    cy.get('@unselectableSeatInput').eq(3).find('#row').type('4');
+    cy.get('@unselectableSeatInput').eq(3).find('#column').type('4');
+    cy.get('@unselectableSeatInput')
+      .eq(3)
+      .find('#unselectableSeatType')
+      .select('unavailable');
+
+    cy.get('@unselectableSeatInput')
+      .eq(2)
+      .find('[data-cy="deleteUnselectableSeatInput"]')
+      .click();
+    cy.get('@unselectableSeatInput').should('have.length', 3);
+
+    cy.get('@unselectableSeatInput')
+      .eq(1)
+      .find('[data-cy="deleteUnselectableSeatInput"]')
+      .click();
+    cy.get('@unselectableSeatInput').should('have.length', 2);
+
+    cy.get('@unselectableSeatInput')
+      .eq(0)
+      .find('#unselectableSeatType')
+      .should('have.value', '1');
+    cy.get('@unselectableSeatInput')
+      .eq(0)
+      .find('#row')
+      .should('have.value', '1');
+    cy.get('@unselectableSeatInput')
+      .eq(0)
+      .find('#column')
+      .should('have.value', '1');
   });
 });
 

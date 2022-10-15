@@ -209,7 +209,7 @@ describe('상영관 등록 폼', () => {
     cy.get('@aisleInputs').eq(1).find('#aisleNo').should('have.value', '4');
   });
 
-  it.only('선택 불가능한 좌석 인풋 추가/삭제', () => {
+  it('선택 불가능한 좌석 인풋 추가/삭제', () => {
     cy.wait(1000);
     cy.contains('선택 불가능한 좌석 지정하기')
       .nextAll('.row')
@@ -266,6 +266,10 @@ describe('상영관 등록 폼', () => {
       .find('#column')
       .should('have.value', '1');
   });
+
+  it('통로 번호에 입력된 값이 1 이하', () => {});
+  it('통로 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
+  it('선택 불가능한 좌석 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
 });
 
 export {};

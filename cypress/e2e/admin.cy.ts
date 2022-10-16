@@ -276,7 +276,44 @@ describe('상영관 등록 폼', () => {
       .should('have.value', '1');
   });
 
-  it('통로 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
+  it.only('통로 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {
+    cy.get('#totalRow').type('5');
+    cy.get('#totalColumn').type('3');
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.contains('통로 만들기').nextAll('.row').as('aisleInputs');
+    cy.get('@aisleInputs').should('have.length', 2);
+
+    cy.get('@aisleInputs').eq(0).find('#aisleNo').type('5');
+    cy.get('@aisleInputs')
+      .eq(0)
+      .find('[data-cy="error"]')
+      .should('have.text', '좌석 행 개수 미만이어야 합니다.');
+    cy.get('@aisleInputs').eq(1).find('#aisleType').select('column');
+    cy.get('@aisleInputs').eq(1).find('#aisleNo').type('3');
+    cy.get('@aisleInputs')
+      .eq(1)
+      .find('[data-cy="error"]')
+      .should('have.text', '좌석 열 개수 미만이어야 합니다.');
+
+    cy.get('@aisleInputs')
+      .eq(0)
+      .find('#aisleNo')
+      .type('{selectAll}{backspace}')
+      .type('4');
+    cy.get('@aisleInputs')
+      .eq(0)
+      .find('[data-cy="error"]')
+      .should('not.be.visible');
+    cy.get('@aisleInputs').eq(1).find('[data-cy="deleteAisleInput"]').click();
+    cy.get('[data-cy="error"]').should('not.be.visible');
+
+    cy.get('#totalRow').type('{selectAll}{backspace}').type('4');
+    cy.get('@aisleInputs')
+      .eq(0)
+      .find('[data-cy="error"]')
+      .should('have.text', '좌석 행 개수 미만이어야 합니다.');
+  });
   it('선택 불가능한 좌석 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
 });
 

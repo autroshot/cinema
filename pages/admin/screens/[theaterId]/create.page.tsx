@@ -9,9 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
 import { schema } from './create.yup';
-import SeatingMap, {
-  Values,
-} from 'components/admin/screen/seatingMap/seatingMap';
+import SeatingMap from 'components/admin/screen/seatingMap/seatingMap';
 import { GetResponseData } from 'pages/api/theaters/[id].page';
 import axios from 'axios';
 import NoticeModal from 'components/admin/theater/noticeModal';

@@ -358,6 +358,48 @@ describe('상영관 등록 폼', () => {
       .find('[data-cy="error"]')
       .should('not.be.visible');
   });
+
+  it('모든 인풋이 작성되지 않음', () => {
+    cy.contains(
+      '모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.'
+    ).should('be.visible');
+    cy.get('[data-cy="submit"]').should('be.disabled');
+
+    cy.get('#screenNo').type('1');
+    cy.get('#totalRow').type('3');
+    cy.get('#totalColumn').type('3');
+    cy.contains(
+      '모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.'
+    ).should('not.exist');
+    cy.contains('노원 영화관에 해당 상영관을 등록합니다.').should('be.visible');
+    cy.get('[data-cy="submit"]').should('not.be.disabled');
+
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.contains(
+      '모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.'
+    ).should('be.visible');
+    cy.contains('통로 만들기').nextAll('.row').as('aisleInputs');
+    cy.get('@aisleInputs').should('have.length', 1);
+    cy.get('@aisleInputs').find('#aisleNo').type('2');
+    cy.contains('노원 영화관에 해당 상영관을 등록합니다.').should('be.visible');
+
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.contains(
+      '모든 칸에 유효한 값을 입력하면 좌석 배치도가 표시됩니다.'
+    ).should('be.visible');
+    cy.contains('선택 불가능한 좌석 지정하기')
+      .nextAll('.row')
+      .as('unselectableSeatInputs');
+    cy.get('@unselectableSeatInputs').should('have.length', 2);
+    cy.get('@unselectableSeatInputs').eq(1).find('#row').type('2');
+    cy.get('@unselectableSeatInputs').eq(1).find('#column').type('2');
+    cy.get('@unselectableSeatInputs')
+      .eq(0)
+      .find('[data-cy="deleteUnselectableSeatInput"]')
+      .click();
+    cy.contains('노원 영화관에 해당 상영관을 등록합니다.').should('be.visible');
+  });
 });
 
 export {};

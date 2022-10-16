@@ -171,7 +171,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
               <UnselectableSeatInputs
                 control={control}
                 register={register}
-                resetField={resetField}
+                types={unselectableSeatTypes}
               />
             </Col>
           </Row>
@@ -345,8 +345,9 @@ type FrontEndAislesWithKind = { kind: 'frontEnd'; values: FrontEndAisles };
 type DbAisles = { aisle_type_id: number; no: number }[];
 type DbAislesWithKind = { kind: 'db'; values: DbAisles };
 
+export type UnselectableSeatTypes = unselectable_seat_type[];
 interface Props {
-  unselectableSeatTypes: unselectable_seat_type[];
+  unselectableSeatTypes: UnselectableSeatTypes;
 }
 
 CreateForm.isAdminPage = true;

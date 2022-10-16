@@ -1,23 +1,22 @@
-import { FormInputs } from 'pages/admin/screens/[theaterId]/create.page';
+import {
+  FormInputs,
+  UnselectableSeatTypes,
+} from 'pages/admin/screens/[theaterId]/create.page';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   Control,
   useFieldArray,
   UseFormRegister,
-  UseFormResetField,
   useFormState,
 } from 'react-hook-form';
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
-import { useEffect, useState } from 'react';
-import { GetResponseData } from 'pages/api/unselectable-seat-types/index.page';
-import axios from 'axios';
 
 export default function UnselectableSeatInputs({
   control,
   register,
-  resetField,
+  types,
 }: Props) {
   const { fields, append, remove } = useFieldArray({
     control: control,
@@ -27,14 +26,6 @@ export default function UnselectableSeatInputs({
     control: control,
     name: 'unselectableSeats',
   });
-
-  const [types, setTypes] = useState<GetResponseData>([]);
-  useEffect(() => {
-    axios.get<GetResponseData>('/api/unselectable-seat-types').then((res) => {
-      setTypes(res.data);
-      resetField('unselectableSeats');
-    });
-  }, [resetField]);
 
   return (
     <>
@@ -122,5 +113,5 @@ export default function UnselectableSeatInputs({
 interface Props {
   control: Control<FormInputs, any>;
   register: UseFormRegister<FormInputs>;
-  resetField: UseFormResetField<FormInputs>;
+  types: UnselectableSeatTypes;
 }

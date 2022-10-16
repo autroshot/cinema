@@ -218,8 +218,7 @@ describe('상영관 등록 폼', () => {
     cy.get('@aisleInputs').eq(1).find('#aisleNo').should('have.value', '4');
   });
 
-  it('선택 불가능한 좌석 인풋 추가/삭제', () => {
-    cy.wait(1000);
+  it.only('선택 불가능한 좌석 인풋 추가/삭제', () => {
     cy.contains('선택 불가능한 좌석 지정하기')
       .nextAll('.row')
       .should('not.exist');

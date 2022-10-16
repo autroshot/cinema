@@ -402,4 +402,16 @@ describe('상영관 등록 폼', () => {
   });
 });
 
+describe('상영관 CRUD', () => {
+  it('중복된 사영관 번호로 등록', () => {
+    cy.visit('http://localhost:3000/admin/screens/1/create');
+
+    cy.get('#screenNo').type('1');
+    cy.get('#totalRow').type('1');
+    cy.get('#totalColumn').type('1');
+    cy.get('[data-cy="submit"]').click();
+    cy.get('[data-cy="alert"]').should('include.text', '고유 제약 조건 오류');
+  });
+});
+
 export {};

@@ -16,8 +16,11 @@ import { GetResponseData } from 'pages/api/theaters/[id].page';
 import axios from 'axios';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import { ErrorResponseData } from 'pages/api/commonTypes';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { prisma } from 'db';
+import { unselectable_seat_type } from '@prisma/client';
 
-export default function CreateForm() {
+export default function CreateForm({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
   const [showModal, setShowModal] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -303,6 +306,30 @@ function sortAndRemoveOverlappingDBAisles(aisles: DbAisles): DbAisles {
   return [...resultRowAisles, ...resultColumnAisles];
 }
 
+export const getStaticPaths: GetStaticPaths = async () => {
+  const theaters = await prisma.theater.findMany({
+    select: {
+      id: true,
+    },
+  });
+
+  const paths = theaters.map((theater) => {
+    return { params: { theaterId: theater.id.toString() } };
+  });
+
+  return { paths: paths, fallback: true };
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const unselectableSeatTypes = await prisma.unselectable_seat_type.findMany();
+
+  return {
+    props: {
+      unselectableSeatTypes,
+    },
+  };
+};
+
 export interface FormInputs {
   no: number | null;
   totalRow: number | null;
@@ -319,5 +346,9 @@ type FrontEndAisles = { typeId: number; no: number }[];
 type FrontEndAislesWithKind = { kind: 'frontEnd'; values: FrontEndAisles };
 type DbAisles = { aisle_type_id: number; no: number }[];
 type DbAislesWithKind = { kind: 'db'; values: DbAisles };
+
+interface Props {
+  unselectableSeatTypes: unselectable_seat_type[];
+}
 
 CreateForm.isAdminPage = true;

@@ -67,7 +67,11 @@ export default function UnselectableSeatInputs({
                   {...register(`unselectableSeats.${index}.row`)}
                   isInvalid={Boolean(errors.unselectableSeats?.[index]?.row)}
                 />
-                <Form.Control.Feedback type="invalid" className="fs-6">
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="fs-6"
+                  data-cy="error"
+                >
                   {errors.unselectableSeats?.[index]?.row?.message}
                 </Form.Control.Feedback>
               </FloatingLabel>

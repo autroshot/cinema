@@ -276,7 +276,7 @@ describe('상영관 등록 폼', () => {
       .should('have.value', '1');
   });
 
-  it.only('통로 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {
+  it('통로 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {
     cy.get('#totalRow').type('5');
     cy.get('#totalColumn').type('3');
     cy.get('[data-cy="addAisleInput"]').click();
@@ -314,7 +314,50 @@ describe('상영관 등록 폼', () => {
       .find('[data-cy="error"]')
       .should('have.text', '좌석 행 개수 미만이어야 합니다.');
   });
-  it('선택 불가능한 좌석 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
+
+  it('선택 불가능한 좌석 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {
+    cy.get('#totalRow').type('3');
+    cy.get('#totalColumn').type('5');
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.get('[data-cy="addUnselectableSeatInput"]').click();
+    cy.contains('선택 불가능한 좌석 지정하기')
+      .nextAll('.row')
+      .as('unselectableSeatInputs');
+    cy.get('@unselectableSeatInputs').should('have.length', 2);
+
+    cy.get('@unselectableSeatInputs').eq(0).find('#row').type('4');
+    cy.get('@unselectableSeatInputs').eq(0).find('#column').type('4');
+    cy.get('@unselectableSeatInputs')
+      .eq(0)
+      .find('[data-cy="error"]')
+      .should('have.text', '좌석 행 개수 이하여야 합니다.');
+    cy.get('@unselectableSeatInputs')
+      .eq(1)
+      .find('#unselectableSeatType')
+      .select('unavailable');
+    cy.get('@unselectableSeatInputs').eq(1).find('#row').type('3');
+    cy.get('@unselectableSeatInputs').eq(1).find('#column').type('6');
+    cy.get('@unselectableSeatInputs')
+      .eq(1)
+      .find('[data-cy="error"]')
+      .should('have.text', '좌석 열 개수 이하여야 합니다.');
+
+    cy.get('@unselectableSeatInputs')
+      .eq(0)
+      .find('#row')
+      .type('{selectAll}{backspace}')
+      .type('3');
+    cy.get('@unselectableSeatInputs')
+      .eq(0)
+      .find('[data-cy="error"]')
+      .should('not.be.visible');
+
+    cy.get('#totalColumn').type('{selectAll}{backspace}').type('6');
+    cy.get('@unselectableSeatInputs')
+      .eq(1)
+      .find('[data-cy="error"]')
+      .should('not.be.visible');
+  });
 });
 
 export {};

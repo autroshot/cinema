@@ -186,6 +186,15 @@ describe('상영관 등록 폼', () => {
       .should('have.text', '양수만 가능합니다.');
   });
 
+  it('통로 번호에 입력된 값이 1 이하', () => {
+    cy.get('[data-cy="addAisleInput"]').click();
+    cy.contains('통로 만들기').nextAll('.row').should('have.length', 1);
+
+    cy.contains('통로 만들기').nextAll('.row').eq(0).as('aisleInput');
+    cy.get('@aisleInput').type('1');
+    cy.get('[data-cy="error"]').should('have.text', '1보다 커야 합니다.');
+  });
+
   it('통로 인풋 추가/삭제', () => {
     cy.contains('통로 만들기').nextAll('.row').should('not.exist');
 
@@ -267,7 +276,6 @@ describe('상영관 등록 폼', () => {
       .should('have.value', '1');
   });
 
-  it('통로 번호에 입력된 값이 1 이하', () => {});
   it('통로 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
   it('선택 불가능한 좌석 인풋에 입력된 값이 좌석의 범위를 벗어남', () => {});
 });

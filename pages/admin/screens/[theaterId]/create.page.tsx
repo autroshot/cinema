@@ -30,7 +30,6 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     watch,
     handleSubmit,
     trigger,
-    resetField,
     formState: { isValid, errors },
   } = useForm<FormInputs>({
     defaultValues: {

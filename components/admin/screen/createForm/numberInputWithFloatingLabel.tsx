@@ -8,9 +8,10 @@ export default function NumberInputWithFloatingLabel<TFormValues>({
   name,
   register,
   error,
+  onChange,
 }: Props<TFormValues>) {
   return (
-    <FloatingLabel controlId={controlId} label={label}>
+    <FloatingLabel controlId={controlId} label={label} onChange={onChange}>
       <Form.Control
         type="number"
         min={min}
@@ -32,4 +33,5 @@ interface Props<TFormInputs> {
   name: Path<TFormInputs>;
   register: UseFormRegister<TFormInputs>;
   error: undefined | string;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }

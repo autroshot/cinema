@@ -103,48 +103,26 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
           </Row>
           <Row className="mb-3">
             <Col>
-              <FloatingLabel
+              <NumberInputWithFloatingLabel<FormInputs>
                 controlId="totalRow"
                 label="좌석 행 개수"
+                min="1"
+                name="totalRow"
+                register={register}
+                error={errors.totalRow?.message}
                 onChange={() => trigger(['aisles', 'unselectableSeats'])}
-              >
-                <Form.Control
-                  type="number"
-                  min="1"
-                  placeholder="1"
-                  {...register('totalRow')}
-                  isInvalid={Boolean(errors.totalRow)}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  className="fs-6"
-                  data-cy="error"
-                >
-                  {errors.totalRow?.message}
-                </Form.Control.Feedback>
-              </FloatingLabel>
+              />
             </Col>
             <Col>
-              <FloatingLabel
+              <NumberInputWithFloatingLabel<FormInputs>
                 controlId="totalColumn"
                 label="좌석 열 개수"
+                min="1"
+                name="totalColumn"
+                register={register}
+                error={errors.totalColumn?.message}
                 onChange={() => trigger(['aisles', 'unselectableSeats'])}
-              >
-                <Form.Control
-                  type="number"
-                  min="1"
-                  placeholder="1"
-                  {...register('totalColumn')}
-                  isInvalid={Boolean(errors.totalColumn)}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  className="fs-6"
-                  data-cy="error"
-                >
-                  {errors.totalColumn?.message}
-                </Form.Control.Feedback>
-              </FloatingLabel>
+              />
             </Col>
           </Row>
           <Row className="mb-3">

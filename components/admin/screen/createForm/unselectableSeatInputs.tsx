@@ -12,6 +12,7 @@ import {
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
+import NumberInputWithFloatingLabel from './numberInputWithFloatingLabel';
 
 export default function UnselectableSeatInputs({
   control,
@@ -48,45 +49,26 @@ export default function UnselectableSeatInputs({
                 </Form.Select>
               </FloatingLabel>
             </Col>
-
             <Col>
-              <FloatingLabel controlId="row" label="행 번호">
-                <Form.Control
-                  type="number"
-                  placeholder="1"
-                  min="1"
-                  {...register(`unselectableSeats.${index}.row`)}
-                  isInvalid={Boolean(errors.unselectableSeats?.[index]?.row)}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  className="fs-6"
-                  data-cy="error"
-                >
-                  {errors.unselectableSeats?.[index]?.row?.message}
-                </Form.Control.Feedback>
-              </FloatingLabel>
+              <NumberInputWithFloatingLabel
+                controlId="row"
+                label="행 번호"
+                min="1"
+                name={`unselectableSeats.${index}.row`}
+                register={register}
+                error={errors.unselectableSeats?.[index]?.row?.message}
+              />
             </Col>
-
             <Col>
-              <FloatingLabel controlId="column" label="열 번호">
-                <Form.Control
-                  type="number"
-                  placeholder="1"
-                  min="1"
-                  {...register(`unselectableSeats.${index}.column`)}
-                  isInvalid={Boolean(errors.unselectableSeats?.[index]?.column)}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  className="fs-6"
-                  data-cy="error"
-                >
-                  {errors.unselectableSeats?.[index]?.column?.message}
-                </Form.Control.Feedback>
-              </FloatingLabel>
+              <NumberInputWithFloatingLabel
+                controlId="column"
+                label="열 번호"
+                min="1"
+                name={`unselectableSeats.${index}.column`}
+                register={register}
+                error={errors.unselectableSeats?.[index]?.column?.message}
+              />
             </Col>
-
             <Col xs={1} className={styles.fixedHeight}>
               <div
                 onClick={() => remove(index)}

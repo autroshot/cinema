@@ -10,6 +10,7 @@ import {
 import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
+import NumberInputWithFloatingLabel from './numberInputWithFloatingLabel';
 
 export default function AisleInputs({ control, register, trigger }: Props) {
   const { fields, append, remove } = useFieldArray({
@@ -39,22 +40,14 @@ export default function AisleInputs({ control, register, trigger }: Props) {
               </FloatingLabel>
             </Col>
             <Col>
-              <FloatingLabel controlId="aisleNo" label="해당 번호">
-                <Form.Control
-                  type="number"
-                  min="2"
-                  placeholder="1"
-                  {...register(`aisles.${index}.no`)}
-                  isInvalid={Boolean(errors.aisles?.[index]?.no)}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  className="fs-6"
-                  data-cy="error"
-                >
-                  {errors.aisles?.[index]?.no?.message}
-                </Form.Control.Feedback>
-              </FloatingLabel>
+              <NumberInputWithFloatingLabel
+                controlId="aisleNo"
+                label="해당 번호"
+                min="2"
+                name={`aisles.${index}.no`}
+                register={register}
+                error={errors.aisles?.[index]?.no?.message}
+              />
             </Col>
             <Col xs={1} className={styles.fixedHeight}>
               <div

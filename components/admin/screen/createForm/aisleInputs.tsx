@@ -11,12 +11,12 @@ import DeleteButton from './deleteButton';
 import styles from './common.module.css';
 import AddButton from './addButton';
 
-export default function AisleInputs(props: Props) {
+export default function AisleInputs({ control, register, trigger }: Props) {
   const { fields, append, remove } = useFieldArray({
-    control: props.control,
+    control: control,
     name: 'aisles',
   });
-  const { errors } = useFormState({ control: props.control, name: 'aisles' });
+  const { errors } = useFormState({ control: control, name: 'aisles' });
 
   return (
     <>
@@ -27,11 +27,11 @@ export default function AisleInputs(props: Props) {
               <FloatingLabel
                 controlId="aisleType"
                 label="통로 유형"
-                onChange={() => props.trigger('aisles')}
+                onChange={() => trigger('aisles')}
               >
                 <Form.Select
                   aria-label="통로 유형 항목"
-                  {...props.register(`aisles.${index}.typeId`)}
+                  {...register(`aisles.${index}.typeId`)}
                 >
                   <option value="1">row</option>
                   <option value="2">column</option>
@@ -44,7 +44,7 @@ export default function AisleInputs(props: Props) {
                   type="number"
                   min="2"
                   placeholder="1"
-                  {...props.register(`aisles.${index}.no`)}
+                  {...register(`aisles.${index}.no`)}
                   isInvalid={Boolean(errors.aisles?.[index]?.no)}
                 />
                 <Form.Control.Feedback

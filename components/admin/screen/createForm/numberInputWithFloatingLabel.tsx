@@ -1,20 +1,21 @@
 import { FloatingLabel, Form } from 'react-bootstrap';
-import { UseFormRegister } from 'react-hook-form';
+import { Path, UseFormRegister } from 'react-hook-form';
 
-export default function NumberInputWithFloatingLabel({
+export default function NumberInputWithFloatingLabel<TFormValues>({
   controlId,
   label,
   min,
+  name,
   register,
   error,
-}: Props) {
+}: Props<TFormValues>) {
   return (
     <FloatingLabel controlId={controlId} label={label}>
       <Form.Control
         type="number"
         min={min}
         placeholder="1"
-        {...register('no')}
+        {...register(name)}
         isInvalid={Boolean(error)}
       />
       <Form.Control.Feedback type="invalid" className="fs-6" data-cy="error">
@@ -24,10 +25,11 @@ export default function NumberInputWithFloatingLabel({
   );
 }
 
-interface Props {
+interface Props<TFormInputs> {
   controlId: string;
   label: string;
   min: string;
-  register: UseFormRegister<any>;
+  name: Path<TFormInputs>;
+  register: UseFormRegister<TFormInputs>;
   error: undefined | string;
 }

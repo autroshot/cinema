@@ -17,6 +17,7 @@ import { ErrorResponseData } from 'pages/api/commonTypes';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { prisma } from 'db';
 import { unselectable_seat_type } from '@prisma/client';
+import NumberInputWithFloatingLabel from 'components/admin/screen/createForm/numberInputWithFloatingLabel';
 
 export default function CreateForm({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
@@ -90,22 +91,14 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
           </h3>
           <Row className="mb-3">
             <Col>
-              <FloatingLabel controlId="screenNo" label="상영관 번호">
-                <Form.Control
-                  type="number"
-                  min="1"
-                  placeholder="1"
-                  {...register('no')}
-                  isInvalid={Boolean(errors.no)}
-                />
-                <Form.Control.Feedback
-                  type="invalid"
-                  className="fs-6"
-                  data-cy="error"
-                >
-                  {errors.no?.message}
-                </Form.Control.Feedback>
-              </FloatingLabel>
+              <NumberInputWithFloatingLabel<FormInputs>
+                controlId="screenNo"
+                label="상영관 번호"
+                min="1"
+                name="no"
+                register={register}
+                error={errors.no?.message}
+              />
             </Col>
           </Row>
           <Row className="mb-3">

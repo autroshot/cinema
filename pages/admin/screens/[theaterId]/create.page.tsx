@@ -151,7 +151,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
               {isValid ? (
                 <>
                   <h5 className="mb-3">좌석 배치도</h5>
-                  <SeatingMap values={toSeatingMapValuesNew(watch())} />
+                  <SeatingMap values={toSeatingMapValues(watch())} />
                   <p className="mt-3">
                     {theaterName} 영화관에 해당 상영관을 등록합니다.
                   </p>
@@ -175,7 +175,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     </>
   );
 
-  function toSeatingMapValuesNew(formInputs: FormInputs) {
+  function toSeatingMapValues(formInputs: FormInputs) {
     const result = convertFormInputs(formInputs);
     result.aisles = sortAndRemoveOverlappingAislesNew(result.aisles);
 

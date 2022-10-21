@@ -175,28 +175,6 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     </>
   );
 
-  function toSeatingMapValues(formInputs: FormInputs) {
-    return {
-      totalRow: Number(formInputs.totalRow),
-      totalColumn: Number(formInputs.totalColumn),
-      unselectableSeats: formInputs.unselectableSeats.map(
-        (unselectableSeat) => {
-          return {
-            typeId: Number(unselectableSeat.typeId),
-            row: Number(unselectableSeat.row),
-            column: Number(unselectableSeat.column),
-          };
-        }
-      ),
-      aisles: sortAndRemoveOverlappingAisles({
-        kind: 'frontEnd',
-        values: formInputs.aisles.map((aisle) => {
-          return { typeId: Number(aisle.typeId), no: Number(aisle.no) };
-        }),
-      }) as FrontEndAisles,
-    };
-  }
-
   function toSeatingMapValuesNew(formInputs: FormInputs) {
     const result = convertFormInputs(formInputs);
     result.aisles = sortAndRemoveOverlappingAislesNew(result.aisles);

@@ -50,7 +50,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
     setLoading(true);
     axios
-      .post('/api/screens', toRequestDataNew(data))
+      .post('/api/screens', toRequestData(data))
       .then(() => {
         setShowModal(true);
         setAlert(null);
@@ -177,40 +177,14 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
   function toSeatingMapValues(formInputs: FormInputs) {
     const result = convertFormInputs(formInputs);
-    result.aisles = sortAndRemoveOverlappingAislesNew(result.aisles);
+    result.aisles = sortAndRemoveOverlappingAisles(result.aisles);
 
     return result;
   }
 
   function toRequestData(formInputs: FormInputs): PostRequestData {
     const convertedFormInputs = convertFormInputs(formInputs);
-    const processedAisles = sortAndRemoveOverlappingAislesNew(
-      convertedFormInputs.aisles
-    );
-
-    return {
-      no: convertedFormInputs.no,
-      total_row: convertedFormInputs.totalRow,
-      total_column: convertedFormInputs.totalColumn,
-      theater_id: Number(router.query.theaterId),
-      unselectable_seats: convertedFormInputs.unselectableSeats.map(
-        (unselectableSeat) => {
-          return {
-            unselectable_seat_type_id: unselectableSeat.typeId,
-            row: unselectableSeat.row,
-            column: unselectableSeat.column,
-          };
-        }
-      ),
-      aisles: processedAisles.map((aisle) => {
-        return { aisle_type_id: aisle.typeId, no: aisle.no };
-      }),
-    };
-  }
-
-  function toRequestDataNew(formInputs: FormInputs): PostRequestData {
-    const convertedFormInputs = convertFormInputs(formInputs);
-    const processedAisles = sortAndRemoveOverlappingAislesNew(
+    const processedAisles = sortAndRemoveOverlappingAisles(
       convertedFormInputs.aisles
     );
     const theaterId = Number(router.query.theaterId);
@@ -255,7 +229,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     };
   }
 
-  function sortAndRemoveOverlappingAislesNew(
+  function sortAndRemoveOverlappingAisles(
     aisles: ConvertedFormInputs['aisles']
   ): ConvertedFormInputs['aisles'] {
     const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
@@ -276,59 +250,6 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
     return [...resultRowAisles, ...resultColumnAisles];
   }
-}
-
-function sortAndRemoveOverlappingAisles(
-  aislesWithKind: FrontEndAislesWithKind | DbAislesWithKind
-): FrontEndAisles | DbAisles {
-  switch (aislesWithKind.kind) {
-    case 'frontEnd':
-      return sortAndRemoveOverlappingFrontEndAisles(aislesWithKind.values);
-
-    case 'db':
-      return sortAndRemoveOverlappingDBAisles(aislesWithKind.values);
-
-    default:
-      const _exhaustiveCheck: never = aislesWithKind;
-      return _exhaustiveCheck;
-  }
-}
-
-function sortAndRemoveOverlappingFrontEndAisles(
-  aisles: FrontEndAisles
-): FrontEndAisles {
-  const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
-  const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
-
-  const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))]
-    .sort((a, b) => a - b)
-    .map((aisleNumber) => {
-      return { typeId: 1, no: aisleNumber };
-    });
-  const resultColumnAisles = [...new Set(columnAisles.map((aisle) => aisle.no))]
-    .sort((a, b) => a - b)
-    .map((aisleNumber) => {
-      return { typeId: 2, no: aisleNumber };
-    });
-
-  return [...resultRowAisles, ...resultColumnAisles];
-}
-function sortAndRemoveOverlappingDBAisles(aisles: DbAisles): DbAisles {
-  const rowAisles = aisles.filter((aisle) => aisle.aisle_type_id === 1);
-  const columnAisles = aisles.filter((aisle) => aisle.aisle_type_id === 2);
-
-  const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))]
-    .sort((a, b) => a - b)
-    .map((aisleNumber) => {
-      return { aisle_type_id: 1, no: aisleNumber };
-    });
-  const resultColumnAisles = [...new Set(columnAisles.map((aisle) => aisle.no))]
-    .sort((a, b) => a - b)
-    .map((aisleNumber) => {
-      return { aisle_type_id: 1, no: aisleNumber };
-    });
-
-  return [...resultRowAisles, ...resultColumnAisles];
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -378,11 +299,6 @@ interface ConvertedFormInputs {
     column: number;
   }[];
 }
-
-type FrontEndAisles = { typeId: number; no: number }[];
-type FrontEndAislesWithKind = { kind: 'frontEnd'; values: FrontEndAisles };
-type DbAisles = { aisle_type_id: number; no: number }[];
-type DbAislesWithKind = { kind: 'db'; values: DbAisles };
 
 export type UnselectableSeatTypes = unselectable_seat_type[];
 interface Props {

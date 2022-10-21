@@ -240,6 +240,28 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
       }),
     };
   }
+
+  function sortAndRemoveOverlappingAislesNew(
+    aisles: FormInputsToNumber['aisles']
+  ): FormInputsToNumber['aisles'] {
+    const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
+    const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
+
+    const resultRowAisles = [...new Set(rowAisles.map((aisle) => aisle.no))]
+      .sort((a, b) => a - b)
+      .map((aisleNumber) => {
+        return { typeId: 1, no: aisleNumber };
+      });
+    const resultColumnAisles = [
+      ...new Set(columnAisles.map((aisle) => aisle.no)),
+    ]
+      .sort((a, b) => a - b)
+      .map((aisleNumber) => {
+        return { typeId: 2, no: aisleNumber };
+      });
+
+    return [...resultRowAisles, ...resultColumnAisles];
+  }
 }
 
 function sortAndRemoveOverlappingAisles(

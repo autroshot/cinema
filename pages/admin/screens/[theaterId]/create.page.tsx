@@ -50,7 +50,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
     setLoading(true);
     axios
-      .post('/api/screens', toRequestData(data))
+      .post('/api/screens', toRequestDataNew(data))
       .then(() => {
         setShowModal(true);
         setAlert(null);
@@ -183,26 +183,55 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   }
 
   function toRequestData(formInputs: FormInputs): PostRequestData {
+    const convertedFormInputs = convertFormInputs(formInputs);
+    const processedAisles = sortAndRemoveOverlappingAislesNew(
+      convertedFormInputs.aisles
+    );
+
     return {
-      no: Number(formInputs.no),
-      total_row: Number(formInputs.totalRow),
-      total_column: Number(formInputs.totalColumn),
+      no: convertedFormInputs.no,
+      total_row: convertedFormInputs.totalRow,
+      total_column: convertedFormInputs.totalColumn,
       theater_id: Number(router.query.theaterId),
-      unselectable_seats: formInputs.unselectableSeats.map(
+      unselectable_seats: convertedFormInputs.unselectableSeats.map(
         (unselectableSeat) => {
           return {
-            unselectable_seat_type_id: Number(unselectableSeat.typeId),
-            row: Number(unselectableSeat.row),
-            column: Number(unselectableSeat.column),
+            unselectable_seat_type_id: unselectableSeat.typeId,
+            row: unselectableSeat.row,
+            column: unselectableSeat.column,
           };
         }
       ),
-      aisles: sortAndRemoveOverlappingAisles({
-        kind: 'db',
-        values: formInputs.aisles.map((aisle) => {
-          return { aisle_type_id: Number(aisle.typeId), no: Number(aisle.no) };
-        }),
-      }) as DbAisles,
+      aisles: processedAisles.map((aisle) => {
+        return { aisle_type_id: aisle.typeId, no: aisle.no };
+      }),
+    };
+  }
+
+  function toRequestDataNew(formInputs: FormInputs): PostRequestData {
+    const convertedFormInputs = convertFormInputs(formInputs);
+    const processedAisles = sortAndRemoveOverlappingAislesNew(
+      convertedFormInputs.aisles
+    );
+    const theaterId = Number(router.query.theaterId);
+
+    return {
+      no: convertedFormInputs.no,
+      total_row: convertedFormInputs.totalRow,
+      total_column: convertedFormInputs.totalColumn,
+      theater_id: theaterId,
+      unselectable_seats: convertedFormInputs.unselectableSeats.map(
+        (unselectableSeat) => {
+          return {
+            unselectable_seat_type_id: unselectableSeat.typeId,
+            row: unselectableSeat.row,
+            column: unselectableSeat.column,
+          };
+        }
+      ),
+      aisles: processedAisles.map((aisle) => {
+        return { aisle_type_id: aisle.typeId, no: aisle.no };
+      }),
     };
   }
 

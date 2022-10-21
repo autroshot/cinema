@@ -332,14 +332,14 @@ export interface FormInputs {
 }
 
 interface FormInputsToNumber {
-  no: Number;
-  totalRow: Number;
-  totalColumn: Number;
-  aisles: { typeId: Number; no: Number }[];
+  no: number;
+  totalRow: number;
+  totalColumn: number;
+  aisles: { typeId: number; no: number }[];
   unselectableSeats: {
-    typeId: Number;
-    row: Number;
-    column: Number;
+    typeId: number;
+    row: number;
+    column: number;
   }[];
 }
 

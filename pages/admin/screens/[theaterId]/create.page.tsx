@@ -4,7 +4,7 @@ import MyAlert from 'components/admin/theater/myAlert';
 import { useRouter } from 'next/router';
 import { PostRequestData } from 'pages/api/screens/index.page';
 import { useEffect, useState } from 'react';
-import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BottomButtons from 'components/admin/screen/createForm/bottomButtons';

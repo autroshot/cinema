@@ -220,6 +220,26 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
       }) as DbAisles,
     };
   }
+
+  function toNumber(formInputs: FormInputs): FormInputsToNumber {
+    return {
+      no: Number(formInputs.no),
+      totalRow: Number(formInputs.totalRow),
+      totalColumn: Number(formInputs.totalColumn),
+      unselectableSeats: formInputs.unselectableSeats.map(
+        (unselectableSeat) => {
+          return {
+            typeId: Number(unselectableSeat.typeId),
+            row: Number(unselectableSeat.row),
+            column: Number(unselectableSeat.column),
+          };
+        }
+      ),
+      aisles: formInputs.aisles.map((aisle) => {
+        return { typeId: Number(aisle.typeId), no: Number(aisle.no) };
+      }),
+    };
+  }
 }
 
 function sortAndRemoveOverlappingAisles(
@@ -308,6 +328,18 @@ export interface FormInputs {
     typeId: string;
     row: string | null;
     column: string | null;
+  }[];
+}
+
+interface FormInputsToNumber {
+  no: Number;
+  totalRow: Number;
+  totalColumn: Number;
+  aisles: { typeId: Number; no: Number }[];
+  unselectableSeats: {
+    typeId: Number;
+    row: Number;
+    column: Number;
   }[];
 }
 

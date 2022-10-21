@@ -43,6 +43,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
+
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     // TODO: 테스트용
     console.log(data);
@@ -299,14 +300,14 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 export interface FormInputs {
-  no: number | null;
-  totalRow: number | null;
-  totalColumn: number | null;
-  aisles: { typeId: number; no: number | null }[];
+  no: string | null;
+  totalRow: string | null;
+  totalColumn: string | null;
+  aisles: { typeId: string; no: string | null }[];
   unselectableSeats: {
-    typeId: number;
-    row: number | null;
-    column: number | null;
+    typeId: string;
+    row: string | null;
+    column: string | null;
   }[];
 }
 

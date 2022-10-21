@@ -221,7 +221,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     };
   }
 
-  function toNumber(formInputs: FormInputs): FormInputsToNumber {
+  function convertFormInputs(formInputs: FormInputs): ConversedFormInputs {
     return {
       no: Number(formInputs.no),
       totalRow: Number(formInputs.totalRow),
@@ -242,8 +242,8 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   }
 
   function sortAndRemoveOverlappingAislesNew(
-    aisles: FormInputsToNumber['aisles']
-  ): FormInputsToNumber['aisles'] {
+    aisles: ConversedFormInputs['aisles']
+  ): ConversedFormInputs['aisles'] {
     const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
     const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
 
@@ -353,7 +353,7 @@ export interface FormInputs {
   }[];
 }
 
-interface FormInputsToNumber {
+interface ConversedFormInputs {
   no: number;
   totalRow: number;
   totalColumn: number;

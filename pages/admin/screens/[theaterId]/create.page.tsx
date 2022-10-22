@@ -250,6 +250,54 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
     return [...resultRowAisles, ...resultColumnAisles];
   }
+
+  function removeOverlappingAndSortUnselectableSeats(
+    unselectableSeats: ConvertedFormInputs['unselectableSeats']
+  ): ConvertedFormInputs['unselectableSeats'] {
+    return sort(removeOverlapping(unselectableSeats));
+
+    function removeOverlapping(
+      unselectableSeats: ConvertedFormInputs['unselectableSeats']
+    ) {
+      const result: ConvertedFormInputs['unselectableSeats'] = [];
+
+      unselectableSeats.forEach((unselectableSeat) => {
+        const foundUnselectableSeat = getSeatInSamePosition(unselectableSeat);
+        if (!foundUnselectableSeat) return result.push(unselectableSeat);
+        if (foundUnselectableSeat.typeId < unselectableSeat.typeId)
+          return result.push(unselectableSeat);
+      });
+
+      return result;
+    }
+
+    function sort(unselectableSeats: ConvertedFormInputs['unselectableSeats']) {
+      return unselectableSeats.sort((seatA, seatB) => {
+        if (seatA.row > seatB.row) return 1;
+        if (seatA.row < seatB.row) return -1;
+        if (seatA.column > seatB.column) return 1;
+        if (seatA.column < seatB.column) return -1;
+        return 0;
+      });
+    }
+
+    function getSeatInSamePosition(
+      unselectableSeat: ConvertedFormInputs['unselectableSeats'][number]
+    ) {
+      const foundUnselectableSeat = unselectableSeats.find((element) => {
+        return (
+          element.row === unselectableSeat.row &&
+          element.column === unselectableSeat.column
+        );
+      });
+
+      if (foundUnselectableSeat === undefined) {
+        return null;
+      } else {
+        return foundUnselectableSeat;
+      }
+    }
+  }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

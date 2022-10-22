@@ -190,6 +190,10 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     const processedAisles = removeOverlappingAndSortAisles(
       convertedFormInputs.aisles
     );
+    const processedUnselectableSeats =
+      removeOverlappingAndSortUnselectableSeats(
+        convertedFormInputs.unselectableSeats
+      );
     const theaterId = Number(router.query.theaterId);
 
     return {
@@ -197,15 +201,13 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
       total_row: convertedFormInputs.totalRow,
       total_column: convertedFormInputs.totalColumn,
       theater_id: theaterId,
-      unselectable_seats: convertedFormInputs.unselectableSeats.map(
-        (unselectableSeat) => {
-          return {
-            unselectable_seat_type_id: unselectableSeat.typeId,
-            row: unselectableSeat.row,
-            column: unselectableSeat.column,
-          };
-        }
-      ),
+      unselectable_seats: processedUnselectableSeats.map((unselectableSeat) => {
+        return {
+          unselectable_seat_type_id: unselectableSeat.typeId,
+          row: unselectableSeat.row,
+          column: unselectableSeat.column,
+        };
+      }),
       aisles: processedAisles.map((aisle) => {
         return { aisle_type_id: aisle.typeId, no: aisle.no };
       }),

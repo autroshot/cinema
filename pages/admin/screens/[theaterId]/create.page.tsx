@@ -177,7 +177,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
   function toSeatingMapValues(formInputs: FormInputs) {
     const result = convertFormInputs(formInputs);
-    result.aisles = sortAndRemoveOverlappingAisles(result.aisles);
+    result.aisles = removeOverlappingAndSortAisles(result.aisles);
     result.unselectableSeats = removeOverlappingAndSortUnselectableSeats(
       result.unselectableSeats
     );
@@ -187,7 +187,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
   function toRequestData(formInputs: FormInputs): PostRequestData {
     const convertedFormInputs = convertFormInputs(formInputs);
-    const processedAisles = sortAndRemoveOverlappingAisles(
+    const processedAisles = removeOverlappingAndSortAisles(
       convertedFormInputs.aisles
     );
     const theaterId = Number(router.query.theaterId);
@@ -232,7 +232,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     };
   }
 
-  function sortAndRemoveOverlappingAisles(
+  function removeOverlappingAndSortAisles(
     aisles: ConvertedFormInputs['aisles']
   ): ConvertedFormInputs['aisles'] {
     const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);

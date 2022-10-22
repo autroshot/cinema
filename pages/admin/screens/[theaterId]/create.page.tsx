@@ -232,9 +232,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     };
   }
 
-  function removeOverlappingAndSortAisles(
-    aisles: ConvertedFormInputs['aisles']
-  ): ConvertedFormInputs['aisles'] {
+  function removeOverlappingAndSortAisles(aisles: aisles): aisles {
     const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
     const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
 
@@ -264,7 +262,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
 
   function removeOverlappingUnselectableSeats(
     unselectableSeats: unselectableSeats
-  ) {
+  ): unselectableSeats {
     const result: unselectableSeats = [];
 
     unselectableSeats.forEach((unselectableSeat) => {
@@ -283,7 +281,9 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
     return result;
   }
 
-  function sortUnselectableSeats(unselectableSeats: unselectableSeats) {
+  function sortUnselectableSeats(
+    unselectableSeats: unselectableSeats
+  ): unselectableSeats {
     return unselectableSeats.sort((seatA, seatB) => {
       if (seatA.row > seatB.row) return 1;
       if (seatA.row < seatB.row) return -1;
@@ -342,6 +342,7 @@ interface ConvertedFormInputs {
   }[];
 }
 type unselectableSeats = ConvertedFormInputs['unselectableSeats'];
+type aisles = ConvertedFormInputs['aisles'];
 
 export type UnselectableSeatTypes = unselectable_seat_type[];
 interface Props {

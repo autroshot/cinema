@@ -178,6 +178,9 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   function toSeatingMapValues(formInputs: FormInputs) {
     const result = convertFormInputs(formInputs);
     result.aisles = sortAndRemoveOverlappingAisles(result.aisles);
+    result.unselectableSeats = removeOverlappingAndSortUnselectableSeats(
+      result.unselectableSeats
+    );
 
     return result;
   }
@@ -252,51 +255,42 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   }
 
   function removeOverlappingAndSortUnselectableSeats(
-    unselectableSeats: ConvertedFormInputs['unselectableSeats']
-  ): ConvertedFormInputs['unselectableSeats'] {
-    return sort(removeOverlapping(unselectableSeats));
+    unselectableSeats: unselectableSeats
+  ): unselectableSeats {
+    return sortUnselectableSeats(
+      removeOverlappingUnselectableSeats(unselectableSeats)
+    );
+  }
 
-    function removeOverlapping(
-      unselectableSeats: ConvertedFormInputs['unselectableSeats']
-    ) {
-      const result: ConvertedFormInputs['unselectableSeats'] = [];
+  function removeOverlappingUnselectableSeats(
+    unselectableSeats: unselectableSeats
+  ) {
+    const result: unselectableSeats = [];
 
-      unselectableSeats.forEach((unselectableSeat) => {
-        const foundUnselectableSeat = getSeatInSamePosition(unselectableSeat);
-        if (!foundUnselectableSeat) return result.push(unselectableSeat);
-        if (foundUnselectableSeat.typeId < unselectableSeat.typeId)
-          return result.push(unselectableSeat);
-      });
-
-      return result;
-    }
-
-    function sort(unselectableSeats: ConvertedFormInputs['unselectableSeats']) {
-      return unselectableSeats.sort((seatA, seatB) => {
-        if (seatA.row > seatB.row) return 1;
-        if (seatA.row < seatB.row) return -1;
-        if (seatA.column > seatB.column) return 1;
-        if (seatA.column < seatB.column) return -1;
-        return 0;
-      });
-    }
-
-    function getSeatInSamePosition(
-      unselectableSeat: ConvertedFormInputs['unselectableSeats'][number]
-    ) {
-      const foundUnselectableSeat = unselectableSeats.find((element) => {
+    unselectableSeats.forEach((unselectableSeat) => {
+      const foundIndex = result.findIndex((element) => {
         return (
           element.row === unselectableSeat.row &&
           element.column === unselectableSeat.column
         );
       });
 
-      if (foundUnselectableSeat === undefined) {
-        return null;
-      } else {
-        return foundUnselectableSeat;
-      }
-    }
+      if (foundIndex === -1) return result.push(unselectableSeat);
+      if (unselectableSeat.typeId < unselectableSeats[foundIndex].typeId)
+        return (unselectableSeats[foundIndex].typeId = unselectableSeat.typeId);
+    });
+
+    return result;
+  }
+
+  function sortUnselectableSeats(unselectableSeats: unselectableSeats) {
+    return unselectableSeats.sort((seatA, seatB) => {
+      if (seatA.row > seatB.row) return 1;
+      if (seatA.row < seatB.row) return -1;
+      if (seatA.column > seatB.column) return 1;
+      if (seatA.column < seatB.column) return -1;
+      return 0;
+    });
   }
 }
 
@@ -347,6 +341,7 @@ interface ConvertedFormInputs {
     column: number;
   }[];
 }
+type unselectableSeats = ConvertedFormInputs['unselectableSeats'];
 
 export type UnselectableSeatTypes = unselectable_seat_type[];
 interface Props {

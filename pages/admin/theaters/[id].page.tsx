@@ -1,7 +1,9 @@
 import { theater } from '@prisma/client';
 import Buttons from 'components/admin/theater/detail/buttons';
 import ConfirmModal from 'components/admin/theater/detail/confirmModal';
-import TheaterContent from 'components/admin/theater/detail/theaterContent';
+import ShowChildrenOrStatus, {
+  Status,
+} from 'components/common/showChildrenOrStatus';
 import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';
@@ -16,7 +18,8 @@ import { Container } from 'react-bootstrap';
 import { TheaterFormValues } from './create.page';
 
 export default function Detail() {
-  const [id, setId] = useState(-1);
+  const [id, setId] = useState<null | number>(null);
+  const [status, setStatus] = useState<Status>('loading');
   const [values, setValues] = useState<TheaterFormValues>({
     name: '',
     street_address: '',
@@ -26,7 +29,6 @@ export default function Detail() {
     car: '',
     parking: '',
   });
-  const [loadingTheater, setLoadingTheater] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
   const [completeType, setCompleteType] = useState<CompleteType>(null);
@@ -41,11 +43,11 @@ export default function Detail() {
       .then((res) => res.json())
       .then((theater: GetResponseData) => {
         if (theater === null) {
-          setLoadingTheater(false);
+          setStatus('noData');
         } else {
           setValues(toFormValues(theater));
           setId(queryId);
-          setLoadingTheater(false);
+          setStatus('showChildren');
         }
       });
   }, [router.query.id]);
@@ -55,16 +57,20 @@ export default function Detail() {
       <Container className="my-3" data-cy="container">
         <form onSubmit={handleUpdate}>
           <h3 data-cy="title">영화관 상세</h3>
-          <TheaterContent loading={loadingTheater} noData={id === -1}>
+          <ShowChildrenOrStatus status={status}>
             <>
-              <TheaterForm id={id} values={values} onChange={handleChange} />
+              <TheaterForm
+                id={Number(id)}
+                values={values}
+                onChange={handleChange}
+              />
               {alert ? <MyAlert message={alert} /> : null}
               <Buttons
                 processing={processing}
                 onDeleteButtonClick={handleDeleteButtonClick}
               />
             </>
-          </TheaterContent>
+          </ShowChildrenOrStatus>
         </form>
       </Container>
       <NoticeModal

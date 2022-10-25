@@ -16,7 +16,7 @@ export default function Screens(props: Props) {
                       <Link
                         href={`/admin/screens/${props.theaterId}/${screen.no}`}
                       >
-                        <a>
+                        <a data-cy={`${props.theaterId}-${screen.no}`}>
                           <span className={styles.wordBreak}>
                             {screen.no}관
                           </span>

@@ -1,6 +1,6 @@
 import type { PostResponseData } from 'pages/api/theaters/index.page';
 
-describe('관리자 페이지 방문', () => {
+describe.only('관리자 페이지 방문', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/admin');
   });
@@ -29,6 +29,11 @@ describe('관리자 페이지 방문', () => {
     cy.get('[data-cy="title"]').should('have.text', '상영관 등록');
     cy.contains('취소').click();
     cy.get('[data-cy="title"]').should('have.text', '영화관 및 상영관 목록');
+
+    cy.contains('수원').click();
+    cy.contains('5관');
+    cy.get('[data-cy="2-5"]').click();
+    cy.get('[data-cy="title"]').should('have.text', '상영관 상세');
   });
 });
 

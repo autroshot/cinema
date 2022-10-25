@@ -5,7 +5,7 @@ import { Container, Form } from 'react-bootstrap';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
-import { schema } from './create.yup';
+import { schema } from '../../../../components/common/screenForm.yup';
 import { GetResponseData } from 'pages/api/theaters/[id].page';
 import axios from 'axios';
 import NoticeModal from 'components/admin/theater/noticeModal';

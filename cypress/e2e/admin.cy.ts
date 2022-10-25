@@ -1,6 +1,6 @@
 import type { PostResponseData } from 'pages/api/theaters/index.page';
 
-describe.only('관리자 페이지 방문', () => {
+describe('관리자 페이지 방문', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/admin');
   });

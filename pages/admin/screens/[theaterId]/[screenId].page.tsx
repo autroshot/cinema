@@ -24,21 +24,21 @@ export default function Detail({ unselectableSeatTypes }: Props) {
   const [status, setStatus] = useState<Status>('loading');
   const [processing, setProcessing] = useState(false);
   const [completeType, setCompleteType] = useState<CompleteType>(null);
-  const [defaultValues, setDefaultValues] = useState<FormInputs>({
-    no: null,
-    totalRow: null,
-    totalColumn: null,
-    aisles: [],
-    unselectableSeats: [],
-  });
 
   const methods = useForm<FormInputs>({
-    defaultValues: defaultValues,
+    defaultValues: {
+      no: null,
+      totalRow: null,
+      totalColumn: null,
+      aisles: [],
+      unselectableSeats: [],
+    },
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
   const {
     handleSubmit,
+    reset,
     formState: { isValid },
   } = methods;
 
@@ -56,24 +56,29 @@ export default function Detail({ unselectableSeatTypes }: Props) {
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
-      // axios
-      //   .get<ScreenGetResponseData>(
-      //     `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`
-      //   )
-      //   .then((res) => {
-      //     if (!res.data) {
-      //       setStatus('noData');
-      //     } else {
-      //       setDefaultValues({res.data});
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     if (err.response) {
-      //       setAlert((err.response.data as ErrorResponseData).message);
-      //       return;
-      //     }
-      //     setAlert('오류');
-      //   });
+      axios
+        .get<ScreenGetResponseData>(
+          `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`
+        )
+        .then((res) => {
+          if (!res.data) {
+            setStatus('noData');
+          } else {
+            const defaultValues: FormInputs = {
+              no: router.query.screenId as string,
+              ...toFormValues(res.data),
+            };
+            reset(defaultValues);
+            setStatus('showChildren');
+          }
+        })
+        .catch((err) => {
+          if (err.response) {
+            setAlert((err.response.data as ErrorResponseData).message);
+            return;
+          }
+          setAlert('오류');
+        });
 
       axios
         .get<TheaterGetResponseData>(`/api/theaters/${router.query.theaterId}`)
@@ -88,7 +93,7 @@ export default function Detail({ unselectableSeatTypes }: Props) {
           setAlert('오류');
         });
     }
-  }, [router]);
+  }, [reset, router]);
 
   return (
     <>
@@ -117,6 +122,31 @@ export default function Detail({ unselectableSeatTypes }: Props) {
       </Container>
     </>
   );
+
+  function toFormValues(
+    screenGetResponseDataWithoutNull: Exclude<ScreenGetResponseData, null>
+  ): Omit<FormInputs, 'no'> {
+    return {
+      totalRow: screenGetResponseDataWithoutNull.total_row.toString(),
+      totalColumn: screenGetResponseDataWithoutNull.total_column.toString(),
+      aisles: screenGetResponseDataWithoutNull.aisles.map((aisle) => {
+        return {
+          typeId: aisle.aisle_type_id.toString(),
+          no: aisle.no.toString(),
+        };
+      }),
+      unselectableSeats:
+        screenGetResponseDataWithoutNull.unselectable_seats.map(
+          (unselectable_seat) => {
+            return {
+              typeId: unselectable_seat.unselectable_seat_type_id.toString(),
+              row: unselectable_seat.row.toString(),
+              column: unselectable_seat.column.toString(),
+            };
+          }
+        ),
+    };
+  }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {

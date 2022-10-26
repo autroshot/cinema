@@ -800,9 +800,9 @@
   "version" "3.1.0"
 
 "cypress@^10.6.0":
-  "integrity" "sha512-6sOpHjostp8gcLO34p6r/Ci342lBs8S5z9/eb3ZCQ22w2cIhMWGUoGKkosabPBfKcvRS9BE4UxybBtlIs8gTQA=="
-  "resolved" "https://registry.npmjs.org/cypress/-/cypress-10.6.0.tgz"
-  "version" "10.6.0"
+  "integrity" "sha512-lsaE7dprw5DoXM00skni6W5ElVVLGAdRUUdZjX2dYsGjbY/QnpzWZ95Zom1mkGg0hAaO/QVTZoFVS7Jgr/GUPA=="
+  "resolved" "https://registry.npmjs.org/cypress/-/cypress-10.11.0.tgz"
+  "version" "10.11.0"
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -823,7 +823,7 @@
     "dayjs" "^1.10.4"
     "debug" "^4.3.2"
     "enquirer" "^2.3.6"
-    "eventemitter2" "^6.4.3"
+    "eventemitter2" "6.4.7"
     "execa" "4.1.0"
     "executable" "^4.1.1"
     "extract-zip" "2.0.1"
@@ -1247,7 +1247,7 @@
   "resolved" "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz"
   "version" "2.0.3"
 
-"eventemitter2@^6.4.3":
+"eventemitter2@6.4.7":
   "integrity" "sha512-tYUSVOGeQPKt/eC1ABfhHy5Xd96N3oIijJvN3O9+TsC28T5V9yX9oEfEK5faP0EFSNVOG97qtAS68GBrQB2hDg=="
   "resolved" "https://registry.npmjs.org/eventemitter2/-/eventemitter2-6.4.7.tgz"
   "version" "6.4.7"

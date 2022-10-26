@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Container, Form } from 'react-bootstrap';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { schema } from '../../../../components/common/screenForm.yup';
+import { schema } from 'components/common/screenForm.yup';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { prisma } from 'db';
 import { unselectable_seat_type } from '@prisma/client';

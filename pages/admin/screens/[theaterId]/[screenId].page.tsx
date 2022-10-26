@@ -11,23 +11,29 @@ import { prisma } from 'db';
 import { unselectable_seat_type } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { GetResponseData } from 'pages/api/theaters/[id].page';
+import { GetResponseData as TheaterGetResponseData } from 'pages/api/theaters/[id].page';
 import { ErrorResponseData } from 'pages/api/commonTypes';
+import { GetResponseData as ScreenGetResponseData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
+import ShowChildrenOrStatus, {
+  Status,
+} from 'components/common/showChildrenOrStatus';
 
 export default function Detail({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
   const [alert, setAlert] = useState<null | string>(null);
+  const [status, setStatus] = useState<Status>('loading');
   const [processing, setProcessing] = useState(false);
   const [completeType, setCompleteType] = useState<CompleteType>(null);
+  const [defaultValues, setDefaultValues] = useState<FormInputs>({
+    no: null,
+    totalRow: null,
+    totalColumn: null,
+    aisles: [],
+    unselectableSeats: [],
+  });
 
   const methods = useForm<FormInputs>({
-    defaultValues: {
-      no: null,
-      totalRow: null,
-      totalColumn: null,
-      aisles: [],
-      unselectableSeats: [],
-    },
+    defaultValues: defaultValues,
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
@@ -50,8 +56,27 @@ export default function Detail({ unselectableSeatTypes }: Props) {
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
+      // axios
+      //   .get<ScreenGetResponseData>(
+      //     `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`
+      //   )
+      //   .then((res) => {
+      //     if (!res.data) {
+      //       setStatus('noData');
+      //     } else {
+      //       setDefaultValues({res.data});
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     if (err.response) {
+      //       setAlert((err.response.data as ErrorResponseData).message);
+      //       return;
+      //     }
+      //     setAlert('오류');
+      //   });
+
       axios
-        .get<GetResponseData>(`/api/theaters/${router.query.theaterId}`)
+        .get<TheaterGetResponseData>(`/api/theaters/${router.query.theaterId}`)
         .then((res) => {
           setTheaterName(res.data ? res.data.name : null);
         })
@@ -72,18 +97,22 @@ export default function Detail({ unselectableSeatTypes }: Props) {
           <h3 data-cy="title" className="mb-3">
             상영관 상세
           </h3>
-          <FormProvider {...methods}>
-            <ScreenForm
-              unselectableSeatTypes={unselectableSeatTypes}
-              theaterName={theaterName}
-              alert={alert}
-            />
-          </FormProvider>
-          <BottomButtons
-            isValid={isValid}
-            processing={processing}
-            onDeleteButtonClick={() => console.log('delete')}
-          />
+          <ShowChildrenOrStatus status={status}>
+            <>
+              <FormProvider {...methods}>
+                <ScreenForm
+                  unselectableSeatTypes={unselectableSeatTypes}
+                  theaterName={theaterName}
+                  alert={alert}
+                />
+              </FormProvider>
+              <BottomButtons
+                isValid={isValid}
+                processing={processing}
+                onDeleteButtonClick={() => console.log('delete')}
+              />
+            </>
+          </ShowChildrenOrStatus>
         </Form>
       </Container>
     </>

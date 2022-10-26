@@ -12,7 +12,7 @@ import type {
   PostRequestData,
   ErrorResponseData,
 } from 'pages/api/theaters/index.page';
-import type { GetResponseData } from 'pages/api/theaters/[id].page';
+import type { GetResponseData } from 'pages/api/theaters/[theaterId]/index.page';
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { TheaterFormValues } from './create.page';

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
 import { Prisma, theater } from '@prisma/client';
-import type { ErrorResponseData } from '../commonTypes';
+import type { ErrorResponseData } from '../../commonTypes';
 
 export default async function handler(
   req: NextApiRequest,
@@ -66,7 +66,7 @@ export default async function handler(
   }
 
   function getId() {
-    return +(req.query.id as string);
+    return +(req.query.theaterId as string);
   }
 }
 

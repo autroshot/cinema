@@ -11,7 +11,7 @@ import { prisma } from 'db';
 import { unselectable_seat_type } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { GetResponseData as TheaterGetResponseData } from 'pages/api/theaters/[id].page';
+import { GetResponseData as TheaterGetResponseData } from 'pages/api/theaters/[theaterId]/index.page';
 import { ErrorResponseData } from 'pages/api/commonTypes';
 import { GetResponseData as ScreenGetResponseData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 import ShowChildrenOrStatus, {

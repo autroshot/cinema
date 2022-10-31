@@ -63,6 +63,69 @@ const screens: Prisma.screenCreateInput[] = [
     theater: {
       connect: { id: 1 },
     },
+    aisles: {
+      createMany: {
+        data: [
+          {
+            no: 2,
+            aisle_type_id: 1,
+          },
+          {
+            no: 3,
+            aisle_type_id: 1,
+          },
+          {
+            no: 7,
+            aisle_type_id: 1,
+          },
+          {
+            no: 10,
+            aisle_type_id: 1,
+          },
+          {
+            no: 40,
+            aisle_type_id: 2,
+          },
+          {
+            no: 43,
+            aisle_type_id: 2,
+          },
+        ],
+        skipDuplicates: true,
+      },
+    },
+    unselectable_seats: {
+      createMany: {
+        data: [
+          {
+            row: 1,
+            column: 1,
+            unselectable_seat_type_id: 2,
+          },
+          {
+            row: 1,
+            column: 2,
+            unselectable_seat_type_id: 2,
+          },
+          {
+            row: 5,
+            column: 5,
+            unselectable_seat_type_id: 1,
+          },
+          {
+            row: 5,
+            column: 6,
+            unselectable_seat_type_id: 1,
+          },
+          {
+            row: 5,
+            column: 7,
+            unselectable_seat_type_id: 1,
+          },
+        ],
+        skipDuplicates: true,
+      },
+    },
   },
   {
     no: 2,

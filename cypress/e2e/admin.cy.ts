@@ -407,6 +407,20 @@ describe('상영관 등록 폼', () => {
 });
 
 describe('상영관 CRUD', () => {
+  beforeEach(() => {
+    cy.exec('npx prisma db seed');
+  });
+
+  it('R', () => {
+    cy.visit('http://localhost:3000/admin/screens/1/1');
+    cy.contains('상영관 상세').should('be.visible');
+    cy.get('[data-cy="error"]').should('not.be.visible');
+
+    cy.get('#screenNo').should('have.value', '1');
+    cy.get('#totalRow').should('have.value', '13');
+    cy.get('#totalColumn').should('have.value', '46');
+  });
+
   it('중복된 사영관 번호로 등록', () => {
     cy.visit('http://localhost:3000/admin/screens/1/create');
 

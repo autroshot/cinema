@@ -419,6 +419,33 @@ describe('상영관 CRUD', () => {
     cy.get('#screenNo').should('have.value', '1');
     cy.get('#totalRow').should('have.value', '13');
     cy.get('#totalColumn').should('have.value', '46');
+    cy.get('[name="aisles.0.typeId"]').should('have.value', '1');
+    cy.get('[name="aisles.0.no"]').should('have.value', '2');
+    cy.get('[name="aisles.1.typeId"]').should('have.value', '1');
+    cy.get('[name="aisles.1.no"]').should('have.value', '3');
+    cy.get('[name="aisles.2.typeId"]').should('have.value', '1');
+    cy.get('[name="aisles.2.no"]').should('have.value', '7');
+    cy.get('[name="aisles.3.typeId"]').should('have.value', '1');
+    cy.get('[name="aisles.3.no"]').should('have.value', '10');
+    cy.get('[name="aisles.4.typeId"]').should('have.value', '2');
+    cy.get('[name="aisles.4.no"]').should('have.value', '40');
+    cy.get('[name="aisles.5.typeId"]').should('have.value', '2');
+    cy.get('[name="aisles.5.no"]').should('have.value', '43');
+    cy.get('[name="unselectableSeats.0.typeId"]').should('have.value', '2');
+    cy.get('[name="unselectableSeats.0.row"]').should('have.value', '1');
+    cy.get('[name="unselectableSeats.0.column"]').should('have.value', '1');
+    cy.get('[name="unselectableSeats.1.typeId"]').should('have.value', '2');
+    cy.get('[name="unselectableSeats.1.row"]').should('have.value', '1');
+    cy.get('[name="unselectableSeats.1.column"]').should('have.value', '2');
+    cy.get('[name="unselectableSeats.2.typeId"]').should('have.value', '1');
+    cy.get('[name="unselectableSeats.2.row"]').should('have.value', '5');
+    cy.get('[name="unselectableSeats.2.column"]').should('have.value', '5');
+    cy.get('[name="unselectableSeats.3.typeId"]').should('have.value', '1');
+    cy.get('[name="unselectableSeats.3.row"]').should('have.value', '5');
+    cy.get('[name="unselectableSeats.3.column"]').should('have.value', '6');
+    cy.get('[name="unselectableSeats.4.typeId"]').should('have.value', '1');
+    cy.get('[name="unselectableSeats.4.row"]').should('have.value', '5');
+    cy.get('[name="unselectableSeats.4.column"]').should('have.value', '7');
   });
 
   it('중복된 사영관 번호로 등록', () => {

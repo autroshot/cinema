@@ -1,5 +1,15 @@
 import { Prisma } from '@prisma/client';
 
+const aisleTypes: Prisma.aisle_typeCreateInput[] = [
+  { id: 1, name: 'row' },
+  { id: 2, name: 'column' },
+];
+
+const unselectableSeatTypes: Prisma.unselectable_seat_typeCreateInput[] = [
+  { id: 1, name: 'nonexistent' },
+  { id: 2, name: 'unavailable' },
+];
+
 const theaters: Prisma.theaterCreateInput[] = [
   {
     name: '월드타워',
@@ -45,179 +55,223 @@ const theaters: Prisma.theaterCreateInput[] = [
   },
 ];
 
-const screens: Prisma.Enumerable<Prisma.screenCreateManyInput> = [
+const screens: Prisma.screenCreateInput[] = [
   {
     no: 1,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 2,
     total_row: 11,
     total_column: 16,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 3,
     total_row: 11,
     total_column: 20,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 4,
     total_row: 14,
     total_column: 26,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 5,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 6,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 7,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 8,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 9,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 10,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 11,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 12,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 13,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 14,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 15,
     total_row: 13,
     total_column: 46,
-    theater_id: 1,
+    theater: {
+      connect: { id: 1 },
+    },
   },
   {
     no: 1,
     total_row: 13,
     total_column: 46,
-    theater_id: 2,
+    theater: {
+      connect: { id: 2 },
+    },
   },
   {
     no: 2,
     total_row: 11,
     total_column: 16,
-    theater_id: 2,
+    theater: {
+      connect: { id: 2 },
+    },
   },
   {
     no: 3,
     total_row: 11,
     total_column: 20,
-    theater_id: 2,
+    theater: {
+      connect: { id: 2 },
+    },
   },
   {
     no: 4,
     total_row: 14,
     total_column: 26,
-    theater_id: 2,
+    theater: {
+      connect: { id: 2 },
+    },
   },
   {
     no: 5,
     total_row: 13,
     total_column: 46,
-    theater_id: 2,
+    theater: {
+      connect: { id: 2 },
+    },
   },
   {
     no: 1,
     total_row: 13,
     total_column: 46,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
   {
     no: 2,
     total_row: 11,
     total_column: 16,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
   {
     no: 3,
     total_row: 11,
     total_column: 20,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
   {
     no: 4,
     total_row: 14,
     total_column: 26,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
   {
     no: 5,
     total_row: 13,
     total_column: 46,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
   {
     no: 6,
     total_row: 14,
     total_column: 26,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
   {
     no: 7,
     total_row: 13,
     total_column: 46,
-    theater_id: 3,
+    theater: {
+      connect: { id: 3 },
+    },
   },
-];
-
-const aisleTypes: Prisma.aisle_typeCreateInput[] = [
-  { id: 1, name: 'row' },
-  { id: 2, name: 'column' },
-];
-
-const unselectableSeatTypes: Prisma.unselectable_seat_typeCreateInput[] = [
-  { id: 1, name: 'nonexistent' },
-  { id: 2, name: 'unavailable' },
 ];
 
 const testData = { theaters, screens, aisleTypes, unselectableSeatTypes };

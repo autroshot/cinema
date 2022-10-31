@@ -15,10 +15,12 @@ async function seed() {
     skipDuplicates: true,
   });
 
-  await prisma.screen.createMany({
-    data: testData.screens,
-    skipDuplicates: true,
+  const promises = testData.screens.map((screen) => {
+    return prisma.screen.create({
+      data: screen,
+    });
   });
+  await Promise.all(promises);
 
   await prisma.aisle_type.createMany({
     data: testData.aisleTypes,

@@ -38,7 +38,7 @@ export default function Detail() {
   useEffect(() => {
     if (!router.query.id) return;
 
-    const queryId = +(router.query.id as string);
+    const queryId = Number(router.query.id as string);
     fetch(`/api/theaters/${queryId}`)
       .then((res) => res.json())
       .then((theater: GetResponseData) => {

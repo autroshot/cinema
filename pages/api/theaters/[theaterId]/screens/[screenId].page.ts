@@ -15,6 +15,34 @@ export default async function handler(
         break;
 
       case 'PUT':
+        try {
+          const body = req.body as PutRequestData;
+
+          const updatedScreen = await prisma.screen.update({
+            where: {
+              theater_id_no: {
+                no: getScreenId(),
+                theater_id: getTheaterId(),
+              },
+            },
+            data: {
+              ...body,
+            },
+          });
+          await res.revalidate(`/theaters/${updatedScreen.theater_id}`);
+
+          res.status(204).end();
+        } catch (err) {
+          console.error(err);
+          if (
+            err instanceof Prisma.PrismaClientKnownRequestError &&
+            err.code === 'P2002'
+          ) {
+            res.status(500).json({ message: '고유 제약 조건 오류' });
+          } else {
+            res.status(500).json({ message: '서버 오류' });
+          }
+        }
         break;
 
       case 'DELETE':
@@ -30,10 +58,10 @@ export default async function handler(
   }
 
   function getTheaterId() {
-    return +(req.query.theaterId as string);
+    return Number(req.query.theaterId as string);
   }
   function getScreenId() {
-    return +(req.query.screenId as string);
+    return Number(req.query.screenId as string);
   }
 }
 
@@ -57,4 +85,4 @@ const getScreen = Prisma.validator<Prisma.screenSelect>()({
 });
 
 export type GetResponseData = Prisma.PromiseReturnType<typeof findScreen>;
-export type PutRequestData = Prisma.theaterUpdateInput;
+export type PutRequestData = Prisma.screenUpdateInput;

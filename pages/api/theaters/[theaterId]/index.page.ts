@@ -66,7 +66,7 @@ export default async function handler(
   }
 
   function getId() {
-    return +(req.query.theaterId as string);
+    return Number(req.query.theaterId as string);
   }
 }
 

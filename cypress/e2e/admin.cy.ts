@@ -448,7 +448,7 @@ describe('상영관 CRUD', () => {
     cy.get('[name="unselectableSeats.4.column"]').should('have.value', '7');
   });
 
-  it('중복된 사영관 번호로 등록', () => {
+  it('중복된 상영관 번호로 등록', () => {
     cy.visit('http://localhost:3000/admin/screens/1/create');
 
     cy.get('#screenNo').type('1');

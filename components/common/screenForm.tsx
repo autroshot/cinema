@@ -4,6 +4,7 @@ import NumberInputWithFloatingLabel from 'components/admin/screen/createForm/num
 import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
 import SeatingMap from 'components/admin/screen/seatingMap/seatingMap';
 import MyAlert from 'components/admin/theater/myAlert';
+import { PostRequestData } from 'pages/api/screens/index.page';
 import { Row, Col } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 
@@ -108,7 +109,35 @@ export default function ScreenForm({
   }
 }
 
-export function convertFormInputs(formInputs: FormInputs): ConvertedFormInputs {
+export function toRequestData(
+  formInputs: FormInputs
+): Omit<PostRequestData, 'theater_id'> {
+  const convertedFormInputs = convertFormInputs(formInputs);
+  const processedAisles = removeOverlappingAndSortAisles(
+    convertedFormInputs.aisles
+  );
+  const processedUnselectableSeats = removeOverlappingAndSortUnselectableSeats(
+    convertedFormInputs.unselectableSeats
+  );
+
+  return {
+    no: convertedFormInputs.no,
+    total_row: convertedFormInputs.totalRow,
+    total_column: convertedFormInputs.totalColumn,
+    unselectable_seats: processedUnselectableSeats.map((unselectableSeat) => {
+      return {
+        unselectable_seat_type_id: unselectableSeat.typeId,
+        row: unselectableSeat.row,
+        column: unselectableSeat.column,
+      };
+    }),
+    aisles: processedAisles.map((aisle) => {
+      return { aisle_type_id: aisle.typeId, no: aisle.no };
+    }),
+  };
+}
+
+function convertFormInputs(formInputs: FormInputs): ConvertedFormInputs {
   return {
     no: Number(formInputs.no),
     totalRow: Number(formInputs.totalRow),
@@ -126,7 +155,7 @@ export function convertFormInputs(formInputs: FormInputs): ConvertedFormInputs {
   };
 }
 
-export function removeOverlappingAndSortAisles(aisles: aisles): aisles {
+function removeOverlappingAndSortAisles(aisles: aisles): aisles {
   const rowAisles = aisles.filter((aisle) => aisle.typeId === 1);
   const columnAisles = aisles.filter((aisle) => aisle.typeId === 2);
 
@@ -144,7 +173,7 @@ export function removeOverlappingAndSortAisles(aisles: aisles): aisles {
   return [...resultRowAisles, ...resultColumnAisles];
 }
 
-export function removeOverlappingAndSortUnselectableSeats(
+function removeOverlappingAndSortUnselectableSeats(
   unselectableSeats: unselectableSeats
 ): unselectableSeats {
   return sortUnselectableSeats(

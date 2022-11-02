@@ -13,10 +13,14 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { GetResponseData as TheaterGetResponseData } from 'pages/api/theaters/[theaterId]/index.page';
 import { ErrorResponseData } from 'pages/api/commonTypes';
-import { GetResponseData as ScreenGetResponseData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
+import {
+  GetResponseData as ScreenGetResponseData,
+  PutRequestData,
+} from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 import ShowChildrenOrStatus, {
   Status,
 } from 'components/common/showChildrenOrStatus';
+import ConfirmModal from 'components/admin/theater/detail/confirmModal';
 
 export default function Detail({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
@@ -24,6 +28,8 @@ export default function Detail({ unselectableSeatTypes }: Props) {
   const [status, setStatus] = useState<Status>('loading');
   const [processing, setProcessing] = useState(false);
   const [completeType, setCompleteType] = useState<CompleteType>(null);
+  const [showConfirmDeletionModal, setShowConfirmDeletionModal] =
+    useState(false);
 
   const methods = useForm<FormInputs>({
     defaultValues: {
@@ -37,6 +43,7 @@ export default function Detail({ unselectableSeatTypes }: Props) {
     resolver: yupResolver(schema),
   });
   const {
+    getValues,
     handleSubmit,
     reset,
     formState: { isValid },
@@ -47,10 +54,41 @@ export default function Detail({ unselectableSeatTypes }: Props) {
     // TODO: 테스트용
     console.log(data);
 
-    setTimeout(() => {
-      setCompleteType('update');
-      setProcessing(false);
-    }, 2000);
+    axios
+      .put(
+        `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`
+        // toFormValues(data) as PutRequestData
+      )
+      .then((res) => {
+        console.log('update request success');
+      })
+      .catch((err) => {
+        if (err.response) {
+          setAlert((err.response.data as ErrorResponseData).message);
+          return;
+        }
+        setAlert('오류');
+      })
+      .then(() => {
+        setCompleteType('update');
+        setProcessing(false);
+      });
+    // const response = await fetch(`/api/theaters/${id}`, {
+    //   method: 'PUT',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(toRequestData(values)),
+    // });
+    // setProcessing(false);
+
+    // if (response.status === 500) {
+    //   const responseJson = (await response.json()) as ErrorResponseData;
+    //   setAlert(responseJson.message);
+    //   return;
+    // }
+    // if (response.status === 204) {
+    //   setCompleteType('update');
+    //   return;
+    // }
   };
 
   const router = useRouter();
@@ -114,14 +152,56 @@ export default function Detail({ unselectableSeatTypes }: Props) {
               <BottomButtons
                 isValid={isValid}
                 processing={processing}
-                onDeleteButtonClick={() => console.log('delete')}
+                onDeleteButtonClick={() => setShowConfirmDeletionModal(true)}
               />
             </>
           </ShowChildrenOrStatus>
         </Form>
       </Container>
+      <NoticeModal
+        show={completeType === 'update'}
+        bodyText="수정이 완료되었습니다."
+        href="/admin/screens"
+        linkText="목록으로 돌아가기"
+        onClose={() => setCompleteType(null)}
+      />
+      <NoticeModal
+        show={completeType === 'delete'}
+        bodyText="삭제가 완료되었습니다."
+        href="/admin/screens"
+        linkText="목록으로 돌아가기"
+      />
+      <ConfirmModal
+        contentName={`${theaterName} ${getValues('no')}관`}
+        show={showConfirmDeletionModal}
+        onClose={() => setShowConfirmDeletionModal(false)}
+        onDelete={handleDelete}
+      />
     </>
   );
+
+  async function handleDelete() {
+    console.log('request delete');
+
+    // setProcessing(true);
+    // const response = await fetch(`/api/theaters/${id}`, {
+    //   method: 'DELETE',
+    // });
+    // setProcessing(false);
+
+    // if (response.status === 500) {
+    //   const responseJson = (await response.json()) as ErrorResponseData;
+    //   setAlert(responseJson.message);
+    //   return;
+    // }
+    // if (response.status === 204) {
+    //   setShowConfirmModal(false);
+    //   setCompleteType('delete');
+    //   return;
+    // }
+    setShowConfirmDeletionModal(false);
+    setCompleteType('delete');
+  }
 
   function toFormValues(
     screenGetResponseDataWithoutNull: Exclude<ScreenGetResponseData, null>

@@ -80,8 +80,10 @@ async function findScreen(theaterId: number, screenId: number) {
 const getScreen = Prisma.validator<Prisma.screenSelect>()({
   total_row: true,
   total_column: true,
-  aisles: true,
-  unselectable_seats: true,
+  aisles: {
+    orderBy: [{ aisle_type_id: 'asc' }, { no: 'asc' }],
+  },
+  unselectable_seats: { orderBy: [{ row: 'asc' }, { column: 'asc' }] },
 });
 
 export type GetResponseData = Prisma.PromiseReturnType<typeof findScreen>;

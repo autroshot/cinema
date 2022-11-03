@@ -25,8 +25,6 @@ export default function Theater({ theater }: Props) {
 
   return (
     <Container className="my-3">
-      {/* TODO: 개발용 */}
-      <div>현재 id: {theater.id}</div>
       <h1 className="d-inline" data-cy="title">
         {theater.name}
       </h1>{' '}
@@ -52,8 +50,6 @@ export default function Theater({ theater }: Props) {
           </Col>
         </Row>
       </section>
-      <section>상영시간표</section>
-      {/* TODO: 미구현 */}
     </Container>
   );
 }

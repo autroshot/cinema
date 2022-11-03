@@ -76,6 +76,16 @@ export default async function handler(
         break;
 
       case 'DELETE':
+        const deletedScreen = await prisma.screen.delete({
+          where: {
+            theater_id_no: {
+              no: getScreenId(),
+              theater_id: getTheaterId(),
+            },
+          },
+        });
+        await res.revalidate(`/theaters/${deletedScreen.theater_id}`);
+        res.status(204).end();
         break;
 
       default:

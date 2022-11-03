@@ -69,10 +69,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const id = context.params?.id as string;
+  const id = Number(context.params?.id);
   const theater = await prisma.theater.findUnique({
     where: {
-      id: +id,
+      id: id,
     },
   });
 

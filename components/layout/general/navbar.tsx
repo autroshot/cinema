@@ -59,11 +59,6 @@ export default function Navbar() {
                   <a>관리자</a>
                 </Link>
               </Nav.Link>
-              <Nav.Link as="div">
-                <Link href="">
-                  <a>로그인</a>
-                </Link>
-              </Nav.Link>
             </Nav>
           </BootstrapNavBar.Collapse>
         </Container>

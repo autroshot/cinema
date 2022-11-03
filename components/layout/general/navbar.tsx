@@ -24,16 +24,6 @@ export default function Navbar() {
           <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
           <BootstrapNavBar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="예매" id="basic-nav-dropdown">
-                <NavDropdown.Item href="">예매하기</NavDropdown.Item>
-                <NavDropdown.Item href="">상영시간표</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="영화" id="basic-nav-dropdown">
-                <NavDropdown.Item href="">홈</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="">현재상영작</NavDropdown.Item>
-                <NavDropdown.Item href="">상영예정작</NavDropdown.Item>
-              </NavDropdown>
               <NavDropdown title="영화관" id="basic-nav-dropdown">
                 <TheaterLinks />
               </NavDropdown>

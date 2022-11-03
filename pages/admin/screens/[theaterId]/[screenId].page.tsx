@@ -168,7 +168,25 @@ export default function Detail({ unselectableSeatTypes }: Props) {
   );
 
   async function handleDelete() {
-    console.log('request delete');
+    setProcessing(true);
+
+    axios
+      .delete(
+        `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`
+      )
+      .then(() => {
+        setCompleteType('delete');
+      })
+      .catch((err) => {
+        if (err.response) {
+          setAlert((err.response.data as ErrorResponseData).message);
+          return;
+        }
+        setAlert('오류');
+      })
+      .then(() => {
+        setProcessing(false);
+      });
 
     // setProcessing(true);
     // const response = await fetch(`/api/theaters/${id}`, {

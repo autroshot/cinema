@@ -540,6 +540,16 @@ describe('상영관 CRUD', () => {
     cy.get('[name="unselectableSeats.5.column"]').should('have.value', '5');
   });
 
+  it('중복된 상영관 번호로 등록', () => {
+    cy.visit('http://localhost:3000/admin/screens/1/create');
+
+    cy.get('#screenNo').type('1');
+    cy.get('#totalRow').type('1');
+    cy.get('#totalColumn').type('1');
+    cy.get('[data-cy="submit"]').click();
+    cy.get('[data-cy="alert"]').should('include.text', '고유 제약 조건 오류');
+  });
+
   it('U', () => {
     cy.visit('http://localhost:3000/admin/screens/1/1');
     cy.contains('상영관 상세').should('be.visible');
@@ -604,16 +614,6 @@ describe('상영관 CRUD', () => {
     cy.get('[name="unselectableSeats.3.typeId"]').should('have.value', '1');
     cy.get('[name="unselectableSeats.3.row"]').should('have.value', '5');
     cy.get('[name="unselectableSeats.3.column"]').should('have.value', '5');
-  });
-
-  it('중복된 상영관 번호로 등록', () => {
-    cy.visit('http://localhost:3000/admin/screens/1/create');
-
-    cy.get('#screenNo').type('1');
-    cy.get('#totalRow').type('1');
-    cy.get('#totalColumn').type('1');
-    cy.get('[data-cy="submit"]').click();
-    cy.get('[data-cy="alert"]').should('include.text', '고유 제약 조건 오류');
   });
 });
 

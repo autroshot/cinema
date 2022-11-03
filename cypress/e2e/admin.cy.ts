@@ -615,6 +615,24 @@ describe('상영관 CRUD', () => {
     cy.get('[name="unselectableSeats.3.row"]').should('have.value', '5');
     cy.get('[name="unselectableSeats.3.column"]').should('have.value', '5');
   });
+
+  it('D', () => {
+    cy.visit('http://localhost:3000/admin/screens');
+    cy.contains('영화관 및 상영관 목록');
+
+    cy.contains('월드타워').click();
+    cy.contains('10관');
+
+    cy.visit('http://localhost:3000/admin/screens/1/10');
+    cy.get('[data-cy="deleteButton"]').click();
+    cy.contains('삭제 재확인');
+    cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
+    cy.contains('삭제가 완료되었습니다.');
+    cy.contains('목록으로 돌아가기').click();
+
+    cy.contains('월드타워').click();
+    cy.contains('10관').should('not.exist');
+  });
 });
 
 export {};

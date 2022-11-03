@@ -29,6 +29,7 @@ export default function BottomButtons({
         className="ms-3"
         disabled={!isValid || processing}
         onClick={onDeleteButtonClick}
+        data-cy="deleteButton"
       >
         {processing ? (
           <>

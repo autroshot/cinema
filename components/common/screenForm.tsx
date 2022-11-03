@@ -12,6 +12,7 @@ export default function ScreenForm({
   unselectableSeatTypes,
   theaterName,
   alert,
+  screenNoReadOnly,
 }: Props) {
   const {
     control,
@@ -29,6 +30,7 @@ export default function ScreenForm({
             controlId="screenNo"
             label="상영관 번호"
             min="1"
+            readOnly={screenNoReadOnly}
             name="no"
             register={register}
             error={errors.no?.message}
@@ -245,4 +247,5 @@ interface Props {
   unselectableSeatTypes: UnselectableSeatTypes;
   theaterName: null | string;
   alert: null | string;
+  screenNoReadOnly?: boolean;
 }

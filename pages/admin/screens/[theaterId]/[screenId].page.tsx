@@ -147,6 +147,7 @@ export default function Detail({ unselectableSeatTypes }: Props) {
                   unselectableSeatTypes={unselectableSeatTypes}
                   theaterName={theaterName}
                   alert={alert}
+                  screenNoReadOnly={true}
                 />
               </FormProvider>
               <BottomButtons

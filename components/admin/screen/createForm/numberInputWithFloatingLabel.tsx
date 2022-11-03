@@ -5,6 +5,7 @@ export default function NumberInputWithFloatingLabel<TFormValues>({
   controlId,
   label,
   min,
+  readOnly,
   name,
   register,
   error,
@@ -16,6 +17,7 @@ export default function NumberInputWithFloatingLabel<TFormValues>({
         type="number"
         min={min}
         placeholder="1"
+        readOnly={readOnly}
         {...register(name)}
         isInvalid={Boolean(error)}
       />
@@ -30,6 +32,7 @@ interface Props<TFormInputs> {
   controlId: string;
   label: string;
   min: string;
+  readOnly?: boolean;
   name: Path<TFormInputs>;
   register: UseFormRegister<TFormInputs>;
   error: undefined | string;

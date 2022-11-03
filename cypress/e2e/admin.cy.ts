@@ -153,7 +153,7 @@ describe('영화관 CRUD', () => {
       cy.visit(`/admin/theaters/${id}`);
 
       cy.get('button').contains('삭제').click();
-      cy.contains('삭제 재확인');
+      cy.contains('삭제 확인');
       cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
       cy.contains('삭제가 완료되었습니다.');
       cy.contains('목록으로 돌아가기').click();
@@ -625,7 +625,7 @@ describe('상영관 CRUD', () => {
 
     cy.visit('http://localhost:3000/admin/screens/1/10');
     cy.get('[data-cy="deleteButton"]').click();
-    cy.contains('삭제 재확인');
+    cy.contains('삭제 확인');
     cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
     cy.contains('삭제가 완료되었습니다.');
     cy.contains('목록으로 돌아가기').click();

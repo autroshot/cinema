@@ -87,7 +87,7 @@ export default function Detail() {
         linkText="목록으로 돌아가기"
       />
       <ConfirmModal
-        contentName={values.name}
+        contentName={`${values.name}점`}
         show={showConfirmModal}
         onClose={handleConfirmModalClose}
         onDelete={handleDelete}

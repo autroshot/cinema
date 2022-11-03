@@ -14,12 +14,11 @@ export default function Info(props: Props) {
     <>
       <Row className="row-cols-1 row-cols-sm-2 g-1">
         <Col>
-          {/* TODO: 미구현 */}
-          <b>&middot;</b> 총 상영관 수 <b>21개관</b>
+          <b>&middot;</b> 총 상영관 수 <b>{props.screenCount}개관</b>
         </Col>
         <Col>
-          {/* TODO: 미구현 */}
-          <b>&middot;</b> 총 좌석수 <b>4,609석</b>
+          <b>&middot;</b> 총 좌석 수{' '}
+          <b>{props.seatCount.toLocaleString('en-US')}석</b>
         </Col>
       </Row>
       <Row className="mt-3">
@@ -86,6 +85,8 @@ export default function Info(props: Props) {
 }
 
 interface Props {
+  screenCount: number;
+  seatCount: number;
   streetAddress: string;
   subway: string | null;
   bus: string | null;

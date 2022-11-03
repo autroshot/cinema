@@ -7,7 +7,11 @@ import type { GetResponseData } from 'pages/api/theaters/[theaterId]/index.page'
 import { prisma } from 'db';
 import { useRouter } from 'next/router';
 
-export default function Theater({ theater }: Props) {
+export default function Theater({
+  theater,
+  screenCount = 0,
+  seatCount = 0,
+}: Props) {
   const router = useRouter();
   if (router.isFallback) {
     return (
@@ -37,6 +41,8 @@ export default function Theater({ theater }: Props) {
         <Row className="row-cols-1 row-cols-sm-2">
           <Col>
             <Info
+              screenCount={screenCount}
+              seatCount={seatCount}
               streetAddress={theater.street_address}
               subway={theater.subway}
               bus={theater.bus}
@@ -76,13 +82,58 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   });
 
-  return {
-    props: {
-      theater: theater,
-    },
-  };
+  if (theater === null) {
+    return {
+      props: {
+        theater,
+      },
+    };
+  } else {
+    const screenCount = await prisma.screen.count({
+      where: {
+        theater_id: id,
+      },
+    });
+
+    const totalRowAndTotalColumnOfScreens = await prisma.screen.findMany({
+      where: {
+        theater_id: id,
+      },
+      select: {
+        total_row: true,
+        total_column: true,
+      },
+    });
+    const nonexistentSeatCount = await prisma.unselectable_seat.count({
+      where: {
+        theater_id: id,
+        unselectable_seat_type_id: 1,
+      },
+    });
+    const seatCount =
+      totalRowAndTotalColumnOfScreens.reduce(
+        (sum, totalRowAndTotalColumnOfScreen) => {
+          return (
+            sum +
+            totalRowAndTotalColumnOfScreen.total_row *
+              totalRowAndTotalColumnOfScreen.total_column
+          );
+        },
+        0
+      ) - nonexistentSeatCount;
+
+    return {
+      props: {
+        theater,
+        screenCount,
+        seatCount,
+      },
+    };
+  }
 };
 
 interface Props {
   theater: GetResponseData;
+  screenCount: number;
+  seatCount: number;
 }

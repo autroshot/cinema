@@ -82,54 +82,53 @@ export const getStaticProps: GetStaticProps = async (context) => {
     },
   });
 
-  if (theater === null) {
+  if (theater === null)
     return {
       props: {
         theater,
       },
     };
-  } else {
-    const screenCount = await prisma.screen.count({
-      where: {
-        theater_id: id,
-      },
-    });
 
-    const totalRowAndTotalColumnOfScreens = await prisma.screen.findMany({
-      where: {
-        theater_id: id,
-      },
-      select: {
-        total_row: true,
-        total_column: true,
-      },
-    });
-    const nonexistentSeatCount = await prisma.unselectable_seat.count({
-      where: {
-        theater_id: id,
-        unselectable_seat_type_id: 1,
-      },
-    });
-    const seatCount =
-      totalRowAndTotalColumnOfScreens.reduce(
-        (sum, totalRowAndTotalColumnOfScreen) => {
-          return (
-            sum +
-            totalRowAndTotalColumnOfScreen.total_row *
-              totalRowAndTotalColumnOfScreen.total_column
-          );
-        },
-        0
-      ) - nonexistentSeatCount;
+  const screenCount = await prisma.screen.count({
+    where: {
+      theater_id: id,
+    },
+  });
 
-    return {
-      props: {
-        theater,
-        screenCount,
-        seatCount,
+  const totalRowAndTotalColumnOfScreens = await prisma.screen.findMany({
+    where: {
+      theater_id: id,
+    },
+    select: {
+      total_row: true,
+      total_column: true,
+    },
+  });
+  const nonexistentSeatCount = await prisma.unselectable_seat.count({
+    where: {
+      theater_id: id,
+      unselectable_seat_type_id: 1,
+    },
+  });
+  const seatCount =
+    totalRowAndTotalColumnOfScreens.reduce(
+      (sum, totalRowAndTotalColumnOfScreen) => {
+        return (
+          sum +
+          totalRowAndTotalColumnOfScreen.total_row *
+            totalRowAndTotalColumnOfScreen.total_column
+        );
       },
-    };
-  }
+      0
+    ) - nonexistentSeatCount;
+
+  return {
+    props: {
+      theater,
+      screenCount,
+      seatCount,
+    },
+  };
 };
 
 interface Props {

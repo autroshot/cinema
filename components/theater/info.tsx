@@ -4,7 +4,16 @@ import CarModal from './carModal';
 import MapModal from './mapModal';
 import PublicTransportModal from './publicTransportModal';
 
-export default function Info(props: Props) {
+export default function Info({
+  screenCount,
+  seatCount,
+  streetAddress,
+  subway,
+  bus,
+  car,
+  parking,
+  googleMapsPlaceId,
+}: Props) {
   const [showPublicTransportModal, setShowPublicTransportModal] =
     useState(false);
   const [showCarModal, setShowCarModal] = useState(false);
@@ -14,20 +23,20 @@ export default function Info(props: Props) {
     <>
       <Row className="row-cols-1 row-cols-sm-2 g-1">
         <Col>
-          <b>&middot;</b> 총 상영관 수 <b>{props.screenCount}개관</b>
+          <b>&middot;</b> 총 상영관 수 <b>{screenCount}개관</b>
         </Col>
         <Col>
           <b>&middot;</b> 총 좌석 수{' '}
-          <b>{props.seatCount.toLocaleString('en-US')}석</b>
+          <b>{seatCount.toLocaleString('en-US')}석</b>
         </Col>
       </Row>
       <Row className="mt-3">
         <Col>
-          <b>{props.streetAddress}</b>
+          <b>{streetAddress}</b>
         </Col>
       </Row>
       <Row className="mt-4 row-cols-1 row-cols-sm-3 g-1">
-        {props.subway || props.bus ? (
+        {subway || bus ? (
           <Col>
             <span
               role="button"
@@ -40,7 +49,7 @@ export default function Info(props: Props) {
             </span>
           </Col>
         ) : null}
-        {props.car || props.parking ? (
+        {car || parking ? (
           <Col>
             <span role="button" onClick={() => setShowCarModal(true)}>
               <span className="material-symbols-outlined">directions_car</span>{' '}
@@ -48,7 +57,7 @@ export default function Info(props: Props) {
             </span>
           </Col>
         ) : null}
-        {props.googleMapsPlaceId ? (
+        {googleMapsPlaceId ? (
           <Col>
             <span role="button" onClick={() => setShowMapModal(true)}>
               <span className="material-symbols-outlined">location_on</span>{' '}
@@ -57,26 +66,26 @@ export default function Info(props: Props) {
           </Col>
         ) : null}
       </Row>
-      {props.subway || props.bus ? (
+      {subway || bus ? (
         <PublicTransportModal
           show={showPublicTransportModal}
-          subway={props.subway}
-          bus={props.bus}
+          subway={subway}
+          bus={bus}
           onHide={() => setShowPublicTransportModal(false)}
         />
       ) : null}
-      {props.car || props.parking ? (
+      {car || parking ? (
         <CarModal
           show={showCarModal}
-          car={props.car}
-          parking={props.parking}
+          car={car}
+          parking={parking}
           onHide={() => setShowCarModal(false)}
         />
       ) : null}
-      {props.googleMapsPlaceId ? (
+      {googleMapsPlaceId ? (
         <MapModal
           show={showMapModal}
-          googleMapsPlaceId={props.googleMapsPlaceId}
+          googleMapsPlaceId={googleMapsPlaceId}
           onHide={() => setShowMapModal(false)}
         />
       ) : null}

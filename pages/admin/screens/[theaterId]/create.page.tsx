@@ -16,7 +16,7 @@ import ScreenForm, {
   FormInputs,
   toRequestData,
 } from 'components/common/screenForm';
-import { PostRequestData } from 'pages/api/screens/index.page';
+import { PostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
 
 export default function CreateForm({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
@@ -43,14 +43,13 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     // TODO: 테스트용
     console.log(data);
-    const requestData = {
-      theater_id: Number(router.query.theaterId),
-      ...toRequestData(data),
-    } as PostRequestData;
 
     setLoading(true);
     axios
-      .post('/api/screens', requestData)
+      .post(
+        `/api/theaters/${router.query.theaterId}/screens`,
+        toRequestData(data) as PostRequestData
+      )
       .then(() => {
         setShowModal(true);
         setAlert(null);

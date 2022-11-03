@@ -4,7 +4,7 @@ import NumberInputWithFloatingLabel from 'components/admin/screen/createForm/num
 import UnselectableSeatInputs from 'components/admin/screen/createForm/unselectableSeatInputs';
 import SeatingMap from 'components/admin/screen/seatingMap/seatingMap';
 import MyAlert from 'components/admin/theater/myAlert';
-import { PostRequestData } from 'pages/api/screens/index.page';
+import { PostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
 import { Row, Col } from 'react-bootstrap';
 import { useFormContext } from 'react-hook-form';
 

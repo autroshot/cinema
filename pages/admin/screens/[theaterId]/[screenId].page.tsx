@@ -1,6 +1,9 @@
 import BottomButtons from 'components/admin/screen/detail/bottomButtons';
 import NoticeModal from 'components/admin/theater/noticeModal';
-import ScreenForm, { FormInputs } from 'components/common/screenForm';
+import ScreenForm, {
+  FormInputs,
+  toRequestData,
+} from 'components/common/screenForm';
 import { useRouter } from 'next/router';
 import { Container, Form } from 'react-bootstrap';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
@@ -56,11 +59,11 @@ export default function Detail({ unselectableSeatTypes }: Props) {
 
     axios
       .put(
-        `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`
-        // toFormValues(data) as PutRequestData
+        `/api/theaters/${router.query.theaterId}/screens/${router.query.screenId}`,
+        toRequestData(data) as PutRequestData
       )
       .then((res) => {
-        console.log('update request success');
+        setCompleteType('update');
       })
       .catch((err) => {
         if (err.response) {
@@ -70,25 +73,8 @@ export default function Detail({ unselectableSeatTypes }: Props) {
         setAlert('오류');
       })
       .then(() => {
-        setCompleteType('update');
         setProcessing(false);
       });
-    // const response = await fetch(`/api/theaters/${id}`, {
-    //   method: 'PUT',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(toRequestData(values)),
-    // });
-    // setProcessing(false);
-
-    // if (response.status === 500) {
-    //   const responseJson = (await response.json()) as ErrorResponseData;
-    //   setAlert(responseJson.message);
-    //   return;
-    // }
-    // if (response.status === 204) {
-    //   setCompleteType('update');
-    //   return;
-    // }
   };
 
   const router = useRouter();

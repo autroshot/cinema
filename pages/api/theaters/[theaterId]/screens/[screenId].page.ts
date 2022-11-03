@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
 import { Prisma } from '@prisma/client';
 import type { ErrorResponseData } from '../../../commonTypes';
+import { data } from 'cypress/types/jquery';
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,6 +19,22 @@ export default async function handler(
         try {
           const body = req.body as PutRequestData;
 
+          await prisma.screen.update({
+            where: {
+              theater_id_no: {
+                no: getScreenId(),
+                theater_id: getTheaterId(),
+              },
+            },
+            data: {
+              unselectable_seats: {
+                deleteMany: {},
+              },
+              aisles: {
+                deleteMany: {},
+              },
+            },
+          });
           const updatedScreen = await prisma.screen.update({
             where: {
               theater_id_no: {
@@ -26,7 +43,20 @@ export default async function handler(
               },
             },
             data: {
-              ...body,
+              no: body.no,
+              total_row: body.total_row,
+              total_column: body.total_column,
+              theater_id: getTheaterId(),
+              unselectable_seats: {
+                createMany: {
+                  data: [...body.unselectable_seats],
+                },
+              },
+              aisles: {
+                createMany: {
+                  data: [...body.aisles],
+                },
+              },
             },
           });
           await res.revalidate(`/theaters/${updatedScreen.theater_id}`);
@@ -87,4 +117,17 @@ const getScreen = Prisma.validator<Prisma.screenSelect>()({
 });
 
 export type GetResponseData = Prisma.PromiseReturnType<typeof findScreen>;
-export type PutRequestData = Prisma.screenUpdateInput;
+export type PutRequestData = {
+  no: number;
+  total_row: number;
+  total_column: number;
+  unselectable_seats: {
+    row: number;
+    column: number;
+    unselectable_seat_type_id: number;
+  }[];
+  aisles: {
+    no: number;
+    aisle_type_id: number;
+  }[];
+};

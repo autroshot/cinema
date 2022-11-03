@@ -3,9 +3,9 @@ import Info from 'components/theater/info';
 import MovieRecommendation from 'components/theater/movieRecommendation';
 import styles from './theater.module.css';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import type { GetResponseData } from 'pages/api/theaters/[theaterId]/index.page';
 import { prisma } from 'db';
 import { useRouter } from 'next/router';
+import { theater } from '@prisma/client';
 
 export default function Theater({
   theater,
@@ -133,7 +133,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 interface Props {
-  theater: GetResponseData;
+  theater: theater | null;
   screenCount: number;
   seatCount: number;
 }

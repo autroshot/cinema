@@ -23,11 +23,17 @@ export default function Info({
     <>
       <Row className="row-cols-1 row-cols-sm-2 g-1">
         <Col>
-          <b>&middot;</b> 총 상영관 수 <b>{screenCount}개관</b>
+          <b>&middot;</b> 총 상영관 수{' '}
+          <b>
+            <span data-cy="screenCount">{screenCount}</span>개관
+          </b>
         </Col>
         <Col>
           <b>&middot;</b> 총 좌석 수{' '}
-          <b>{seatCount.toLocaleString('en-US')}석</b>
+          <b>
+            <span data-cy="seatCount">{seatCount.toLocaleString('en-US')}</span>
+            석
+          </b>
         </Col>
       </Row>
       <Row className="mt-3">

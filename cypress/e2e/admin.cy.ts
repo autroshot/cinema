@@ -697,7 +697,15 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
     cy.get('[data-cy="seatCount"]').should('have.text', '7,380');
   });
 
-  it('D', () => {});
+  it('D', () => {
+    cy.request('DELETE', 'http://localhost:3000/api/theaters/1/screens/1');
+
+    cy.visit('http://localhost:3000/theaters/1');
+    cy.get('[data-cy="title"]').should('have.text', '월드타워');
+
+    cy.get('[data-cy="screenCount"]').should('have.text', '14');
+    cy.get('[data-cy="seatCount"]').should('have.text', '7,338');
+  });
 });
 
 export {};

@@ -76,7 +76,24 @@ export default async function handler(
         break;
 
       case 'DELETE':
-        const deletedScreen = await prisma.screen.delete({
+        const updateScreen = prisma.screen.update({
+          where: {
+            theater_id_no: {
+              no: getScreenId(),
+              theater_id: getTheaterId(),
+            },
+          },
+          data: {
+            unselectable_seats: {
+              deleteMany: {},
+            },
+            aisles: {
+              deleteMany: {},
+            },
+          },
+        });
+
+        const deleteScreen = prisma.screen.delete({
           where: {
             theater_id_no: {
               no: getScreenId(),
@@ -84,6 +101,12 @@ export default async function handler(
             },
           },
         });
+
+        const [, deletedScreen] = await prisma.$transaction([
+          updateScreen,
+          deleteScreen,
+        ]);
+
         await res.revalidate(`/theaters/${deletedScreen.theater_id}`);
         res.status(204).end();
         break;

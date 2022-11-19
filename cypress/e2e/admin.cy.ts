@@ -1,5 +1,6 @@
 import type { PostResponseData as TheaterPostResponseData } from 'pages/api/theaters/index.page';
 import { PostRequestData as ScreenPostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
+import { PutRequestData as ScreenPutRequestData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 
 describe('관리자 페이지 방문', () => {
   beforeEach(() => {
@@ -669,7 +670,32 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
     cy.get('[data-cy="seatCount"]').should('have.text', '7,961');
   });
 
-  it('U', () => {});
+  it('U', () => {
+    cy.request('PUT', 'http://localhost:3000/api/theaters/1/screens/15', {
+      no: 15,
+      total_row: 7,
+      total_column: 7,
+      aisles: [
+        { aisle_type_id: 1, no: 3 },
+        { aisle_type_id: 1, no: 4 },
+        { aisle_type_id: 2, no: 3 },
+      ],
+      unselectable_seats: [
+        { unselectable_seat_type_id: 1, row: 1, column: 1 },
+        { unselectable_seat_type_id: 1, row: 1, column: 2 },
+        { unselectable_seat_type_id: 1, row: 1, column: 3 },
+        { unselectable_seat_type_id: 1, row: 1, column: 4 },
+        { unselectable_seat_type_id: 2, row: 2, column: 1 },
+        { unselectable_seat_type_id: 2, row: 2, column: 2 },
+      ],
+    } as ScreenPutRequestData);
+
+    cy.visit('http://localhost:3000/theaters/1');
+    cy.get('[data-cy="title"]').should('have.text', '월드타워');
+
+    cy.get('[data-cy="screenCount"]').should('have.text', '15');
+    cy.get('[data-cy="seatCount"]').should('have.text', '7,380');
+  });
 
   it('D', () => {});
 });

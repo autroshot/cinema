@@ -60,7 +60,7 @@ model aisle {
   aisle_type    aisle_type @relation(fields: [aisle_type_id], references: [id])
   aisle_type_id Int        @db.UnsignedTinyInt
 
-  @@id([theater_id, screen_no, no])
+  @@id([theater_id, screen_no, no, aisle_type_id])
   @@index([aisle_type_id])
 }
 

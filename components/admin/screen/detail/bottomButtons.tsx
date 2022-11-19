@@ -4,6 +4,7 @@ import { Button, Spinner } from 'react-bootstrap';
 export default function BottomButtons({
   isValid,
   processing,
+  cancelUrl,
   onDeleteButtonClick,
 }: Props) {
   return (
@@ -46,7 +47,7 @@ export default function BottomButtons({
           <>삭제</>
         )}
       </Button>
-      <Link href="/admin/theaters">
+      <Link href={cancelUrl}>
         <Button type="button" variant="secondary" className="ms-3">
           취소
         </Button>
@@ -58,5 +59,6 @@ export default function BottomButtons({
 interface Props {
   isValid: boolean;
   processing: boolean;
+  cancelUrl: string;
   onDeleteButtonClick: () => void;
 }

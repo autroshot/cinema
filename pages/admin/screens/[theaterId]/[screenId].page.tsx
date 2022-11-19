@@ -137,6 +137,7 @@ export default function Detail({ unselectableSeatTypes }: Props) {
               <BottomButtons
                 isValid={isValid}
                 processing={processing}
+                cancelUrl={'/admin/screens'}
                 onDeleteButtonClick={() => setShowConfirmDeletionModal(true)}
               />
             </>

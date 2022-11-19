@@ -81,7 +81,7 @@ export default async function handler(
         break;
 
       case 'DELETE':
-        const updateScreen = prisma.screen.update({
+        const deleteRelatedRecord = prisma.screen.update({
           where: {
             theater_id_no: {
               no: getScreenId(),
@@ -97,7 +97,6 @@ export default async function handler(
             },
           },
         });
-
         const deleteScreen = prisma.screen.delete({
           where: {
             theater_id_no: {
@@ -108,7 +107,7 @@ export default async function handler(
         });
 
         const [, deletedScreen] = await prisma.$transaction([
-          updateScreen,
+          deleteRelatedRecord,
           deleteScreen,
         ]);
 

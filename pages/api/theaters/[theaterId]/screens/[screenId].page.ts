@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { prisma } from 'db';
 import { Prisma } from '@prisma/client';
 import type { ErrorResponseData } from '../../../commonTypes';
-import { data } from 'cypress/types/jquery';
 
 export default async function handler(
   req: NextApiRequest,

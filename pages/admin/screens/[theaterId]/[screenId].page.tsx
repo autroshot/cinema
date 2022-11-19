@@ -54,8 +54,6 @@ export default function Detail({ unselectableSeatTypes }: Props) {
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
     setProcessing(true);
-    // TODO: 테스트용
-    console.log(data);
 
     axios
       .put(
@@ -188,22 +186,6 @@ export default function Detail({ unselectableSeatTypes }: Props) {
         setProcessing(false);
       });
 
-    // setProcessing(true);
-    // const response = await fetch(`/api/theaters/${id}`, {
-    //   method: 'DELETE',
-    // });
-    // setProcessing(false);
-
-    // if (response.status === 500) {
-    //   const responseJson = (await response.json()) as ErrorResponseData;
-    //   setAlert(responseJson.message);
-    //   return;
-    // }
-    // if (response.status === 204) {
-    //   setShowConfirmModal(false);
-    //   setCompleteType('delete');
-    //   return;
-    // }
     setShowConfirmDeletionModal(false);
     setCompleteType('delete');
   }

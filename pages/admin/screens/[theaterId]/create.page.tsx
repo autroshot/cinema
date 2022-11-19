@@ -41,9 +41,6 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   } = methods;
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    // TODO: 테스트용
-    console.log(data);
-
     setLoading(true);
     axios
       .post(

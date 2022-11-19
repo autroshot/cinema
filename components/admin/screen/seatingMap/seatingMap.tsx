@@ -6,8 +6,6 @@ import BlankTd from './blankTd';
 export default function SeatingMap({ values }: Props) {
   return (
     <>
-      {/* TODO: 테스트용 */}
-      <div>{JSON.stringify(values)}</div>
       <div className="bg-black text-white p-1">
         <div className="d-grid text-white bg-secondary text-center p-1 m-1">
           S C R E E N

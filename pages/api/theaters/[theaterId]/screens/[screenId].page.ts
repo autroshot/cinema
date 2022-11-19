@@ -18,7 +18,7 @@ export default async function handler(
         try {
           const body = req.body as PutRequestData;
 
-          await prisma.screen.update({
+          const deleteRelatedRecord = prisma.screen.update({
             where: {
               theater_id_no: {
                 no: getScreenId(),
@@ -34,7 +34,7 @@ export default async function handler(
               },
             },
           });
-          const updatedScreen = await prisma.screen.update({
+          const updateScreen = prisma.screen.update({
             where: {
               theater_id_no: {
                 no: getScreenId(),
@@ -58,6 +58,12 @@ export default async function handler(
               },
             },
           });
+
+          const [, updatedScreen] = await prisma.$transaction([
+            deleteRelatedRecord,
+            updateScreen,
+          ]);
+
           await res.revalidate(`/theaters/${updatedScreen.theater_id}`);
 
           res.status(204).end();

@@ -1,4 +1,3 @@
-import BottomButtons from 'components/admin/screen/detail/bottomButtons';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import ScreenForm, {
   FormInputs,
@@ -24,6 +23,7 @@ import ShowChildrenOrStatus, {
   Status,
 } from 'components/common/showChildrenOrStatus';
 import ConfirmModal from 'components/admin/theater/detail/confirmModal';
+import UDButtons from 'components/admin/common/UDButtons';
 
 export default function Detail({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
@@ -134,10 +134,10 @@ export default function Detail({ unselectableSeatTypes }: Props) {
                   screenNoReadOnly={true}
                 />
               </FormProvider>
-              <BottomButtons
-                isValid={isValid}
+              <UDButtons
+                url="/admin/screens"
+                disabled={!isValid}
                 processing={processing}
-                cancelUrl={'/admin/screens'}
                 onDeleteButtonClick={() => setShowConfirmDeletionModal(true)}
               />
             </>

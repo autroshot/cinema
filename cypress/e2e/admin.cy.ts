@@ -633,6 +633,7 @@ describe('상영관 CRUD', () => {
     cy.contains('목록으로 돌아가기').click();
 
     cy.contains('월드타워').click();
+    cy.wait(0);
     cy.contains('10관').should('not.exist');
   });
 });

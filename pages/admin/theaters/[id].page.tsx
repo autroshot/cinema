@@ -1,5 +1,5 @@
 import { theater } from '@prisma/client';
-import ConfirmModal from 'components/admin/theater/detail/confirmModal';
+import ConfirmModal from 'components/admin/common/confirmModal';
 import ShowChildrenOrStatus, {
   Status,
 } from 'components/common/showChildrenOrStatus';

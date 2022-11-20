@@ -22,7 +22,7 @@ import {
 import ShowChildrenOrStatus, {
   Status,
 } from 'components/common/showChildrenOrStatus';
-import ConfirmModal from 'components/admin/theater/detail/confirmModal';
+import ConfirmModal from 'components/admin/common/confirmModal';
 import UDButtons from 'components/admin/common/UDButtons';
 
 export default function Detail({ unselectableSeatTypes }: Props) {

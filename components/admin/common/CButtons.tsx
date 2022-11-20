@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap';
 import CancelButton from './cancelButton';
 import MySpinner from './mySpinner';
 
-export default function CButtons({ url, disabled, processing }: Props) {
+export default function CButtons({ url, disabled = false, processing }: Props) {
   return (
     <>
       <Button type="submit" disabled={disabled} data-cy="submit">
@@ -15,6 +15,6 @@ export default function CButtons({ url, disabled, processing }: Props) {
 
 interface Props {
   url: string;
-  disabled: boolean;
+  disabled?: boolean;
   processing: boolean;
 }

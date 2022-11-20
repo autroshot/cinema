@@ -1,5 +1,4 @@
 import { theater } from '@prisma/client';
-import Buttons from 'components/admin/theater/detail/buttons';
 import ConfirmModal from 'components/admin/theater/detail/confirmModal';
 import ShowChildrenOrStatus, {
   Status,
@@ -16,6 +15,7 @@ import type { GetResponseData } from 'pages/api/theaters/[theaterId]/index.page'
 import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { TheaterFormValues } from './create.page';
+import UDButtons from 'components/admin/common/UDButtons';
 
 export default function Detail() {
   const [id, setId] = useState<null | number>(null);
@@ -32,7 +32,8 @@ export default function Detail() {
   const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
   const [completeType, setCompleteType] = useState<CompleteType>(null);
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showConfirmDeletionModal, setShowConfirmDeletionModal] =
+    useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -65,9 +66,10 @@ export default function Detail() {
                 onChange={handleChange}
               />
               {alert ? <MyAlert message={alert} /> : null}
-              <Buttons
+              <UDButtons
+                url="/admin/theaters"
                 processing={processing}
-                onDeleteButtonClick={handleDeleteButtonClick}
+                onDeleteButtonClick={() => setShowConfirmDeletionModal(true)}
               />
             </>
           </ShowChildrenOrStatus>
@@ -88,7 +90,7 @@ export default function Detail() {
       />
       <ConfirmModal
         contentName={`${values.name}점`}
-        show={showConfirmModal}
+        show={showConfirmDeletionModal}
         onClose={handleConfirmModalClose}
         onDelete={handleDelete}
       />
@@ -147,7 +149,7 @@ export default function Detail() {
       return;
     }
     if (response.status === 204) {
-      setShowConfirmModal(false);
+      setShowConfirmDeletionModal(false);
       setCompleteType('delete');
       return;
     }
@@ -158,11 +160,11 @@ export default function Detail() {
   }
 
   function handleConfirmModalClose() {
-    setShowConfirmModal(false);
+    setShowConfirmDeletionModal(false);
   }
 
   function handleDeleteButtonClick() {
-    setShowConfirmModal(true);
+    setShowConfirmDeletionModal(true);
   }
 
   function validate(values: TheaterFormValues) {

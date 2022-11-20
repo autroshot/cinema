@@ -102,7 +102,7 @@ describe('영화관 CRUD', () => {
     );
 
     cy.contains('name').click().type('{selectAll}{del}');
-    cy.get('button').contains('수정').click();
+    cy.get('[data-cy="update"]').click();
     cy.get('[data-cy="alert"]').should(
       'include.text',
       '필숫값이 비어 있습니다.'
@@ -127,7 +127,7 @@ describe('영화관 CRUD', () => {
       .click()
       .type('{selectAll}{del}')
       .type(THEATER_DUMMY.parking);
-    cy.get('button').contains('수정').click();
+    cy.get('[data-cy="update"]').click();
 
     cy.contains('수정이 완료되었습니다.');
     cy.reload();
@@ -154,7 +154,7 @@ describe('영화관 CRUD', () => {
 
       cy.visit(`/admin/theaters/${id}`);
 
-      cy.get('button').contains('삭제').click();
+      cy.get('[data-cy="delete"]').click();
       cy.contains('삭제 확인');
       cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
       cy.contains('삭제가 완료되었습니다.');
@@ -626,14 +626,13 @@ describe('상영관 CRUD', () => {
     cy.contains('10관');
 
     cy.visit('http://localhost:3000/admin/screens/1/10');
-    cy.get('[data-cy="deleteButton"]').click();
+    cy.get('[data-cy="delete"]').click();
     cy.contains('삭제 확인');
     cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
     cy.contains('삭제가 완료되었습니다.');
-    cy.contains('목록으로 돌아가기').click();
 
+    cy.visit('http://localhost:3000/admin/screens');
     cy.contains('월드타워').click();
-    cy.wait(0);
     cy.contains('10관').should('not.exist');
   });
 });

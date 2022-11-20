@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Container, Form } from 'react-bootstrap';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import BottomButtons from 'components/admin/screen/createForm/bottomButtons';
 import { schema } from 'components/common/screenForm.yup';
 import { GetResponseData } from 'pages/api/theaters/[theaterId]/index.page';
 import axios from 'axios';
@@ -17,11 +16,12 @@ import ScreenForm, {
   toRequestData,
 } from 'components/common/screenForm';
 import { PostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
+import CButtons from 'components/admin/common/CButtons';
 
 export default function CreateForm({ unselectableSeatTypes }: Props) {
   const [theaterName, setTheaterName] = useState<null | string>(null);
   const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const [alert, setAlert] = useState<null | string>(null);
 
   const methods = useForm<FormInputs>({
@@ -41,7 +41,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
   } = methods;
 
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setLoading(true);
+    setProcessing(true);
     axios
       .post(
         `/api/theaters/${router.query.theaterId}/screens`,
@@ -58,7 +58,7 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
         }
         setAlert('오류');
       })
-      .then(() => setLoading(false));
+      .then(() => setProcessing(false));
   };
 
   const router = useRouter();
@@ -93,7 +93,11 @@ export default function CreateForm({ unselectableSeatTypes }: Props) {
               alert={alert}
             />
           </FormProvider>
-          <BottomButtons disabled={!isValid} loading={loading} />
+          <CButtons
+            url="/admin/screens"
+            disabled={!isValid}
+            processing={processing}
+          />
         </Form>
       </Container>
       <NoticeModal

@@ -1,4 +1,4 @@
-import Buttons from 'components/admin/theater/createForm/buttons';
+import CButtons from 'components/admin/common/CButtons';
 import MyAlert from 'components/admin/theater/myAlert';
 import NoticeModal from 'components/admin/theater/noticeModal';
 import TheaterForm from 'components/admin/theater/theaterForm';
@@ -30,7 +30,7 @@ export default function CreateForm() {
           <h3 data-cy="title">영화관 등록</h3>
           <TheaterForm values={values} onChange={handleChange} />
           {alert ? <MyAlert message={alert} /> : null}
-          <Buttons loading={loading} />
+          <CButtons url="/admin/theaters" processing={loading} />
         </form>
       </Container>
       <NoticeModal

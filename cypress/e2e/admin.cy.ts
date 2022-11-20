@@ -61,21 +61,21 @@ describe('영화관 CRUD', () => {
     cy.contains('google_maps_place_id')
       .click()
       .type(THEATER_DUMMY.google_maps_place_id);
-    cy.get('button').contains('등록').click();
+    cy.get('[data-cy="submit"]').click();
     cy.get('[data-cy="alert"]').should(
       'include.text',
       '필숫값이 비어 있습니다.'
     );
 
     cy.contains('street_address').click().type(THEATER_DUMMY.street_address);
-    cy.get('button').contains('등록').click();
+    cy.get('[data-cy="submit"]').click();
     cy.get('[data-cy="alert"]').should('include.text', '고유 제약 조건 오류');
 
     cy.contains('name')
       .click()
       .type('{selectAll}{del}')
       .type(THEATER_DUMMY.name);
-    cy.get('button').contains('등록').click();
+    cy.get('[data-cy="submit"]').click();
     cy.contains('등록이 완료되었습니다.');
     cy.contains('목록으로 돌아가기').click();
 

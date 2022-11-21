@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap';
 
 export default function Index() {
   const { data: session } = useSession();
-  console.log(session);
 
   return (
     <Container className="my-3">

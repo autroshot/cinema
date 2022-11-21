@@ -3,21 +3,24 @@ import { PostRequestData as ScreenPostRequestData } from 'pages/api/theaters/[th
 import { PutRequestData as ScreenPutRequestData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 
 describe.only('관리자 인증', () => {
-  it('비인증 접근', () => {
+  it('관리자 페이지 비인증 접근', () => {
     cy.visit('http://localhost:3000/admin');
-
     cy.contains('Please sign in to access this page.');
   });
 
   it('로그인', () => {
-    cy.visit('http://localhost:3000');
-    cy.contains('관리자').click();
+    cy.adminLogin();
+  });
 
-    cy.get('#input-username-for-credentials-provider').type('admin');
-    cy.get('#input-password-for-credentials-provider').type('1234');
-    cy.get('button[type="submit"]').click();
-
+  it('로그아웃', () => {
+    cy.adminLogin();
+    cy.visit('http://localhost:3000/admin');
     cy.contains('admin님이 로그인되었습니다.');
+
+    cy.contains('관리자 나가기').click();
+    cy.url().should('eq', 'http://localhost:3000/');
+    cy.visit('http://localhost:3000/admin');
+    cy.contains('Please sign in to access this page.');
   });
 });
 

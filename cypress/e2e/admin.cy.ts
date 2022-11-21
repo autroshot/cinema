@@ -2,6 +2,25 @@ import type { PostResponseData as TheaterPostResponseData } from 'pages/api/thea
 import { PostRequestData as ScreenPostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
 import { PutRequestData as ScreenPutRequestData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 
+describe.only('관리자 인증', () => {
+  it('비인증 접근', () => {
+    cy.visit('http://localhost:3000/admin');
+
+    cy.contains('Please sign in to access this page.');
+  });
+
+  it('로그인', () => {
+    cy.visit('http://localhost:3000');
+    cy.contains('관리자').click();
+
+    cy.get('#input-username-for-credentials-provider').type('admin');
+    cy.get('#input-password-for-credentials-provider').type('1234');
+    cy.get('button[type="submit"]').click();
+
+    cy.contains('admin이 로그인되었습니다.');
+  });
+});
+
 describe('관리자 페이지 방문', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/admin');

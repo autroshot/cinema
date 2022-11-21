@@ -45,9 +45,7 @@ export default function Navbar() {
             </Nav>
             <Nav>
               <Nav.Link as="div">
-                <Link href="/admin/">
-                  <a>관리자</a>
-                </Link>
+                <a href="/admin">관리자</a>
               </Nav.Link>
             </Nav>
           </BootstrapNavBar.Collapse>

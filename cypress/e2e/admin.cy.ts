@@ -17,7 +17,7 @@ describe.only('관리자 인증', () => {
     cy.get('#input-password-for-credentials-provider').type('1234');
     cy.get('button[type="submit"]').click();
 
-    cy.contains('admin이 로그인되었습니다.');
+    cy.contains('admin님이 로그인되었습니다.');
   });
 });
 

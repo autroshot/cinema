@@ -5,21 +5,42 @@ import GeneralLayout from 'components/layout/general/layout';
 import { SSRProvider } from 'react-bootstrap';
 import { NextPage } from 'next';
 import AdminLayout from 'components/layout/admin/layout';
+import { SessionProvider, useSession } from 'next-auth/react';
 
-function MyApp({ Component, pageProps }: AppPropsWithAdmin) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppPropsWithAdmin) {
   return (
     <SSRProvider>
-      {Component.isAdminPage ? (
-        <AdminLayout>
-          <Component {...pageProps} />
-        </AdminLayout>
-      ) : (
-        <GeneralLayout>
-          <Component {...pageProps} />
-        </GeneralLayout>
-      )}
+      <SessionProvider session={session}>
+        {Component.isAdminPage ? (
+          <Auth>
+            <AdminLayout>
+              <Component {...pageProps} />
+            </AdminLayout>
+          </Auth>
+        ) : (
+          <GeneralLayout>
+            <Component {...pageProps} />
+          </GeneralLayout>
+        )}
+      </SessionProvider>
     </SSRProvider>
   );
+}
+
+function Auth({ children }: Props) {
+  const { status } = useSession({ required: true });
+
+  if (status === 'loading') {
+    return <div>로딩 중입니다...</div>;
+  }
+  return children;
+}
+
+interface Props {
+  children: JSX.Element;
 }
 
 type NextPageWithAdmin = NextPage & {

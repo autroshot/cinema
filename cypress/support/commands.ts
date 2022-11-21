@@ -4,7 +4,7 @@ Cypress.Commands.add('adminLogin', () => {
   cy.session(
     'admin',
     () => {
-      cy.visit('http://localhost:3000/admin');
+      cy.visit('admin');
 
       cy.get('#input-username-for-credentials-provider').type('admin');
       cy.get('#input-password-for-credentials-provider').type('1234');
@@ -14,7 +14,8 @@ Cypress.Commands.add('adminLogin', () => {
     },
     {
       validate() {
-        cy.visit('http://localhost:3000/admin');
+        cy.visit('admin');
+        cy.contains('admin님이 로그인되었습니다.');
       },
     }
   );

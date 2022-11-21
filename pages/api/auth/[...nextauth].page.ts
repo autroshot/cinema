@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 export default NextAuth({
+  secret: 'DuaLKqhn9zSO2EYWgMvMg7PdRQM2x0KaLiVVtFHU0eY=',
   providers: [
     CredentialsProvider({
       name: 'Credentials',

@@ -4,7 +4,7 @@ import { PutRequestData as ScreenPutRequestData } from 'pages/api/theaters/[thea
 
 describe('관리자 인증', () => {
   it('관리자 페이지 비인증 접근', () => {
-    cy.visit('http://localhost:3000/admin');
+    cy.visit('admin');
     cy.contains('Please sign in to access this page.');
   });
 
@@ -14,12 +14,12 @@ describe('관리자 인증', () => {
 
   it('로그아웃', () => {
     cy.adminLogin();
-    cy.visit('http://localhost:3000/admin');
+    cy.visit('admin');
     cy.contains('admin님이 로그인되었습니다.');
 
     cy.contains('관리자 나가기').click();
     cy.url().should('eq', 'http://localhost:3000/');
-    cy.visit('http://localhost:3000/admin');
+    cy.visit('admin');
     cy.contains('Please sign in to access this page.');
   });
 });
@@ -27,7 +27,6 @@ describe('관리자 인증', () => {
 describe('관리자 페이지 방문', () => {
   beforeEach(() => {
     cy.adminLogin();
-    cy.visit('http://localhost:3000/admin');
   });
 
   it('영화관', () => {
@@ -73,11 +72,11 @@ const THEATER_DUMMY = {
 describe('영화관 CRUD', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
-    cy.adminLogin();
   });
 
   it('C', () => {
-    cy.visit('http://localhost:3000/admin/theaters/create');
+    cy.adminLogin();
+    cy.visit('admin/theaters/create');
 
     cy.contains('name').click().type('월드타워');
     cy.contains('google_maps_place_id')
@@ -105,7 +104,8 @@ describe('영화관 CRUD', () => {
   });
 
   it('R', () => {
-    cy.visit('http://localhost:3000/admin/theaters');
+    cy.adminLogin();
+    cy.visit('admin/theaters');
 
     cy.get('[data-cy="theaters"]').contains('월드타워');
     cy.get('[data-cy="theaters"]').contains('수원');
@@ -117,7 +117,8 @@ describe('영화관 CRUD', () => {
   });
 
   it('U', () => {
-    cy.visit('http://localhost:3000/admin/theaters/1');
+    cy.adminLogin();
+    cy.visit('admin/theaters/1');
     cy.get('[data-cy="container"]').should(
       'not.include.text',
       '불러오는 중...'
@@ -170,34 +171,33 @@ describe('영화관 CRUD', () => {
   });
 
   it('D', () => {
-    cy.request('POST', 'api/theaters', THEATER_DUMMY).then((theater) => {
-      const body = theater.body as TheaterPostResponseData;
-      const id = body.id;
+    cy.request('POST', 'api/theaters', THEATER_DUMMY);
+    cy.adminLogin();
+    cy.visit('admin/theaters/5');
 
-      cy.visit(`/admin/theaters/${id}`);
+    cy.get('[data-cy="delete"]').click();
+    cy.contains('삭제 확인');
+    cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
+    cy.contains('삭제가 완료되었습니다.');
+    cy.contains('목록으로 돌아가기').click();
 
-      cy.get('[data-cy="delete"]').click();
-      cy.contains('삭제 확인');
-      cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
-      cy.contains('삭제가 완료되었습니다.');
-      cy.contains('목록으로 돌아가기').click();
-
-      cy.get('[data-cy="theaters"]').should(
-        'not.contain.text',
-        THEATER_DUMMY.name
-      );
-      cy.visit(`/admin/theaters/${id}`);
-      cy.contains('데이터가 없습니다.');
-    });
+    cy.get('[data-cy="theaters"]').should('contain.text', '노원');
+    cy.get('[data-cy="theaters"]').should(
+      'not.contain.text',
+      THEATER_DUMMY.name
+    );
+    cy.visit('admin/theaters/5');
+    cy.contains('데이터가 없습니다.');
   });
 });
 
 describe('상영관 등록 폼', () => {
   beforeEach(() => {
-    cy.adminLogin();
-    cy.visit('http://localhost:3000/admin/screens/4/create');
-    cy.contains('상영관 등록').should('be.visible');
-    cy.get('[data-cy="error"]').should('not.be.visible');
+    cy.adminLogin().then(() => {
+      cy.visit('admin/screens/4/create');
+      cy.contains('상영관 등록').should('be.visible');
+      cy.get('[data-cy="error"]').should('not.be.visible');
+    });
   });
 
   it('입력된 값이 정수가 아님', () => {
@@ -434,11 +434,11 @@ describe('상영관 등록 폼', () => {
 describe('상영관 CRUD', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
-    cy.adminLogin();
   });
 
   it('R', () => {
-    cy.visit('http://localhost:3000/admin/screens/1/1');
+    cy.adminLogin();
+    cy.visit('admin/screens/1/1');
     cy.contains('상영관 상세').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
 
@@ -475,7 +475,8 @@ describe('상영관 CRUD', () => {
   });
 
   it('C', () => {
-    cy.visit('http://localhost:3000/admin/screens/4/create');
+    cy.adminLogin();
+    cy.visit('admin/screens/4/create');
     cy.contains('상영관 등록').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
 
@@ -531,7 +532,7 @@ describe('상영관 CRUD', () => {
     cy.get('[data-cy="submit"]').click();
     cy.contains('등록이 완료되었습니다.');
 
-    cy.visit('http://localhost:3000/admin/screens/4/1');
+    cy.visit('admin/screens/4/1');
     cy.contains('상영관 상세').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
 
@@ -567,7 +568,8 @@ describe('상영관 CRUD', () => {
   });
 
   it('중복된 상영관 번호로 등록', () => {
-    cy.visit('http://localhost:3000/admin/screens/1/create');
+    cy.adminLogin();
+    cy.visit('admin/screens/1/create');
 
     cy.get('#screenNo').type('1');
     cy.get('#totalRow').type('1');
@@ -577,7 +579,8 @@ describe('상영관 CRUD', () => {
   });
 
   it('U', () => {
-    cy.visit('http://localhost:3000/admin/screens/1/1');
+    cy.adminLogin();
+    cy.visit('admin/screens/1/1');
     cy.contains('상영관 상세').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
 
@@ -613,7 +616,7 @@ describe('상영관 CRUD', () => {
     cy.get('[type="submit"]').click();
     cy.contains('수정이 완료되었습니다.');
 
-    cy.visit('http://localhost:3000/admin/screens/1/1');
+    cy.visit('admin/screens/1/1');
     cy.contains('상영관 상세').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
 
@@ -643,19 +646,20 @@ describe('상영관 CRUD', () => {
   });
 
   it('D', () => {
-    cy.visit('http://localhost:3000/admin/screens');
+    cy.adminLogin();
+    cy.visit('admin/screens');
     cy.contains('영화관 및 상영관 목록');
 
     cy.contains('월드타워').click();
     cy.contains('10관');
 
-    cy.visit('http://localhost:3000/admin/screens/1/10');
+    cy.visit('admin/screens/1/10');
     cy.get('[data-cy="delete"]').click();
     cy.contains('삭제 확인');
     cy.get('[data-cy="confirmButtons"]').contains('삭제').click();
     cy.contains('삭제가 완료되었습니다.');
 
-    cy.visit('http://localhost:3000/admin/screens');
+    cy.visit('admin/screens');
     cy.contains('월드타워').click();
     cy.contains('10관').should('not.exist');
   });
@@ -664,11 +668,10 @@ describe('상영관 CRUD', () => {
 describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
-    cy.adminLogin();
   });
 
   it('초깃값', () => {
-    cy.visit('http://localhost:3000/theaters/1');
+    cy.visit('theaters/1');
     cy.get('[data-cy="title"]').should('have.text', '월드타워');
 
     cy.get('[data-cy="screenCount"]').should('have.text', '15');
@@ -676,7 +679,7 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
   });
 
   it('C', () => {
-    cy.request('POST', 'http://localhost:3000/api/theaters/1/screens', {
+    cy.request('POST', 'api/theaters/1/screens', {
       no: 16,
       total_row: 5,
       total_column: 6,
@@ -688,7 +691,8 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
       ],
     } as ScreenPostRequestData);
 
-    cy.visit('http://localhost:3000/theaters/1');
+    cy.adminLogin();
+    cy.visit('theaters/1');
     cy.get('[data-cy="title"]').should('have.text', '월드타워');
 
     cy.get('[data-cy="screenCount"]').should('have.text', '16');
@@ -696,7 +700,7 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
   });
 
   it('U', () => {
-    cy.request('PUT', 'http://localhost:3000/api/theaters/1/screens/15', {
+    cy.request('PUT', 'api/theaters/1/screens/15', {
       no: 15,
       total_row: 7,
       total_column: 7,
@@ -715,7 +719,8 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
       ],
     } as ScreenPutRequestData);
 
-    cy.visit('http://localhost:3000/theaters/1');
+    cy.adminLogin();
+    cy.visit('theaters/1');
     cy.get('[data-cy="title"]').should('have.text', '월드타워');
 
     cy.get('[data-cy="screenCount"]').should('have.text', '15');
@@ -723,9 +728,10 @@ describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
   });
 
   it('D', () => {
-    cy.request('DELETE', 'http://localhost:3000/api/theaters/1/screens/1');
+    cy.request('DELETE', 'api/theaters/1/screens/1');
 
-    cy.visit('http://localhost:3000/theaters/1');
+    cy.adminLogin();
+    cy.visit('theaters/1');
     cy.get('[data-cy="title"]').should('have.text', '월드타워');
 
     cy.get('[data-cy="screenCount"]').should('have.text', '14');

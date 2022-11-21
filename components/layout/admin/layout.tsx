@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ScriptProps } from 'next/script';
 import { Container, Nav } from 'react-bootstrap';
+import { signOut } from 'next-auth/react';
 
 export default function Layout({ children }: ScriptProps) {
   return (
@@ -21,9 +22,13 @@ export default function Layout({ children }: ScriptProps) {
             <Link href="/admin/screens">상영관</Link>
           </Nav.Link>
         </Nav.Item>
-        <Nav.Item as="li" className="ms-0 ms-sm-auto">
+        <Nav.Item
+          as="li"
+          className="ms-0 ms-sm-auto"
+          onClick={() => signOut({ callbackUrl: '/' })}
+        >
           <Nav.Link as="div">
-            <Link href="/">관리자 나가기</Link>
+            <a>관리자 나가기</a>
           </Nav.Link>
         </Nav.Item>
       </Nav>

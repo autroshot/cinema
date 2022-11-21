@@ -2,7 +2,7 @@ import type { PostResponseData as TheaterPostResponseData } from 'pages/api/thea
 import { PostRequestData as ScreenPostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
 import { PutRequestData as ScreenPutRequestData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 
-describe.only('관리자 인증', () => {
+describe('관리자 인증', () => {
   it('관리자 페이지 비인증 접근', () => {
     cy.visit('http://localhost:3000/admin');
     cy.contains('Please sign in to access this page.');
@@ -26,6 +26,7 @@ describe.only('관리자 인증', () => {
 
 describe('관리자 페이지 방문', () => {
   beforeEach(() => {
+    cy.adminLogin();
     cy.visit('http://localhost:3000/admin');
   });
 
@@ -70,16 +71,15 @@ const THEATER_DUMMY = {
   parking: '테스트 주차',
 };
 describe('영화관 CRUD', () => {
-  const duplicatedName = '월드타워';
-
   beforeEach(() => {
     cy.exec('npx prisma db seed');
+    cy.adminLogin();
   });
 
   it('C', () => {
     cy.visit('http://localhost:3000/admin/theaters/create');
 
-    cy.contains('name').click().type(duplicatedName);
+    cy.contains('name').click().type('월드타워');
     cy.contains('google_maps_place_id')
       .click()
       .type(THEATER_DUMMY.google_maps_place_id);
@@ -194,6 +194,7 @@ describe('영화관 CRUD', () => {
 
 describe('상영관 등록 폼', () => {
   beforeEach(() => {
+    cy.adminLogin();
     cy.visit('http://localhost:3000/admin/screens/4/create');
     cy.contains('상영관 등록').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
@@ -433,6 +434,7 @@ describe('상영관 등록 폼', () => {
 describe('상영관 CRUD', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
+    cy.adminLogin();
   });
 
   it('R', () => {
@@ -662,6 +664,7 @@ describe('상영관 CRUD', () => {
 describe('상영관 CUD에 의한 총 좌석 수 갱신', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
+    cy.adminLogin();
   });
 
   it('초깃값', () => {

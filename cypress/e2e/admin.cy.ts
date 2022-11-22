@@ -27,6 +27,7 @@ describe('관리자 인증', () => {
 describe('관리자 페이지 방문', () => {
   beforeEach(() => {
     cy.adminLogin();
+    cy.visit('admin');
   });
 
   it('영화관', () => {
@@ -72,10 +73,10 @@ const THEATER_DUMMY = {
 describe('영화관 CRUD', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
+    cy.adminLogin();
   });
 
   it('C', () => {
-    cy.adminLogin();
     cy.visit('admin/theaters/create');
 
     cy.contains('name').click().type('월드타워');
@@ -104,7 +105,6 @@ describe('영화관 CRUD', () => {
   });
 
   it('R', () => {
-    cy.adminLogin();
     cy.visit('admin/theaters');
 
     cy.get('[data-cy="theaters"]').contains('월드타워');
@@ -117,7 +117,6 @@ describe('영화관 CRUD', () => {
   });
 
   it('U', () => {
-    cy.adminLogin();
     cy.visit('admin/theaters/1');
     cy.get('[data-cy="container"]').should(
       'not.include.text',
@@ -172,7 +171,6 @@ describe('영화관 CRUD', () => {
 
   it('D', () => {
     cy.request('POST', 'api/theaters', THEATER_DUMMY);
-    cy.adminLogin();
     cy.visit('admin/theaters/5');
 
     cy.get('[data-cy="delete"]').click();
@@ -193,11 +191,10 @@ describe('영화관 CRUD', () => {
 
 describe('상영관 등록 폼', () => {
   beforeEach(() => {
-    cy.adminLogin().then(() => {
-      cy.visit('admin/screens/4/create');
-      cy.contains('상영관 등록').should('be.visible');
-      cy.get('[data-cy="error"]').should('not.be.visible');
-    });
+    cy.adminLogin();
+    cy.visit('admin/screens/4/create');
+    cy.contains('상영관 등록').should('be.visible');
+    cy.get('[data-cy="error"]').should('not.be.visible');
   });
 
   it('입력된 값이 정수가 아님', () => {
@@ -434,10 +431,10 @@ describe('상영관 등록 폼', () => {
 describe('상영관 CRUD', () => {
   beforeEach(() => {
     cy.exec('npx prisma db seed');
+    cy.adminLogin();
   });
 
   it('R', () => {
-    cy.adminLogin();
     cy.visit('admin/screens/1/1');
     cy.contains('상영관 상세').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
@@ -475,7 +472,6 @@ describe('상영관 CRUD', () => {
   });
 
   it('C', () => {
-    cy.adminLogin();
     cy.visit('admin/screens/4/create');
     cy.contains('상영관 등록').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
@@ -568,7 +564,6 @@ describe('상영관 CRUD', () => {
   });
 
   it('중복된 상영관 번호로 등록', () => {
-    cy.adminLogin();
     cy.visit('admin/screens/1/create');
 
     cy.get('#screenNo').type('1');
@@ -579,7 +574,6 @@ describe('상영관 CRUD', () => {
   });
 
   it('U', () => {
-    cy.adminLogin();
     cy.visit('admin/screens/1/1');
     cy.contains('상영관 상세').should('be.visible');
     cy.get('[data-cy="error"]').should('not.be.visible');
@@ -646,7 +640,6 @@ describe('상영관 CRUD', () => {
   });
 
   it('D', () => {
-    cy.adminLogin();
     cy.visit('admin/screens');
     cy.contains('영화관 및 상영관 목록');
 

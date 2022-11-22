@@ -14,8 +14,9 @@ Cypress.Commands.add('adminLogin', () => {
     },
     {
       validate() {
-        cy.visit('admin');
-        cy.contains('admin님이 로그인되었습니다.');
+        cy.request<object>('GET', 'api/auth/session').then(($response) => {
+          expect($response.body).to.have.property('user');
+        });
       },
     }
   );

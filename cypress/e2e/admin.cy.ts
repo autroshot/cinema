@@ -1,4 +1,3 @@
-import type { PostResponseData as TheaterPostResponseData } from 'pages/api/theaters/index.page';
 import { PostRequestData as ScreenPostRequestData } from 'pages/api/theaters/[theaterId]/screens/index.page';
 import { PutRequestData as ScreenPutRequestData } from 'pages/api/theaters/[theaterId]/screens/[screenId].page';
 

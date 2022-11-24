@@ -1,4 +1,4 @@
-import { FormInputs } from 'pages/admin/screens/[theaterId]/create.page';
+import { FormInputs } from 'components/common/screenForm';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   Control,
@@ -63,7 +63,7 @@ export default function AisleInputs({ control, register, trigger }: Props) {
       })}
       <div
         className="d-grid"
-        onClick={() => append({ typeId: 1, no: null })}
+        onClick={() => append({ typeId: '1', no: null })}
         data-cy="addAisleInput"
       >
         <AddButton />

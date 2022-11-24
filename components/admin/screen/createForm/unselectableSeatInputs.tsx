@@ -1,7 +1,7 @@
 import {
   FormInputs,
   UnselectableSeatTypes,
-} from 'pages/admin/screens/[theaterId]/create.page';
+} from 'components/common/screenForm';
 import { Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import {
   Control,
@@ -83,7 +83,7 @@ export default function UnselectableSeatInputs({
       })}
       <div
         className="d-grid"
-        onClick={() => append({ typeId: 1, row: null, column: null })}
+        onClick={() => append({ typeId: '1', row: null, column: null })}
         data-cy="addUnselectableSeatInput"
       >
         <AddButton />

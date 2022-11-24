@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=optional"
           rel="stylesheet"
         />
         <link

@@ -1,4 +1,4 @@
-.gitHubIcon::before {
+.gitHubIcon {
   content: '';
   width: 1.7rem;
   height: 1.7rem;

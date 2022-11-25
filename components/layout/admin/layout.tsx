@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ScriptProps } from 'next/script';
 import { Container, Nav } from 'react-bootstrap';
 import { signOut } from 'next-auth/react';
+import Footer from '../common/footer';
 
 export default function Layout({ children }: ScriptProps) {
   return (
@@ -33,6 +34,7 @@ export default function Layout({ children }: ScriptProps) {
         </Nav.Item>
       </Nav>
       <main>{children}</main>
+      <Footer />
     </Container>
   );
 }

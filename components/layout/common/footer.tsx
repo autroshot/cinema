@@ -1,23 +1,26 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import logo from 'public/logos/site-with-text-gray.png';
-import { Container } from 'react-bootstrap';
+import { Container, Stack } from 'react-bootstrap';
 import styles from './footer.module.css';
 
 export default function Footer() {
   return (
-    <Container className="py-5">
+    <Container className="py-3">
       <footer>
-        <div className="mb-3">
-          <Image src={logo} alt="시네마 로고" />
-        </div>
-        <div>
+        <Stack direction="horizontal" gap={3}>
+          <Link href="/">
+            <a>
+              <Image src={logo} alt="시네마 로고" />
+            </a>
+          </Link>
           <a
             href="https://github.com/autroshot/cinema"
             target="_blank"
             rel="noreferrer"
             className={styles.gitHubIcon}
           />
-        </div>
+        </Stack>
       </footer>
     </Container>
   );

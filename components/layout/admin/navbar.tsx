@@ -26,7 +26,7 @@ export default function Navbar() {
         onClick={() => signOut({ callbackUrl: '/' })}
       >
         <Nav.Link as="div">
-          <a>관리자 나가기</a>
+          <a tabIndex={0}>관리자 나가기</a>
         </Nav.Link>
       </Nav.Item>
     </Nav>

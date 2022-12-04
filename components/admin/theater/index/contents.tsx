@@ -3,7 +3,7 @@ import type {
   GetRequestData,
   GetResponseData,
 } from 'pages/api/theaters/index.page';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner } from 'react-bootstrap';
 import styles from './contents.module.css';
 
@@ -45,7 +45,12 @@ export default function Contents() {
         {theaters.map((theater) => {
           return (
             <Link key={theater.id} href={`/admin/theaters/${theater.id}`}>
-              <tr role="link" className={styles.cursorPointer}>
+              <tr
+                role="link"
+                className={styles.cursorPointer}
+                tabIndex={0}
+                onKeyDown={handleKeyDown}
+              >
                 <td>{theater.id}</td>
                 <td>{theater.name}</td>
               </tr>
@@ -54,5 +59,11 @@ export default function Contents() {
         })}
       </>
     );
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
+    if (e.key === 'Enter') {
+      e.currentTarget.click();
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { triggerClickWhenEnterKeyDown } from 'components/admin/common/functions';
 import styles from './theater.module.css';
 
 export default function Theater(props: Props) {
@@ -7,7 +8,7 @@ export default function Theater(props: Props) {
       className={styles.cursorPointer}
       tabIndex={0}
       onClick={props.onClick}
-      onKeyDown={handleKeyDown}
+      onKeyDown={triggerClickWhenEnterKeyDown}
       aria-controls={`${props.id}-theater-screens`}
       aria-expanded={props.open}
     >
@@ -24,12 +25,6 @@ export default function Theater(props: Props) {
       </td>
     </tr>
   );
-
-  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
-    if (e.key === 'Enter') {
-      e.currentTarget.click();
-    }
-  }
 }
 
 interface Props {

@@ -1,3 +1,4 @@
+import { triggerClickWhenEnterKeyDown } from 'components/admin/common/functions';
 import Link from 'next/link';
 import type {
   GetRequestData,
@@ -49,7 +50,7 @@ export default function Contents() {
                 role="link"
                 className={styles.cursorPointer}
                 tabIndex={0}
-                onKeyDown={handleKeyDown}
+                onKeyDown={triggerClickWhenEnterKeyDown}
               >
                 <td>{theater.id}</td>
                 <td>{theater.name}</td>
@@ -59,11 +60,5 @@ export default function Contents() {
         })}
       </>
     );
-  }
-
-  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
-    if (e.key === 'Enter') {
-      e.currentTarget.click();
-    }
   }
 }

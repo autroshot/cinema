@@ -5,7 +5,9 @@ export default function Theater(props: Props) {
     <tr
       role="button"
       className={styles.cursorPointer}
+      tabIndex={0}
       onClick={props.onClick}
+      onKeyDown={handleKeyDown}
       aria-controls={`${props.id}-theater-screens`}
       aria-expanded={props.open}
     >
@@ -22,6 +24,12 @@ export default function Theater(props: Props) {
       </td>
     </tr>
   );
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
+    if (e.key === 'Enter') {
+      e.currentTarget.click();
+    }
+  }
 }
 
 interface Props {

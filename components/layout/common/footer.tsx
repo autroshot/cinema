@@ -18,8 +18,9 @@ export default function Footer() {
             href="https://github.com/autroshot/cinema"
             target="_blank"
             rel="noreferrer"
-            className={styles.gitHubIcon}
-          />
+          >
+            <svg className={styles.gitHubIcon} aria-label="깃허브" />
+          </a>
         </Stack>
       </footer>
     </Container>

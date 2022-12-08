@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 시네마
 
-## Getting Started
+[롯데시네마](https://www.lottecinema.co.kr)를 참고하여 React로 영화 예매 사이트를 일부 구현했습니다.
 
-First, run the development server:
+## 주요 패키지
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- [TypeScript](https://www.typescriptlang.org/)
+- [Next.js](https://nextjs.org/)
+- [React Bootstrap](https://react-bootstrap.github.io/) - React로 재구성된 프런트 엔드 프레임워크
+- [Swiper](https://swiperjs.com/) - 터치 슬라이더(캐러셀)
+- [React Hook Form](https://react-hook-form.com/) - 폼 관리 및 유효성 검사
+- [Yup](https://github.com/jquense/yup) - 유효성 검사를 위한 스키마 빌더
+- [NextAuth.js](https://next-auth.js.org/) - 인증
+- [Prisma](https://www.prisma.io/) - ORM
+- [Cypress](https://docs.cypress.io/) - 프런트 엔드 테스트 도구
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 구현 페이지
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- 홈
+- 영화관 상세
+- 스페셜관 홈 및 상세
+- 관리자 모드의 영화관 목록 및 폼
+- 관리자 모드의 상영관 목록 및 폼
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 구현 기능
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Next.js에서 제공하는 렌더링 방식
 
-## Learn More
+- SG(Static Generation) - 스페셜관 상세 페이지 등
+- SSG(Static Site Generation) - 관리자 모드의 상영관 폼의 선택 불가능한 좌석 종류 등
+- ISR(Incremental Static Regeneration) - 영화관 및 상영관 변경에 의한 영화관 상세 페이지의 갱신 등
+- CSR(Client Side Rendering) - 네비바의 영화관 목록, 관리자 모드의 상영관 상세 페이지의 폼 기본값 등
 
-To learn more about Next.js, take a look at the following resources:
+### DB
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 영화관과 상영관 DB 및 CRUD 구현
+- 서버리스 DB 플랫폼 [PlanetScale](https://planetscale.com/)과 ORM [Prisma](https://www.prisma.io/) 사용
+- [ERD 링크](https://www.erdcloud.com/d/NZpy2yTbB2EDSXqG7)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### 그 외
 
-## Deploy on Vercel
+- 캐러셀 - 홈페이지의 트레일러와 포스터
+- 유튜브 연동 - 홈페이지의 영화 트레일러
+- 구글 드라이브의 동영상 연동 - 스페셜관 상세 페이지의 배경 영상
+- 구글 맵 연동 - 영화관 상세 페이지의 지도 보기
+- 구글 폰트 및 아이콘
+- 인증 - 모든 관리자 페이지
+- 동적인 폼의 인풋값에 대한 유효성 검사 - 관리자 모드의 상영관 폼
+- 동적인 좌석 배치도 - 관리자 모드의 상영관 폼
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

@@ -24,10 +24,10 @@ export default function Navbar() {
           <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
           <BootstrapNavBar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <NavDropdown title="영화관" id="basic-nav-dropdown">
+              <NavDropdown title="영화관" id="theater-nav-dropdown">
                 <TheaterLinks />
               </NavDropdown>
-              <NavDropdown title="스페셜관" id="basic-nav-dropdown">
+              <NavDropdown title="스페셜관" id="special-screen-nav-dropdown">
                 <Link href="/special-screens/" passHref>
                   <NavDropdown.Item>홈</NavDropdown.Item>
                 </Link>

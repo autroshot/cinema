@@ -2,17 +2,47 @@
 
 [롯데시네마](https://www.lottecinema.co.kr)를 참고하여 React로 영화 예매 사이트를 일부 구현했습니다.
 
-## 주요 패키지
+## 기술 스택
 
+### 언어
+
+- JavaScript
 - [TypeScript](https://www.typescriptlang.org/)
+
+### 프런트엔드
+
+- [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
-- [React Bootstrap](https://react-bootstrap.github.io/) - React로 재구성된 프런트 엔드 프레임워크
-- [Swiper](https://swiperjs.com/) - 터치 슬라이더(캐러셀)
+- [React Bootstrap](https://react-bootstrap.github.io/) - React로 재구성된 Bootstrap
+
+### DB 및 ORM
+
+- [PlanetScale](https://planetscale.com/) - 서버리스 MySQL 플랫폼
+- [Prisma](https://www.prisma.io/) - ORM
+
+### 데이터 가져오기
+
+- [Axios](https://axios-http.com/)
+- [SWR](https://swr.vercel.app/)
+
+### 폼 및 유효성 검사
+
 - [React Hook Form](https://react-hook-form.com/) - 폼 관리 및 유효성 검사
 - [Yup](https://github.com/jquense/yup) - 유효성 검사를 위한 스키마 빌더
-- [NextAuth.js](https://next-auth.js.org/) - 인증
-- [Prisma](https://www.prisma.io/) - ORM
-- [Cypress](https://docs.cypress.io/) - 프런트 엔드 테스트 도구
+
+### 인증
+
+- [NextAuth.js](https://next-auth.js.org/)
+
+### 테스트 도구
+
+- [Cypress](https://docs.cypress.io/)
+
+### 그 외
+
+- [Swiper](https://swiperjs.com/) - 터치 슬라이더(캐러셀)
+- [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/get-started?hl=ko)
+- [Google Fonts](https://fonts.google.com/)
 
 ## 구현 페이지
 
@@ -34,7 +64,7 @@
 ### DB
 
 - 영화관과 상영관 DB 및 CRUD 구현
-- 서버리스 DB 플랫폼 [PlanetScale](https://planetscale.com/)과 ORM [Prisma](https://www.prisma.io/) 사용
+- 서버리스 MySQL 플랫폼 [PlanetScale](https://planetscale.com/)과 ORM [Prisma](https://www.prisma.io/) 사용
 - [ERD 링크](https://www.erdcloud.com/d/NZpy2yTbB2EDSXqG7)
 
 ### 그 외
@@ -47,4 +77,3 @@
 - 인증 - 모든 관리자 페이지
 - 동적인 폼의 인풋값에 대한 유효성 검사 - 관리자 모드의 상영관 폼
 - 동적인 좌석 배치도 - 관리자 모드의 상영관 폼
-

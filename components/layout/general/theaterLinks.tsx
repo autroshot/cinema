@@ -24,15 +24,13 @@ export default function TheaterLinks() {
         </Spinner>
       </div>
     );
-  return (
-    <>
-      {data.map((theater) => {
-        return (
-          <Link key={theater.id} href={`/theaters/${theater.id}`} passHref>
-            <NavDropdown.Item>{theater.name}</NavDropdown.Item>
-          </Link>
-        );
-      })}
-    </>
-  );
+  return <>
+    {data.map((theater) => {
+      return (
+        <Link key={theater.id} href={`/theaters/${theater.id}`} passHref legacyBehavior>
+          <NavDropdown.Item>{theater.name}</NavDropdown.Item>
+        </Link>
+      );
+    })}
+  </>;
 }

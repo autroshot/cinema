@@ -19,7 +19,7 @@ export default function Index() {
       </Table>
       <Row>
         <Col>
-          <Link href="/admin/theaters/create">
+          <Link href="/admin/theaters/create" legacyBehavior>
             <Button>영화관 등록</Button>
           </Link>
         </Col>

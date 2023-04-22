@@ -41,24 +41,22 @@ export default function Contents() {
       </tr>
     );
   } else {
-    return (
-      <>
-        {theaters.map((theater) => {
-          return (
-            <Link key={theater.id} href={`/admin/theaters/${theater.id}`}>
-              <tr
-                role="link"
-                className={styles.cursorPointer}
-                tabIndex={0}
-                onKeyDown={triggerClickWhenEnterKeyDown}
-              >
-                <td>{theater.id}</td>
-                <td>{theater.name}</td>
-              </tr>
-            </Link>
-          );
-        })}
-      </>
-    );
+    return <>
+      {theaters.map((theater) => {
+        return (
+          <Link key={theater.id} href={`/admin/theaters/${theater.id}`} legacyBehavior>
+            <tr
+              role="link"
+              className={styles.cursorPointer}
+              tabIndex={0}
+              onKeyDown={triggerClickWhenEnterKeyDown}
+            >
+              <td>{theater.id}</td>
+              <td>{theater.name}</td>
+            </tr>
+          </Link>
+        );
+      })}
+    </>;
   }
 }

@@ -15,18 +15,18 @@ export default function Screens(props: Props) {
                     <Col xs={2} sm={1} key={screen.no} className="mb-1">
                       <Link
                         href={`/admin/screens/${props.theaterId}/${screen.no}`}
-                      >
-                        <a data-cy={`${props.theaterId}-${screen.no}`}>
-                          <span className={styles.wordBreak}>
-                            {screen.no}관
-                          </span>
-                        </a>
+                        data-cy={`${props.theaterId}-${screen.no}`}>
+
+                        <span className={styles.wordBreak}>
+                          {screen.no}관
+                        </span>
+
                       </Link>
                     </Col>
                   );
                 })}
               </Row>
-              <Link href={`/admin/screens/${props.theaterId}/create`}>
+              <Link href={`/admin/screens/${props.theaterId}/create`} legacyBehavior>
                 <Button size="sm" className="my-2">
                   상영관 등록
                 </Button>

@@ -16,9 +16,9 @@ export default function Navbar() {
         <Container className="px-0">
           <BootstrapNavBar.Brand className="d-flex align-items-center">
             <Link href="/">
-              <a>
-                <Image src={logo} alt="시네마 로고" />
-              </a>
+
+              <Image src={logo} alt="시네마 로고" />
+
             </Link>
           </BootstrapNavBar.Brand>
           <BootstrapNavBar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,17 +28,17 @@ export default function Navbar() {
                 <TheaterLinks />
               </NavDropdown>
               <NavDropdown title="스페셜관" id="special-screen-nav-dropdown">
-                <Link href="/special-screens/" passHref>
+                <Link href="/special-screens/" passHref legacyBehavior>
                   <NavDropdown.Item>홈</NavDropdown.Item>
                 </Link>
                 <NavDropdown.Divider />
-                <Link href="/special-screens/super-plex-g" passHref>
+                <Link href="/special-screens/super-plex-g" passHref legacyBehavior>
                   <NavDropdown.Item>수퍼플렉스G</NavDropdown.Item>
                 </Link>
-                <Link href="/special-screens/colorium" passHref>
+                <Link href="/special-screens/colorium" passHref legacyBehavior>
                   <NavDropdown.Item>컬러리움</NavDropdown.Item>
                 </Link>
-                <Link href="/special-screens/cine-couple" passHref>
+                <Link href="/special-screens/cine-couple" passHref legacyBehavior>
                   <NavDropdown.Item>씨네커플</NavDropdown.Item>
                 </Link>
               </NavDropdown>

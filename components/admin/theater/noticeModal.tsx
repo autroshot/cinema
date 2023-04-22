@@ -17,7 +17,7 @@ export default function NoticeModal(props: Props) {
       <Modal.Body>{props.bodyText}</Modal.Body>
       <Modal.Footer className="justify-content-center p-2">
         {props.href ? (
-          <Link href={props.href}>
+          <Link href={props.href} legacyBehavior>
             <Button variant="primary">{props.linkText}</Button>
           </Link>
         ) : (

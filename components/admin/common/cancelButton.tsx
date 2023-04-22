@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 export default function CancelButton({ url }: Props) {
   return (
-    <Link href={url}>
+    <Link href={url} legacyBehavior>
       <Button
         type="button"
         variant="secondary"

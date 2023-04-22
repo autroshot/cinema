@@ -10,9 +10,9 @@ export default function Footer() {
       <footer>
         <Stack direction="horizontal" gap={3}>
           <Link href="/">
-            <a>
-              <Image src={logo} alt="시네마 로고" />
-            </a>
+
+            <Image src={logo} alt="시네마 로고" />
+
           </Link>
           <a
             href="https://github.com/autroshot/cinema"
